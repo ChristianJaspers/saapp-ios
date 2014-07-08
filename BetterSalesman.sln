@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSalesman", "BetterSalesman\BetterSalesman.csproj", "{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSalesmanCore", "saapp-core\BetterSalesmanCore\BetterSalesmanCore.csproj", "{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -13,6 +15,18 @@ Global
 		AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhone.Build.0 = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
