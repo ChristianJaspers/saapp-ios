@@ -105,10 +105,21 @@
     <Compile Include="src\main\Main.cs" />
     <Compile Include="src\ViewModels\FlayoutNavigationItem.cs" />
     <Compile Include="src\controllers\base\BaseUINavigationController.cs" />
-    <Compile Include="src\controllers\RootViewController.cs" />
-    <Compile Include="src\controllers\RootViewController.designer.cs">
+    <Compile Include="src\controllers\base\RootViewController.cs" />
+    <Compile Include="src\controllers\base\RootViewController.designer.cs">
       <DependentUpon>RootViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\controllers\login\LoginViewController.cs" />
+    <Compile Include="src\controllers\login\LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\login\ForgotPasswordViewController.cs" />
+    <Compile Include="src\controllers\login\ForgotPasswordViewController.designer.cs">
+      <DependentUpon>ForgotPasswordViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerController.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerCell.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -123,6 +134,9 @@
     <Folder Include="src\base\" />
     <Folder Include="src\ViewModels\" />
     <Folder Include="src\controllers\base\" />
+    <Folder Include="src\controllers\login\" />
+    <Folder Include="src\controllers\profile\" />
+    <Folder Include="src\controllers\arguments\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
