@@ -97,16 +97,22 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
-    <Compile Include="BetterSalesmanViewController.cs" />
-    <Compile Include="BetterSalesmanViewController.designer.cs">
+    <Compile Include="src\main\AppDelegate.cs" />
+    <Compile Include="src\controllers\BetterSalesmanViewController.cs" />
+    <Compile Include="src\controllers\BetterSalesmanViewController.designer.cs">
       <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\main\Main.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
-    <InterfaceDefinition Include="MainStoryboard_iPad.storyboard" />
+    <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
+    <InterfaceDefinition Include="src\views\MainStoryboard_iPhone.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="src\controllers\" />
+    <Folder Include="src\views\" />
+    <Folder Include="src\main\" />
+  </ItemGroup>
 </Project>
