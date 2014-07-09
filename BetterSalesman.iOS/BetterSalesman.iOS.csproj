@@ -121,7 +121,6 @@
     <Compile Include="src\controllers\arguments\ArgumentsListViewController.designer.cs">
       <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewCell.cs" />
     <Compile Include="src\controllers\arguments\ArgumentsListViewSource.cs" />
   </ItemGroup>
   <ItemGroup>

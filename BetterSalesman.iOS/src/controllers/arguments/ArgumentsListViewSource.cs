@@ -5,6 +5,7 @@ namespace BetterSalesman
 {
     public class ArgumentsListViewSource : UITableViewSource
     {
+        readonly string cellIdentifierItem = "ArgumentsCell";
         public ArgumentsListViewSource()
         {
         }
@@ -21,24 +22,15 @@ namespace BetterSalesman
             return 3;
         }
 
-        public override string TitleForHeader(UITableView tableView, int section)
-        {
-            return "Header";
-        }
-
-        public override string TitleForFooter(UITableView tableView, int section)
-        {
-            return "Footer";
-        }
-
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(ArgumentsListViewCell.Key) as ArgumentsListViewCell;
-            if (cell == null)
-                cell = new ArgumentsListViewCell();
+            var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
             
-            // TODO: populate the cell with the appropriate data based on the indexPath
-            cell.DetailTextLabel.Text = "DetailsTextLabel";
+            var title = (UILabel)cell.ViewWithTag(1);
+            var subtitle = (UILabel)cell.ViewWithTag(2);
+            
+            title.Text = "Feature";
+            subtitle.Text = "Benefit";
             
             return cell;
         }

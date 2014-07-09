@@ -1,5 +1,4 @@
 ﻿using MonoTouch.UIKit;
-using MonoTouch.Foundation;
 using System;
 
 namespace BetterSalesman
@@ -18,7 +17,6 @@ namespace BetterSalesman
         {
             base.ViewDidLoad();
             
-            // Register the TableView's data source
             TableView.Source = new ArgumentsListViewSource();
         }
     }
