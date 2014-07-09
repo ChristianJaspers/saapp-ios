@@ -12,6 +12,8 @@ namespace BetterSalesman
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            loginButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
         }
     }
 }

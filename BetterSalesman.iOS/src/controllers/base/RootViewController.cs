@@ -6,14 +6,9 @@ using MonoTouch.Dialog;
 
 namespace BetterSalesman
 {
-    public partial class RootViewController : UIViewController
+    public partial class RootViewController : BaseUIViewController
     {
-        public FlyoutNavigationController Navigation;
-        
-        static bool UserInterfaceIdiomIsPhone
-        {
-            get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
-        }
+        public static FlyoutNavigationController Navigation;
 
         public RootViewController(IntPtr handle) : base(handle)
         {
@@ -37,6 +32,7 @@ namespace BetterSalesman
             Navigation = new FlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
+            Navigation.ShouldReceiveTouch += (recognizer, touch) => false;
             View.AddSubview(Navigation.View);
 
             PopulateNavigationItems();
@@ -49,18 +45,18 @@ namespace BetterSalesman
             elements.Add(
                 new FlayoutNavigationItem(
                     "Profile", 
-                    () => { /* TODO action here */ },
+                    Profile,
                     UIImage.FromBundle(""), // TODO icons here
-                    "controller"
+                    "NavigationBase" 
                 )
             );
             
             elements.Add(
                 new FlayoutNavigationItem(
                     "Log out", 
-                    () => { /* TODO action here */ },
+                    Logout,
                     UIImage.FromBundle(""), // TODO icons here
-                    "controller"
+                    "NavigationBase"
                 )
             );
 
@@ -86,6 +82,24 @@ namespace BetterSalesman
         }
         
         #endregion
+        
+        void LoginIfNeeded()
+        {
+            PresentViewControllerWithStoryboardId("Login",false);   
+        }
+
+        void Logout()
+        {
+            UIAlertView alert = new UIAlertView("Logout","Successfull logout action callback",null,null,new []{"ok"});
+            alert.Show();
+            
+            LoginIfNeeded();
+        }
+
+        void Profile()
+        {
+            PresentViewControllerWithStoryboardId("Profile");
+        }
     }
 }
 

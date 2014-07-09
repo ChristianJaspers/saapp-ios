@@ -11,18 +11,18 @@ using System.CodeDom.Compiler;
 
 namespace BetterSalesman
 {
-	[Register ("LoginViewController")]
-	partial class LoginViewController
+	[Register ("ProfileViewController")]
+	partial class ProfileViewController
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		MonoTouch.UIKit.UIButton loginButton { get; set; }
+		MonoTouch.UIKit.UIButton backButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (loginButton != null) {
-				loginButton.Dispose ();
-				loginButton = null;
+			if (backButton != null) {
+				backButton.Dispose ();
+				backButton = null;
 			}
 		}
 	}
