@@ -117,9 +117,12 @@
     <Compile Include="src\controllers\login\ForgotPasswordViewController.designer.cs">
       <DependentUpon>ForgotPasswordViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerController.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerCell.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListViewControllerSource.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListViewController.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListViewController.designer.cs">
+      <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsListViewCell.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -131,7 +134,6 @@
     <Folder Include="src\controllers\" />
     <Folder Include="src\views\" />
     <Folder Include="src\main\" />
-    <Folder Include="src\base\" />
     <Folder Include="src\ViewModels\" />
     <Folder Include="src\controllers\base\" />
     <Folder Include="src\controllers\login\" />

@@ -3,10 +3,9 @@ using MonoTouch.Foundation;
 
 namespace BetterSalesman
 {
-    [Register("ArgumentsListViewControllerController")]
-    public class ArgumentsListViewControllerController : UITableViewController
+    public partial class ArgumentsListViewController : UITableViewController
     {
-        public ArgumentsListViewControllerController() : base(UITableViewStyle.Grouped)
+        public ArgumentsListViewController() : base(UITableViewStyle.Grouped)
         {
         }
 
@@ -23,7 +22,7 @@ namespace BetterSalesman
             base.ViewDidLoad();
             
             // Register the TableView's data source
-            TableView.Source = new ArgumentsListViewControllerSource();
+            TableView.Source = new ArgumentsListViewSource();
         }
     }
 }

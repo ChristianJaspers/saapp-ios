@@ -11,8 +11,8 @@ using System.CodeDom.Compiler;
 
 namespace BetterSalesman
 {
-	[Register ("ArgumentsListViewControllerController")]
-	partial class ArgumentsListViewControllerController
+	[Register ("ArgumentsListViewController")]
+	partial class ArgumentsListViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{

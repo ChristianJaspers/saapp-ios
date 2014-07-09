@@ -3,9 +3,9 @@ using MonoTouch.UIKit;
 
 namespace BetterSalesman
 {
-    public class ArgumentsListViewControllerSource : UITableViewSource
+    public class ArgumentsListViewSource : UITableViewSource
     {
-        public ArgumentsListViewControllerSource()
+        public ArgumentsListViewSource()
         {
         }
 
@@ -33,9 +33,9 @@ namespace BetterSalesman
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = tableView.DequeueReusableCell(ArgumentsListViewControllerCell.Key) as ArgumentsListViewControllerCell;
+            var cell = tableView.DequeueReusableCell(ArgumentsListViewCell.Key) as ArgumentsListViewCell;
             if (cell == null)
-                cell = new ArgumentsListViewControllerCell();
+                cell = new ArgumentsListViewCell();
             
             // TODO: populate the cell with the appropriate data based on the indexPath
             cell.DetailTextLabel.Text = "DetailsTextLabel";
