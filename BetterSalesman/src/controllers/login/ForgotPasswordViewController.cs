@@ -12,11 +12,8 @@ namespace BetterSalesman
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-        }
-        
-        partial void Skip (UIButton sender)
-        {
-            DismissViewController(true, null);
+            
+            skipButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
         }
     }
 }

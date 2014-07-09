@@ -129,13 +129,13 @@
         <!--Table View Controller - Arguments-->
         <scene sceneID="xoK-1n-vwP">
             <objects>
-                <tableViewController id="zRj-my-jX7" sceneMemberID="viewController">
+                <tableViewController id="zRj-my-jX7" sceneMemberID="viewController" customClass="ArgumentsListViewControllerController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" id="gOR-jb-kkA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="BNT-Qq-yRu">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="BNT-Qq-yRu" reuseIdentifier="ArgumentsCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BNT-Qq-yRu" id="9be-zg-sBc">
@@ -282,7 +282,6 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <state key="normal" title="skip"/>
                                 <connections>
-                                    <action selector="Skip:" destination="XNh-xx-dKY" id="30" eventType="touchUpInside"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -293,6 +292,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Mo-0n-KYO"/>
+                    <connections>
+                        <outlet property="skipButton" destination="9dr-UN-Qsu" id="name-outlet-9dr-UN-Qsu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iiv-CF-dpG" sceneMemberID="firstResponder"/>
             </objects>

@@ -5,7 +5,7 @@ namespace BetterSalesman
 {
     public class ArgumentsListViewControllerCell : UITableViewCell
     {
-        public static readonly NSString Key = new NSString("ArgumentsListViewControllerCell");
+        public static readonly NSString Key = new NSString("ArgumentsCell");
 
         public ArgumentsListViewControllerCell() : base(UITableViewCellStyle.Value1, Key)
         {

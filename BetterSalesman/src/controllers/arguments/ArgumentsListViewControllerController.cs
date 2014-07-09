@@ -1,8 +1,9 @@
-﻿
-using MonoTouch.UIKit;
+﻿using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 
 namespace BetterSalesman
 {
+    [Register("ArgumentsListViewControllerController")]
     public class ArgumentsListViewControllerController : UITableViewController
     {
         public ArgumentsListViewControllerController() : base(UITableViewStyle.Grouped)

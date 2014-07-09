@@ -18,7 +18,7 @@ namespace BetterSalesman
         public override int RowsInSection(UITableView tableview, int section)
         {
             // TODO: return the actual number of items in the section
-            return 1;
+            return 3;
         }
 
         public override string TitleForHeader(UITableView tableView, int section)

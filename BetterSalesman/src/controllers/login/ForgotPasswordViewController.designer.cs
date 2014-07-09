@@ -14,12 +14,16 @@ namespace BetterSalesman
 	[Register ("ForgotPasswordViewController")]
 	partial class ForgotPasswordViewController
 	{
-		[Action ("Skip:")]
+		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void Skip (UIButton sender);
+		UIButton skipButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (skipButton != null) {
+				skipButton.Dispose ();
+				skipButton = null;
+			}
 		}
 	}
 }
