@@ -18,17 +18,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.AppStore|iPhone.Build.0 = Release|Any CPU
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Release|iPhone.Build.0 = Release|Any CPU
 		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{3C98D868-2FC7-474C-91CC-5D44586EE00B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
