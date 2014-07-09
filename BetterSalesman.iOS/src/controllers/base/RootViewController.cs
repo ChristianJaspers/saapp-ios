@@ -27,13 +27,6 @@ namespace BetterSalesman
             
             NavigationLayoutInit();
         }
-        
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-            
-            Navigation.ShowMenu();
-        }
 
         #endregion
         
@@ -55,7 +48,16 @@ namespace BetterSalesman
 
             elements.Add(
                 new FlayoutNavigationItem(
-                    "Lorem ipsum", 
+                    "Profile", 
+                    () => { /* TODO action here */ },
+                    UIImage.FromBundle(""), // TODO icons here
+                    "controller"
+                )
+            );
+            
+            elements.Add(
+                new FlayoutNavigationItem(
+                    "Log out", 
                     () => { /* TODO action here */ },
                     UIImage.FromBundle(""), // TODO icons here
                     "controller"
