@@ -1,5 +1,6 @@
 ﻿using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using System;
 
 namespace BetterSalesman
 {
@@ -8,13 +9,9 @@ namespace BetterSalesman
         public ArgumentsListViewController() : base(UITableViewStyle.Grouped)
         {
         }
-
-        public override void DidReceiveMemoryWarning()
+        
+        public ArgumentsListViewController(IntPtr handle) : base(handle)
         {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-            
-            // Release any cached data, images, etc that aren't in use.
         }
 
         public override void ViewDidLoad()
