@@ -132,6 +132,18 @@
       <DependentUpon>ProfileViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="src\controllers\base\BaseUIViewController.cs" />
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Argument.cs">
+      <Link>BusinessLayer\Argument.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Product.cs">
+      <Link>BusinessLayer\Product.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\User.cs">
+      <Link>BusinessLayer\User.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Contracts\IBusinessEntity.cs">
+      <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -148,6 +160,8 @@
     <Folder Include="src\controllers\login\" />
     <Folder Include="src\controllers\profile\" />
     <Folder Include="src\controllers\arguments\" />
+    <Folder Include="BusinessLayer\" />
+    <Folder Include="BusinessLayer\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
