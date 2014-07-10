@@ -1,7 +1,7 @@
 ﻿using MonoTouch.UIKit;
 using System;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     public partial class ArgumentsListViewController : UITableViewController
     {

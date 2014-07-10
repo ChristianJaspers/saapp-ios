@@ -1,7 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     public class BaseUIViewController : UIViewController
     {

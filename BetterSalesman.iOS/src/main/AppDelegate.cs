@@ -2,7 +2,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to

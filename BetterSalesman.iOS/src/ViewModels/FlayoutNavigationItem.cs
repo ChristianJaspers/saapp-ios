@@ -2,7 +2,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     public class FlayoutNavigationItem : ImageStringElement
     {

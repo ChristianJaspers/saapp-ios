@@ -2,7 +2,7 @@
 using System;
 using MonoTouch.Foundation;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     [Register("BaseUINavigationController")]
     public class BaseUINavigationController : UINavigationController

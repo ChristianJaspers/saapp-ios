@@ -4,7 +4,7 @@ using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
     public partial class RootViewController : BaseUIViewController
     {

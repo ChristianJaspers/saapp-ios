@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("BetterSalesman.Droid.Resource", IsApplication=true)]
 
-namespace BetterSalesman.Droid
+namespace BetterSalesman.iOS
 {
 	
 	
