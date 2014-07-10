@@ -47,7 +47,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             Debug.WriteLine("HTTPClient: Performing get request for path: " + BaseUrl + resourcePath);
 
             string result = null;
-
+            
             using (HttpResponseMessage response = await client.GetAsync(resourcePath))
             {
                 try
