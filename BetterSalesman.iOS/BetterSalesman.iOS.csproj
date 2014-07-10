@@ -156,6 +156,9 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseHttpClient.cs">
       <Link>ServiceAccessLayer\BaseHttpClient.cs</Link>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerBase.cs">
+      <Link>ServiceAccessLayer\SynchronizationManagerBase.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
