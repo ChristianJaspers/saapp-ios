@@ -35,6 +35,8 @@
     <Compile Include="BusinessLayer\Contracts\IBusinessEntity.cs" />
     <Compile Include="BusinessLayer\Argument.cs" />
     <Compile Include="BusinessLayer\Product.cs" />
+    <Compile Include="ServiceAccessLayer\HttpConfig.cs" />
+    <Compile Include="ServiceAccessLayer\BaseHttpClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

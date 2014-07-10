@@ -1,5 +1,7 @@
 ﻿using System;
 using BetterSalesman.Core.BusinessLayer.Contracts;
+using SQLite;
+using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.BusinessLayer
 {
