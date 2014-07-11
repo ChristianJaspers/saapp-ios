@@ -9,36 +9,47 @@ namespace BetterSalesman.iOS.Tests
     [TestFixture]
     public class UserSessionManagerTests
     {
-        User stubUser()
+        User testUser;
+        User sessionUser;
+        
+        [SetUp]
+        public void Init()
         {
-            return new User {
+            testUser = new User {
                 Id = 1,
                 Username = "John",
                 Email = "Test user",
                 Token = "abcdxyz"
             };
+            
+            sessionUser = null;
+            
+            UserSessionManager.Instance.User = testUser;
+
+            UserSessionManager.Instance.Save();
         }
         
         [Test]
         public async void SavingUserInManager()
-        {
-            var userToSave = stubUser();
-            
-            UserSessionManager.Instance.User = userToSave;
-            
-            UserSessionManager.Instance.Save();
-            
+        {   
             await UserSessionManager.Instance.FetchUser();
+
+            sessionUser = UserSessionManager.Instance.User;
             
-            User sessionUser = UserSessionManager.Instance.User;
+            Assert.True(sessionUser != null);
+        }
+        
+        [Test]
+        public async void SavingSameDataInManager()
+        {   
+            await UserSessionManager.Instance.FetchUser();
+
+            sessionUser = UserSessionManager.Instance.User;
             
-            var serializedA = JsonConvert.SerializeObject(userToSave);
+            var serializedA = JsonConvert.SerializeObject(testUser);
             var serializedB = JsonConvert.SerializeObject(sessionUser);
-            
-//            Debug.WriteLine("from session: " + serializedA);
-//            Debug.WriteLine("from fixture: " + serializedB);
-            
-            Assert.True(serializedA.Equals(serializedB));
+
+            Assert.True(serializedA.Equals(serializedB));   
         }
     }
 }
