@@ -1,7 +1,6 @@
 ﻿using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.ServiceAccessLayer;
 using SQLite;
-using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -74,10 +73,10 @@ namespace BetterSalesman.Core.DataLayer
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            // TODO most of code in SaveDataFromMemory don't propagates exception further, so it might be useless here
             try
             {
-                SaveDataFromMemory(eventItem);
+                // TODO
+//                SaveDataFromMemory(eventItem);
             }
             catch (Exception e)
             {
@@ -140,11 +139,12 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         private static void SaveDataFromMemory(/*Container containerData*/)
         {
-            if (eventData == null)
-            {
-                Debug.WriteLine("ERROR! EventContainer is null.");
-                return;
-            }
+            // TODO
+//            if (eventData == null)
+//            {
+//                Debug.WriteLine("ERROR! EventContainer is null.");
+//                return;
+//            }
 
             using (var connection = OpenConnection())
             {
