@@ -1,16 +1,20 @@
 ﻿using BetterSalesman.Core.BusinessLayer;
+using System;
+using ReactiveUI;
+using Akavache;
+using System.Threading.Tasks;
 
-namespace BetterSalesman.Core
+namespace BetterSalesman.Core.ServiceAccessLayer
 {
-    public class BaseSession
+    public class UserSessionManager
     {
-        const string AppSessionIdentifier = "com.selleo.app";
+        const string CacheUserKey = "user";
         User user;
 
-        static BaseSession instance;
-        static object locker;
+        static UserSessionManager instance;
+        static object locker = new Object();
         
-        public static BaseSession Instance
+        public static UserSessionManager Instance
         {
             get
             {
@@ -20,7 +24,7 @@ namespace BetterSalesman.Core
                     {
                         if (instance == null)
                         {
-                            instance = new BaseSession();
+                            instance = new UserSessionManager();
                         }
                     }
                 }
@@ -29,23 +33,31 @@ namespace BetterSalesman.Core
             }
         }
         
-        void Save()
+        public void Save()
         {
-            // save user with error handling?
+            BlobCache.UserAccount.InsertObject(CacheUserKey, user, DateTimeOffset.MaxValue);
         }
         
-        void Discard()
+        public void Discard()
         {
-            // clean user
-            // remove from session data
+            user = null;
+            
+            BlobCache.UserAccount.InvalidateObject<User>(CacheUserKey);
         }
         
-        User User
+        public async Task FetchUser(Action finished = null)
+        {
+            user = await BlobCache.UserAccount.GetObjectAsync<User>(CacheUserKey);
+            
+            if (finished != null)
+            {
+                finished();
+            }
+        }
+        
+        public User User
         {
             get {
-                // TODO fetching
-                user = new User();
-                
                 return user;
             }
             set {

@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace BetterSalesman
+namespace BetterSalesman.iOS
 {
 	[Register ("BaseUINavigationController")]
 	partial class BaseUINavigationController
