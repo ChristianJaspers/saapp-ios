@@ -39,6 +39,7 @@
     <Compile Include="ServiceAccessLayer\BaseHttpClient.cs" />
     <Compile Include="ServiceAccessLayer\SynchronizationManagerBase.cs" />
     <Compile Include="DataLayer\DatabaseProvider.cs" />
+    <Compile Include="DataLayer\UserSessionManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
