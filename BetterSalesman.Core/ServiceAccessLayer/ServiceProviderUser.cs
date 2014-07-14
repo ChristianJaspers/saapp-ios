@@ -45,7 +45,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             HTTPRequestTimeoutEventHandler timeout = null
         )
         {
-            var parameters = new Dictionary<string, string> {
+            var parameters = new Dictionary<string, object> {
                 {paramUsername,username},
                 {paramPassword,password}
             };
@@ -63,13 +63,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             await request.PerformRequest(request);
         }
 
-        Dictionary<string, string> ParametersWithDeviceInfo(Dictionary<string, string> parameters)
+        Dictionary<string, object> ParametersWithDeviceInfo(Dictionary<string, object> parameters)
         {
-//            parameters.Add(paramDeviceInfo, JsonConvert.SerializeObject(new Device {
-//                NotificationToken = "notification token goes here", // TODO
-//                Platform = paramCurrentPlatform,
-//                Language = HttpConfig.Lang
-//            }));
+            parameters.Add(paramDeviceInfo, new Device {
+                NotificationToken = "notification token goes here", // TODO
+                Platform = paramCurrentPlatform,
+                Language = HttpConfig.Lang
+            });
             
             return parameters;
         }

@@ -24,7 +24,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
     {
         public string Path;
         public HTTPMethod Method;
-        public Dictionary<string, string> Parameters;
+        public Dictionary<string, object> Parameters;
         public Dictionary<string, string> Headers;
         
         private HttpClient client;
