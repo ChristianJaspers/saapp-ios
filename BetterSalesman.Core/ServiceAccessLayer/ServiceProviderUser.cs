@@ -65,11 +65,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         Dictionary<string, string> ParametersWithDeviceInfo(Dictionary<string, string> parameters)
         {
-            parameters.Add(paramDeviceInfo, JsonConvert.ToString(new Device {
-                NotificationToken = "notification token goes here", // TODO
-                Platform = paramCurrentPlatform,
-                Language = HttpConfig.Lang
-            }));
+//            parameters.Add(paramDeviceInfo, JsonConvert.SerializeObject(new Device {
+//                NotificationToken = "notification token goes here", // TODO
+//                Platform = paramCurrentPlatform,
+//                Language = HttpConfig.Lang
+//            }));
             
             return parameters;
         }

@@ -4,9 +4,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public static class HttpConfig
     {
-        public static string Host = "serwer.com";
+        public static string Host = "dwo.mikstura.it";
 
-        static string lang;
+        static string lang = "pl";
 
         public static string Lang
         {
