@@ -63,6 +63,6 @@ Global
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = BetterSalesman.iOS.Tests\BetterSalesman.iOS.Tests.csproj
+		StartupItem = BetterSalesman.iOS\BetterSalesman.iOS.csproj
 	EndGlobalSection
 EndGlobal

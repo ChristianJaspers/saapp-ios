@@ -27,15 +27,14 @@ namespace BetterSalesman.Core.BusinessLayer
         public string ThumbUrl { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "activity_me")]
-        public string ActivityMe { get; set; }
+        public float ActivityMe { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "activity_team")]
-        public string ActivityTeam { get; set; }
+        public float ActivityTeam { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "activity_all_teams")]
-        public string ActivityAllTeams { get; set; }
+        public float ActivityAllTeams { get; set; }
         
         public DateTime UpdatedAt { get; set; }
     }
 }
-

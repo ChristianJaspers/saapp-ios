@@ -30,7 +30,7 @@ namespace BetterSalesman.iOS.Tests
         }
         
         [Test]
-        public async void SavingUserInManager()
+        public async void TestSavingUserInManager()
         {   
             await UserSessionManager.Instance.FetchUser();
 
@@ -40,7 +40,7 @@ namespace BetterSalesman.iOS.Tests
         }
         
         [Test]
-        public async void SavingSameDataInManager()
+        public async void TestSavingSameDataInManager()
         {   
             await UserSessionManager.Instance.FetchUser();
 
