@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -27,6 +28,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public Dictionary<string, object> Parameters;
         public Dictionary<string, string> Headers;
         
+        public string AuthorizationToken;
+        
         private HttpClient client;
 
         public event HTTPRequestSuccessEventHandler Success;
@@ -39,6 +42,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             
             client = new HttpClient();
             client.BaseAddress = new Uri("http://" + HttpConfig.Host);
+            
+            if (AuthorizationToken != null)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthorizationToken);
+            }
 
             string serializedParameters = JsonConvert.SerializeObject(requestSetup.Parameters);
             string serializedHeaders = JsonConvert.SerializeObject(requestSetup.Headers);
@@ -48,6 +56,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             Debug.WriteLine("HTTPClient Path: " + client.BaseAddress + requestSetup.Path);
             Debug.WriteLine("HTTPClient Params: " + serializedParameters);
             Debug.WriteLine("HTTPClient Headers: " + serializedHeaders);
+            Debug.WriteLine("HTTPClient Auth token: " + client.DefaultRequestHeaders.Authorization);
 
             switch(requestSetup.Method)
             {

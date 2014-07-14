@@ -203,6 +203,9 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpRequest.cs">
       <Link>ServiceAccessLayer\HttpRequest.cs</Link>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseServiceProvider.cs">
+      <Link>ServiceAccessLayer\BaseServiceProvider.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
-    public class ServiceProviderUser
+    public class ServiceProviderUser : BaseServiceProvider
     {
         private static ServiceProviderUser instance;
         private static object locker = new Object();
@@ -12,8 +11,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         // Parameters
         const string paramUsername = "username";
         const string paramPassword = "password";
-        const string paramDeviceInfo = "device_info";
-        const string paramCurrentPlatform = "ios";
         
         // Paths
         const string pathAuth = "auth.json";
@@ -53,7 +50,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             var request = new HttpRequest {
                 Method = HTTPMethod.POST,
                 Path = pathAuth,
-                Parameters = ParametersWithDeviceInfo(parameters)
+                Parameters = ParametersWithDeviceInfo(parameters),
+                AuthorizationToken = "testtoken"
             };
             
             request.Success += success;
@@ -61,24 +59,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             request.Timeout += timeout;
             
             await request.PerformRequest(request);
-        }
-
-        Dictionary<string, object> ParametersWithDeviceInfo(Dictionary<string, object> parameters)
-        {
-            parameters.Add(paramDeviceInfo, new Device {
-                NotificationToken = "notification token goes here", // TODO
-                Platform = paramCurrentPlatform,
-                Language = HttpConfig.Lang
-            });
-            
-            return parameters;
-        }
-        
-        class Device
-        {
-            public string NotificationToken;
-            public string Platform;
-            public string Language;
         }
     }
 }
