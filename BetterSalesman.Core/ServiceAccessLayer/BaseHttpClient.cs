@@ -15,12 +15,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         DELETE = 3
     };
     
+    public delegate void HTTPRequestSuccessEventHandler(string result);
+    public delegate void HTTPRequestFailureEventHandler(int errorCode, string response);
+    public delegate void HTTPRequestTimeoutEventHandler();
+    
     public class HttpRequestSetup
     {
         public string Path;
         public HTTPMethod Method;
         public Dictionary<string, string> Parameters;
         public Dictionary<string, string> Headers;
+        
+        public event HTTPRequestSuccessEventHandler Success;
+        public event HTTPRequestFailureEventHandler Failure;
+        public event HTTPRequestTimeoutEventHandler Timeout;
+        
     }
     
     public class BaseHttpClient
