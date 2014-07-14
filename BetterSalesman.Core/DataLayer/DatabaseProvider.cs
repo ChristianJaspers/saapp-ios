@@ -179,7 +179,7 @@ namespace BetterSalesman.Core.DataLayer
         {
             Debug.WriteLine("DB create if not exists");
 
-            connection.CreateTable<User>();
+            connection.CreateTable<UserSession>();
             connection.CreateTable<Product>();
             connection.CreateTable<Argument>();
 

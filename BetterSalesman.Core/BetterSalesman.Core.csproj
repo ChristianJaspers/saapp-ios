@@ -31,15 +31,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BusinessLayer\User.cs" />
     <Compile Include="BusinessLayer\Contracts\IBusinessEntity.cs" />
     <Compile Include="BusinessLayer\Argument.cs" />
     <Compile Include="BusinessLayer\Product.cs" />
     <Compile Include="ServiceAccessLayer\HttpConfig.cs" />
-    <Compile Include="ServiceAccessLayer\BaseHttpClient.cs" />
     <Compile Include="ServiceAccessLayer\SynchronizationManagerBase.cs" />
     <Compile Include="DataLayer\DatabaseProvider.cs" />
     <Compile Include="DataLayer\UserSessionManager.cs" />
+    <Compile Include="BusinessLayer\UserSession.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderUser.cs" />
+    <Compile Include="ServiceAccessLayer\HttpRequest.cs" />
+    <Compile Include="BusinessLayer\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

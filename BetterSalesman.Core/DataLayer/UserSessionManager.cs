@@ -1,6 +1,5 @@
 ﻿using BetterSalesman.Core.BusinessLayer;
 using System;
-using ReactiveUI;
 using Akavache;
 using System.Threading.Tasks;
 
@@ -9,7 +8,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
     public class UserSessionManager
     {
         const string CacheUserKey = "user";
-        User user;
+        UserSession user;
 
         static UserSessionManager instance;
         static object locker = new Object();
@@ -42,12 +41,12 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             user = null;
             
-            BlobCache.UserAccount.InvalidateObject<User>(CacheUserKey);
+            BlobCache.UserAccount.InvalidateObject<UserSession>(CacheUserKey);
         }
         
         public async Task FetchUser(Action finished = null)
         {
-            user = await BlobCache.UserAccount.GetObjectAsync<User>(CacheUserKey);
+            user = await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheUserKey);
             
             if (finished != null)
             {
@@ -55,7 +54,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
         }
         
-        public User User
+        public UserSession User
         {
             get {
                 return user;

@@ -17,9 +17,6 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "email")]
         public string Email { get; set; }
         
-        [JsonPropertyAttribute(PropertyName = "token")]
-        public string Token { get; set; }
-        
         [JsonPropertyAttribute(PropertyName = "image_url")]
         public string ImageUrl { get; set; }
         

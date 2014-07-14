@@ -1,5 +1,9 @@
 ﻿using MonoTouch.UIKit;
 using System;
+using System.Diagnostics;
+using BetterSalesman.Core.ServiceAccessLayer;
+using Newtonsoft.Json;
+using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -27,6 +31,8 @@ namespace BetterSalesman.iOS
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
+            
+            UserSessionManager.Instance.FetchUser(() => Debug.WriteLine(JsonConvert.ToString("test")));
         }
     }
 }

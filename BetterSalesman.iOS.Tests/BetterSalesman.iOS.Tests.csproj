@@ -136,9 +136,6 @@
   <ItemGroup>
     <Compile Include="src\Main\Main.cs" />
     <Compile Include="src\Main\UnitTestAppDelegate.cs" />
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\User.cs">
-      <Link>BusinessLayer\User.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\DataLayer\UserSessionManager.cs">
       <Link>DataLayer\UserSessionManager.cs</Link>
     </Compile>
@@ -146,6 +143,9 @@
       <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
     </Compile>
     <Compile Include="src\Tests\UserSessionManagerTests.cs" />
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\UserSession_1.cs">
+      <Link>BusinessLayer\UserSession_1.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

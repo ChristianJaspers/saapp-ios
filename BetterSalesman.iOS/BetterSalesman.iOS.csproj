@@ -173,17 +173,11 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Product.cs">
       <Link>BusinessLayer\Product.cs</Link>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\User.cs">
-      <Link>BusinessLayer\User.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Contracts\IBusinessEntity.cs">
       <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpConfig.cs">
       <Link>ServiceAccessLayer\HttpConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseHttpClient.cs">
-      <Link>ServiceAccessLayer\BaseHttpClient.cs</Link>
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerBase.cs">
       <Link>ServiceAccessLayer\SynchronizationManagerBase.cs</Link>
@@ -193,6 +187,18 @@
     </Compile>
     <Compile Include="..\BetterSalesman.Core\DataLayer\UserSessionManager.cs">
       <Link>DataLayer\UserSessionManager.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\UserSession.cs">
+      <Link>BusinessLayer\UserSession.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderUser.cs">
+      <Link>ServiceAccessLayer\ServiceProviderUser.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\User.cs">
+      <Link>BusinessLayer\User.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpRequest.cs">
+      <Link>ServiceAccessLayer\HttpRequest.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

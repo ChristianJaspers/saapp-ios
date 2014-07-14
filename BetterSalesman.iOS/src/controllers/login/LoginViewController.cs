@@ -17,14 +17,18 @@ namespace BetterSalesman.iOS
             
             loginButton.TouchUpInside += (sender, e) =>
             {
-                DismissViewController(true, null);                
-                
-                UserSessionManager.Instance.User = new User {
-                    Id = 1,
-                    Username = "John",
-                    Email = "Test user",
-                    Token = "abcdxyz"
-                };
+                ServiceProviderUser.Instance.Authentication(
+                    "john",
+                    "doe",
+                    result => {
+                        DismissViewController(true, null);
+//                    
+                        UserSessionManager.Instance.User = new UserSession {
+                            Token = "123",
+                        };
+                        // we can do some serialization here and save user?
+                    }
+                );
                 
                 UserSessionManager.Instance.Save();
             };
