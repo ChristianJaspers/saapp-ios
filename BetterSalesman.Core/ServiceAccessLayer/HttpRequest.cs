@@ -127,7 +127,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             Debug.WriteLine("HTTPClient Result Status code: " + response.StatusCode);
 
-            string result;
+            string result = string.Empty;
 
             switch(response.StatusCode)
             {
@@ -143,7 +143,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     break;
     
                 case HttpStatusCode.RequestTimeout:
-                    if (Timeout)
+                    if (Timeout != null)
                     {
                         // TODO handle error here
                         Timeout();
@@ -151,7 +151,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     break;
     
                 default:
-                    if (Failure)
+                    if (Failure != null)
                     {
                         // TODO handle error here
                         Failure(400);

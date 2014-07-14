@@ -143,8 +143,8 @@
       <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
     </Compile>
     <Compile Include="src\Tests\UserSessionManagerTests.cs" />
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\UserSession_1.cs">
-      <Link>BusinessLayer\UserSession_1.cs</Link>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\UserSession.cs">
+      <Link>BusinessLayer\UserSession.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

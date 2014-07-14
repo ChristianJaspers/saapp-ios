@@ -1,6 +1,7 @@
 ﻿using BetterSalesman.Core.BusinessLayer;
 using System;
 using Akavache;
+using ReactiveUI;
 using System.Threading.Tasks;
 
 namespace BetterSalesman.Core.ServiceAccessLayer

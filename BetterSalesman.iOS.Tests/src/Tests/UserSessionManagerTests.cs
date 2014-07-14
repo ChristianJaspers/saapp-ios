@@ -9,16 +9,13 @@ namespace BetterSalesman.iOS.Tests
     [TestFixture]
     public class UserSessionManagerTests
     {
-        User testUser;
-        User sessionUser;
+        UserSession testUser;
+        UserSession sessionUser;
         
         [SetUp]
         public void Init()
         {
-            testUser = new User {
-                Id = 1,
-                Username = "John",
-                Email = "Test user",
+            testUser = new UserSession {
                 Token = "abcdxyz"
             };
             
@@ -36,7 +33,7 @@ namespace BetterSalesman.iOS.Tests
 
             sessionUser = UserSessionManager.Instance.User;
             
-            Assert.True(sessionUser != null);
+            Assert.IsNotNull(sessionUser);
         }
         
         [Test]
@@ -49,7 +46,7 @@ namespace BetterSalesman.iOS.Tests
             var serializedA = JsonConvert.SerializeObject(testUser);
             var serializedB = JsonConvert.SerializeObject(sessionUser);
 
-            Assert.True(serializedA.Equals(serializedB));   
+            Assert.AreEqual(serializedA,serializedB);   
         }
     }
 }
