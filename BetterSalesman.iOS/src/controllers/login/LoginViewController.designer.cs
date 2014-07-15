@@ -16,7 +16,7 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		MonoTouch.UIKit.UIButton loginButton { get; set; }
+		UIButton loginButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

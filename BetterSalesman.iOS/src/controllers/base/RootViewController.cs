@@ -12,6 +12,7 @@ namespace BetterSalesman.iOS
         public static FlyoutNavigationController Navigation;
         
         const string navigationBase = "NavigationBase";
+        const string navigationMyTeam = "NavigationMyTeam";
 
         public RootViewController(IntPtr handle) : base(handle)
         {
@@ -59,7 +60,7 @@ namespace BetterSalesman.iOS
                     I18n.MyTeam, 
                     MyTeam,
                     UIImage.FromBundle(""), // TODO icons here
-                    navigationBase 
+                    navigationMyTeam
                 )
             );
             
@@ -86,9 +87,9 @@ namespace BetterSalesman.iOS
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
         
-        UIViewController controllerForSection(string title)
+        UIViewController controllerForSection(string title = navigationBase)
         {
-            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(navigationBase);
+            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(title);
             vc.InitialControllerType = title;
             return vc;
         }

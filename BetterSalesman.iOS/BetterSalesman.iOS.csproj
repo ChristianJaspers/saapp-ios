@@ -212,6 +212,10 @@
     </Compile>
     <Compile Include="src\extensions\LocalizationExtensions.cs" />
     <Compile Include="src\helpers\I18n.cs" />
+    <Compile Include="src\controllers\myteam\MyTeamListViewController.cs" />
+    <Compile Include="src\controllers\myteam\MyTeamListViewController.designer.cs">
+      <DependentUpon>MyTeamListViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -234,6 +238,7 @@
     <Folder Include="DataLayer\" />
     <Folder Include="src\extensions\" />
     <Folder Include="src\helpers\" />
+    <Folder Include="src\controllers\myteam\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
