@@ -3,6 +3,7 @@ using MonoTouch.UIKit;
 using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -54,7 +55,7 @@ namespace BetterSalesman.iOS
             elements.Add(
                 new FlayoutNavigationItem(
                     "Log out", 
-                    Logout,
+                    UserSessionManager.Instance.Discard,
                     UIImage.FromBundle(""), // TODO icons here
                     "NavigationBase"
                 )
@@ -82,19 +83,6 @@ namespace BetterSalesman.iOS
         }
         
         #endregion
-        
-        void LoginIfNeeded()
-        {
-            PresentViewControllerWithStoryboardId("Login",false);   
-        }
-
-        void Logout()
-        {
-            UIAlertView alert = new UIAlertView("Logout","Successfull logout action callback",null,null,new []{"ok"});
-            alert.Show();
-            
-            LoginIfNeeded();
-        }
 
         void Profile()
         {

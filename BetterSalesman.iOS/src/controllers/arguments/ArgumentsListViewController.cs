@@ -39,13 +39,16 @@ namespace BetterSalesman.iOS
         {
             base.ViewWillAppear(animated);
             
-            if (UserSessionManager.Instance.User != null)
+            DisplayLoginViewIfNeeded();
+        }
+        
+        void DisplayLoginViewIfNeeded()
+        {
+            if (UserSessionManager.Instance.User == null)
             {
-                Debug.WriteLine("User logged in");
-            }
-            else
-            {
-                Debug.WriteLine("User not logged in");
+                UIViewController vc = (UIViewController)Storyboard.InstantiateViewController("Login");
+    
+                PresentViewController(vc, false, null);
             }
         }
     }
