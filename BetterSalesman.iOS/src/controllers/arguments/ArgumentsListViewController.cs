@@ -34,23 +34,6 @@ namespace BetterSalesman.iOS
                 Debug.WriteLine("Logged in user: " + UserSessionManager.Instance.User)
             );
         }
-        
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-            
-            DisplayLoginViewIfNeeded();
-        }
-        
-        void DisplayLoginViewIfNeeded()
-        {
-            if (UserSessionManager.Instance.User == null)
-            {
-                UIViewController vc = (UIViewController)Storyboard.InstantiateViewController("Login");
-    
-                PresentViewController(vc, false, null);
-            }
-        }
     }
 }
 

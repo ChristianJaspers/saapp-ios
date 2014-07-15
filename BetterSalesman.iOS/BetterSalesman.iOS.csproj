@@ -132,11 +132,15 @@
     <Reference Include="Akavache.Sqlite3">
       <HintPath>..\packages\akavache.sqlite3.3.2.0\lib\MonoTouch\Akavache.Sqlite3.dll</HintPath>
     </Reference>
+    <Reference Include="MBProgressHUD">
+      <HintPath>..\Components\mbprogresshud-0.8\lib\ios\MBProgressHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\ic_menu.png" />
     <BundleResource Include="Resources\ic_menu%402x.png" />
+    <BundleResource Include="Resources\profile_mock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -234,6 +238,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="sqlite-net">
       <Version>1.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="mbprogresshud">
+      <Version>0.8</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

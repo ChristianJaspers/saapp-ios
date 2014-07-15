@@ -55,7 +55,7 @@ namespace BetterSalesman.iOS
             elements.Add(
                 new FlayoutNavigationItem(
                     "Log out", 
-                    UserSessionManager.Instance.Discard,
+                    Logout,
                     UIImage.FromBundle(""), // TODO icons here
                     "NavigationBase"
                 )
@@ -81,9 +81,18 @@ namespace BetterSalesman.iOS
             vc.InitialControllerType = title;
             return vc;
         }
-        
-        #endregion
 
+        #endregion
+        
+        void Logout()
+        {
+            UserSessionManager.Instance.Discard();
+
+            UIViewController vc = (UIViewController)Storyboard.InstantiateViewController("Login");
+
+            PresentViewController(vc, false, null);
+        }
+        
         void Profile()
         {
             PresentViewControllerWithStoryboardId("Profile");
