@@ -19,7 +19,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
     
     public delegate void HTTPRequestSuccessEventHandler(string result);
     public delegate void HTTPRequestFailureEventHandler(int errorCode);
-    public delegate void HTTPRequestTimeoutEventHandler();
     
     public class HttpRequest
     {
@@ -34,9 +33,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         public event HTTPRequestSuccessEventHandler Success;
         public event HTTPRequestFailureEventHandler Failure;
-        public event HTTPRequestTimeoutEventHandler Timeout;
 
-        public async Task<string> PerformRequest()
+        public async Task<string> Perform()
         {
             string result = null;
             
@@ -148,14 +146,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     if (Success != null)
                     {
                         Success(result);
-                    }
-                    break;
-    
-                case HttpStatusCode.RequestTimeout:
-                    if (Timeout != null)
-                    {
-                        // TODO handle error here
-                        Timeout();
                     }
                     break;
     

@@ -40,8 +40,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             string username, 
             string password, 
             HTTPRequestSuccessEventHandler success = null, 
-            HTTPRequestFailureEventHandler failure = null, 
-            HTTPRequestTimeoutEventHandler timeout = null
+            HTTPRequestFailureEventHandler failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
@@ -76,7 +75,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             };
             
             request.Failure += failure;
-            request.Timeout += timeout;
             
             await request.Perform();
         }
