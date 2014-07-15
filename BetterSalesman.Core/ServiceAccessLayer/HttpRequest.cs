@@ -36,7 +36,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public event HTTPRequestFailureEventHandler Failure;
         public event HTTPRequestTimeoutEventHandler Timeout;
 
-        public async Task<string> PerformRequest(HttpRequest requestSetup)
+        public async Task<string> PerformRequest()
         {
             string result = null;
             
@@ -48,39 +48,39 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthorizationToken);
             }
 
-            string serializedParameters = JsonConvert.SerializeObject(requestSetup.Parameters);
-            string serializedHeaders = JsonConvert.SerializeObject(requestSetup.Headers);
-            string path = requestSetup.Path;
+            string serializedParameters = JsonConvert.SerializeObject(Parameters);
+            string serializedHeaders = JsonConvert.SerializeObject(Headers);
+            string path = Path;
 
-            Debug.WriteLine("HTTPClient Method: " + requestSetup.Method);
-            Debug.WriteLine("HTTPClient Path: " + client.BaseAddress + requestSetup.Path);
+            Debug.WriteLine("HTTPClient Method: " + Method);
+            Debug.WriteLine("HTTPClient Path: " + client.BaseAddress + Path);
             Debug.WriteLine("HTTPClient Params: " + serializedParameters);
             Debug.WriteLine("HTTPClient Headers: " + serializedHeaders);
             Debug.WriteLine("HTTPClient Auth token: " + client.DefaultRequestHeaders.Authorization);
 
-            switch(requestSetup.Method)
+            switch(Method)
             {
             case HTTPMethod.GET:
-                result = await PerformGetRequest(path, serializedParameters);
+                result = await PerformRequestGet(path, serializedParameters);
                 break;
 
             case HTTPMethod.POST:
-                result = await PerformPostRequest(path, serializedParameters);
+                result = await PerformRequestPost(path, serializedParameters);
                 break;
 
             case HTTPMethod.PUT:
-                result = await PerformPutRequest(path, serializedParameters);
+                result = await PerformRequestPut(path, serializedParameters);
                 break;
 
             case HTTPMethod.DELETE:
-                result = await PerformDeleteRequest(path);
+                result = await PerformRequestDelete(path);
                 break;
             }
 
             return result;
         }
 
-        private async Task<string> PerformGetRequest(string resourcePath, string serializedParameters)
+        private async Task<string> PerformRequestGet(string resourcePath, string serializedParameters)
         {
             string result = null;
 
@@ -92,7 +92,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformPostRequest(string resourcePath, string serializedParameters)
+        private async Task<string> PerformRequestPost(string resourcePath, string serializedParameters)
         {
             string result = null;
 
@@ -106,7 +106,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformPutRequest(string resourcePath, string serializedParameters)
+        private async Task<string> PerformRequestPut(string resourcePath, string serializedParameters)
         {
             string result = null;
 
@@ -120,7 +120,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformDeleteRequest(string resourcePath)
+        private async Task<string> PerformRequestDelete(string resourcePath)
         {
             string result = null;
 

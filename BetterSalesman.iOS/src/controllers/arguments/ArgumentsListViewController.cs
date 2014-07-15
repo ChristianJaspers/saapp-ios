@@ -2,8 +2,6 @@
 using System;
 using System.Diagnostics;
 using BetterSalesman.Core.ServiceAccessLayer;
-using Newtonsoft.Json;
-using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -32,7 +30,23 @@ namespace BetterSalesman.iOS
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
             
-            UserSessionManager.Instance.FetchUser(() => Debug.WriteLine(JsonConvert.ToString("test")));
+            UserSessionManager.Instance.FetchUser(() => 
+                Debug.WriteLine("Logged in user: " + UserSessionManager.Instance.User)
+            );
+        }
+        
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            
+            if (UserSessionManager.Instance.User != null)
+            {
+                Debug.WriteLine("User logged in");
+            }
+            else
+            {
+                Debug.WriteLine("User not logged in");
+            }
         }
     }
 }

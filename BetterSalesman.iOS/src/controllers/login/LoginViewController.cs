@@ -1,7 +1,6 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
-using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -15,23 +14,14 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            loginButton.TouchUpInside += (sender, e) =>
-            {
+            loginButton.TouchUpInside += (sender, e) => 
                 ServiceProviderUser.Instance.Authentication(
-                    "john",
-                    "doe",
-                    result => {
-                        DismissViewController(true, null);
-//                    
-                        UserSessionManager.Instance.User = new UserSession {
-                            Token = "123",
-                        };
-                        // we can do some serialization here and save user?
-                    }
+                    "john", 
+                    "doe", 
+                    result => DismissViewController(true, null),
+                    errorCode => DismissViewController(true, null) 
+                    // TODO we leave it for testing purpose since backend is not ready
                 );
-                
-                UserSessionManager.Instance.Save();
-            };
         }
     }
 }
