@@ -210,6 +210,8 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseServiceProvider.cs">
       <Link>ServiceAccessLayer\BaseServiceProvider.cs</Link>
     </Compile>
+    <Compile Include="src\extensions\LocalizationExtensions.cs" />
+    <Compile Include="src\helpers\I18n.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -230,6 +232,8 @@
     <Folder Include="BusinessLayer\Contracts\" />
     <Folder Include="ServiceAccessLayer\" />
     <Folder Include="DataLayer\" />
+    <Folder Include="src\extensions\" />
+    <Folder Include="src\helpers\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

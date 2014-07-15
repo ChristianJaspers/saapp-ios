@@ -10,6 +10,8 @@ namespace BetterSalesman.iOS
     public partial class RootViewController : BaseUIViewController
     {
         public static FlyoutNavigationController Navigation;
+        
+        const string navigationBase = "NavigationBase";
 
         public RootViewController(IntPtr handle) : base(handle)
         {
@@ -45,19 +47,28 @@ namespace BetterSalesman.iOS
 
             elements.Add(
                 new FlayoutNavigationItem(
-                    "Profile", 
+                    I18n.Profile, 
                     Profile,
                     UIImage.FromBundle(""), // TODO icons here
-                    "NavigationBase" 
+                    navigationBase
                 )
             );
             
             elements.Add(
                 new FlayoutNavigationItem(
-                    "Log out", 
+                    I18n.MyTeam, 
+                    MyTeam,
+                    UIImage.FromBundle(""), // TODO icons here
+                    navigationBase 
+                )
+            );
+            
+            elements.Add(
+                new FlayoutNavigationItem(
+                    I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(""), // TODO icons here
-                    "NavigationBase"
+                    navigationBase
                 )
             );
 
@@ -77,12 +88,22 @@ namespace BetterSalesman.iOS
         
         UIViewController controllerForSection(string title)
         {
-            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController("NavigationBase");
+            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(navigationBase);
             vc.InitialControllerType = title;
             return vc;
         }
 
         #endregion
+        
+        void Profile()
+        {
+            PresentViewControllerWithStoryboardId("Profile");
+        }
+        
+        void MyTeam()
+        {
+            // load it here
+        }
         
         void Logout()
         {
@@ -93,10 +114,6 @@ namespace BetterSalesman.iOS
             PresentViewController(vc, false, null);
         }
         
-        void Profile()
-        {
-            PresentViewControllerWithStoryboardId("Profile");
-        }
     }
 }
 
