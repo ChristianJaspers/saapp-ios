@@ -16,19 +16,20 @@ namespace BetterSalesman.iOS
             
             loginButton.TouchUpInside += (sender, e) =>
             {
-                ShowProgressIndicator();
+                ShowIndicator();
                 
                 ServiceProviderUser.Instance.Authentication(
                     "john", 
                     "doe", 
                     result =>
                     {
-                        HideProgressIndicator();
+                        HideIndicator();
                         DismissViewController(true, null);
                     },
                     errorCode =>
                     {
-                        HideProgressIndicator();
+                        HideIndicator();
+                        ShowAlert("Kod błędu: " + errorCode,"Wystąpił problem");
                         DismissViewController(true, null);
                     }
                     // TODO we leave it for testing purpose since backend is not ready
