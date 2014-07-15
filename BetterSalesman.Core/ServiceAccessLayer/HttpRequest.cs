@@ -153,7 +153,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     if (Failure != null)
                     {
                         // TODO handle error here
-                        Failure(400);
+                        Failure(Convert.ToInt32(response.StatusCode));
                     }
                     break;
             }
