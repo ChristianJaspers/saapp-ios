@@ -17,7 +17,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         // Paths
 //        const string pathAuth = "auth/login";
-        const string pathAuth = "api/json/get/cjSVVWLPdu?indent=2";
+        const string pathAuth = "api/json/get/cgefSlWzeG?indent=2";
         
         public static ServiceProviderUser Instance
         {
@@ -39,14 +39,14 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         }
         
         public async void Authentication(
-            string username, 
+            string email, 
             string password, 
             HTTPRequestSuccessEventHandler success = null, 
             HTTPRequestFailureEventHandler failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
-                {paramUsername,username},
+                {paramUsername,email},
                 {paramPassword,password}
             };
             

@@ -19,8 +19,8 @@ namespace BetterSalesman.iOS
                 ShowIndicator();
                 
                 ServiceProviderUser.Instance.Authentication(
-                    "john", 
-                    "doe", 
+                    inputEmail.Text, 
+                    inputPsasword.Text, 
                     result =>
                     {
                         HideIndicator();
@@ -30,10 +30,8 @@ namespace BetterSalesman.iOS
                     errorCode =>
                     {
                         HideIndicator();
-                        ShowAlert("Error code: " + errorCode,"Problem");
-                        DismissViewController(true, null);
+                        ShowAlert(I18n.ErrorConnectionTimeout);
                     }
-                    // TODO we leave it for testing purpose since backend is not ready
                 );
             };
         }
