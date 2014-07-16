@@ -25,12 +25,12 @@ namespace BetterSalesman.iOS
                     {
                         HideIndicator();
                         DismissViewController(true, null);
-                        UserSessionManager.Instance.FetchUser(user=>this.ShowAlert("Recived token: " + user.Token));
+                        UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
                     },
                     errorCode =>
                     {
                         HideIndicator();
-                        ShowAlert("Kod błędu: " + errorCode,"Wystąpił problem");
+                        ShowAlert("Error code: " + errorCode,"Problem");
                         DismissViewController(true, null);
                     }
                     // TODO we leave it for testing purpose since backend is not ready

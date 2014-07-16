@@ -82,9 +82,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            using (HttpResponseMessage response = await client.GetAsync(resourcePath))
+            try
             {
-                result = await ParseResponse(response, resourcePath);
+                using (HttpResponseMessage response = await client.GetAsync(resourcePath))
+                {
+                    result = await ParseResponse(response, resourcePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);   
             }
 
             return result;
@@ -95,11 +102,19 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             string result = null;
 
             var content = new StringContent(serializedParameters);
-
-            using (HttpResponseMessage response = await client.PostAsync(resourcePath, content))
+            
+            try
             {
-                result = await ParseResponse(response, resourcePath);
+                using (HttpResponseMessage response = await client.PostAsync(resourcePath, content))
+                {   
+                    result = await ParseResponse(response, resourcePath);
+                }
             }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
 
             return result;
         }
@@ -110,9 +125,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
             var content = new StringContent(serializedParameters);
 
-            using (HttpResponseMessage response = await client.PutAsync(resourcePath, content))
+            try
             {
-                result = await ParseResponse(response, resourcePath);
+                using (HttpResponseMessage response = await client.PutAsync(resourcePath, content))
+                {
+                    result = await ParseResponse(response, resourcePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);   
             }
 
             return result;
@@ -122,9 +144,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            using (HttpResponseMessage response = await client.DeleteAsync(resourcePath))
+            try
             {
-                result = await ParseResponse(response, resourcePath);
+                using (HttpResponseMessage response = await client.DeleteAsync(resourcePath))
+                {
+                    result = await ParseResponse(response, resourcePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
             }
 
             return result;
@@ -159,6 +188,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
 
             return result;
+        }
+
+        void HandleException(Exception ex)
+        {
+            Debug.WriteLine("Error communicating with the server: " + ex.Message);
+            
+            Failure(Convert.ToInt32(HttpStatusCode.RequestTimeout));
         }
     }
 }
