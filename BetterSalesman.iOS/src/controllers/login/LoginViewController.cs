@@ -16,24 +16,45 @@ namespace BetterSalesman.iOS
             
             loginButton.TouchUpInside += (sender, e) =>
             {
-                ShowIndicator();
-                
-                ServiceProviderUser.Instance.Authentication(
-                    inputEmail.Text, 
-                    inputPsasword.Text, 
-                    result =>
-                    {
-                        HideIndicator();
-                        DismissViewController(true, null);
-                        UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
-                    },
-                    errorCode =>
-                    {
-                        HideIndicator();
-                        ShowAlert(I18n.ErrorConnectionTimeout);
-                    }
-                );
+                if ( Validate() )
+                {
+                    ShowIndicator();
+                    
+                    ServiceProviderUser.Instance.Authentication(
+                        inputEmail.Text, 
+                        inputPassword.Text, 
+                        result =>
+                        {
+                            HideIndicator();
+                            DismissViewController(true, null);
+                            UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
+                        },
+                        errorCode =>
+                        {
+                            HideIndicator();
+                            ShowAlert(I18n.ErrorConnectionTimeout);
+                        }
+                    );
+                }
+                else
+                {
+                    ShowAlert(I18n.ErrorFillFields);
+                }
             };
+        }
+
+        bool Validate()
+        {   
+            // TODO we need build some serious validator
+            InvokeOnMainThread(() =>
+            {
+                inputEmail.Layer.BorderWidth = 1;
+                inputPassword.Layer.BorderWidth = 1;
+                inputEmail.Layer.BorderColor = inputEmail.IsNotEmpty() && inputEmail.IsValidEmail() ? UIColor.LightGray.CGColor : UIColor.Red.CGColor;
+                inputPassword.Layer.BorderColor = inputPassword.IsNotEmpty() ? UIColor.LightGray.CGColor : UIColor.Red.CGColor;
+            });
+            
+            return inputEmail.IsNotEmpty() && inputEmail.IsValidEmail() && inputPassword.IsNotEmpty();
         }
     }
 }

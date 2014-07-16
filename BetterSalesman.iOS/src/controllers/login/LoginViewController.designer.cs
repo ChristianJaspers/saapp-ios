@@ -20,7 +20,7 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField inputPsasword { get; set; }
+		UITextField inputPassword { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -32,9 +32,9 @@ namespace BetterSalesman.iOS
 				inputEmail.Dispose ();
 				inputEmail = null;
 			}
-			if (inputPsasword != null) {
-				inputPsasword.Dispose ();
-				inputPsasword = null;
+			if (inputPassword != null) {
+				inputPassword.Dispose ();
+				inputPassword = null;
 			}
 			if (loginButton != null) {
 				loginButton.Dispose ();

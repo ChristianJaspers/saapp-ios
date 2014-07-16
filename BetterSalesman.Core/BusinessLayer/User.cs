@@ -11,8 +11,8 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "id")]
         public int Id { get; set; }
         
-        [JsonPropertyAttribute(PropertyName = "username")]
-        public string Username { get; set; }
+        [JsonPropertyAttribute(PropertyName = "display_name")]
+        public string DisplayName { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "email")]
         public string Email { get; set; }

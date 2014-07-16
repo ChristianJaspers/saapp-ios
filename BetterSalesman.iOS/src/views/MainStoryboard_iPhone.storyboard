@@ -108,7 +108,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4R-hB-Y3J">
                                 <rect key="frame" x="20" y="183" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8E-F0-NLD">
                                 <rect key="frame" x="137" y="235" width="46" height="30"/>
@@ -139,7 +139,7 @@
                     <connections>
                         <outlet property="loginButton" destination="g8E-F0-NLD" id="name-outlet-g8E-F0-NLD"/>
                         <outlet property="inputEmail" destination="YtV-5J-KgG" id="name-outlet-YtV-5J-KgG"/>
-                        <outlet property="inputPsasword" destination="I4R-hB-Y3J" id="name-outlet-I4R-hB-Y3J"/>
+                        <outlet property="inputPassword" destination="I4R-hB-Y3J" id="name-outlet-I4R-hB-Y3J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plD-aC-shG" sceneMemberID="firstResponder"/>

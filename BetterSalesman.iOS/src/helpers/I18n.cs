@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BetterSalesman.iOS
+﻿namespace BetterSalesman.iOS
 {
     public static class I18n
     {
@@ -12,6 +10,8 @@ namespace BetterSalesman.iOS
         public static string Logout = "Log out".t();
         
         public static string ErrorConnectionTimeout = "Connection timeout".t();
+
+        public static string ErrorFillFields = "Please fill marked fields to continue".t();
     }
 }
 

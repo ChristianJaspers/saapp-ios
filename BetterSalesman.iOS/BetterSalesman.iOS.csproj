@@ -223,6 +223,7 @@
       <Link>DataLayer\DatabaseHelper.cs</Link>
     </Compile>
     <Compile Include="src\controllers\myteam\MyTeamListViewSource.cs" />
+    <Compile Include="src\extensions\UITextFieldValidatorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
