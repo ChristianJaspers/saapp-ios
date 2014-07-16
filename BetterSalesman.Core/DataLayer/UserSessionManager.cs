@@ -45,13 +45,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             BlobCache.UserAccount.InvalidateObject<UserSession>(CacheUserKey);
         }
         
-        public async Task FetchUser(Action finished = null)
+        public async Task FetchUser(Action<UserSession> finished = null)
         {
             user = await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheUserKey);
             
             if (finished != null)
             {
-                finished();
+                finished(user);
             }
         }
         

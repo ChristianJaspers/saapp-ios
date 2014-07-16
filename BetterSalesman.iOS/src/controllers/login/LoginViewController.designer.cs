@@ -16,10 +16,26 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		MonoTouch.UIKit.UIButton loginButton { get; set; }
+		UITextField inputEmail { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField inputPassword { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton loginButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (inputEmail != null) {
+				inputEmail.Dispose ();
+				inputEmail = null;
+			}
+			if (inputPassword != null) {
+				inputPassword.Dispose ();
+				inputPassword = null;
+			}
 			if (loginButton != null) {
 				loginButton.Dispose ();
 				loginButton = null;

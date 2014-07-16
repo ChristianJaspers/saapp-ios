@@ -3,12 +3,17 @@ using MonoTouch.UIKit;
 using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
+using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.DataLayer;
 
 namespace BetterSalesman.iOS
 {
     public partial class RootViewController : BaseUIViewController
     {
         public static FlyoutNavigationController Navigation;
+        
+        const string navigationBase = "NavigationBase";
+        const string navigationMyTeam = "NavigationMyTeam";
 
         public RootViewController(IntPtr handle) : base(handle)
         {
@@ -19,6 +24,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            DatabaseProvider.Setup();
             
             NavigationLayoutInit();
         }
@@ -44,19 +51,28 @@ namespace BetterSalesman.iOS
 
             elements.Add(
                 new FlayoutNavigationItem(
-                    "Profile", 
+                    I18n.Profile, 
                     Profile,
                     UIImage.FromBundle(""), // TODO icons here
-                    "NavigationBase" 
+                    navigationBase
                 )
             );
             
             elements.Add(
                 new FlayoutNavigationItem(
-                    "Log out", 
+                    I18n.MyTeam, 
+                    MyTeam,
+                    UIImage.FromBundle(""), // TODO icons here
+                    navigationMyTeam
+                )
+            );
+            
+            elements.Add(
+                new FlayoutNavigationItem(
+                    I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(""), // TODO icons here
-                    "NavigationBase"
+                    navigationBase
                 )
             );
 
@@ -74,32 +90,34 @@ namespace BetterSalesman.iOS
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
         
-        UIViewController controllerForSection(string title)
+        UIViewController controllerForSection(string title = navigationBase)
         {
-            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController("NavigationBase");
+            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(title);
             vc.InitialControllerType = title;
             return vc;
         }
-        
+
         #endregion
         
-        void LoginIfNeeded()
-        {
-            PresentViewControllerWithStoryboardId("Login",false);   
-        }
-
-        void Logout()
-        {
-            UIAlertView alert = new UIAlertView("Logout","Successfull logout action callback",null,null,new []{"ok"});
-            alert.Show();
-            
-            LoginIfNeeded();
-        }
-
         void Profile()
         {
             PresentViewControllerWithStoryboardId("Profile");
         }
+        
+        void MyTeam()
+        {
+            // load it here
+        }
+        
+        void Logout()
+        {
+            UserSessionManager.Instance.Discard();
+
+            UIViewController vc = (UIViewController)Storyboard.InstantiateViewController("Login");
+
+            PresentViewController(vc, false, null);
+        }
+        
     }
 }
 

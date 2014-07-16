@@ -15,6 +15,8 @@ namespace BetterSalesman.Core.DataLayer
     /// </summary>
     public static class DatabaseProvider
     {
+        public static bool CopyInitialDatabase;
+
         /// <summary>
         /// The filepath.
         /// </summary>
@@ -95,21 +97,25 @@ namespace BetterSalesman.Core.DataLayer
         }
 
         /// <summary>
-        /// Copies the initial database.
+        /// Setup this instance.
         /// </summary>
-        public static void CopyInitialDatabase()
+        public static void Setup()
         {
-            #if SILVERLIGHT
-            string resourcePath = string.Format("Assets/Data/{0}.sqlite3", HttpConfig.Lang);
-            CopyFileIfNotExists(resourcePath, DatabaseFileFullPath);
-            #elif NETFX_CORE
-            TODO - implement on Windows Desktop and RT
-            #elif __IOS__
-            string resourcePath = Path.Combine(Environment.CurrentDirectory, DatabaseFilename);
-            CopyFileIfNotExists(resourcePath, DatabaseFileFullPath);
-            #elif __ANDROID__
-            // Android has platform specfic mecha
-            #endif
+            if ( CopyInitialDatabase )
+            {
+                #if SILVERLIGHT
+                string resourcePath = string.Format("Assets/Data/{0}.sqlite3", HttpConfig.Lang);
+                CopyFileIfNotExists(resourcePath, DatabaseFileFullPath);
+                #elif NETFX_CORE
+                TODO - implement on Windows Desktop and RT
+                #elif __IOS__
+                string resourcePath = Path.Combine(Environment.CurrentDirectory, DatabaseFilename);
+                CopyFileIfNotExists(resourcePath, DatabaseFileFullPath);
+                #elif __ANDROID__
+                // Android has platform specfic mecha
+                #endif
+            }
+            
             // Automatic migration purpose if DB changed beetwen different app versions
             using (var connection = OpenConnection())
             {
@@ -179,7 +185,7 @@ namespace BetterSalesman.Core.DataLayer
         {
             Debug.WriteLine("DB create if not exists");
 
-            connection.CreateTable<UserSession>();
+            connection.CreateTable<User>();
             connection.CreateTable<Product>();
             connection.CreateTable<Argument>();
 

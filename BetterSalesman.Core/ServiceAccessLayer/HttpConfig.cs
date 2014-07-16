@@ -4,7 +4,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public static class HttpConfig
     {
-        public static string Host = "dwo.mikstura.it";
+        public static string Host = "www.json-generator.com"; // TODO stub backend
 
         static string lang = "pl";
 

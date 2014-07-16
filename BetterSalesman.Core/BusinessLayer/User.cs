@@ -11,8 +11,8 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "id")]
         public int Id { get; set; }
         
-        [JsonPropertyAttribute(PropertyName = "username")]
-        public string Username { get; set; }
+        [JsonPropertyAttribute(PropertyName = "display_name")]
+        public string DisplayName { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "email")]
         public string Email { get; set; }
@@ -22,15 +22,6 @@ namespace BetterSalesman.Core.BusinessLayer
         
         [JsonPropertyAttribute(PropertyName = "thumb_url")]
         public string ThumbUrl { get; set; }
-        
-        [JsonPropertyAttribute(PropertyName = "activity_me")]
-        public float ActivityMe { get; set; }
-        
-        [JsonPropertyAttribute(PropertyName = "activity_team")]
-        public float ActivityTeam { get; set; }
-        
-        [JsonPropertyAttribute(PropertyName = "activity_all_teams")]
-        public float ActivityAllTeams { get; set; }
         
         public DateTime UpdatedAt { get; set; }
     }
