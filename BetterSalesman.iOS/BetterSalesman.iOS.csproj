@@ -135,6 +135,9 @@
     <Reference Include="MBProgressHUD">
       <HintPath>..\Components\mbprogresshud-0.8\lib\ios\MBProgressHUD.dll</HintPath>
     </Reference>
+    <Reference Include="SDWebImage">
+      <HintPath>..\Components\sdwebimage-3.5.4\lib\ios\SDWebImage.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -219,6 +222,7 @@
     <Compile Include="..\BetterSalesman.Core\DataLayer\DatabaseHelper.cs">
       <Link>DataLayer\DatabaseHelper.cs</Link>
     </Compile>
+    <Compile Include="src\controllers\myteam\MyTeamListViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -254,6 +258,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="mbprogresshud">
       <Version>0.8</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="sdwebimage">
+      <Version>3.5.4</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

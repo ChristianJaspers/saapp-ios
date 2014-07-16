@@ -17,8 +17,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            // TODO my team ListViewSource
-            TableView.Source = new ArgumentsListViewSource();
+            TableView.Source = new MyTeamListViewSource();
             
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
             {
