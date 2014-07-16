@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -17,8 +18,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         DELETE
     };
     
-    public delegate void HTTPRequestSuccessEventHandler(string result);
-    public delegate void HTTPRequestFailureEventHandler(int errorCode);
+    public delegate void HttpRequestSuccessEventHandler(string result);
+    public delegate void HttpRequestFailureEventHandler(int errorCode);
     
     public class HttpRequest
     {
@@ -31,8 +32,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         private HttpClient client;
 
-        public event HTTPRequestSuccessEventHandler Success;
-        public event HTTPRequestFailureEventHandler Failure;
+        public event HttpRequestSuccessEventHandler Success;
+        public event HttpRequestFailureEventHandler Failure;
 
         public async Task<string> Perform()
         {
