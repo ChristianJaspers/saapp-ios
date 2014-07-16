@@ -216,6 +216,9 @@
     <Compile Include="src\controllers\myteam\MyTeamListViewController.designer.cs">
       <DependentUpon>MyTeamListViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\DataLayer\DatabaseHelper.cs">
+      <Link>DataLayer\DatabaseHelper.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BetterSalesman.Core.BusinessLayer;
 using Newtonsoft.Json;
+using BetterSalesman.Core.DataLayer;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -15,7 +16,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         const string paramPassword = "password";
         
         // Paths
-        const string pathAuth = "auth/login";
+//        const string pathAuth = "auth/login";
+        const string pathAuth = "api/json/get/cjSVVWLPdu?indent=2";
         
         public static ServiceProviderUser Instance
         {
@@ -56,17 +58,17 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             
             request.Success += result => {
                 
-                var resultObject = JsonConvert.DeserializeObject<JsonLoginResponse>(result);
+                var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
                 
                 // session save
                 UserSessionManager.Instance.User = new UserSession {
-                    Token = resultObject.AccessToken,
+                    Token = responseJsonLogin.AccessToken,
                 };
 
                 UserSessionManager.Instance.Save();
                 
                 // db save
-                // TODO save user object in DB here
+                DatabaseHelper.Replace<User>(responseJsonLogin.User);
                 
                 if ( success != null )
                 {
@@ -79,7 +81,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             await request.Perform();
         }
         
-        class JsonLoginResponse
+        class ResponseJsonLogin
         {
             [JsonPropertyAttribute(PropertyName = "user")]
             public User User;

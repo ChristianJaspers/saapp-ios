@@ -25,6 +25,7 @@ namespace BetterSalesman.iOS
                     {
                         HideIndicator();
                         DismissViewController(true, null);
+                        UserSessionManager.Instance.FetchUser(user=>this.ShowAlert("Recived token: " + user.Token));
                     },
                     errorCode =>
                     {

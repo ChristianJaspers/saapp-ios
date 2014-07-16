@@ -30,9 +30,7 @@ namespace BetterSalesman.iOS
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
             
-            UserSessionManager.Instance.FetchUser(() => 
-                Debug.WriteLine("Logged in user: " + UserSessionManager.Instance.User)
-            );
+            UserSessionManager.Instance.FetchUser(user => Debug.WriteLine("Logged in user: " + user));
         }
     }
 }

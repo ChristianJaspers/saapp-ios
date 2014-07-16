@@ -4,6 +4,7 @@ using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.DataLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -23,6 +24,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            DatabaseProvider.Setup();
             
             NavigationLayoutInit();
         }
