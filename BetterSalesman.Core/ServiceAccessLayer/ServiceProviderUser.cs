@@ -73,7 +73,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                 UserSessionManager.Instance.Save();
                 
-                DatabaseHelper.InsertOrUpdate<User>(responseJsonLogin.User);
+                DatabaseHelper.Replace<User>(responseJsonLogin.User);
                 
                 if ( success != null )
                 {
@@ -101,7 +101,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                 var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
 
-                DatabaseHelper.InsertOrUpdate<User>(responseJsonLogin.User);
+                DatabaseHelper.Replace<User>(responseJsonLogin.User);
 
                 if ( success != null )
                 {
