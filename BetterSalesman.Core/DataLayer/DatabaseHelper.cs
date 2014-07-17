@@ -10,14 +10,14 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         /// <param name="object">IBusinessEntity Object.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        private static void Replace<T>(IBusinessEntity @object)
+        public static void Replace<T>(IBusinessEntity @object)
         {
             using (var conn = DatabaseProvider.OpenConnection())
             {
                 conn.BeginTransaction();
                 
                 conn.Delete<T>(@object.Id);
-                Insert(@object,conn);
+                conn.Insert(@object);
                 
                 conn.Commit();
             }
@@ -30,33 +30,9 @@ namespace BetterSalesman.Core.DataLayer
         /// <param name="connection">Connection.</param>
         public static void Insert(IBusinessEntity @object, SQLiteConnection connection = null)
         {
-            if (connection != null)
+            using (var conn = DatabaseProvider.OpenConnection())
             {
-                connection.Insert(@object);
-            }
-            else
-            {
-                using (var conn = DatabaseProvider.OpenConnection())
-                {
-                    conn.Insert(@object);
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Insert or update given entity
-        /// </summary>
-        /// <param name="object">IBusinessEntity Object.</param>
-        /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public static void InsertOrUpdate<T>(IBusinessEntity @object) where T : new()
-        {
-            var findObject = Get<T>(@object.Id);
-            if ( !findObject.Equals(default(T)) )
-            {
-                Replace<T>(@object);
-            } else
-            {
-                Insert(@object);
+                conn.Insert(@object);
             }
         }
         
