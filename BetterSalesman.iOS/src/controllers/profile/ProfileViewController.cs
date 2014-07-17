@@ -1,20 +1,62 @@
 using System;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.Collections.Generic;
+using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
-	partial class ProfileViewController : UIViewController
+	partial class ProfileViewController : BaseUIViewController
 	{
 		private const string ImageMediaType = "public.image";
 
 		private UIImagePickerController imagePicker;
 
+		private User user;
+
 		public ProfileViewController (IntPtr handle) : base (handle)
 		{
+		}
+
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+
+			BackButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
+
+			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
+			{
+				ShowImagePickerTypeSelection();
+			};
+
+			LoadUser();
+		}
+
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+
+			ShowIndicator();
+
+			ServiceProviderUser.Instance.Profile(async result =>
+				{
+					await UserSessionManager.Instance.FetchUser(obj =>
+					{
+						LoadUser();
+						// TODO refresh UI here?
+					});
+
+					HideIndicator();
+				},
+				errorCode =>
+				{
+					HideIndicator();  
+					ShowAlert(I18n.ErrorConnectionTimeout);
+				});
 		}
 
 		private void ShowImagePickerTypeSelection()
@@ -103,6 +145,11 @@ namespace BetterSalesman.iOS
 			imagePicker.ModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
 
 			PresentViewController(imagePicker, true, null);
+		}
+			
+		void LoadUser()
+		{
+			user = UserManager.LoggedInUser();
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             parameters.Add(paramDeviceInfo, new Device {
                 NotificationToken = "notification token goes here", // TODO
                 Platform = paramCurrentPlatform,
-                Language = HttpConfig.Lang
+                Locale = HttpConfig.Lang
             });
 
             return parameters;
@@ -22,7 +22,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             public string NotificationToken;
             public string Platform;
-            public string Language;
+            public string Locale;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using MonoTouch.UIKit;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -14,6 +15,19 @@ namespace BetterSalesman.iOS
             base.ViewDidLoad();
             
             skipButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
+            
+            // TODO request here
+            ServiceProviderUser.Instance.ForgotPassword(
+                "email@here.pl",
+                result =>
+                {
+                    
+                },
+                errorCode =>
+                {
+                
+                }
+            );
         }
     }
 }
