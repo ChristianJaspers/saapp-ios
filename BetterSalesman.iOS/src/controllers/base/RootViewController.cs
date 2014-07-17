@@ -14,8 +14,10 @@ namespace BetterSalesman.iOS
     {
         public static FlyoutNavigationController Navigation;
         
-        const string navigationBase = "NavigationBase";
-        const string navigationMyTeam = "NavigationMyTeam";
+        const string storyboardIdNavigationBase = "NavigationBase";
+        const string storyboardIdNavigationMyTeam = "NavigationMyTeam";
+        const string storyboardIdProfile = "Profile";
+        const string storyboardIdLogin = "Login";
 
         public RootViewController(IntPtr handle) : base(handle)
         {
@@ -51,34 +53,26 @@ namespace BetterSalesman.iOS
 
         void PopulateNavigationItems()
         {
-            var elements = new List<FlayoutNavigationItem>();
-
-            elements.Add(
+            var elements = new List<FlayoutNavigationItem>() {
                 new FlayoutNavigationItem(
                     I18n.Profile, 
                     Profile,
                     UIImage.FromBundle(""), // TODO icons here
-                    navigationBase
-                )
-            );
-            
-            elements.Add(
+                    storyboardIdNavigationBase
+                ),
                 new FlayoutNavigationItem(
                     I18n.MyTeam, 
                     null,
                     UIImage.FromBundle(""), // TODO icons here
-                    navigationMyTeam
-                )
-            );
-            
-            elements.Add(
+                    storyboardIdNavigationMyTeam
+                ),
                 new FlayoutNavigationItem(
                     I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(""), // TODO icons here
-                    navigationBase
+                    storyboardIdNavigationBase
                 )
-            );
+            };
 
             string[] controllers = new string[elements.Count];
 
@@ -94,7 +88,7 @@ namespace BetterSalesman.iOS
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
         
-        UIViewController controllerForSection(string title = navigationBase)
+        UIViewController controllerForSection(string title = storyboardIdNavigationBase)
         {
             BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(title);
             vc.InitialControllerType = title;
@@ -118,14 +112,14 @@ namespace BetterSalesman.iOS
         
         void Profile()
         {
-            PresentViewControllerWithStoryboardId("Profile");
+            PresentViewControllerWithStoryboardId(storyboardIdProfile);
         }
         
         void Logout()
         {
             UserSessionManager.Instance.Discard();
 
-            UIViewController vc = (UIViewController)Storyboard.InstantiateViewController("Login");
+            UIViewController vc = (UIViewController)Storyboard.InstantiateViewController(storyboardIdLogin);
 
             PresentViewController(vc, false, null);
         }
