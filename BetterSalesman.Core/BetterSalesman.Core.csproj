@@ -45,6 +45,7 @@
     <Compile Include="ServiceAccessLayer\BaseServiceProvider.cs" />
     <Compile Include="ServiceAccessLayer\FileUploadRequest.cs" />
     <Compile Include="DataLayer\DatabaseHelper.cs" />
+    <Compile Include="BusinessLayer\Managers\UserManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -53,5 +54,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="ServiceAccessLayer\" />
     <Folder Include="BusinessLayer\Contracts\" />
+    <Folder Include="BusinessLayer\Managers\" />
   </ItemGroup>
 </Project>

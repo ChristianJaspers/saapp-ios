@@ -1,6 +1,7 @@
 using System;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
@@ -19,8 +20,7 @@ namespace BetterSalesman.iOS
             
             backButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
             
-            // TODO load user from DB here
-            // user = 
+            LoadUser();
         }
 
         public override void ViewDidAppear(bool animated)
@@ -32,16 +32,25 @@ namespace BetterSalesman.iOS
             ServiceProviderUser.Instance.Profile(
                 result =>
                 {
-                    // TODO load user
+                    UserSessionManager.Instance.FetchUser(obj =>
+                        {
+                            LoadUser();
+                            // TODO refresh UI here?
+                        });
+                    
                     HideIndicator();
                 },
                 errorCode =>
                 {
-                    HideIndicator();
-                    // TODO there was a problem   
+                    HideIndicator();  
                     ShowAlert(I18n.ErrorConnectionTimeout);
                 }
             );
+        }
+
+        void LoadUser()
+        {
+            user = UserManager.LoggedInUser();
         }
     }
 }

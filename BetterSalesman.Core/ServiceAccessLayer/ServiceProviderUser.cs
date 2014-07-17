@@ -63,15 +63,14 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 
                 var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
                 
-                // session save
                 UserSessionManager.Instance.User = new UserSession {
+                    UserId = responseJsonLogin.User.Id,
                     Token = responseJsonLogin.AccessToken,
                 };
 
                 UserSessionManager.Instance.Save();
                 
-                // db save
-                DatabaseHelper.Replace<User>(responseJsonLogin.User);
+                DatabaseHelper.InsertOrUpdate<User>(responseJsonLogin.User);
                 
                 if ( success != null )
                 {
@@ -101,8 +100,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                 var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
 
-                // db save
-                DatabaseHelper.Replace<User>(responseJsonLogin.User);
+                DatabaseHelper.InsertOrUpdate<User>(responseJsonLogin.User);
 
                 if ( success != null )
                 {
