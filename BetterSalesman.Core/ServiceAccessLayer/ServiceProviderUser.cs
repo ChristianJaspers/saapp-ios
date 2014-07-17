@@ -85,11 +85,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         }
         
         public async void Profile(
-            HTTPRequestSuccessEventHandler success = null, 
-            HTTPRequestFailureEventHandler failure = null
+            HttpRequestSuccessEventHandler success = null, 
+            HttpRequestFailureEventHandler failure = null
         )
         {
-            var parameters = new Dictionary<string, object> {};
+            var parameters = new Dictionary<string, object>();
 
             var request = new HttpRequest {
                 Method = HTTPMethod.GET,
