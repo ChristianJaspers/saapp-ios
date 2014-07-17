@@ -16,18 +16,6 @@ namespace BetterSalesman.iOS
 		public ProfileViewController (IntPtr handle) : base (handle)
 		{
 		}
-        
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-            
-            BackButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
-
-			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
-			{
-				ShowImagePickerTypeSelection();
-			};
-        }
 
 		private void ShowImagePickerTypeSelection()
 		{
