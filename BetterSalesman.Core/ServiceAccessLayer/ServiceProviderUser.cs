@@ -12,13 +12,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         private static object locker = new Object();
         
         // Parameters
-        const string paramUsername = "username";
+        const string paramEmail = "email";
         const string paramPassword = "password";
         
         // Paths
 //        const string pathAuth = "auth/login";
         const string pathAuth = "api/json/get/ccXoDMnFYO?indent=2";
+//        const string pathProfile = "profile";
         const string pathProfile = "api/json/get/bSpxyCrcBK?indent=2";
+//        const string pathForgotPassword = "auth/forgot_password";
+        const string pathForgotPassword = "api/json/get/bMapgUjlGq?indent=2";
         
         public static ServiceProviderUser Instance
         {
@@ -49,7 +52,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         )
         {
             var parameters = new Dictionary<string, object> {
-                {paramUsername,email},
+                {paramEmail,email},
                 {paramPassword,password}
             };
             
@@ -88,12 +91,10 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             HttpRequestFailureEventHandler failure = null
         )
         {
-            var parameters = new Dictionary<string, object>();
-
             var request = new HttpRequest {
                 Method = HTTPMethod.GET,
                 Path = pathProfile,
-                Parameters = ParametersWithDeviceInfo(parameters)
+                Parameters = ParametersWithDeviceInfo(new Dictionary<string, object>())
             };
 
             request.Success += result => {
@@ -101,6 +102,35 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
 
                 DatabaseHelper.InsertOrUpdate<User>(responseJsonLogin.User);
+
+                if ( success != null )
+                {
+                    success(result);
+                }
+            };
+
+            request.Failure += failure;
+
+            await request.Perform();
+        }
+
+        public async void ForgotPassword(
+            string email,
+            HttpRequestSuccessEventHandler success = null, 
+            HttpRequestFailureEventHandler failure = null
+        )
+        {
+            var parameters = new Dictionary<string, object> {
+                {paramEmail,email},
+            };
+            
+            var request = new HttpRequest {
+                Method = HTTPMethod.POST,
+                Path = pathForgotPassword,
+                Parameters = ParametersWithDeviceInfo(parameters)
+            };
+
+            request.Success += result => {
 
                 if ( success != null )
                 {
