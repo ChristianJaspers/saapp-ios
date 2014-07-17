@@ -71,6 +71,17 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="YES" contentMode="scaleToFill" id="104" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="98" y="81" width="124" height="136"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="107" fixedFrame="YES">
+                                <rect key="frame" x="118" y="187" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Pick photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -81,7 +92,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="74" id="name-outlet-74"/>
+                        <outlet property="BackButton" destination="74" id="name-outlet-74"/>
+                        <outlet property="ProfileImageView" destination="104" id="name-outlet-104"/>
+                        <outlet property="ProfileImageEditButton" destination="107" id="name-outlet-107"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gV-8m-Exf" userLabel="First Responder" sceneMemberID="firstResponder"/>

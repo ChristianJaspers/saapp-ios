@@ -16,13 +16,29 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton backButton { get; set; }
+		UIButton BackButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton ProfileImageEditButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView ProfileImageView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (backButton != null) {
-				backButton.Dispose ();
-				backButton = null;
+			if (BackButton != null) {
+				BackButton.Dispose ();
+				BackButton = null;
+			}
+			if (ProfileImageEditButton != null) {
+				ProfileImageEditButton.Dispose ();
+				ProfileImageEditButton = null;
+			}
+			if (ProfileImageView != null) {
+				ProfileImageView.Dispose ();
+				ProfileImageView = null;
 			}
 		}
 	}
