@@ -6,7 +6,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
     {
         public static string Host = "www.json-generator.com"; // TODO stub backend
 
-        static string lang = "pl";
+        static string lang;
 
         public static string Lang
         {

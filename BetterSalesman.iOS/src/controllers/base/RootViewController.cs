@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using MonoTouch.UIKit;
 using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.DataLayer;
+using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
@@ -24,6 +26,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            LanguageSetup();
             
             DatabaseProvider.Setup();
             
@@ -61,7 +65,7 @@ namespace BetterSalesman.iOS
             elements.Add(
                 new FlayoutNavigationItem(
                     I18n.MyTeam, 
-                    MyTeam,
+                    null,
                     UIImage.FromBundle(""), // TODO icons here
                     navigationMyTeam
                 )
@@ -96,17 +100,25 @@ namespace BetterSalesman.iOS
             vc.InitialControllerType = title;
             return vc;
         }
+        
+        void LanguageSetup()
+        {   
+            string[] availableLanguages = {"pl","en"};
+            
+            var currentLocale = NSLocale.PreferredLanguages[0];
+            
+            var userLocale = availableLanguages.Contains(currentLocale) ? currentLocale : "en"; 
+            
+            System.Diagnostics.Debug.WriteLine("Current locale: " + currentLocale + " / user locale: " + userLocale);
+            
+            HttpConfig.Lang = userLocale;
+        }
 
         #endregion
         
         void Profile()
         {
             PresentViewControllerWithStoryboardId("Profile");
-        }
-        
-        void MyTeam()
-        {
-            // load it here
         }
         
         void Logout()
