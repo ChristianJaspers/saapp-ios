@@ -17,7 +17,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         // Paths
 //        const string pathAuth = "auth/login";
-        const string pathAuth = "api/json/get/cgefSlWzeG?indent=2";
+        const string pathAuth = "api/json/get/ccXoDMnFYO?indent=2";
+        const string pathProfile = "api/json/get/bSpxyCrcBK?indent=2";
         
         public static ServiceProviderUser Instance
         {
@@ -37,6 +38,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 return instance;
             }
         }
+        
+        #region Requests
         
         public async void Authentication(
             string email, 
@@ -81,6 +84,41 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             await request.Perform();
         }
         
+        public async void Profile(
+            HTTPRequestSuccessEventHandler success = null, 
+            HTTPRequestFailureEventHandler failure = null
+        )
+        {
+            var parameters = new Dictionary<string, object> {};
+
+            var request = new HttpRequest {
+                Method = HTTPMethod.GET,
+                Path = pathProfile,
+                Parameters = ParametersWithDeviceInfo(parameters)
+            };
+
+            request.Success += result => {
+
+                var responseJsonLogin = JsonConvert.DeserializeObject<ResponseJsonLogin>(result);
+
+                // db save
+                DatabaseHelper.Replace<User>(responseJsonLogin.User);
+
+                if ( success != null )
+                {
+                    success(result);
+                }
+            };
+
+            request.Failure += failure;
+
+            await request.Perform();
+        }
+        
+        #endregion
+        
+        #region Json definitions
+        
         class ResponseJsonLogin
         {
             [JsonPropertyAttribute(PropertyName = "user")]
@@ -89,6 +127,15 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             [JsonPropertyAttribute(PropertyName = "access_token")]
             public string AccessToken;
         }
+        
+        
+        class ResponseJsonProfile
+        {
+            [JsonPropertyAttribute(PropertyName = "user")]
+            public User User;
+        }
+        
+        #endregion
     }
 }
 
