@@ -2,23 +2,19 @@
 
 namespace XValidator
 {
-    public class ValidatorBase : IValidator
+    public abstract class XValidatorBase
     {
-        #region IValidator implementation
-
         public string Message = "Field {0} is required.";
 
-        public override string ErrorMessage(string fieldName)
+        public string ErrorMessage(string fieldName)
         {
             return string.Format(Message, fieldName);
         }
 
-        public override bool IsValid(string value)
+        public virtual bool IsValid(string value)
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 }
 

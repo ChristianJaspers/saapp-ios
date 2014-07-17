@@ -4,7 +4,7 @@ namespace XValidator
 {
     public class XFormValidator
     {
-        public IValidate[] Inputs { get; set; }
+        public XFieldValidate[] Inputs { get; set; }
         public List<string> Errors { get; set; }
         
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
+using XValidator;
 
 namespace BetterSalesman.iOS
 {
@@ -45,6 +46,25 @@ namespace BetterSalesman.iOS
 
         bool Validate()
         {   
+            var validator = new XFormValidator {
+                Inputs = {
+                    new XFieldValidate {
+                        Name = "Email".t(),
+                        FieldView = inputEmail,
+                        Validators = new XValidator[] {
+                            new XValidatorRequired()
+                        },
+                    },
+                    new XFieldValidate {
+                        Name = "Password".t(),
+                        FieldView = inputPassword,
+                        Validators = new XValidator[] {
+                            new XValidatorRequired()
+                        },
+                    }
+                }
+            };
+            
             // TODO we need build some serious validator
             InvokeOnMainThread(() =>
             {

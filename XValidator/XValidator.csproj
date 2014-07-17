@@ -31,15 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Contracts\IValidate.cs" />
-    <Compile Include="Contracts\IValidator.cs" />
     <Compile Include="XFormValidator.cs" />
-    <Compile Include="Validators\ValidatorBase.cs" />
-    <Compile Include="Validators\ValidatorRequired.cs" />
+    <Compile Include="XFieldValidate.cs" />
+    <Compile Include="Validators\XValidatorBase.cs" />
+    <Compile Include="Validators\XValidatorRequired.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 </Project>
