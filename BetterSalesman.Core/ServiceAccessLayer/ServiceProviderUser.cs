@@ -44,8 +44,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public async void Authentication(
             string email, 
             string password, 
-            HTTPRequestSuccessEventHandler success = null, 
-            HTTPRequestFailureEventHandler failure = null
+            HttpRequestSuccessEventHandler success = null, 
+            HttpRequestFailureEventHandler failure = null
         )
         {
             var parameters = new Dictionary<string, object> {

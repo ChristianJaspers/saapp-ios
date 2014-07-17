@@ -43,6 +43,7 @@
     <Compile Include="ServiceAccessLayer\HttpRequest.cs" />
     <Compile Include="BusinessLayer\User.cs" />
     <Compile Include="ServiceAccessLayer\BaseServiceProvider.cs" />
+    <Compile Include="ServiceAccessLayer\FileUploadRequest.cs" />
     <Compile Include="DataLayer\DatabaseHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

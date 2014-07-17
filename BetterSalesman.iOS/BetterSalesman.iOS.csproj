@@ -213,6 +213,9 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseServiceProvider.cs">
       <Link>ServiceAccessLayer\BaseServiceProvider.cs</Link>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\FileUploadRequest.cs">
+      <Link>ServiceAccessLayer\FileUploadRequest.cs</Link>
+    </Compile>
     <Compile Include="src\extensions\LocalizationExtensions.cs" />
     <Compile Include="src\helpers\I18n.cs" />
     <Compile Include="src\controllers\myteam\MyTeamListViewController.cs" />
