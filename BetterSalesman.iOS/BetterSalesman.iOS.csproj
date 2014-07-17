@@ -254,6 +254,7 @@
     <Folder Include="src\helpers\" />
     <Folder Include="src\controllers\myteam\" />
     <Folder Include="BusinessLayer\Managers\" />
+    <Folder Include="src\views\components\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

@@ -3,7 +3,7 @@ namespace XValidator
 	public interface IValidator
 	{
         string ErrorMessage(string fieldName);
-        bool IsValid();
+        bool IsValid(string value);
 	}
 
 }
