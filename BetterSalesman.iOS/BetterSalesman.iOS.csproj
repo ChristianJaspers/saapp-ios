@@ -230,6 +230,8 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\UserManager.cs">
       <Link>BusinessLayer\Managers\UserManager.cs</Link>
     </Compile>
+    <Compile Include="src\helpers\ImageFilesManagementHelper.cs" />
+    <Compile Include="src\helpers\ImagePickerPresenter.cs" />
     <Compile Include="src\views\XUITextFieldValidate.cs" />
   </ItemGroup>
   <ItemGroup>

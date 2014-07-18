@@ -14,14 +14,19 @@ namespace BetterSalesman.iOS
 {
 	partial class ProfileViewController : BaseUIViewController
 	{
-		private const string ImageMediaType = "public.image";
-
-		private UIImagePickerController imagePicker;
-
+		private ImagePickerPresenter imagePickerPresenter;
 		private User user;
 
 		public ProfileViewController (IntPtr handle) : base (handle)
 		{
+			imagePickerPresenter = new ImagePickerPresenter ();
+			imagePickerPresenter.FinishedPicking += async (bool didPickAnImage, UIImage pickedImage) => 
+			{
+				if (didPickAnImage)
+				{
+					await UploadImage(pickedImage);
+				}
+			};
 		}
 
 		public override void ViewDidLoad()
@@ -32,7 +37,7 @@ namespace BetterSalesman.iOS
 
 			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
 			{
-				ShowImagePickerTypeSelection();
+				imagePickerPresenter.ShowImagePickerTypeSelection(this);
 			};
 
 //			LoadUser();
@@ -61,100 +66,9 @@ namespace BetterSalesman.iOS
 //				});
 		}
 
-		private void ShowImagePickerTypeSelection()
-		{
-			var CameraPickerType = UIImagePickerControllerSourceType.Camera;
-			var PhotoLibraryPickerType = UIImagePickerControllerSourceType.PhotoLibrary;
-			var SavedPhotosPickerType = UIImagePickerControllerSourceType.Camera;
-
-			var buttonIndexesToSourceTypes = new Dictionary<int, UIImagePickerControllerSourceType>();
-			var lastButtonIndex = -1;
-
-			// TODO - localize all UI strings
-			UIAlertView alert = new UIAlertView() 
-			{
-				Title = "Pick image".t(),
-			};
-
-			if (IsPickerTypeAvailable(CameraPickerType))
-			{
-				alert.AddButton ("Camera".t());
-				lastButtonIndex += 1;
-				buttonIndexesToSourceTypes.Add(lastButtonIndex, CameraPickerType); 
-			}
-
-			if (IsPickerTypeAvailable(PhotoLibraryPickerType))
-			{
-				alert.AddButton ("Photo library".t());
-				lastButtonIndex += 1;
-				buttonIndexesToSourceTypes.Add(lastButtonIndex, PhotoLibraryPickerType);
-			}
-
-			if (IsPickerTypeAvailable(SavedPhotosPickerType))
-			{
-				alert.AddButton ("Photo library".t());
-				lastButtonIndex += 1;
-				buttonIndexesToSourceTypes.Add(lastButtonIndex, SavedPhotosPickerType);
-			}
-
-			alert.AddButton("Cancel".t());
-
-			// last button added is the 'cancel' button (index of '2')
-			alert.Clicked += (object a, UIButtonEventArgs b) =>
-			{
-				ShowImagePicker(buttonIndexesToSourceTypes[b.ButtonIndex]);
-			};
-
-			alert.Show ();
-		}
-
-		private bool IsPickerTypeAvailable(UIImagePickerControllerSourceType type)
-		{
-			return UIImagePickerController.IsSourceTypeAvailable(type);
-		}
-
-		private void ShowImagePicker(UIImagePickerControllerSourceType pickerType)
-		{
-			imagePicker = new UIImagePickerController();
-
-			imagePicker.SourceType = pickerType;
-			if (pickerType == UIImagePickerControllerSourceType.Camera)
-			{
-				imagePicker.ShowsCameraControls = true;
-			}
-			imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes(pickerType);
-
-			imagePicker.FinishedPickingMedia += async (s, e) =>
-			{
-				await HandleFilePickedAndLoaded(s, e);
-			};
-
-			imagePicker.Canceled += (object s, EventArgs e) => 
-			{
-				imagePicker.DismissViewController(true, null);
-			};
-
-			imagePicker.ModalInPopover = true;
-			imagePicker.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
-			imagePicker.ModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
-
-			PresentViewController(imagePicker, true, null);
-		}
-
-		private async Task HandleFilePickedAndLoaded(object s, UIImagePickerMediaPickedEventArgs e)
-		{
-			imagePicker.DismissViewController (true, null);
-
-			Debug.WriteLine("MediaUrl: " + e.MediaUrl);
-			if (e.MediaType == ImageMediaType)
-			{
-				await UploadImage(e.OriginalImage);
-			}
-		}
-
 		private async Task UploadImage(UIImage image)
 		{
-			var imageFilePath = await SaveImageToTemporaryFilePng(image);
+			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
 
 			var fileUploadRequest = new FileUploadRequest ();
 
@@ -163,7 +77,7 @@ namespace BetterSalesman.iOS
 			fileUploadRequest.Success += async (string remoteFileUrl) => 
 			{
 				Debug.WriteLine ("Upload complete - file URL: " + remoteFileUrl);
-				RemoveTemporaryFile(imageFilePath);
+				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 
 				UIImage remoteImage = await Task<UIImage>.Run(() =>
 				{
@@ -181,53 +95,12 @@ namespace BetterSalesman.iOS
 			fileUploadRequest.Failure += (int errorCode) =>
 			{
 				Debug.WriteLine ("Upload failed: " + errorCode);
-				RemoveTemporaryFile(imageFilePath);
+				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 			};
 
 			fileUploadRequest.Perform(imageFilePath);
 		}
-
-		/// <summary>
-		/// Saves the image to temporary file in png format.
-		/// </summary>
-		/// <returns>Path to temporary file representing image provide as paramater</returns>
-		/// <param name="image">The image to be saved to a tempoarary png file</param>
-		public async Task<string> SaveImageToTemporaryFilePng(UIImage image)
-		{
-			var uniqueFileNamePortion = Guid.NewGuid().ToString();
-			var temporaryImageFileName = string.Format("{0}.png", uniqueFileNamePortion);
-
-			var documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			var temporaryStorageFolderPath = Path.Combine(documentsFolderPath, "..", "tmp");
-
-			var temporaryImageFilePath = Path.Combine(temporaryStorageFolderPath, temporaryImageFileName);
-
-			var imageData = image.AsPNG();
-			await Task.Run(() => 
-			{
-				//File.WriteAllBytes(temporaryImageFilePath, imageData);
-				NSError error = null;
-				if (imageData.Save(temporaryImageFilePath, false, out error)) 
-				{
-					Console.WriteLine("saved file");
-				} else 
-				{
-					Console.WriteLine("NOT saved file because" + error.LocalizedDescription);
-				}
-			});
-
-			return temporaryImageFilePath;
-		}
-
-		// TODO - might require some extra checks to see if file can we opened in ReadWrite mode
-		public void RemoveTemporaryFile(string temporaryFilePath)
-		{
-			if (File.Exists(temporaryFilePath))
-			{
-				File.Delete(temporaryFilePath);
-			}
-		}
-			
+						
 		void LoadUser()
 		{
 			user = UserManager.LoggedInUser();
