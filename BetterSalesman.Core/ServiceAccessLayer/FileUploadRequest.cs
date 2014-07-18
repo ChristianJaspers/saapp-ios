@@ -52,6 +52,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 				client.UploadFileCompleted += OnUploadCompleted;
 
+				Debug.WriteLine("Begining upload");
+
 				// TODO - change to production URI
 				client.UploadFileAsync(new Uri("http://roweo.pl/api/user/image_upload", UriKind.Absolute), localFilePath);
 			}
@@ -67,6 +69,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 		private void OnUploadCompleted(object sender, UploadFileCompletedEventArgs e)
 		{
+			Debug.WriteLine("Upload completed");
+
 			var result = e.Result;
 			var error = e.Error;
 
@@ -82,6 +86,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				// TODO - use debugger to find out where the JSON is contained, then add parsing code here
 				if (error != null) 
 				{
+					Debug.WriteLine("Upload error: " + error.Message + "\nStackTrace: " + error.StackTrace);
 					OnFailure(UnknownNetworkErrorCode, UnknownNetworErrorMessage);
 				} 
 				else 

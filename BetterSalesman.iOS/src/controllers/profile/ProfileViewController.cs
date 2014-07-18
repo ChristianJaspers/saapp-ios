@@ -98,6 +98,7 @@ namespace BetterSalesman.iOS
 				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 			};
 
+
 			fileUploadRequest.Perform(imageFilePath);
 		}
 						
