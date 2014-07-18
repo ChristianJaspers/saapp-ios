@@ -230,6 +230,7 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\UserManager.cs">
       <Link>BusinessLayer\Managers\UserManager.cs</Link>
     </Compile>
+    <Compile Include="src\views\XUITextFieldValidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

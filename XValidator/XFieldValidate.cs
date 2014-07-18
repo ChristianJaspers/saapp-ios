@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace XValidator
 {
-    public class XFieldValidate
+    public class XFieldValidate <T>
     {
         /// <summary>
         /// Gets or sets the name of the field displayed as referenced in error messages
@@ -36,18 +37,18 @@ namespace XValidator
                 }
             }
             
-            return Errors.Count > 0;
+            return !Errors.Any();
         }
         
         /// <summary>
         /// The field view object.
         /// </summary>
-        public object FieldView;
+        public T FieldView;
         
         /// <summary>
         /// Value of the field
         /// </summary>
-        public string Value()
+        public virtual string Value()
         {
             throw new NotImplementedException();
         }
@@ -55,7 +56,7 @@ namespace XValidator
         /// <summary>
         /// Redraw view when error appears during validaton
         /// </summary>
-        public void ViewStateError()
+        public virtual void ViewStateError()
         {
             throw new NotImplementedException();
         }
@@ -63,7 +64,7 @@ namespace XValidator
         /// <summary>
         /// Redraw view when no errors during validation
         /// </summary>
-        public void ViewStateNormal()
+        public virtual void ViewStateNormal()
         {
             throw new NotImplementedException();
         }

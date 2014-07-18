@@ -2,9 +2,9 @@
 
 namespace XValidator
 {
-    public class XFormValidator
+    public class XFormValidator<T>
     {
-        public XFieldValidate[] Inputs { get; set; }
+        public XFieldValidate<T>[] Inputs { get; set; }
         public List<string> Errors { get; set; }
         
         /// <summary>
@@ -16,7 +16,10 @@ namespace XValidator
             
             foreach (var input in Inputs)
             {
-                input.Validate();
+                if (!input.Validate())
+                {
+                    input.ViewStateError();
+                }
                 
                 foreach (var error in input.Errors)
                 {
