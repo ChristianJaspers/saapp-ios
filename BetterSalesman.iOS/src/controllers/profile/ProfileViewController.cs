@@ -15,9 +15,10 @@ namespace BetterSalesman.iOS
 	partial class ProfileViewController : BaseUIViewController
 	{
 		private ImagePickerPresenter imagePickerPresenter;
+		private UIImage cachedPickedImage;
 		private User user;
 
-		public ProfileViewController (IntPtr handle) : base (handle)
+		public ProfileViewController(IntPtr handle) : base (handle)
 		{
 			imagePickerPresenter = new ImagePickerPresenter ();
 			imagePickerPresenter.FinishedPicking += async (bool didPickAnImage, UIImage pickedImage) => 
@@ -68,36 +69,37 @@ namespace BetterSalesman.iOS
 
 		private async Task UploadImage(UIImage image)
 		{
+			cachedPickedImage = image;
+
 			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
 
-			var fileUploadRequest = new FileUploadRequest ();
+			var fileUploadRequest = new FileUploadRequest();
 
 			fileUploadRequest.ProgressUpdated += (int progressPercentage) => Debug.WriteLine ("Upload progress: " + progressPercentage);
 
 			fileUploadRequest.Success += async (string remoteFileUrl) => 
 			{
-				Debug.WriteLine ("Upload complete - file URL: " + remoteFileUrl);
 				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-
-				UIImage remoteImage = await Task<UIImage>.Run(() =>
-				{
-					// TODO - check if URL is valid and if connection is available
-					var data = NSData.FromUrl(new NSUrl(remoteFileUrl));
-					return UIImage.LoadFromData(data);
-				});
+				cachedPickedImage = null;
 
 				InvokeOnMainThread(() =>
 				{
-					ProfileImageView.Image = remoteImage;
+					Debug.WriteLine ("Upload complete - file URL: " + remoteFileUrl);
+					ProfileImageView.Image = cachedPickedImage;
+					cachedPickedImage = null;
 				});
 			};
 
-			fileUploadRequest.Failure += (int errorCode) =>
+			fileUploadRequest.Failure += (int errorCode, string errorMessage) =>
 			{
-				Debug.WriteLine ("Upload failed: " + errorCode);
 				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-			};
+				cachedPickedImage = null;
 
+				InvokeOnMainThread(() =>
+				{
+					ShowAlert(errorMessage);
+				});
+			};
 
 			fileUploadRequest.Perform(imageFilePath);
 		}

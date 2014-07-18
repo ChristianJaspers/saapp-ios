@@ -233,6 +233,10 @@
     <Compile Include="src\helpers\ImageFilesManagementHelper.cs" />
     <Compile Include="src\helpers\ImagePickerPresenter.cs" />
     <Compile Include="src\views\XUITextFieldValidate.cs" />
+    <Compile Include="src\helpers\Reachability.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessErrorDescriptionProvider.cs">
+      <Link>ServiceAccessLayer\ServiceAccessErrorDescriptionProvider.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

@@ -20,7 +20,10 @@ Application require Xamarin Studio (Indie license at least for handling external
 
 - [iOS] **MBProgressHUD** (loader indicator) [http://components.xamarin.com/view/mbprogresshud](http://components.xamarin.com/view/mbprogresshud)
 
+
 ###Other
+
+- [iOS] **Reachability** (Network reachability from official Xamarin sample project) [https://github.com/xamarin/monotouch-samples/blob/master/ReachabilitySample/reachability.cs]
 
 - [Cross] **SQLite.NET extensions** (relations and TextBlob properties) [https://bitbucket.org/twincoders/sqlite-net-extensions](https://bitbucket.org/twincoders/sqlite-net-extensions)
 

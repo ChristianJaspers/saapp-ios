@@ -10,18 +10,13 @@ using System.Linq;
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	public delegate void FileUploadCompletedEventHandler(string remoteFileUrl);
+	public delegate void FileUploadFailedEventHandler(int errorCode, string errorMessage);
 	public delegate void FileUploadProgressUpdatedEventHandler(int progressPercentage);
 
 	public class FileUploadRequest
 	{
-		// TODO - extract and localize
-		public const int UnknownNetworkErrorCode = -1001;
-		public const string UnknownNetworErrorMessage = "An unknown error occured. Please try again later.";
-		public const int FileNotFoundErrorCode = -1000;
-		public const string FileNotFoundErrorMessage = "Couldn't find file you selected. Please select another file.";
-
 		public event FileUploadCompletedEventHandler Success;
-		public event HttpRequestFailureEventHandler Failure;
+		public event FileUploadFailedEventHandler Failure;
 		public event FileUploadProgressUpdatedEventHandler ProgressUpdated;
 
 		private WebClient client;
@@ -40,9 +35,24 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 		public void Perform(string localFilePath)
 		{
+			// TODO - replace with production value
+			var host = "http://www.roweo.pl";
+
+			if (Reachability.InternetConnectionStatus() == NetworkStatus.NotReachable)
+			{
+				OnFailure(ServiceAccessErrorDescriptionProvider.NetworkUnavailableErrorCode, ServiceAccessErrorDescriptionProvider.NetworkUnavailableErrorMessage);
+				return;
+			}
+
+			if (!Reachability.IsHostReachable(host))
+			{
+				OnFailure(ServiceAccessErrorDescriptionProvider.HostUnreachableErrorCode, ServiceAccessErrorDescriptionProvider.HostUnreachableErrorMessage);
+				return;
+			}
+
 			if (!File.Exists(localFilePath)) 
 			{
-				OnFailure(FileNotFoundErrorCode, FileNotFoundErrorMessage);
+				OnFailure(ServiceAccessErrorDescriptionProvider.FileNotFoundErrorCode, ServiceAccessErrorDescriptionProvider.FileNotFoundErrorMessage);
 				return;
 			}
 
@@ -55,7 +65,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				Debug.WriteLine("Begining upload");
 
 				// TODO - change to production URI
-				client.UploadFileAsync(new Uri("http://roweo.pl/api/user/image_upload", UriKind.Absolute), localFilePath);
+				client.UploadFileAsync(new Uri("http://www.roweo.pl/api/user/image_upload", UriKind.Absolute), localFilePath);
 			}
 		}
 
@@ -87,11 +97,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				if (error != null) 
 				{
 					Debug.WriteLine("Upload error: " + error.Message + "\nStackTrace: " + error.StackTrace);
-					OnFailure(UnknownNetworkErrorCode, UnknownNetworErrorMessage);
+					OnFailure(ServiceAccessErrorDescriptionProvider.UnknownNetworkErrorCode, ServiceAccessErrorDescriptionProvider.UnknownNetworErrorMessage);
 				} 
 				else 
 				{
-					OnFailure(UnknownNetworkErrorCode, UnknownNetworErrorMessage);
+					OnFailure(ServiceAccessErrorDescriptionProvider.UnknownNetworkErrorCode, ServiceAccessErrorDescriptionProvider.UnknownNetworErrorMessage);
 				}
 			}
 		}
@@ -118,7 +128,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		{
 			if (Failure != null) 
 			{
-				Failure(errorCode);
+				Failure(errorCode, errorMessage);
 			}
 		}
 			
