@@ -43,9 +43,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="M0E-8S-Szi"/>
-                    <connections>
-                        <outlet property="forgotButton" destination="NNq-ub-JJV" id="name-outlet-NNq-ub-JJV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -63,10 +60,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_mock.png" translatesAutoresizingMaskIntoConstraints="NO" id="75">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74">
                                 <rect key="frame" x="137" y="473" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -74,11 +67,11 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="YES" contentMode="scaleToFill" id="104" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                            <imageView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104">
                                 <rect key="frame" x="98" y="81" width="124" height="136"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="107" fixedFrame="YES">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="107">
                                 <rect key="frame" x="118" y="187" width="81" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Pick photo">
@@ -88,16 +81,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WJ6-Jc-xuW" firstAttribute="top" secondItem="75" secondAttribute="bottom" id="Nso-hF-r3b"/>
-                            <constraint firstItem="75" firstAttribute="top" secondItem="zA1-1y-Uve" secondAttribute="top" id="O7i-yz-PA6"/>
-                            <constraint firstItem="75" firstAttribute="leading" secondItem="zA1-1y-Uve" secondAttribute="leading" id="c7k-DV-4CA"/>
-                            <constraint firstAttribute="trailing" secondItem="75" secondAttribute="trailing" id="yYR-W4-Omb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="BackButton" destination="74" id="name-outlet-74"/>
-                        <outlet property="ProfileImageView" destination="104" id="name-outlet-104"/>
                         <outlet property="ProfileImageEditButton" destination="107" id="name-outlet-107"/>
+                        <outlet property="ProfileImageView" destination="104" id="name-outlet-104"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gV-8m-Exf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,9 +142,9 @@
                     <navigationItem key="navigationItem" id="QFT-9d-I8H"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="loginButton" destination="g8E-F0-NLD" id="name-outlet-g8E-F0-NLD"/>
                         <outlet property="inputEmail" destination="YtV-5J-KgG" id="name-outlet-YtV-5J-KgG"/>
                         <outlet property="inputPassword" destination="I4R-hB-Y3J" id="name-outlet-I4R-hB-Y3J"/>
+                        <outlet property="loginButton" destination="g8E-F0-NLD" id="name-outlet-g8E-F0-NLD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plD-aC-shG" sceneMemberID="firstResponder"/>
@@ -336,25 +325,26 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-UN-Qsu">
-                                <rect key="frame" x="270" y="518" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-UN-Qsu">
+                                <rect key="frame" x="20" y="20" width="55" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FtC-vA-8L8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                <state key="normal" title="skip"/>
+                                <state key="normal" title="cancel"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KVi-82-kg8" firstAttribute="top" secondItem="9dr-UN-Qsu" secondAttribute="bottom" constant="20" id="KdE-PW-qqG"/>
-                            <constraint firstAttribute="trailing" secondItem="9dr-UN-Qsu" secondAttribute="trailing" constant="20" id="n7d-kD-vdQ"/>
+                            <constraint firstItem="9dr-UN-Qsu" firstAttribute="top" secondItem="dah-Lu-myd" secondAttribute="bottom" id="FCW-mW-tLS"/>
+                            <constraint firstItem="9dr-UN-Qsu" firstAttribute="leading" secondItem="77h-qL-HEd" secondAttribute="leading" constant="20" id="pSc-Oc-Lkc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Mo-0n-KYO"/>
                     <connections>
-                        <outlet property="skipButton" destination="9dr-UN-Qsu" id="name-outlet-9dr-UN-Qsu"/>
                         <outlet property="inputEmail" destination="x7d-T2-cfP" id="name-outlet-x7d-T2-cfP"/>
+                        <outlet property="skipButton" destination="9dr-UN-Qsu" id="name-outlet-9dr-UN-Qsu"/>
+                        <outlet property="forgotPasswordButton" destination="Jdv-Q3-KP4" id="name-outlet-Jdv-Q3-KP4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iiv-CF-dpG" sceneMemberID="firstResponder"/>

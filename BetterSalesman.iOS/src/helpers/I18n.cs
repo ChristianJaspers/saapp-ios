@@ -15,6 +15,8 @@
         
         public static string FieldEmail = "Email".t();
         public static string FieldPassword = "Password".t();
+
+        public static string SuccessMessageForgotPassword = "Email with new password has been sent".t();
     }
 }
 

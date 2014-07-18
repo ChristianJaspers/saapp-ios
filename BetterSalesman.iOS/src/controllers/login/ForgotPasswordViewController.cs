@@ -28,31 +28,34 @@ namespace BetterSalesman.iOS
                 }
             };
             
-            skipButton.TouchUpInside += (senderse, e) => DismissViewController(true, null);
+            skipButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
             
-            if ( validator.Validate() )
-            {
-                ShowIndicator();
-                
-                ServiceProviderUser.Instance.ForgotPassword(
-                    inputEmail.Text,
-                    result =>
-                    {
-                        HideIndicator();
-                        DismissViewController(true, null);
-                        // TODO alert info about success
-                    },
-                    errorCode =>
-                    {
-                        HideIndicator();
-                        ShowAlert(I18n.ErrorConnectionTimeout);
-                    }
-                );
-            }
-            else
-            {
-                ShowAlert(string.Join("\n",validator.Errors));
-            }
+            forgotPasswordButton.TouchUpInside += (sender, e) => {
+                if ( validator.Validate() )
+                {
+                    ShowIndicator();
+                    
+                    ServiceProviderUser.Instance.ForgotPassword(
+                        inputEmail.Text,
+                        result => 
+                        {
+                            HideIndicator();
+                            DismissViewController(true, null);
+                            ShowAlert(I18n.SuccessMessageForgotPassword);
+                        },
+                        errorCode =>
+                        {
+                            HideIndicator();
+                            ShowAlert(I18n.ErrorConnectionTimeout);
+                        }
+                    );
+                }
+                else
+                {
+                    ShowAlert(string.Join("\n",validator.Errors));
+                }
+            };
+            
         }
     }
 }
