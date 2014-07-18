@@ -20,6 +20,10 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel displayNameLabel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton ProfileImageEditButton { get; set; }
 
 		[Outlet]
@@ -31,6 +35,10 @@ namespace BetterSalesman.iOS
 			if (BackButton != null) {
 				BackButton.Dispose ();
 				BackButton = null;
+			}
+			if (displayNameLabel != null) {
+				displayNameLabel.Dispose ();
+				displayNameLabel = null;
 			}
 			if (ProfileImageEditButton != null) {
 				ProfileImageEditButton.Dispose ();

@@ -41,7 +41,7 @@ namespace BetterSalesman.iOS
 				imagePickerPresenter.ShowImagePickerTypeSelection(this);
 			};
 
-//			LoadUser();
+			LoadUser();
 		}
 
 		public override void ViewDidAppear(bool animated)
@@ -107,6 +107,8 @@ namespace BetterSalesman.iOS
 		void LoadUser()
 		{
 			user = UserManager.LoggedInUser();
+            
+            displayNameLabel.Text = user.DisplayName;
 		}
 	}
 }
