@@ -16,7 +16,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         const string paramPassword = "password";
         
         // Paths
-//        const string pathAuth = "auth/login";
+//        const string pathAuth = "auth";
         const string pathAuth = "api/json/get/ccXoDMnFYO?indent=2";
 //        const string pathProfile = "profile";
         const string pathProfile = "api/json/get/bSpxyCrcBK?indent=2";
