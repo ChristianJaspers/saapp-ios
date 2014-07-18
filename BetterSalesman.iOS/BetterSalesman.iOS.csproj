@@ -230,6 +230,7 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\UserManager.cs">
       <Link>BusinessLayer\Managers\UserManager.cs</Link>
     </Compile>
+    <Compile Include="src\views\XUITextFieldValidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -272,5 +273,11 @@
       <Version>3.5.4</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XValidator\XValidator.csproj">
+      <Project>{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}</Project>
+      <Name>XValidator</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSalesman.Droid", "Bet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSalesman.iOS.Tests", "BetterSalesman.iOS.Tests\BetterSalesman.iOS.Tests.csproj", "{6AF2B01E-162E-4184-9C1A-D346D84ED656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XValidator", "XValidator\XValidator.csproj", "{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -49,6 +51,18 @@ Global
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhone.Build.0 = Release|Any CPU
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8009200B-75E2-4C9D-B7E0-8E59CC9FB312}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Release|iPhone.Build.0 = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{FC3A09F4-AA4B-41C5-98D4-93060851E0A8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
