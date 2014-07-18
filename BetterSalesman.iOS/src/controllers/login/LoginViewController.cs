@@ -17,18 +17,18 @@ namespace BetterSalesman.iOS
             base.ViewDidLoad();
             
             var validator = new XFormValidator<UITextField> {
-                Inputs = new XFieldValidate<UITextField>[] {
+                Inputs = new [] {
                     new XUITextFieldValidate {
-                        Name = "Email".t(),
+                        Name = I18n.FieldEmail,
                         FieldView = inputEmail,
-                        Validators = new XValidatorBase[] {
+                        Validators = new [] {
                             new XValidatorRequired()
                         },
                     },
                     new XUITextFieldValidate {
-                        Name = "Password".t(),
+                        Name = I18n.FieldPassword,
                         FieldView = inputPassword,
-                        Validators = new XValidatorBase[] {
+                        Validators = new [] {
                             new XValidatorRequired()
                         },
                     }

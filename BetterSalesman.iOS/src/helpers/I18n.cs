@@ -12,6 +12,9 @@
         public static string ErrorConnectionTimeout = "Connection timeout".t();
 
         public static string ErrorFillFields = "Please fill marked fields to continue".t();
+        
+        public static string FieldEmail = "Email".t();
+        public static string FieldPassword = "Password".t();
     }
 }
 
