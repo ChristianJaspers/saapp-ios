@@ -21,11 +21,11 @@ namespace BetterSalesman.iOS
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
 			imagePickerPresenter = new ImagePickerPresenter ();
-			imagePickerPresenter.FinishedPicking += async (bool didPickAnImage, UIImage pickedImage) => 
+			imagePickerPresenter.FinishedPicking += (bool didPickAnImage, UIImage pickedImage) => 
 			{
 				if (didPickAnImage)
 				{
-					await UploadImage(pickedImage);
+					UploadImage(pickedImage);
 				}
 			};
 		}
@@ -80,7 +80,6 @@ namespace BetterSalesman.iOS
 			fileUploadRequest.Success += async (string remoteFileUrl) => 
 			{
 				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-				cachedPickedImage = null;
 
 				InvokeOnMainThread(() =>
 				{
