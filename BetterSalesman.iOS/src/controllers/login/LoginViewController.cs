@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
+using XValidator;
 
 namespace BetterSalesman.iOS
 {
@@ -14,9 +16,28 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
+            var validator = new XFormValidator<UITextField> {
+                Inputs = new [] {
+                    new XUITextFieldValidate {
+                        Name = I18n.FieldEmail,
+                        FieldView = inputEmail,
+                        Validators = new [] {
+                            new XValidatorRequired()
+                        },
+                    },
+                    new XUITextFieldValidate {
+                        Name = I18n.FieldPassword,
+                        FieldView = inputPassword,
+                        Validators = new [] {
+                            new XValidatorRequired()
+                        },
+                    }
+                }
+            };
+            
             loginButton.TouchUpInside += (sender, e) =>
             {
-                if ( Validate() )
+                if ( validator.Validate() )
                 {
                     ShowIndicator();
                     
@@ -38,23 +59,9 @@ namespace BetterSalesman.iOS
                 }
                 else
                 {
-                    ShowAlert(I18n.ErrorFillFields);
+                    ShowAlert(string.Join("\n",validator.Errors));
                 }
             };
-        }
-
-        bool Validate()
-        {   
-            // TODO we need build some serious validator
-            InvokeOnMainThread(() =>
-            {
-                inputEmail.Layer.BorderWidth = 1;
-                inputPassword.Layer.BorderWidth = 1;
-                inputEmail.Layer.BorderColor = inputEmail.IsNotEmpty() && inputEmail.IsValidEmail() ? UIColor.LightGray.CGColor : UIColor.Red.CGColor;
-                inputPassword.Layer.BorderColor = inputPassword.IsNotEmpty() ? UIColor.LightGray.CGColor : UIColor.Red.CGColor;
-            });
-            
-            return inputEmail.IsNotEmpty() && inputEmail.IsValidEmail() && inputPassword.IsNotEmpty();
         }
     }
 }
