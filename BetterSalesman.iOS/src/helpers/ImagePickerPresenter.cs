@@ -20,7 +20,6 @@ namespace BetterSalesman.iOS
 
 		public const UIImagePickerControllerSourceType CameraPickerType = UIImagePickerControllerSourceType.Camera;
 		public const UIImagePickerControllerSourceType PhotoLibraryPickerType = UIImagePickerControllerSourceType.PhotoLibrary;
-		public const UIImagePickerControllerSourceType SavedPhotosPickerType = UIImagePickerControllerSourceType.Camera;
 
 		public event FinishedPickingEventHandler FinishedPicking;
 
@@ -28,11 +27,10 @@ namespace BetterSalesman.iOS
 		private UIActionSheet mediaSourceTypePicker;
 
 		// TODO - add to localized strings
-		private string CancelButtonLabel = "Cancel".t();
+		private string MediaSourceTypePickerLabel = "Choose source".t();
 		private string CameraButtonLabel = "Camera".t();
 		private string PhotoLibraryButtonLabel = "Photo library".t();
-		private string SavedPhotosButtonLabel = "Saved photos".t();
-		private string MediaSourceTypePickerLabel = "Choose source".t();
+		private string CancelButtonLabel = "Cancel".t();
 
 		private Dictionary<int, UIImagePickerControllerSourceType> buttonIndexesForMediaSourceTypes;
 		private int lastAddedMediaSourceTypeButtonIndex;
@@ -51,7 +49,6 @@ namespace BetterSalesman.iOS
 
 			AddButtonToMediaSourceTypePickerIfTypeAvailable(CameraButtonLabel, CameraPickerType);
 			AddButtonToMediaSourceTypePickerIfTypeAvailable(PhotoLibraryButtonLabel, PhotoLibraryPickerType);
-			AddButtonToMediaSourceTypePickerIfTypeAvailable(SavedPhotosButtonLabel, SavedPhotosPickerType);
 			mediaSourceTypePicker.AddButton(CancelButtonLabel);
 
 			mediaSourceTypePicker.Clicked += (object sender, UIButtonEventArgs e) =>

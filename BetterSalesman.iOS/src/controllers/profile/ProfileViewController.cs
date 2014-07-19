@@ -23,10 +23,13 @@ namespace BetterSalesman.iOS
 			imagePickerPresenter = new ImagePickerPresenter ();
 			imagePickerPresenter.FinishedPicking += (bool didPickAnImage, UIImage pickedImage) => 
 			{
-				if (didPickAnImage)
+				Task.Run(async () =>
 				{
-					UploadImage(pickedImage);
-				}
+					if (didPickAnImage)
+					{
+					  await UploadImage(pickedImage);
+					}
+				});
 			};
 		}
 
