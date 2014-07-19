@@ -83,7 +83,10 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidLoad();
 
-			BackButton.TouchUpInside += (sender, e) => DismissViewController(true, null);
+			BackButton.TouchUpInside += (sender, e) =>
+			{
+				DismissViewController (true, null);
+			};
 
 			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
 			{

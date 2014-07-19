@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using MonoTouch.MobileCoreServices;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -68,11 +69,12 @@ namespace BetterSalesman.iOS
 			imagePicker = new UIImagePickerController();
 
 			imagePicker.SourceType = pickerType;
+			// only allow photos (not videos)
+			imagePicker.MediaTypes = new string[] { UTType.Image };
 			if (pickerType == UIImagePickerControllerSourceType.Camera)
 			{
 				imagePicker.ShowsCameraControls = true;
 			}
-			imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes(pickerType);
 
 			imagePicker.FinishedPickingMedia += (s, e) =>
 			{
