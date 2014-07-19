@@ -9,6 +9,7 @@ using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.IO;
 using System.Threading.Tasks;
+using MBProgressHUD;
 
 namespace BetterSalesman.iOS
 {
@@ -17,6 +18,51 @@ namespace BetterSalesman.iOS
 		private ImagePickerPresenter imagePickerPresenter;
 		private UIImage cachedPickedImage;
 		private User user;
+
+		private MTMBProgressHUD myHud;
+
+		private void ShowHud(string titleLabel = "", MBProgressHUDMode mode = MBProgressHUDMode.Indeterminate)
+		{
+			InvokeOnMainThread (() =>
+			{
+				myHud = MTMBProgressHUD.ShowHUD(View, true);
+				myHud.LabelText = titleLabel;
+				myHud.Mode = mode;
+			});
+		}
+
+		private void SetHudTitleLabel(string titleLabel)
+		{
+			myHud.LabelText = titleLabel;
+		}
+
+		private void SetHudDetailsLabel(string detailsLabel)
+		{
+			myHud.DetailsLabelText = detailsLabel;
+		}
+
+		private void SetHudMode(MBProgressHUDMode mode)
+		{
+			myHud.Mode = mode;
+		}
+
+		private void SetHudProgress(float progress)
+		{
+			myHud.Progress = progress;
+		}
+
+		private void HideHud()
+		{
+			if (myHud == null)
+			{
+				return;
+			}
+
+			InvokeOnMainThread (() =>
+			{
+				myHud.Hide(true);
+			});
+		}
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
@@ -78,7 +124,12 @@ namespace BetterSalesman.iOS
 
 			var fileUploadRequest = new FileUploadRequest();
 
-			fileUploadRequest.ProgressUpdated += (int progressPercentage) => Debug.WriteLine ("Upload progress: " + progressPercentage);
+			fileUploadRequest.ProgressUpdated += (int progressPercentage) => 
+			{
+				Debug.WriteLine ("Upload progress: " + progressPercentage);
+
+				SetHudProgress(progressPercentage / 100.0f);
+			};
 
 			fileUploadRequest.Success += async (string remoteFileUrl) => 
 			{
@@ -90,6 +141,8 @@ namespace BetterSalesman.iOS
 					ProfileImageView.Image = cachedPickedImage;
 					cachedPickedImage = null;
 				});
+
+				HideHud();
 			};
 
 			fileUploadRequest.Failure += (int errorCode, string errorMessage) =>
@@ -101,8 +154,11 @@ namespace BetterSalesman.iOS
 				{
 					ShowAlert(errorMessage);
 				});
+
+				HideHud();
 			};
 
+			ShowHud("Updating profile picture", MBProgressHUDMode.Indeterminate);
 			fileUploadRequest.Perform(imageFilePath);
 		}
 						
