@@ -7,7 +7,7 @@ using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
-    public partial class RootViewController : BaseUIViewController
+    public partial class FlyoutViewController : BaseUIViewController
     {
         public static FlyoutNavigationController Navigation;
         
@@ -18,7 +18,7 @@ namespace BetterSalesman.iOS
         
         const string sequeIdLogout = "LogoutSegue";
 
-        public RootViewController(IntPtr handle)
+        public FlyoutViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -104,7 +104,6 @@ namespace BetterSalesman.iOS
             
             UserSessionManager.Instance.Discard();
         }
-        
     }
 }
 

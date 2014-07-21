@@ -349,10 +349,10 @@
             </objects>
             <point key="canvasLocation" x="-1570" y="-1000"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Flyout View Controller-->
         <scene sceneID="4OI-L5-8ov">
             <objects>
-                <viewController id="wVP-bY-Y9v" customClass="RootViewController" sceneMemberID="viewController">
+                <viewController id="wVP-bY-Y9v" customClass="FlyoutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A8H-5H-pZt"/>
                         <viewControllerLayoutGuide type="bottom" id="bF2-3x-5vK"/>
