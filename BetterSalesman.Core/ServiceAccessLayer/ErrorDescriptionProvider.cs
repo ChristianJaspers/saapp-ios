@@ -3,7 +3,7 @@
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	// TODO - can't localize in core since localization is done per-platform - add localizetion provider?
-	public class ServiceAccessErrorDescriptionProvider
+	public static class ErrorDescriptionProvider
 	{
 		// TODO - localize
 		public static int HostUnreachableErrorCode = 2000;

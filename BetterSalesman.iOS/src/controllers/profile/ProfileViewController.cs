@@ -108,10 +108,7 @@ namespace BetterSalesman.iOS
 				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 				cachedPickedImage = null;
 
-				InvokeOnMainThread(() =>
-				{
-					ShowAlert(errorMessage);
-				});
+				InvokeOnMainThread(() => ShowAlert(errorMessage));
 
 				HideHud();
 			};

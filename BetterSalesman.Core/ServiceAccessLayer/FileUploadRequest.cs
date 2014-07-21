@@ -40,19 +40,19 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 			if (Reachability.InternetConnectionStatus() == NetworkStatus.NotReachable)
 			{
-				OnFailure(ServiceAccessErrorDescriptionProvider.NetworkUnavailableErrorCode, ServiceAccessErrorDescriptionProvider.NetworkUnavailableErrorMessage);
+				OnFailure(ErrorDescriptionProvider.NetworkUnavailableErrorCode, ErrorDescriptionProvider.NetworkUnavailableErrorMessage);
 				return;
 			}
 
 			if (!Reachability.IsHostReachable(host))
 			{
-				OnFailure(ServiceAccessErrorDescriptionProvider.HostUnreachableErrorCode, ServiceAccessErrorDescriptionProvider.HostUnreachableErrorMessage);
+				OnFailure(ErrorDescriptionProvider.HostUnreachableErrorCode, ErrorDescriptionProvider.HostUnreachableErrorMessage);
 				return;
 			}
 
 			if (!File.Exists(localFilePath)) 
 			{
-				OnFailure(ServiceAccessErrorDescriptionProvider.FileNotFoundErrorCode, ServiceAccessErrorDescriptionProvider.FileNotFoundErrorMessage);
+				OnFailure(ErrorDescriptionProvider.FileNotFoundErrorCode, ErrorDescriptionProvider.FileNotFoundErrorMessage);
 				return;
 			}
 
@@ -97,11 +97,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				if (error != null) 
 				{
 					Debug.WriteLine("Upload error: " + error.Message + "\nStackTrace: " + error.StackTrace);
-					OnFailure(ServiceAccessErrorDescriptionProvider.UnknownNetworkErrorCode, ServiceAccessErrorDescriptionProvider.UnknownNetworErrorMessage);
+					OnFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode, ErrorDescriptionProvider.UnknownNetworErrorMessage);
 				} 
 				else 
 				{
-					OnFailure(ServiceAccessErrorDescriptionProvider.UnknownNetworkErrorCode, ServiceAccessErrorDescriptionProvider.UnknownNetworErrorMessage);
+					OnFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode, ErrorDescriptionProvider.UnknownNetworErrorMessage);
 				}
 			}
 		}

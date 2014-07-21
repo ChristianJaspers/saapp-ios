@@ -46,7 +46,7 @@
     <Compile Include="ServiceAccessLayer\FileUploadRequest.cs" />
     <Compile Include="DataLayer\DatabaseHelper.cs" />
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
-    <Compile Include="ServiceAccessLayer\ServiceAccessErrorDescriptionProvider.cs" />
+    <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
