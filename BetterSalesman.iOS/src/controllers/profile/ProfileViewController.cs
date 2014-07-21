@@ -1,15 +1,10 @@
 using System;
 using MonoTouch.UIKit;
-using MonoTouch.Foundation;
-using System.CodeDom.Compiler;
 using System.Diagnostics;
-using System.Collections.Generic;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
-using System.IO;
 using System.Threading.Tasks;
-using MBProgressHUD;
 
 namespace BetterSalesman.iOS
 {
@@ -22,16 +17,16 @@ namespace BetterSalesman.iOS
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
 			imagePickerPresenter = new ImagePickerPresenter ();
-			imagePickerPresenter.FinishedPicking += (bool didPickAnImage, UIImage pickedImage) => 
-			{
-				Task.Run(async () =>
-				{
-					if (didPickAnImage)
-					{
-					  await UploadImage(pickedImage);
-					}
-				});
-			};
+			imagePickerPresenter.FinishedPicking += (didPickAnImage, pickedImage) =>
+            {
+                Task.Run(async () =>
+                    {
+                        if (didPickAnImage)
+                        {
+                            await UploadImage(pickedImage);
+                        }
+                    });
+            };
 		}
 
 		public override void ViewDidLoad()
@@ -82,38 +77,38 @@ namespace BetterSalesman.iOS
 
 			var fileUploadRequest = new FileUploadRequest();
 
-			fileUploadRequest.ProgressUpdated += (int progressPercentage) => 
-			{
-				Debug.WriteLine ("Upload progress: " + progressPercentage);
+			fileUploadRequest.ProgressUpdated += progressPercentage =>
+            {
+                Debug.WriteLine("Upload progress: " + progressPercentage);
 
-				SetHudProgress(progressPercentage / 100.0f);
-			};
+                SetHudProgress(progressPercentage / 100.0f);
+            };
 
-			fileUploadRequest.Success += async (string remoteFileUrl) => 
-			{
-				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+			fileUploadRequest.Success += async remoteFileUrl =>
+            {
+                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 
-				InvokeOnMainThread(() =>
-				{
-					Debug.WriteLine ("Upload complete - file URL: " + remoteFileUrl);
-					ProfileImageView.Image = cachedPickedImage;
-					cachedPickedImage = null;
-				});
+                InvokeOnMainThread(() =>
+                    {
+                        Debug.WriteLine("Upload complete - file URL: " + remoteFileUrl);
+                        ProfileImageView.Image = cachedPickedImage;
+                        cachedPickedImage = null;
+                    });
 
-				HideHud();
-			};
+                HideHud();
+            };
 
-			fileUploadRequest.Failure += (int errorCode, string errorMessage) =>
-			{
-				ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-				cachedPickedImage = null;
+			fileUploadRequest.Failure += (errorCode, errorMessage) =>
+            {
+                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+                cachedPickedImage = null;
 
-				InvokeOnMainThread(() => ShowAlert(errorMessage));
+                InvokeOnMainThread(() => ShowAlert(errorMessage));
 
-				HideHud();
-			};
+                HideHud();
+            };
 
-			ShowHud("Updating profile picture", MBProgressHUDMode.Indeterminate);
+			ShowHud("Updating profile picture");
 			fileUploadRequest.Perform(imageFilePath);
 		}
 						
