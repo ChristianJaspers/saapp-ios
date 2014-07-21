@@ -20,7 +20,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         const string pathAuth = "api/json/get/ccXoDMnFYO?indent=2";
 //        const string pathProfile = "profile";
         const string pathProfile = "api/json/get/bSpxyCrcBK?indent=2";
-//        const string pathForgotPassword = "auth/forgot_password";
+//        const string pathForgotPassword = "passwords";
         const string pathForgotPassword = "api/json/get/bMapgUjlGq?indent=2";
         
         public static ServiceProviderUser Instance
