@@ -33,19 +33,19 @@ namespace BetterSalesman.iOS
             forgotPasswordButton.TouchUpInside += (sender, e) => {
                 if ( validator.Validate() )
                 {
-                    ShowIndicator();
+                    ShowHud();
                     
                     ServiceProviderUser.Instance.ForgotPassword(
                         inputEmail.Text,
                         result => 
                         {
-                            HideIndicator();
+                            HideHud();
                             DismissViewController(true, null);
                             ShowAlert(I18n.SuccessMessageForgotPassword);
                         },
                         errorCode =>
                         {
-                            HideIndicator();
+                            HideHud();
                             ShowAlert(I18n.ErrorConnectionTimeout);
                         }
                     );

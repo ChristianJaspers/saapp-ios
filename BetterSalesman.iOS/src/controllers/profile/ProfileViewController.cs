@@ -19,51 +19,6 @@ namespace BetterSalesman.iOS
 		private UIImage cachedPickedImage;
 		private User user;
 
-		private MTMBProgressHUD myHud;
-
-		private void ShowHud(string titleLabel = "", MBProgressHUDMode mode = MBProgressHUDMode.Indeterminate)
-		{
-			InvokeOnMainThread (() =>
-			{
-				myHud = MTMBProgressHUD.ShowHUD(View, true);
-				myHud.LabelText = titleLabel;
-				myHud.Mode = mode;
-			});
-		}
-
-		private void SetHudTitleLabel(string titleLabel)
-		{
-			myHud.LabelText = titleLabel;
-		}
-
-		private void SetHudDetailsLabel(string detailsLabel)
-		{
-			myHud.DetailsLabelText = detailsLabel;
-		}
-
-		private void SetHudMode(MBProgressHUDMode mode)
-		{
-			myHud.Mode = mode;
-		}
-
-		private void SetHudProgress(float progress)
-		{
-			myHud.Progress = progress;
-		}
-
-		private void HideHud()
-		{
-			if (myHud == null)
-			{
-				return;
-			}
-
-			InvokeOnMainThread (() =>
-			{
-				myHud.Hide(true);
-			});
-		}
-
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
 			imagePickerPresenter = new ImagePickerPresenter ();

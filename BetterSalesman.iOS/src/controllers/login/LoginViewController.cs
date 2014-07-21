@@ -39,20 +39,20 @@ namespace BetterSalesman.iOS
             {
                 if ( validator.Validate() )
                 {
-                    ShowIndicator();
+                    ShowHud();
                     
                     ServiceProviderUser.Instance.Authentication(
                         inputEmail.Text, 
                         inputPassword.Text, 
                         result =>
                         {
-                            HideIndicator();
+                            HideHud();
                             DismissViewController(true, null);
 //                            UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
                         },
                         errorCode =>
                         {
-                            HideIndicator();
+                            HideHud();
                             ShowAlert(I18n.ErrorConnectionTimeout);
                         }
                     );

@@ -6,7 +6,6 @@ namespace BetterSalesman.iOS
 {
     public class BaseUIViewController : UIViewController
     {
-        MTMBProgressHUD hud;
         public BaseUIViewController(IntPtr handle) : base(handle)
         {
         }
@@ -18,24 +17,51 @@ namespace BetterSalesman.iOS
             PresentViewController(vc, animate, null);   
         }
         
-        protected void ShowIndicator()
+        #region Progress HUD
+        
+        private MTMBProgressHUD myHud;
+
+        protected void ShowHud(string titleLabel = "", MBProgressHUDMode mode = MBProgressHUDMode.Indeterminate)
         {
-            hud = new MTMBProgressHUD (View) {
-                RemoveFromSuperViewOnHide = true
-            };
+            InvokeOnMainThread(() =>
+                {
+                    myHud = MTMBProgressHUD.ShowHUD(View, true);
+                    myHud.LabelText = titleLabel;
+                    myHud.Mode = mode;
+                });
+        }
 
-            View.Superview.AddSubview (hud);
+        protected void SetHudTitleLabel(string titleLabel)
+        {
+            myHud.LabelText = titleLabel;
+        }
 
-            hud.Show (true);
+        protected void SetHudDetailsLabel(string detailsLabel)
+        {
+            myHud.DetailsLabelText = detailsLabel;
+        }
+
+        protected void SetHudMode(MBProgressHUDMode mode)
+        {
+            myHud.Mode = mode;
+        }
+
+        protected void SetHudProgress(float progress)
+        {
+            myHud.Progress = progress;
+        }
+
+        protected void HideHud()
+        {
+            if (myHud == null)
+            {
+                return;
+            }
+
+            InvokeOnMainThread(() => myHud.Hide(true));
         }
         
-        protected void HideIndicator()
-        {
-            if (hud != null && !hud.Hidden)
-            {
-                hud.Hide(true,0.5);
-            }
-        }
+        #endregion
         
         protected void ShowAlert(string msg)
         {
