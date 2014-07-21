@@ -19,12 +19,16 @@ namespace BetterSalesman.iOS
 			imagePickerPresenter = new ImagePickerPresenter ();
 			imagePickerPresenter.FinishedPicking += (didPickAnImage, pickedImage) =>
             {
+				if (!didPickAnImage)
+				{
+					return;
+				}
+
+				ShowHud("Updating profile picture");
+
                 Task.Run(async () =>
                     {
-                        if (didPickAnImage)
-                        {
-                            await UploadImage(pickedImage);
-                        }
+                    	await UploadImage(pickedImage);
                     });
             };
 		}
@@ -43,7 +47,7 @@ namespace BetterSalesman.iOS
 				imagePickerPresenter.ShowImagePickerTypeSelection(this);
 			};
 
-			LoadUser();
+			//LoadUser();
 		}
 
 		public override void ViewDidAppear(bool animated)
@@ -107,8 +111,7 @@ namespace BetterSalesman.iOS
 
                 HideHud();
             };
-
-			ShowHud("Updating profile picture");
+				
 			fileUploadRequest.Perform(imageFilePath);
 		}
 						
