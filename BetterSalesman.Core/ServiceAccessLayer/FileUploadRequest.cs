@@ -40,19 +40,19 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 			if (Reachability.InternetConnectionStatus() == NetworkStatus.NotReachable)
 			{
-				OnFailure(ErrorDescriptionProvider.NetworkUnavailableErrorCode, ErrorDescriptionProvider.NetworkUnavailableErrorMessage);
+				ReportInAppFailure(ErrorDescriptionProvider.NetworkUnavailableErrorCode);
 				return;
 			}
 
 			if (!Reachability.IsHostReachable(host))
 			{
-				OnFailure(ErrorDescriptionProvider.HostUnreachableErrorCode, ErrorDescriptionProvider.HostUnreachableErrorMessage);
+				ReportInAppFailure(ErrorDescriptionProvider.HostUnreachableErrorCode);
 				return;
 			}
 
 			if (!File.Exists(localFilePath)) 
 			{
-				OnFailure(ErrorDescriptionProvider.FileNotFoundErrorCode, ErrorDescriptionProvider.FileNotFoundErrorMessage);
+				ReportInAppFailure(ErrorDescriptionProvider.FileNotFoundErrorCode);
 				return;
 			}
 
@@ -77,6 +77,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			}
 		}
 
+		/// <summary>
+		/// Executes OnFailure with error code and localized message for any in-app error like lack of connection or non-existent file access
+		/// </summary>
+		/// <param name="errorCode">Error code for given in-app error</param>
+		private void ReportInAppFailure(int errorCode)
+		{
+			string errorMessage = ErrorDescriptionProvider.GetMessageForCode(errorCode);
+			OnFailure(errorCode, errorMessage);
+		}
+
 		private void OnUploadCompleted(object sender, UploadFileCompletedEventArgs e)
 		{
 			Debug.WriteLine("Upload completed");
@@ -97,11 +107,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				if (error != null) 
 				{
 					Debug.WriteLine("Upload error: " + error.Message + "\nStackTrace: " + error.StackTrace);
-					OnFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode, ErrorDescriptionProvider.UnknownNetworErrorMessage);
+					ReportInAppFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode);
 				} 
 				else 
 				{
-					OnFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode, ErrorDescriptionProvider.UnknownNetworErrorMessage);
+					ReportInAppFailure(ErrorDescriptionProvider.UnknownNetworkErrorCode);
 				}
 			}
 		}

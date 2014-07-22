@@ -27,11 +27,10 @@ namespace BetterSalesman.iOS
 		private UIImagePickerController imagePicker;
 		private UIActionSheet mediaSourceTypePicker;
 
-		// TODO - add to localized strings
-		private string MediaSourceTypePickerLabel = "Choose source".t();
-		private string CameraButtonLabel = "Camera".t();
-		private string PhotoLibraryButtonLabel = "Photo library".t();
-		private string CancelButtonLabel = "Cancel".t();
+		private string MediaSourceTypePickerLabel = I18n.ChooseSourceImagePickerText;
+		private string CameraButtonLabel = I18n.CameraImagePickerText;
+		private string PhotoLibraryButtonLabel = I18n.PhotoLibraryImagePickerText;
+		private string CancelButtonLabel = I18n.Cancel;
 
 		private Dictionary<int, UIImagePickerControllerSourceType> buttonIndexesForMediaSourceTypes;
 		private int lastAddedMediaSourceTypeButtonIndex;

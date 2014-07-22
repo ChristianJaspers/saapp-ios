@@ -16,7 +16,7 @@ namespace BetterSalesman.iOS
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
-			imagePickerPresenter = new ImagePickerPresenter ();
+			imagePickerPresenter = new ImagePickerPresenter();
 			imagePickerPresenter.FinishedPicking += (didPickAnImage, pickedImage) =>
             {
 				if (!didPickAnImage)
@@ -24,7 +24,7 @@ namespace BetterSalesman.iOS
 					return;
 				}
 
-				ShowHud("Updating profile picture");
+				ShowHud(I18n.UploadingProfilePictureMessage);
 
                 Task.Run(async () =>
                     {
