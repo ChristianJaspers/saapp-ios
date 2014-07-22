@@ -54,6 +54,10 @@ namespace BetterSalesman.Core.DataLayer
             return obj;
         }
         
+        /// <summary>
+        /// Replaces all entities of given type with given entities
+        /// </summary>
+        /// <param name="items">List of items.</param>
         public static void ReplaceAll<T>(List<T> items)
         {
             using (var conn = DatabaseProvider.OpenConnection())
@@ -67,6 +71,11 @@ namespace BetterSalesman.Core.DataLayer
             }
         }
         
+        /// <summary>
+        /// Inserts all entities of given type
+        /// </summary>
+        /// <param name="connection">Connection.</param>
+        /// <param name="objects">Enumerable list of objects.</param>
         private static void InsertAll<T>(SQLiteConnection connection, IEnumerable<T> objects)
         {
             if (objects != null)
