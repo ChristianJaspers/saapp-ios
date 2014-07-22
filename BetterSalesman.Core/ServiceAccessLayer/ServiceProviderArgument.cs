@@ -52,9 +52,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 
                 var responseJsonArguments = JsonConvert.DeserializeObject<ResponseJsonArguments>(result);
                 
-                responseJsonArguments.Arguments.ForEach(i=>{
-                });
-                
+                DatabaseHelper.ReplaceAll<Argument>(responseJsonArguments.Arguments);
                 
                 if ( success != null )
                 {

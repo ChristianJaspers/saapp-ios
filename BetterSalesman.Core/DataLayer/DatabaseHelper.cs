@@ -1,5 +1,6 @@
 ﻿using BetterSalesman.Core.BusinessLayer.Contracts;
 using SQLite;
+using System.Collections.Generic;
 
 namespace BetterSalesman.Core.DataLayer
 {
@@ -51,6 +52,30 @@ namespace BetterSalesman.Core.DataLayer
             }
             
             return obj;
+        }
+        
+        public static void ReplaceAll<T>(List<T> items)
+        {
+            using (var conn = DatabaseProvider.OpenConnection())
+            {
+                conn.BeginTransaction();
+                
+                conn.DeleteAll<T>();
+                InsertAll<T>(conn, items);
+                
+                conn.Commit();
+            }
+        }
+        
+        private static void InsertAll<T>(SQLiteConnection connection, IEnumerable<T> objects)
+        {
+            if (objects != null)
+            {
+                foreach (var obj in objects)
+                {
+                    connection.Insert(obj);
+                }
+            }
         }
     }
 }

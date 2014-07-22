@@ -43,9 +43,14 @@ namespace BetterSalesman.iOS
 
         void LoadArguments()
         {
-            ((ArgumentsListViewSource)TableView.Source).items = ArgumentManager.Arguments();
-            
-            TableView.ReloadData();
+            InvokeOnMainThread(() =>
+            {
+                var items = ArgumentManager.Arguments();
+                    
+                ((ArgumentsListViewSource)TableView.Source).items = items;
+        
+                TableView.ReloadData();
+            });
         }
     }
 }

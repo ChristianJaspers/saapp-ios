@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
+using BetterSalesman.Core.DataLayer;
 
 namespace BetterSalesman.Core.BusinessLayer.Managers
 {
@@ -8,7 +10,11 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
         {
             var items = new List<Argument>();
             
-            // TODO fetching part goes here
+            using (var conn = DatabaseProvider.OpenConnection())
+            {
+                // some order here?
+                items = conn.Table<Argument>().ToList();
+            }
             
             return items;
         }
