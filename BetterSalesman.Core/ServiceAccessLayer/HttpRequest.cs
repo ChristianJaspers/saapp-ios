@@ -29,7 +29,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public Dictionary<string, object> Parameters;
         public Dictionary<string, string> Headers;
         
-        public string AuthorizationToken;
+        public static string AuthorizationToken;
         
         private HttpClient client;
 
@@ -44,8 +44,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             client.BaseAddress = new Uri("http://" + HttpConfig.Host);
             
             if (AuthorizationToken != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthorizationToken);
+            {   
+                client.DefaultRequestHeaders.Add("Authorization", "Token token=\"" + AuthorizationToken + "\"");
             }
 
             string serializedParameters = JsonConvert.SerializeObject(Parameters);
