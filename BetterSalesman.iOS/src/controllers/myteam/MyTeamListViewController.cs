@@ -1,6 +1,5 @@
 using System;
 
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace BetterSalesman.iOS
@@ -21,7 +20,7 @@ namespace BetterSalesman.iOS
             
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
             {
-                RootViewController.Navigation.ToggleMenu();
+                FlyoutViewController.Navigation.ToggleMenu();
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);

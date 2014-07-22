@@ -162,10 +162,6 @@
     <Compile Include="src\main\Main.cs" />
     <Compile Include="src\ViewModels\FlayoutNavigationItem.cs" />
     <Compile Include="src\controllers\base\BaseUINavigationController.cs" />
-    <Compile Include="src\controllers\base\RootViewController.cs" />
-    <Compile Include="src\controllers\base\RootViewController.designer.cs">
-      <DependentUpon>RootViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\controllers\login\LoginViewController.cs" />
     <Compile Include="src\controllers\login\LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
@@ -243,6 +239,20 @@
     <Compile Include="src\helpers\Reachability.cs" />
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ErrorDescriptionProvider.cs">
       <Link>ServiceAccessLayer\ErrorDescriptionProvider.cs</Link>
+    </Compile>
+    <Compile Include="src\controllers\base\MainViewController.cs" />
+    <Compile Include="src\controllers\base\MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\base\FlyoutViewController.cs" />
+    <Compile Include="src\controllers\base\FlyoutViewController.designer.cs">
+      <DependentUpon>FlyoutViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderArgument.cs">
+      <Link>ServiceAccessLayer\ServiceProviderArgument.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ArgumentManager.cs">
+      <Link>BusinessLayer\Managers\ArgumentManager.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

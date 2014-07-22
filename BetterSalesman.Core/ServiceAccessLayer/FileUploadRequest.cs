@@ -36,7 +36,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		public void Perform(string localFilePath)
 		{
 			// TODO - replace with production value
-			var host = "http://www.roweo.pl";
+            var host = HttpConfig.Protocol + HttpConfig.Host;
 
 			if (Reachability.InternetConnectionStatus() == NetworkStatus.NotReachable)
 			{

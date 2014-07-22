@@ -4,7 +4,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public static class HttpConfig
     {
-        public static string Host = "www.json-generator.com"; // TODO stub backend
+//        public static string Host = "www.json-generator.com"; // TODO stub backend
+        public static string Host = "saapp-staging.herokuapp.com";
+        public static string Protocol = "http://";
 
         static string lang;
 

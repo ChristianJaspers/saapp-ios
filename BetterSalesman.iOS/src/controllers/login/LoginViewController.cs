@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
 using XValidator;
@@ -8,6 +7,7 @@ namespace BetterSalesman.iOS
 {
     public partial class LoginViewController : BaseUIViewController
     {   
+        const string sequeIdLogged = "LoggedSeque";
         public LoginViewController(IntPtr handle) : base(handle)
         {
         }
@@ -47,7 +47,7 @@ namespace BetterSalesman.iOS
                         result =>
                         {
                             HideHud();
-                            DismissViewController(true, null);
+                            Login();
 //                            UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
                         },
                         errorCode =>
@@ -62,6 +62,19 @@ namespace BetterSalesman.iOS
                     ShowAlert(string.Join("\n",validator.Errors));
                 }
             };
+            
+            UserSessionManager.Instance.FetchUser(user => 
+            {
+                if ( user != null )
+                {
+                    Login();
+                }  
+            });
+        }
+        
+        void Login()
+        {
+            PerformSegue(sequeIdLogged, this);
         }
     }
 }

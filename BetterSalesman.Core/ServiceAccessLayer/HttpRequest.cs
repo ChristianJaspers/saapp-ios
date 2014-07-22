@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
+using System.Text;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -102,7 +103,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            var content = new StringContent(serializedParameters);
+            var content = new StringContent(serializedParameters, Encoding.UTF8, "application/json");
             
             try
             {
@@ -124,7 +125,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            var content = new StringContent(serializedParameters);
+            var content = new StringContent(serializedParameters, Encoding.UTF8, "application/json");
 
             try
             {

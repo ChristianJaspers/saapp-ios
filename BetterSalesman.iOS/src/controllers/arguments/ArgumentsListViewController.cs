@@ -1,6 +1,7 @@
-﻿using MonoTouch.UIKit;
-using System;
+﻿using System;
 using System.Diagnostics;
+using MonoTouch.UIKit;
+using BetterSalesman.Core.BusinessLayer.Managers;
 using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
@@ -8,12 +9,14 @@ namespace BetterSalesman.iOS
     public partial class ArgumentsListViewController : UITableViewController
     {
         const string menu_icon = "ic_menu";
-        
-        public ArgumentsListViewController() : base(UITableViewStyle.Grouped)
+
+        public ArgumentsListViewController()
+            : base(UITableViewStyle.Grouped)
         {
         }
-        
-        public ArgumentsListViewController(IntPtr handle) : base(handle)
+
+        public ArgumentsListViewController(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -25,12 +28,24 @@ namespace BetterSalesman.iOS
             
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
             {
-                RootViewController.Navigation.ToggleMenu();
+                FlyoutViewController.Navigation.ToggleMenu();
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
             
-            UserSessionManager.Instance.FetchUser(user => Debug.WriteLine("Logged in user: " + user));
+            LoadArguments();
+            
+            ServiceProviderArgument.Instance.Arguments(
+                result => LoadArguments(),
+                async errorCode => Debug.WriteLine("Error during fetching " + errorCode)
+            );
+        }
+
+        void LoadArguments()
+        {
+            ((ArgumentsListViewSource)TableView.Source).items = ArgumentManager.Arguments();
+            
+            TableView.ReloadData();
         }
     }
 }

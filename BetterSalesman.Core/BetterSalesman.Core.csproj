@@ -47,6 +47,8 @@
     <Compile Include="DataLayer\DatabaseHelper.cs" />
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
     <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
+    <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Linq;
 using MonoTouch.UIKit;
 using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 using BetterSalesman.Core.ServiceAccessLayer;
-using BetterSalesman.Core.DataLayer;
-using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
-    public partial class RootViewController : BaseUIViewController
+    public partial class FlyoutViewController : BaseUIViewController
     {
         public static FlyoutNavigationController Navigation;
         
@@ -18,8 +15,11 @@ namespace BetterSalesman.iOS
         const string storyboardIdNavigationMyTeam = "NavigationMyTeam";
         const string storyboardIdProfile = "Profile";
         const string storyboardIdLogin = "Login";
+        
+        const string sequeIdLogout = "LogoutSegue";
 
-        public RootViewController(IntPtr handle) : base(handle)
+        public FlyoutViewController(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -28,10 +28,6 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            
-            LanguageSetup();
-            
-            DatabaseProvider.Setup();
             
             NavigationLayoutInit();
         }
@@ -87,43 +83,27 @@ namespace BetterSalesman.iOS
 
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
-        
+
         UIViewController controllerForSection(string title = storyboardIdNavigationBase)
         {
             BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(title);
             vc.InitialControllerType = title;
             return vc;
         }
-        
-        void LanguageSetup()
-        {   
-            string[] availableLanguages = {"pl","en"};
-            
-            var currentLocale = NSLocale.PreferredLanguages[0];
-            
-            var userLocale = availableLanguages.Contains(currentLocale) ? currentLocale : "en"; 
-            
-            System.Diagnostics.Debug.WriteLine("Current locale: " + currentLocale + " / user locale: " + userLocale);
-            
-            HttpConfig.Lang = userLocale;
-        }
 
         #endregion
-        
+
         void Profile()
         {
             PresentViewControllerWithStoryboardId(storyboardIdProfile);
         }
-        
+
         void Logout()
         {
+            PerformSegue(sequeIdLogout, this); 
+            
             UserSessionManager.Instance.Discard();
-
-            UIViewController vc = (UIViewController)Storyboard.InstantiateViewController(storyboardIdLogin);
-
-            PresentViewController(vc, false, null);
         }
-        
     }
 }
 
