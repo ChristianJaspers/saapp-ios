@@ -3,7 +3,7 @@ using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.Core.BusinessLayer.Managers
 {
-    public class UserManager
+    public static class UserManager
     {        
         public static User LoggedInUser()
         {

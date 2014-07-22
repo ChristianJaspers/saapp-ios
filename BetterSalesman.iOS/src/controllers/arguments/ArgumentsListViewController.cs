@@ -1,5 +1,8 @@
-﻿using MonoTouch.UIKit;
-using System;
+﻿using System;
+using System.Diagnostics;
+using MonoTouch.UIKit;
+using BetterSalesman.Core.BusinessLayer.Managers;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -24,11 +27,25 @@ namespace BetterSalesman.iOS
             TableView.Source = new ArgumentsListViewSource();
             
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
-                {
-                    FlyoutViewController.Navigation.ToggleMenu();
-                });
+            {
+                FlyoutViewController.Navigation.ToggleMenu();
+            });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
+            
+            LoadArguments();
+            
+            ServiceProviderArgument.Instance.Arguments(
+                result => LoadArguments(),
+                async errorCode => Debug.WriteLine("Error during fetching " + errorCode)
+            );
+        }
+
+        void LoadArguments()
+        {
+            ((ArgumentsListViewSource)TableView.Source).items = ArgumentManager.Arguments();
+            
+            TableView.ReloadData();
         }
     }
 }

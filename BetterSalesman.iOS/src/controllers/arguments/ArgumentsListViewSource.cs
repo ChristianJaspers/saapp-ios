@@ -1,36 +1,39 @@
 ﻿using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using BetterSalesman.Core.BusinessLayer;
+using System.Collections.Generic;
 
 namespace BetterSalesman.iOS
 {
     public class ArgumentsListViewSource : UITableViewSource
     {
         readonly string cellIdentifierItem = "ArgumentsCell";
+        public List<Argument> items = new List<Argument>();
         public ArgumentsListViewSource()
         {
         }
 
         public override int NumberOfSections(UITableView tableView)
         {
-            // TODO: return the actual number of sections
             return 1;
         }
 
         public override int RowsInSection(UITableView tableview, int section)
         {
-            // TODO: return the actual number of items in the section
-            return 3;
+            return items.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
             
-            var title = (UILabel)cell.ViewWithTag(1);
-            var subtitle = (UILabel)cell.ViewWithTag(2);
+            var featureTxt = (UILabel)cell.ViewWithTag(1);
+            var benefitTxt = (UILabel)cell.ViewWithTag(2);
             
-            title.Text = "Feature";
-            subtitle.Text = "Benefit";
+            var argument = items[indexPath.Row];
+            
+            featureTxt.Text = argument.Feature;
+            benefitTxt.Text = argument.Benefit;
             
             return cell;
         }
