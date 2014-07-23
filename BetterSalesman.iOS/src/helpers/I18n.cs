@@ -17,6 +17,9 @@
         public static string FieldPassword = "Password".t();
 
         public static string SuccessMessageForgotPassword = "Email with new password has been sent".t();
+        
+        public static string Rated = "Rated".t();
+        public static string WithoutRating = "Without rating".t();
     }
 }
 

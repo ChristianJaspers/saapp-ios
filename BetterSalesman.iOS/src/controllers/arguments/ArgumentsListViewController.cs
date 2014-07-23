@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -37,7 +39,7 @@ namespace BetterSalesman.iOS
             
             ServiceProviderArgument.Instance.Arguments(
                 result => LoadArguments(),
-                async errorCode => Debug.WriteLine("Error during fetching " + errorCode)
+                errorCode => Debug.WriteLine("Error during fetching " + errorCode)
             );
         }
 
@@ -45,8 +47,12 @@ namespace BetterSalesman.iOS
         {
             InvokeOnMainThread(() =>
             {
+                var allArguments = ArgumentManager.Arguments();
                     
-                ((ArgumentsListViewSource)TableView.Source).items = ArgumentManager.Arguments();
+                ((ArgumentsListViewSource)TableView.Source).Items = new Dictionary<int, List<Argument>> {
+                    { 0, allArguments },
+                    { 1, allArguments }
+                };
         
                 TableView.ReloadData();
             });

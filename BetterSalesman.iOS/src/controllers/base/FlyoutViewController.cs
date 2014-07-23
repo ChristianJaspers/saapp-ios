@@ -103,9 +103,6 @@ namespace BetterSalesman.iOS
             UserSessionManager.Instance.Discard();
             
             PerformSegue(segueIDLogout, this);
-//            var nb = (UINavigationController)UIApplication.SharedApplication.Delegate.Window.RootViewController;
-            
-//            nb.PopToRootViewController(true);
             
         }
     }

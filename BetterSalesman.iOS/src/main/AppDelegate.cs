@@ -1,7 +1,6 @@
 ﻿
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
