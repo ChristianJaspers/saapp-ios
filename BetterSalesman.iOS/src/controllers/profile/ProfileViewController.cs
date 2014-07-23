@@ -50,23 +50,24 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
-//			ShowIndicator();
-//
-//			ServiceProviderUser.Instance.Profile(async result =>
-//				{
-//					await UserSessionManager.Instance.FetchUser(obj =>
-//					{
-//						LoadUser();
-//						// TODO refresh UI here?
-//					});
-//
-//					HideIndicator();
-//				},
-//				errorCode =>
-//				{
-//					HideIndicator();  
-//					ShowAlert(I18n.ErrorConnectionTimeout);
-//				});
+            // TODO indicator if needed?
+//            ShowHud();
+			ServiceProviderUser.Instance.Profile(async result =>
+				{
+					await UserSessionManager.Instance.FetchUser(obj =>
+					{
+                        LoadUser();
+                    });
+
+                    // TODO indicator if needed?
+//                    HideHud(); 
+				},
+				errorCode =>
+				{
+                    // TODO indicator if needed?
+//                    HideHud(); 
+					ShowAlert(I18n.ErrorConnectionTimeout);
+				});
 		}
 
 		private async Task UploadImage(UIImage image)

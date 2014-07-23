@@ -63,13 +63,10 @@ namespace BetterSalesman.iOS
                 }
             };
             
-            UserSessionManager.Instance.FetchUser(user => 
+            if (UserSessionManager.Instance.User != null)
             {
-                if ( user != null )
-                {
-                    Login();
-                }  
-            });
+                Login();
+            }
         }
         
         void Login()

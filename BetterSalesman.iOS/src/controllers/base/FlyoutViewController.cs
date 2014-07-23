@@ -16,7 +16,7 @@ namespace BetterSalesman.iOS
         const string storyboardIdProfile = "Profile";
         const string storyboardIdLogin = "Login";
         
-        const string sequeIdLogout = "LogoutSegue";
+        const string segueIDLogout = "LogoutSegue";
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -100,9 +100,13 @@ namespace BetterSalesman.iOS
 
         void Logout()
         {
-            PerformSegue(sequeIdLogout, this); 
-            
             UserSessionManager.Instance.Discard();
+            
+            PerformSegue(segueIDLogout, this);
+//            var nb = (UINavigationController)UIApplication.SharedApplication.Delegate.Window.RootViewController;
+            
+//            nb.PopToRootViewController(true);
+            
         }
     }
 }

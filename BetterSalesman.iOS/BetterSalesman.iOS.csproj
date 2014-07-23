@@ -249,6 +249,14 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ArgumentManager.cs">
       <Link>BusinessLayer\Managers\ArgumentManager.cs</Link>
     </Compile>
+    <Compile Include="src\views\SegueNavigationWithoutAnimation.cs" />
+    <Compile Include="src\views\SegueNavigationWithoutAnimation.designer.cs">
+      <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\base\AppEntryViewController.cs" />
+    <Compile Include="src\controllers\base\AppEntryViewController.designer.cs">
+      <DependentUpon>AppEntryViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
