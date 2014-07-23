@@ -12,7 +12,10 @@ namespace BetterSalesman.iOS
         public static FlyoutNavigationController Navigation;
         
         const string storyboardIdNavigationBase = "NavigationBase";
-        const string storyboardIdNavigationMyTeam = "NavigationMyTeam";
+        
+        const string VListArguments = "ListArguments";
+        const string VListMyTeam = "ListMyTeam";
+        
         const string storyboardIdProfile = "Profile";
         const string storyboardIdLogin = "Login";
         
@@ -54,19 +57,25 @@ namespace BetterSalesman.iOS
                     I18n.Profile, 
                     Profile,
                     UIImage.FromBundle(""), // TODO icons here
-                    storyboardIdNavigationBase
+                    VListArguments
+                ),
+                new FlayoutNavigationItem(
+                    I18n.Arguments, 
+                    null,
+                    UIImage.FromBundle(""), // TODO icons here
+                    VListArguments
                 ),
                 new FlayoutNavigationItem(
                     I18n.MyTeam, 
                     null,
                     UIImage.FromBundle(""), // TODO icons here
-                    storyboardIdNavigationMyTeam
+                    VListMyTeam
                 ),
                 new FlayoutNavigationItem(
                     I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(""), // TODO icons here
-                    storyboardIdNavigationBase
+                    VListArguments
                 )
             };
 
@@ -86,9 +95,16 @@ namespace BetterSalesman.iOS
 
         UIViewController controllerForSection(string title = storyboardIdNavigationBase)
         {
-            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(title);
+            BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(storyboardIdNavigationBase);
             vc.InitialControllerType = title;
             return vc;
+        }
+        
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            
+            Navigation.SelectedIndex = 1;
         }
 
         #endregion

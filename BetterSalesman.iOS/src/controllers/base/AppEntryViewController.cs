@@ -18,9 +18,9 @@ namespace BetterSalesman.iOS
         {
         }
         
-        public async override void ViewDidLoad()
+        public async override void ViewWillAppear(bool animated)
         {
-            base.ViewDidLoad();
+            base.ViewWillAppear(animated);
             
             var user = await UserSessionManager.Instance.UserAsync();
 

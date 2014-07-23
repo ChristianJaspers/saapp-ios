@@ -26,14 +26,14 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            TableView.Source = new ArgumentsListViewSource();
-            
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
             {
                 FlyoutViewController.Navigation.ToggleMenu();
             });
-
-            NavigationItem.SetLeftBarButtonItem(menuButton, true);
+            
+            NavigationItem.SetLeftBarButtonItem(menuButton, false);
+            
+            TableView.Source = new ArgumentsListViewSource();
             
             LoadArguments();
             

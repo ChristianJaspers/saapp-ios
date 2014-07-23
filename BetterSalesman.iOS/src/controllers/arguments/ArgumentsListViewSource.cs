@@ -41,6 +41,8 @@ namespace BetterSalesman.iOS
             var cell = tableView.DequeueReusableCell(cellIdentifierHeader) ?? new UITableViewCell();
             
             var titleTxt = (UILabel)cell.ViewWithTag(1);
+            
+            // TODO star image here according to section
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
             titleTxt.Text = TitleForHeader(tableView, section);
