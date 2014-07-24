@@ -14,7 +14,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         // Paths
 //        const string pathAuth = "arguments";
-        const string pathArguments = "api/json/get/bVEDGtpQmW?indent=2";
+        const string pathArguments = "api/json/get/cqclWoOtKa?indent=2";
         
         public static ServiceProviderArgument Instance
         {

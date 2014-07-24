@@ -51,6 +51,7 @@
     <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
     <Compile Include="BusinessLayer\Report.cs" />
     <Compile Include="BusinessLayer\ProductGroup.cs" />
+    <Compile Include="Extensions\ArgumentsExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

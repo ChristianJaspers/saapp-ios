@@ -263,6 +263,9 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Report.cs">
       <Link>BusinessLayer\Report.cs</Link>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\Extensions\ArgumentsExtensions.cs">
+      <Link>Extensions\ArgumentsExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -287,6 +290,7 @@
     <Folder Include="src\helpers\" />
     <Folder Include="src\controllers\myteam\" />
     <Folder Include="BusinessLayer\Managers\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

@@ -12,8 +12,7 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
             
             using (var conn = DatabaseProvider.OpenConnection())
             {
-                // some order here?
-                items = conn.Table<Argument>().ToList();
+                items = conn.Table<Argument>().ToList().OrderBy(a=>a.Relevance).ThenBy(a=>a.CreatedAt).ToList();
             }
             
             return items;

@@ -49,7 +49,7 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Determinate status of procedure
         /// </summary>
-        public static bool InProgress = false;
+        public static bool InProgress;
 
         /// <summary>
         /// Full synchronisation of database

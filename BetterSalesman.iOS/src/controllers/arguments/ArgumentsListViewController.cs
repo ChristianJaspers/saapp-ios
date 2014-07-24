@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.Extensions;
 
 namespace BetterSalesman.iOS
 {
@@ -48,16 +50,27 @@ namespace BetterSalesman.iOS
         void LoadArguments()
         {
             InvokeOnMainThread(() =>
+            {
+                var allArguments = ArgumentManager.Arguments();
+                var notRatedArguments = allArguments.Grouped();
+                var RatedArguments = allArguments.NotGrouped();
+                
+                var items = new Dictionary<int, List<Argument>>();
+                
+                if ( notRatedArguments.Any() )
                 {
-                    var allArguments = ArgumentManager.Arguments();
-                    
-                    ((ArgumentsListViewSource)TableView.Source).Items = new Dictionary<int, List<Argument>> {
-                        { 0, allArguments },
-                        { 1, allArguments }
-                    };
-        
-                    TableView.ReloadData();
-                });
+                    items.Add(0,notRatedArguments);
+                    items.Add(1,RatedArguments);
+                }
+                else
+                {
+                    items.Add(0,RatedArguments);
+                }
+                
+                ((ArgumentsListViewSource)TableView.Source).Items = items;
+    
+                TableView.ReloadData();
+            });
         }
     }
 }
