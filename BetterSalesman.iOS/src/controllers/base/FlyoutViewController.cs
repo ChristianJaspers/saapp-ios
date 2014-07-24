@@ -13,6 +13,7 @@ namespace BetterSalesman.iOS
         
         const string storyboardIdNavigationBase = "NavigationBase";
         
+        const string VEmpty = "Empty";
         const string VListArguments = "ListArguments";
         const string VListMyTeam = "ListMyTeam";
         
@@ -20,6 +21,12 @@ namespace BetterSalesman.iOS
         const string storyboardIdLogin = "Login";
         
         const string segueIDLogout = "LogoutSegue";
+        
+        // TODO update icons
+        const string IcProfile = "";
+        const string IcArguments = "";
+        const string IcMyTeam = "";
+        const string IcLogout = "";
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -28,9 +35,11 @@ namespace BetterSalesman.iOS
 
         #region View lifecycle
 
-        public override void ViewDidLoad()
+        public async override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            HttpRequest.AuthorizationToken = UserSessionManager.Instance.User.Token;
             
             NavigationLayoutInit();
         }
@@ -56,26 +65,26 @@ namespace BetterSalesman.iOS
                 new FlayoutNavigationItem(
                     I18n.Profile, 
                     Profile,
-                    UIImage.FromBundle(""), // TODO icons here
-                    VListArguments
+                    UIImage.FromBundle(IcProfile),
+                    VEmpty
                 ),
                 new FlayoutNavigationItem(
                     I18n.Arguments, 
                     null,
-                    UIImage.FromBundle(""), // TODO icons here
+                    UIImage.FromBundle(IcArguments),
                     VListArguments
                 ),
                 new FlayoutNavigationItem(
                     I18n.MyTeam, 
                     null,
-                    UIImage.FromBundle(""), // TODO icons here
+                    UIImage.FromBundle(IcMyTeam),
                     VListMyTeam
                 ),
                 new FlayoutNavigationItem(
                     I18n.Logout, 
                     Logout,
-                    UIImage.FromBundle(""), // TODO icons here
-                    VListArguments
+                    UIImage.FromBundle(IcLogout),
+                    VEmpty
                 )
             };
 
@@ -95,8 +104,15 @@ namespace BetterSalesman.iOS
 
         UIViewController controllerForSection(string title = storyboardIdNavigationBase)
         {
+            if (title.Equals(VEmpty))
+            {
+                return null;
+            }
+            
             BaseUINavigationController vc = (BaseUINavigationController)Storyboard.InstantiateViewController(storyboardIdNavigationBase);
+            
             vc.InitialControllerType = title;
+            
             return vc;
         }
         

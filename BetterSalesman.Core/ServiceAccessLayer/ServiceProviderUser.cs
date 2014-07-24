@@ -71,8 +71,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     UserId = responseJsonLogin.User.Id,
                     Token = responseJsonLogin.AccessToken,
                 };
-                
-                HttpRequest.AuthorizationToken = responseJsonLogin.AccessToken;
 
                 UserSessionManager.Instance.Save();
                 

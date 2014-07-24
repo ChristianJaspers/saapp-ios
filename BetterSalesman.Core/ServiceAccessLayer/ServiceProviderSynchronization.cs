@@ -48,6 +48,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             request.Success += result => {
                 
                 // TODO parse synchronization request
+                var responseJsonSynchronization = JsonConvert.DeserializeObject<ResponseJsonSynchronization>(result);
 
                 if ( success != null )
                 {

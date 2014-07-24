@@ -23,6 +23,8 @@ namespace BetterSalesman.iOS
             base.ViewWillAppear(animated);
             
             var user = await UserSessionManager.Instance.UserAsync();
+            
+            UserSessionManager.Instance.User = user;
 
             string segueToPerform = user != null ? segueIDLoggedIn : segueIDNotLoggedIn;
 

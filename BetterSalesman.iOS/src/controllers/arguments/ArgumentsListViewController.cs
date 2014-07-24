@@ -29,9 +29,9 @@ namespace BetterSalesman.iOS
             Title = I18n.Arguments;
             
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
-            {
-                FlyoutViewController.Navigation.ToggleMenu();
-            });
+                {
+                    FlyoutViewController.Navigation.ToggleMenu();
+                });
             
             NavigationItem.SetLeftBarButtonItem(menuButton, false);
             
@@ -41,23 +41,23 @@ namespace BetterSalesman.iOS
             
             ServiceProviderArgument.Instance.Arguments(
                 result => LoadArguments(),
-                errorCode => Debug.WriteLine("Error during fetching " + errorCode)
+                errorCode => Debug.WriteLine("Error during arguments fetching " + errorCode)
             );
         }
 
         void LoadArguments()
         {
             InvokeOnMainThread(() =>
-            {
-                var allArguments = ArgumentManager.Arguments();
+                {
+                    var allArguments = ArgumentManager.Arguments();
                     
-                ((ArgumentsListViewSource)TableView.Source).Items = new Dictionary<int, List<Argument>> {
-                    { 0, allArguments },
-                    { 1, allArguments }
-                };
+                    ((ArgumentsListViewSource)TableView.Source).Items = new Dictionary<int, List<Argument>> {
+                        { 0, allArguments },
+                        { 1, allArguments }
+                    };
         
-                TableView.ReloadData();
-            });
+                    TableView.ReloadData();
+                });
         }
     }
 }
