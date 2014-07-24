@@ -72,10 +72,17 @@ namespace BetterSalesman.iOS
             var featureTxt = (UILabel)cell.ViewWithTag(1);
             var benefitTxt = (UILabel)cell.ViewWithTag(2);
             
+            var relevanceTxt = (UILabel)cell.ViewWithTag(5);
+            var verticalLine = (UIView)cell.ViewWithTag(6);
+            
             var argument = Items[indexPath.Section][indexPath.Row];
+            
+            verticalLine.Hidden = !argument.Rated;
+            relevanceTxt.Hidden = !argument.Rated;
             
             featureTxt.Text = argument.Feature;
             benefitTxt.Text = argument.Benefit;
+            relevanceTxt.Text = argument.Relevance.ToString();
             
             return cell;
         }
