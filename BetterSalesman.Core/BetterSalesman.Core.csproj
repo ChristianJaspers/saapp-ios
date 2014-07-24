@@ -49,6 +49,7 @@
     <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
     <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
     <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

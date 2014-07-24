@@ -257,6 +257,9 @@
     <Compile Include="src\controllers\base\AppEntryViewController.designer.cs">
       <DependentUpon>AppEntryViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderSynchronization.cs">
+      <Link>ServiceAccessLayer\ServiceProviderSynchronization.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
