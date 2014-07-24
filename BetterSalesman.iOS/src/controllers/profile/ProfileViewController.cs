@@ -76,41 +76,41 @@ namespace BetterSalesman.iOS
 
 			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
 
-			var fileUploadRequest = new FileUploadRequest();
-
-			fileUploadRequest.ProgressUpdated += progressPercentage =>
-            {
-                Debug.WriteLine("Upload progress: " + progressPercentage);
-
-                SetHudProgress(progressPercentage / 100.0f);
-            };
-
-			fileUploadRequest.Success += async remoteFileUrl =>
-            {
-                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-
-                InvokeOnMainThread(() =>
-                    {
-                        Debug.WriteLine("Upload complete - file URL: " + remoteFileUrl);
-                        ProfileImageView.Image = cachedPickedImage;
-                        cachedPickedImage = null;
-                    });
-
-                HideHud();
-            };
-
-			fileUploadRequest.Failure += (errorCode, errorMessage) =>
-            {
-                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-                cachedPickedImage = null;
-
-                InvokeOnMainThread(() => ShowAlert(errorMessage));
-
-                HideHud();
-            };
-
-			ShowHud("Updating profile picture");
-			fileUploadRequest.Perform(imageFilePath);
+//			var fileUploadRequest = new FileUploadRequest();
+//
+//			fileUploadRequest.ProgressUpdated += progressPercentage =>
+//            {
+//                Debug.WriteLine("Upload progress: " + progressPercentage);
+//
+//                SetHudProgress(progressPercentage / 100.0f);
+//            };
+//
+//			fileUploadRequest.Success += async remoteFileUrl =>
+//            {
+//                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+//
+//                InvokeOnMainThread(() =>
+//                    {
+//                        Debug.WriteLine("Upload complete - file URL: " + remoteFileUrl);
+//                        ProfileImageView.Image = cachedPickedImage;
+//                        cachedPickedImage = null;
+//                    });
+//
+//                HideHud();
+//            };
+//
+//			fileUploadRequest.Failure += (errorCode, errorMessage) =>
+//            {
+//                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+//                cachedPickedImage = null;
+//
+//                InvokeOnMainThread(() => ShowAlert(errorMessage));
+//
+//                HideHud();
+//            };
+//
+//			ShowHud("Updating profile picture");
+//			fileUploadRequest.Perform(imageFilePath);
 		}
 						
 		void LoadUser()
