@@ -178,9 +178,6 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Argument.cs">
       <Link>BusinessLayer\Argument.cs</Link>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Product.cs">
-      <Link>BusinessLayer\Product.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Contracts\IBusinessEntity.cs">
       <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
     </Compile>
@@ -259,6 +256,12 @@
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderSynchronization.cs">
       <Link>ServiceAccessLayer\ServiceProviderSynchronization.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\ProductGroup.cs">
+      <Link>BusinessLayer\ProductGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Report.cs">
+      <Link>BusinessLayer\Report.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

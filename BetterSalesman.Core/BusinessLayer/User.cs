@@ -17,11 +17,14 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "email")]
         public string Email { get; set; }
         
-        [JsonPropertyAttribute(PropertyName = "image_url")]
-        public string ImageUrl { get; set; }
+        [JsonPropertyAttribute(PropertyName = "avatar_url")]
+        public string AvatarUrl { get; set; }
         
-        [JsonPropertyAttribute(PropertyName = "thumb_url")]
-        public string ThumbUrl { get; set; }
+        [JsonPropertyAttribute(PropertyName = "avatar_thumb_url")]
+        public string AvatarThumbUrl { get; set; }
+        
+        [JsonPropertyAttribute(PropertyName = "experience")]
+        public int Experience { get; set; }
         
         public DateTime UpdatedAt { get; set; }
     }

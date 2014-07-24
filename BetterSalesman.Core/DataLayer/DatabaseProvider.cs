@@ -186,7 +186,8 @@ namespace BetterSalesman.Core.DataLayer
             Debug.WriteLine("DB create if not exists");
 
             connection.CreateTable<User>();
-            connection.CreateTable<Product>();
+            connection.CreateTable<ProductGroup>();
+            connection.CreateTable<Report>();
             connection.CreateTable<Argument>();
 
             Debug.WriteLine("DB ready to rumble if not exists");
@@ -196,7 +197,9 @@ namespace BetterSalesman.Core.DataLayer
         {
             Debug.WriteLine("Deleting records...");
 
-            connection.DeleteAll<Product>();
+            connection.CreateTable<User>();
+            connection.CreateTable<ProductGroup>();
+            connection.CreateTable<Report>();
             connection.DeleteAll<Argument>();
 
             Debug.WriteLine("Finished deleting records");

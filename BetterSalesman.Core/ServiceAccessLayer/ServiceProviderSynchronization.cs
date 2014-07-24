@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using BetterSalesman.Core.BusinessLayer;
+using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -9,7 +11,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         private static object locker = new Object();
         
         // Paths
-        const string pathSynchronization = "api/json/get/bOYtHYkYAy?indent=2";
+        const string pathSynchronization = "api/json/get/cqTPNZiVGq?indent=2";
         
         public static ServiceProviderSynchronization Instance
         {
@@ -64,7 +66,17 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         class ResponseJsonSynchronization
         {
+            [JsonPropertyAttribute(PropertyName = "users")]
+            public List<User> Users;
             
+            [JsonPropertyAttribute(PropertyName = "product_groups")]
+            public List<ProductGroup> ProductGroups;
+            
+            [JsonPropertyAttribute(PropertyName = "arguments")]
+            public List<Argument> Arguments;
+            
+            [JsonPropertyAttribute(PropertyName = "reports")]
+            public List<Report> Reports;
         }
         
         #endregion
