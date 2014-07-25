@@ -6,12 +6,12 @@ namespace BetterSalesman.Core.Extensions
 {
     public static class ArgumentsExtensions
     {
-        public static List<Argument> Grouped(this List<Argument> arguments)
+        public static List<Argument> NotRated(this List<Argument> arguments)
         {
             return arguments.Where(a => !a.Rated).ToList();
         }
 
-        public static List<Argument> NotGrouped(this List<Argument> arguments)
+        public static List<Argument> Rated(this List<Argument> arguments)
         {
             return arguments.Where(a => a.Rated).ToList();
         }

@@ -52,8 +52,8 @@ namespace BetterSalesman.iOS
             InvokeOnMainThread(() =>
             {
                 var allArguments = ArgumentManager.Arguments();
-                var notRatedArguments = allArguments.Grouped();
-                var RatedArguments = allArguments.NotGrouped();
+                var notRatedArguments = allArguments.NotRated();
+                var RatedArguments = allArguments.Rated();
                 
                 var items = new Dictionary<int, List<Argument>>();
                 

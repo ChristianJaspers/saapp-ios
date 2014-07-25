@@ -10,8 +10,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         // Paths
         const string pathSynchronization = "api/v1/resources";
-        // TODO remove
-//        const string pathSynchronization = "api/json/get/cuNKvuvcwO?indent=2";
         
         public static ServiceProviderSynchronization Instance
         {
