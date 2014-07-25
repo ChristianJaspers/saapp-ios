@@ -7,6 +7,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
 namespace BetterSalesman.Core.DataLayer
 {
@@ -54,8 +55,9 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Full synchronisation of database
         /// </summary>
+        /// <param name = "containerData">Contains DTO object to save</param>
         /// <param name="filePath">Path to database file.</param>
-        public static void FullSync(/*Container containerData, */string filePath = "")
+        public static void FullSync(JsonSynchronization containerData, string filePath = "")
         {
             // TODO - remove stopwatch code
             Debug.WriteLine("In Full sync");
@@ -77,8 +79,7 @@ namespace BetterSalesman.Core.DataLayer
 
             try
             {
-                // TODO
-//                SaveDataFromMemory(eventItem);
+                SaveDataFromMemory(containerData);
             }
             catch (Exception e)
             {
@@ -143,7 +144,7 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Saves the data from memory.
         /// </summary>
-        private static void SaveDataFromMemory(/*Container containerData*/)
+        private static void SaveDataFromMemory(JsonSynchronization containerData)
         {
             // TODO
 //            if (eventData == null)
@@ -167,7 +168,7 @@ namespace BetterSalesman.Core.DataLayer
 
                     DeleteAllRecords(connection);
 
-//                    InsertRecords(connection, eventData);
+                    InsertRecords(connection, containerData);
 
                     connection.Commit();
                 }
@@ -206,20 +207,12 @@ namespace BetterSalesman.Core.DataLayer
         }
 
         // TODO fill container with data
-        private static void InsertRecords(SQLiteConnection connection/*, Container containerData*/)
+        private static void InsertRecords(SQLiteConnection connection, JsonSynchronization containerData)
         {
-
-        }
-
-        private static void InsertAll(SQLiteConnection connection, IEnumerable objects)
-        {
-            if (objects != null)
-            {
-                foreach (var obj in objects)
-                {
-                    connection.Insert(obj);
-                }
-            }
+            DatabaseHelper.ReplaceAll(containerData.Users,connection);
+            DatabaseHelper.ReplaceAll(containerData.Categories,connection);
+            DatabaseHelper.ReplaceAll(containerData.Reports,connection);
+            DatabaseHelper.ReplaceAll(containerData.Arguments,connection);
         }
     }
 }

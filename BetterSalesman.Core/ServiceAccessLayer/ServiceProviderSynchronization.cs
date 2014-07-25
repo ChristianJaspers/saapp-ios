@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BetterSalesman.Core.BusinessLayer;
-using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -46,10 +44,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             };
             
             request.Success += result => {
-                
-                var responseJsonSynchronization = JsonConvert.DeserializeObject<ResponseJsonSynchronization>(result);
-                
-                // TODO run sync method from DatabaseProvider ?
 
                 if ( success != null )
                 {
@@ -60,25 +54,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             request.Failure += failure;
             
             await request.Perform();
-        }
-        
-        #endregion
-
-        #region Json definitions
-
-        class ResponseJsonSynchronization
-        {
-            [JsonPropertyAttribute(PropertyName = "users")]
-            public List<User> Users;
-            
-            [JsonPropertyAttribute(PropertyName = "product_groups")]
-            public List<Category> ProductGroups;
-            
-            [JsonPropertyAttribute(PropertyName = "arguments")]
-            public List<Argument> Arguments;
-            
-            [JsonPropertyAttribute(PropertyName = "reports")]
-            public List<Report> Reports;
         }
         
         #endregion

@@ -3,7 +3,7 @@ using MonoTouch.UIKit;
 
 namespace BetterSalesman.iOS
 {
-    public class XUITextFieldValidate : XFieldValidate<UITextField>
+    public class XUITextField : XField<UITextField>
     {
         public override string Value()
         {

@@ -62,13 +62,24 @@ namespace BetterSalesman.Core.DataLayer
         {
             using (var conn = DatabaseProvider.OpenConnection())
             {
-                conn.BeginTransaction();
-                
-                conn.DeleteAll<T>();
-                InsertAll<T>(conn, items);
-                
-                conn.Commit();
+                ReplaceAll(items, conn);
             }
+        }
+        
+        /// <summary>
+        /// Replaces all entities of given type with given entities
+        /// </summary>
+        /// <param name="items">Items.</param>
+        /// <param name="connection">Connection.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static void ReplaceAll<T>(List<T> items, SQLiteConnection connection)
+        {
+            connection.BeginTransaction();
+
+            connection.DeleteAll<T>();
+            InsertAll<T>(connection, items);
+
+            connection.Commit();
         }
         
         /// <summary>

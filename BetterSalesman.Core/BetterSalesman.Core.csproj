@@ -51,6 +51,8 @@
     <Compile Include="BusinessLayer\Report.cs" />
     <Compile Include="Extensions\ArgumentsExtensions.cs" />
     <Compile Include="BusinessLayer\Category.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs" />
+    <Compile Include="ServiceAccessLayer\SynchronizationManagerApplication.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
