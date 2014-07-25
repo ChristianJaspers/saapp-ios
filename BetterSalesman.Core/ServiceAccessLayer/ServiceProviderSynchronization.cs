@@ -11,7 +11,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         private static object locker = new Object();
         
         // Paths
-        const string pathSynchronization = "api/json/get/cqTPNZiVGq?indent=2";
+        const string pathSynchronization = "api/v1/sync";
         
         public static ServiceProviderSynchronization Instance
         {
@@ -72,7 +72,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             public List<User> Users;
             
             [JsonPropertyAttribute(PropertyName = "product_groups")]
-            public List<ProductGroup> ProductGroups;
+            public List<Category> ProductGroups;
             
             [JsonPropertyAttribute(PropertyName = "arguments")]
             public List<Argument> Arguments;

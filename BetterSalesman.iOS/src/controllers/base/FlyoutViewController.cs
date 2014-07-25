@@ -27,6 +27,7 @@ namespace BetterSalesman.iOS
         const string IcArguments = "";
         const string IcMyTeam = "";
         const string IcLogout = "";
+        const string IcSynchronization = "";
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -79,6 +80,12 @@ namespace BetterSalesman.iOS
                     null,
                     UIImage.FromBundle(IcMyTeam),
                     VListMyTeam
+                ),
+                new FlayoutNavigationItem(
+                    I18n.Synchronization, 
+                    Synchronization,
+                    UIImage.FromBundle(IcSynchronization),
+                    VEmpty
                 ),
                 new FlayoutNavigationItem(
                     I18n.Logout, 
@@ -136,6 +143,11 @@ namespace BetterSalesman.iOS
             
             PerformSegue(segueIDLogout, this);
             
+        }
+
+        void Synchronization()
+        {
+            // TODO sync code goes here
         }
     }
 }

@@ -82,7 +82,7 @@ namespace BetterSalesman.iOS
             
             featureTxt.Text = argument.Feature;
             benefitTxt.Text = argument.Benefit;
-            relevanceTxt.Text = argument.Relevance.ToString();
+            relevanceTxt.Text = argument.Rating.ToString();
             
             return cell;
         }

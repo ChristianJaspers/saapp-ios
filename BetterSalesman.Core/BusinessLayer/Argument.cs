@@ -11,8 +11,8 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "id")]
         public int Id { get; set; }
 
-        [JsonPropertyAttribute(PropertyName = "product_group_id")]
-        public int ProductGroupId { get; set; }
+        [JsonPropertyAttribute(PropertyName = "category_id")]
+        public int CategoryId { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "feature")]
         public string Feature { get; set; }
@@ -20,17 +20,23 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "benefit")]
         public string Benefit { get; set; }
 
-        [JsonPropertyAttribute(PropertyName = "relevance")]
-        public int Relevance { get; set; }
-
-        [JsonPropertyAttribute(PropertyName = "rated")]
-        public bool Rated { get; set; }
+        [JsonPropertyAttribute(PropertyName = "rating")]
+        public int Rating { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "created_at")]
         public DateTime CreatedAt { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "updated_at")]
         public DateTime UpdatedAt { get; set; }
+        
+        #region Convenience properties
+        
+        public bool Rated
+        {
+            get { return Rating > 0; }   
+        }
+        
+        #endregion
     }
 }
 
