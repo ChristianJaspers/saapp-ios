@@ -11,8 +11,8 @@ using System.CodeDom.Compiler;
 
 namespace BetterSalesman.iOS
 {
-	[Register ("AppEntryViewController")]
-	partial class AppEntryViewController
+	[Register ("ArgumentsForm")]
+	partial class ArgumentsForm
 	{
 		void ReleaseDesignerOutlets ()
 		{

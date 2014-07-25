@@ -266,6 +266,14 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
     </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsForm.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsForm.designer.cs">
+      <DependentUpon>ArgumentsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsDetail.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsDetail.designer.cs">
+      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

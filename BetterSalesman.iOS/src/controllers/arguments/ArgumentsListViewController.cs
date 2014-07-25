@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 using BetterSalesman.Core.BusinessLayer.Managers;
-using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.Extensions;
 
@@ -13,6 +12,9 @@ namespace BetterSalesman.iOS
     public partial class ArgumentsListViewController : UITableViewController
     {
         const string menu_icon = "ic_menu";
+        
+        const string segueIdAdding = "ArgumentAdding";
+        const string segueIdSelected = "ArgumentSelected";
 
         public ArgumentsListViewController()
             : base(UITableViewStyle.Grouped)
@@ -23,6 +25,8 @@ namespace BetterSalesman.iOS
             : base(handle)
         {
         }
+        
+        #region Lifecycle
 
         public override void ViewDidLoad()
         {
@@ -46,6 +50,24 @@ namespace BetterSalesman.iOS
             
             LoadArguments();
         }
+        
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            
+            if (segue.Identifier.Equals(segueIdSelected))
+            {
+                var cell = (UITableViewCell)sender;
+                
+                var indexPath = TableView.IndexPathForCell(cell);
+                
+                var vc = (ArgumentsDetail)segue.DestinationViewController;
+                
+                vc.Argument = ((ArgumentsListViewSource)TableView.Source).Items[indexPath.Section][indexPath.Row];
+            }
+        }
+        
+        #endregion
 
         void LoadArguments()
         {
