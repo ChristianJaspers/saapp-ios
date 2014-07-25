@@ -36,7 +36,7 @@ namespace BetterSalesman.iOS
 
         #region View lifecycle
 
-        public async override void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             
@@ -131,6 +131,8 @@ namespace BetterSalesman.iOS
         }
 
         #endregion
+        
+        #region Tab actions
 
         void Profile()
         {
@@ -147,8 +149,19 @@ namespace BetterSalesman.iOS
 
         void Synchronization()
         {
-            // TODO sync code goes here
+            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
+            
+            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud();
+
+            SynchronizationManagerApplication.Instance.FinishedSynchronization += () => {
+                HideHud();
+                Navigation.HideMenu();
+            };
+            
+            SynchronizationManagerApplication.Instance.Synchronize();
         }
+        
+        #endregion
     }
 }
 

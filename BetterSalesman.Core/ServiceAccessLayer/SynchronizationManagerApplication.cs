@@ -4,18 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BetterSalesman.Core.DataLayer;
-using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
-    internal class AppSynchronizationManager : SynchronizationManagerBase
+    internal class SynchronizationManagerApplication : SynchronizationManagerBase
     {
         #region Singleton
 
-        private static AppSynchronizationManager instance;
+        private static SynchronizationManagerApplication instance;
 
-        public static AppSynchronizationManager Instance
+        public static SynchronizationManagerApplication Instance
         {
             get
             {
@@ -25,7 +24,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     {
                         if (instance == null)
                         {
-                            instance = new AppSynchronizationManager();
+                            instance = new SynchronizationManagerApplication();
                         }
                     }
                 }
@@ -36,39 +35,36 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         #endregion Singleton
 
-        private AppSynchronizationManager()
+        private SynchronizationManagerApplication()
             : base()
         {
         }
 
         public override void FullSynchronizationTaskRun()
         {
-            Task.Run(async () =>
-                {
-                    ServiceProviderSynchronization.Instance.Synchronize(
-                        async result => {
-                        
-                            var dataContainer = await ParseJsonAsync(result);  
-                        
-                            await UpdateDatabaseAsync(dataContainer);
-                        
-                            OnUpdatedDatabase();
-                        
-                            OnFinishedSynchronization();
-                        },
-                        errorCode => OnFinishedSynchronization()
-                    );
-                });
+            ServiceProviderSynchronization.Instance.Synchronize(
+                async result => {
+                
+                    var dataContainer = await ParseJsonAsync(result);  
+                
+                    await UpdateDatabaseAsync(dataContainer);
+                
+                    OnUpdatedDatabase();
+                
+                    OnFinishedSynchronization();
+                },
+                errorCode => OnFinishedSynchronization()
+            );
         }
 
         public async Task CopyInitialDatabaseAsync()
         {
             await Task.Run(() =>
-                {
-                    Debug.WriteLine("Copying initial databse...");
-                    DatabaseProvider.Setup();
-                    Debug.WriteLine("Finished copying initial databse.");
-                });
+            {
+                Debug.WriteLine("Copying initial databse...");
+                DatabaseProvider.Setup();
+                Debug.WriteLine("Finished copying initial databse.");
+            });
         }
 
         private async Task<JsonSynchronization> ParseJsonAsync(string eventJson)

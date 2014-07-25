@@ -166,8 +166,6 @@ namespace BetterSalesman.Core.DataLayer
 
                     CreateTablesIfNotExist(connection);
 
-                    DeleteAllRecords(connection);
-
                     InsertRecords(connection, containerData);
 
                     connection.Commit();
@@ -192,18 +190,6 @@ namespace BetterSalesman.Core.DataLayer
             connection.CreateTable<Argument>();
 
             Debug.WriteLine("DB ready to rumble if not exists");
-        }
-
-        private static void DeleteAllRecords(SQLiteConnection connection)
-        {
-            Debug.WriteLine("Deleting records...");
-
-            connection.CreateTable<User>();
-            connection.CreateTable<Category>();
-            connection.CreateTable<Report>();
-            connection.DeleteAll<Argument>();
-
-            Debug.WriteLine("Finished deleting records");
         }
 
         // TODO fill container with data

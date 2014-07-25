@@ -45,7 +45,6 @@
     <Compile Include="DataLayer\DatabaseHelper.cs" />
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
     <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
-    <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
     <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
     <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
     <Compile Include="BusinessLayer\Report.cs" />

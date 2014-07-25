@@ -38,13 +38,13 @@ namespace BetterSalesman.iOS
             NavigationItem.SetLeftBarButtonItem(menuButton, false);
             
             TableView.Source = new ArgumentsListViewSource();
+        }
+        
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
             
             LoadArguments();
-            
-            ServiceProviderArgument.Instance.Arguments(
-                result => LoadArguments(),
-                errorCode => Debug.WriteLine("Error during arguments fetching " + errorCode)
-            );
         }
 
         void LoadArguments()

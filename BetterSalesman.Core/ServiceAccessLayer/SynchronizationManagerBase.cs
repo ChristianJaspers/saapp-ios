@@ -111,6 +111,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
         }
 
+        /// <summary>
+        /// Unsubscribes attached events.
+        /// </summary>
+        public virtual void UnsubscribeEvents()
+        {
+            StartedSynchronization = null;
+            FinishedSynchronization = null;
+            UpdatedDatabase = null;
+        }
+        
         protected virtual void OnStartedSynchronization()
         {
             if (StartedSynchronization != null)
@@ -139,5 +149,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 UpdatedDatabase();
             }
         }
+        
     }
 }

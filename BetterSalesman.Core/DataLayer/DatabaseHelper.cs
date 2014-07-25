@@ -55,14 +55,16 @@ namespace BetterSalesman.Core.DataLayer
         }
         
         /// <summary>
-        /// Replaces all entities of given type with given entities
+        /// Replaces all entities of given type with transaction
         /// </summary>
         /// <param name="items">List of items.</param>
         public static void ReplaceAll<T>(List<T> items)
         {
             using (var conn = DatabaseProvider.OpenConnection())
             {
+                conn.BeginTransaction();
                 ReplaceAll(items, conn);
+                conn.Commit();
             }
         }
         
@@ -74,12 +76,8 @@ namespace BetterSalesman.Core.DataLayer
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static void ReplaceAll<T>(List<T> items, SQLiteConnection connection)
         {
-            connection.BeginTransaction();
-
             connection.DeleteAll<T>();
             InsertAll<T>(connection, items);
-
-            connection.Commit();
         }
         
         /// <summary>

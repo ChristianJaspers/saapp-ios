@@ -236,9 +236,6 @@
     <Compile Include="src\controllers\base\FlyoutViewController.designer.cs">
       <DependentUpon>FlyoutViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderArgument.cs">
-      <Link>ServiceAccessLayer\ServiceProviderArgument.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ArgumentManager.cs">
       <Link>BusinessLayer\Managers\ArgumentManager.cs</Link>
     </Compile>
