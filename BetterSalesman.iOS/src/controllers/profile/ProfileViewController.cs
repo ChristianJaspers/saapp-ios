@@ -75,34 +75,52 @@ namespace BetterSalesman.iOS
 			cachedPickedImage = image;
 
 			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
-
-			var uploader = new HttpClientFileUploader(HttpRequest.AuthorizationToken);
-
-			var uploadUrl = HttpConfig.ApiBaseAddress + "profile/avatar";
-			var parameterName = "file";
 			var mimeType = "image/png";
 
-			ShowHud("Uploading image");
-			var result = await uploader.UploadFileAsync(uploadUrl, imageFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
-
-			HideHud();
-
-			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessful;
-			if (!result.IsSuccess)
+			ShowHud(I18n.ServiceAccessProfilePictureUpdatingProfilePicture);
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureUploadingMessage);
+			var uploadResult = await ServiceProviderUser.Instance.UpdateAvatar(imageFilePath, mimeType);
+			if (!uploadResult.IsSuccess)
 			{
-				uploadCompletedMessage = result.Error.LocalizedMessage;
+				HideHud();
+				ShowAlert(uploadResult.Error.LocalizedMessage);
+				return;
 			}
 
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
+
+			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
+			if (!downloadResult.IsSuccess)
+			{
+				HideHud();
+				ShowAlert(uploadResult.Error.LocalizedMessage);
+				return;
+			}
+
+			UpdateProfileImageView(downloadResult.Image);
+
+			HideHud();
+			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessful;
 			ShowAlert(uploadCompletedMessage);
 
-			// TODO - file not found error
 			// TODO - reachability error
 			// TODO - scale down image
-			// TODO - download thumbnail
 			// TODO - update user (like during login)
+			// TODO - add placeholder avatar
 
 		}
 						
+		private void UpdateProfileImageView(UIImage image)
+		{
+			InvokeOnMainThread(() =>
+			{
+				if (image != null)
+				{
+					ProfileImageView.Image = image;
+				}
+			});
+		}
+
 		void LoadUser()
 		{
 			user = UserManager.LoggedInUser();

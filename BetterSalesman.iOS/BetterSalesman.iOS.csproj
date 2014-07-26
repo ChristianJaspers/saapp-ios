@@ -280,6 +280,7 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessError.cs">
       <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
     </Compile>
+    <Compile Include="src\helpers\ImageDownloader.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

@@ -23,7 +23,10 @@
         public static string Rated = "Rated".t();
         public static string WithoutRating = "Without rating".t();
 
-		public static string ServiceAccessProfilePictureUpdateSuccessful = "We've update your profile picture for you.".t();
+		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
+		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
+		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();
+		public static string ServiceAccessProfilePictureUpdateSuccessful = "We've updated your profile picture for you.".t();
     }
 }
 

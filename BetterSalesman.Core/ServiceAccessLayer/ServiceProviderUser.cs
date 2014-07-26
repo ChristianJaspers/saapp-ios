@@ -141,9 +141,14 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             await request.Perform();
         }
 
-		public async Task<FileUploadResult> UpdateAvatar(string localFilePath)
+		public async Task<FileUploadResult> UpdateAvatar(string localFilePath, string mimeType)
 		{
-			return null;
+			var uploader = new HttpClientFileUploader(HttpRequest.AuthorizationToken);
+
+			var uploadUrl = HttpConfig.ApiBaseAddress + "profile/avatar";
+			var parameterName = "file";
+
+			return await uploader.UploadFileAsync(uploadUrl, localFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
 		}
         
         #endregion

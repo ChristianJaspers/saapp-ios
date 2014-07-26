@@ -1,10 +1,14 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace BetterSalesman.Core
+namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	public class ServiceAccessError
 	{
+		// TODO - localize with LocalizationProvider and ILocalicationProvider implemented per platform and remove ErrorDescriptionProvider
+		public static ServiceAccessError ErrorUnknown = new ServiceAccessError(-1000, "Something went wrong. Please try again later.");
+		public static ServiceAccessError ErrorFileNotFound = new ServiceAccessError(-1001, "Couldn't find the requested file.");
+
 		[JsonPropertyAttribute(PropertyName = "code")]
 		public int InternalCode { get; private set; }
 

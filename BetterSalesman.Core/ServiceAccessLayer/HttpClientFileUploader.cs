@@ -17,29 +17,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 		public const string HttpHeaderTitleContentType = "Content-Type";
 
-		private FileUploadResult UnknownErrorResult;
-
 		private string authorizationToken;
 
 		public HttpClientFileUploader(string authorizationToken)
 		{
 			this.authorizationToken = authorizationToken;
-
-			UnknownErrorResult = new FileUploadResult
-			{
-				// TODO - replace with actual unknown error code and localized message
-				Error = new ServiceAccessError(-1000, "Something went wrong. Please try again later.")
-			};
 		}
 
 		public async Task<FileUploadResult> UploadFileAsync(string uploadUrl, string localFilePath, string parameterName, string mimeType, string method = HttpMethodPost)
 		{
 			var isPostOrPut = method.Equals(HttpMethodPost) || method.Equals(HttpMethodPut);
 			Debug.Assert(isPostOrPut, "UploadFileAsync expected HTTP method to be POST or PUT, but found " + method);
-
+		
 			if (!File.Exists(localFilePath))
 			{
-				// TODO - internal error handling
+				return new FileUploadResult(ServiceAccessError.ErrorFileNotFound);
 			}
 
 			// TODO - check network availability
@@ -51,7 +43,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			catch (Exception e)
 			{
 				Debug.WriteLine("An exception occured during upload: " + e);
-				return UnknownErrorResult;
+				return new FileUploadResult(ServiceAccessError.ErrorUnknown);
 			}
 		}
 
@@ -90,7 +82,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 						}
 						else
 						{
-							return UnknownErrorResult;
+							return new FileUploadResult(ServiceAccessError.ErrorUnknown);
 						}
 					}
 				}
@@ -113,7 +105,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				}
 				else
 				{
-					result = UnknownErrorResult;
+					result = new FileUploadResult(ServiceAccessError.ErrorUnknown);
 				}
 			}
 			else
@@ -126,7 +118,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				}
 				else
 				{
-					result = UnknownErrorResult;
+					result = new FileUploadResult(ServiceAccessError.ErrorUnknown);
 				}
 			}
 
@@ -148,6 +140,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 	public class FileUploadResult
 	{
+		public FileUploadResult() : base()
+		{
+		}
+
+
+		public FileUploadResult(User user) : base()
+		{
+			User = user;
+		}
+
+		public FileUploadResult(ServiceAccessError error) : base()
+		{
+			Error = error;
+		}
+
 		public bool IsSuccess { get { return Error == null; } }
 		public User User { get; set; }
 		public ServiceAccessError Error { get; set; }
