@@ -34,7 +34,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		public async Task<FileUploadResult> UploadFileAsync(string uploadUrl, string localFilePath, string parameterName, string mimeType, string method = HttpMethodPost)
 		{
 			var isPostOrPut = method.Equals(HttpMethodPost) || method.Equals(HttpMethodPut);
-			Debug.Assert("UploadFileAsync expected HTTP method to be POST or PUT, but found " + method);
+			Debug.Assert(isPostOrPut, "UploadFileAsync expected HTTP method to be POST or PUT, but found " + method);
 
 			if (!File.Exists(localFilePath))
 			{
@@ -105,14 +105,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				}
 				else
 				{
-					result.Error = UnknownErrorResult;
+					result = UnknownErrorResult;
 				}
 			}
 			else
 			{
 				var uploadFailureResponse= JsonConvert.DeserializeObject<FileUploadFailureResponse>(responseText);
 				var isKnownError = uploadFailureResponse.Error != null;
-				result.Error = isKnownError ? uploadFailureResponse.Error : UnknownErrorResult;
+				if (isKnownError)
+				{
+					result.Error = uploadFailureResponse.Error;
+				}
+				else
+				{
+					result = UnknownErrorResult;
+				}
 			}
 
 			return result;
