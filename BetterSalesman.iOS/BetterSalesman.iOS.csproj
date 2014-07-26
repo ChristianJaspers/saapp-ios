@@ -274,6 +274,12 @@
     <Compile Include="src\controllers\arguments\ArgumentsDetail.designer.cs">
       <DependentUpon>ArgumentsDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpClientFileUploader.cs">
+      <Link>ServiceAccessLayer\HttpClientFileUploader.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessError.cs">
+      <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

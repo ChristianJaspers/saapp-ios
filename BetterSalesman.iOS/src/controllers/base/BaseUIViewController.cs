@@ -70,7 +70,10 @@ namespace BetterSalesman.iOS
         
         protected void ShowAlert(string msg, string title)
         {
-            new UIAlertView (title, msg, null, I18n.OK, null).Show ();
+			InvokeOnMainThread(() =>
+			{
+            	new UIAlertView(title, msg, null, I18n.OK, null).Show();
+			});
         }
     }
 }

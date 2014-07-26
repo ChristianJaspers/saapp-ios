@@ -22,6 +22,8 @@
         
         public static string Rated = "Rated".t();
         public static string WithoutRating = "Without rating".t();
+
+		public static string ServiceAccessProfilePictureUpdateSuccessful = "We've update your profile picture for you.".t();
     }
 }
 

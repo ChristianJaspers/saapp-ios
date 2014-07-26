@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BetterSalesman.Core.BusinessLayer;
 using Newtonsoft.Json;
 using BetterSalesman.Core.DataLayer;
+using System.Threading.Tasks;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -139,6 +140,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
             await request.Perform();
         }
+
+		public async Task<FileUploadResult> UpdateAvatar(string localFilePath)
+		{
+			return null;
+		}
         
         #endregion
         

@@ -76,41 +76,32 @@ namespace BetterSalesman.iOS
 
 			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
 
-//			var fileUploadRequest = new FileUploadRequest();
-//
-//			fileUploadRequest.ProgressUpdated += progressPercentage =>
-//            {
-//                Debug.WriteLine("Upload progress: " + progressPercentage);
-//
-//                SetHudProgress(progressPercentage / 100.0f);
-//            };
-//
-//			fileUploadRequest.Success += async remoteFileUrl =>
-//            {
-//                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-//
-//                InvokeOnMainThread(() =>
-//                    {
-//                        Debug.WriteLine("Upload complete - file URL: " + remoteFileUrl);
-//                        ProfileImageView.Image = cachedPickedImage;
-//                        cachedPickedImage = null;
-//                    });
-//
-//                HideHud();
-//            };
-//
-//			fileUploadRequest.Failure += (errorCode, errorMessage) =>
-//            {
-//                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-//                cachedPickedImage = null;
-//
-//                InvokeOnMainThread(() => ShowAlert(errorMessage));
-//
-//                HideHud();
-//            };
-//
-//			ShowHud("Updating profile picture");
-//			fileUploadRequest.Perform(imageFilePath);
+			var uploader = new HttpClientFileUploader(HttpRequest.AuthorizationToken);
+
+			var uploadUrl = HttpConfig.ApiBaseAddress + "profile/avatar";
+			var parameterName = "file";
+			var mimeType = "image/png";
+
+			ShowHud("Uploading image");
+			var result = await uploader.UploadFileAsync(uploadUrl, imageFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
+			Debug.WriteLine("Finished uploading image");
+
+			HideHud();
+
+			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessful;
+			if (!result.IsSuccess)
+			{
+				uploadCompletedMessage = result.Error.LocalizedMessage;
+			}
+
+			ShowAlert(uploadCompletedMessage);
+
+			// TODO - file not found error
+			// TODO - reachability error
+			// TODO - scale down image
+			// TODO - download thumbnail
+			// TODO - update user (like during login)
+
 		}
 						
 		void LoadUser()
