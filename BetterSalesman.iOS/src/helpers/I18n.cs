@@ -26,7 +26,8 @@
 		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
 		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
 		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();
-		public static string ServiceAccessProfilePictureUpdateSuccessful = "We've updated your profile picture for you.".t();
+		public static string ServiceAccessProfilePicturePreparingForUploadMessage = "Preparing picture for upload".t();
+		public static string ServiceAccessProfilePictureUpdateSuccessfulMessage = "We've updated your profile picture for you.".t();
     }
 }
 

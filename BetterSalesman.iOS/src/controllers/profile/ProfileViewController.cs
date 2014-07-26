@@ -11,7 +11,6 @@ namespace BetterSalesman.iOS
 	partial class ProfileViewController : BaseUIViewController
 	{
 		private ImagePickerPresenter imagePickerPresenter;
-		private UIImage cachedPickedImage;
 		private User user;
 
 		public ProfileViewController(IntPtr handle) : base (handle)
@@ -72,13 +71,17 @@ namespace BetterSalesman.iOS
 
 		private async Task UploadImage(UIImage image)
 		{
-			cachedPickedImage = image;
-
-			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
-			var mimeType = "image/png";
-
 			ShowHud(I18n.ServiceAccessProfilePictureUpdatingProfilePicture);
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePicturePreparingForUploadMessage);
+
+			var maximumImageWithAndHeight = 1024;
+			var downsizedImage = ImageManipulationHelper.ResizeImageToMaximumSize(image, maximumImageWithAndHeight, maximumImageWithAndHeight);
+
+			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFileJpeg(downsizedImage, 0.75f);
+			var mimeType = "image/jpeg";
+
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureUploadingMessage);
+
 			var uploadResult = await ServiceProviderUser.Instance.UpdateAvatar(imageFilePath, mimeType);
 			if (!uploadResult.IsSuccess)
 			{
@@ -100,14 +103,12 @@ namespace BetterSalesman.iOS
 			UpdateProfileImageView(downloadResult.Image);
 
 			HideHud();
-			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessful;
+			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
 			ShowAlert(uploadCompletedMessage);
 
 			// TODO - reachability error
-			// TODO - scale down image
-			// TODO - update user (like during login)
 			// TODO - add placeholder avatar
-
+			// TODO - verify if User replacement in ServiceProviderUser works as expected
 		}
 						
 		private void UpdateProfileImageView(UIImage image)

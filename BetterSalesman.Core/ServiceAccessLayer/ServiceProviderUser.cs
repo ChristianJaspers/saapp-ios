@@ -148,7 +148,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			var uploadUrl = HttpConfig.ApiBaseAddress + "profile/avatar";
 			var parameterName = "file";
 
-			return await uploader.UploadFileAsync(uploadUrl, localFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
+			var result = await uploader.UploadFileAsync(uploadUrl, localFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
+			if (result.IsSuccess)
+			{
+				DatabaseHelper.Replace<User>(result.User);
+			}
+
+			return result;
 		}
         
         #endregion

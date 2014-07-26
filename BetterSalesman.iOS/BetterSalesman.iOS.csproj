@@ -281,6 +281,7 @@
       <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
     </Compile>
     <Compile Include="src\helpers\ImageDownloader.cs" />
+    <Compile Include="src\helpers\ImageManipulationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
