@@ -27,6 +27,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 			UnknownErrorResult = new FileUploadResult
 			{
+				// TODO - replace with actual unknown error code and localized message
 				Error = new ServiceAccessError(-1000, "Something went wrong. Please try again later.")
 			};
 		}
@@ -45,51 +46,58 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 			try
 			{
-				using (var client = new HttpClient())
-				{
-					client.DefaultRequestHeaders.Add("Authorization", "Token token=\"" + authorizationToken + "\"");
-
-					var boundary = "Upload----" + DateTime.Now.Ticks;
-					using (var content = new MultipartFormDataContent(boundary))
-					{
-						using (var fileStream = new FileStream(localFilePath, FileMode.Open, FileAccess.Read))
-						{
-							var streamContent = new StreamContent(fileStream);
-							streamContent.Headers.Remove(HttpHeaderTitleContentType);
-							streamContent.Headers.Add(HttpHeaderTitleContentType, mimeType);
-
-							var fileName = Path.GetFileName(localFilePath);
-							Debug.WriteLine("File name: " + fileName);
-							content.Add(streamContent, parameterName, fileName);
-
-							if (method.Equals(HttpMethodPost))
-							{
-								using (var response = await client.PostAsync(uploadUrl, content))
-								{
-									return await HandleResponse(response);
-								}
-							}
-							else if (method.Equals(HttpMethodPut))
-							{
-								using (var response = await client.PutAsync(uploadUrl, content))
-								{
-									return await HandleResponse(response);
-								}
-							}
-						}
-					}
-				}
+				return await PerformUploadAsync(uploadUrl, localFilePath, parameterName, mimeType, method);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine("An exception occured during upload: " + e);
 				return UnknownErrorResult;
 			}
-
-			return UnknownErrorResult;
 		}
 
-		private async Task<FileUploadResult> HandleResponse(HttpResponseMessage response)
+		private async Task<FileUploadResult> PerformUploadAsync(string uploadUrl, string localFilePath, string parameterName, string mimeType, string method)
+		{
+			using (var client = new HttpClient())
+			{
+				client.DefaultRequestHeaders.Add("Authorization", "Token token=\"" + authorizationToken + "\"");
+
+				var boundary = "Upload----" + DateTime.Now.Ticks;
+				using (var content = new MultipartFormDataContent(boundary))
+				{
+					using (var fileStream = new FileStream(localFilePath, FileMode.Open, FileAccess.Read))
+					{
+						var streamContent = new StreamContent(fileStream);
+						streamContent.Headers.Remove(HttpHeaderTitleContentType);
+						streamContent.Headers.Add(HttpHeaderTitleContentType, mimeType);
+
+						var fileName = Path.GetFileName(localFilePath);
+						Debug.WriteLine("File name: " + fileName);
+						content.Add(streamContent, parameterName, fileName);
+
+						if (method.Equals(HttpMethodPost))
+						{
+							using (var response = await client.PostAsync(uploadUrl, content))
+							{
+								return await HandleResponseAsync(response);
+							}
+						}
+						else if (method.Equals(HttpMethodPut))
+						{
+							using (var response = await client.PutAsync(uploadUrl, content))
+							{
+								return await HandleResponseAsync(response);
+							}
+						}
+						else
+						{
+							return UnknownErrorResult;
+						}
+					}
+				}
+			}
+		}
+
+		private async Task<FileUploadResult> HandleResponseAsync(HttpResponseMessage response)
 		{
 			var responseText = await response.Content.ReadAsStringAsync();
 			var result = new FileUploadResult();

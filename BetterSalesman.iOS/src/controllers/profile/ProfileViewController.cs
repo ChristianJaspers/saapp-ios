@@ -84,7 +84,6 @@ namespace BetterSalesman.iOS
 
 			ShowHud("Uploading image");
 			var result = await uploader.UploadFileAsync(uploadUrl, imageFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
-			Debug.WriteLine("Finished uploading image");
 
 			HideHud();
 
