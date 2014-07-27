@@ -85,6 +85,7 @@ namespace BetterSalesman.iOS
 			var uploadResult = await ServiceProviderUser.Instance.UpdateAvatar(imageFilePath, mimeType);
 			if (!uploadResult.IsSuccess)
 			{
+				await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 				HideHud();
 				ShowAlert(uploadResult.Error.LocalizedMessage);
 				return;
@@ -107,7 +108,7 @@ namespace BetterSalesman.iOS
 			ShowAlert(uploadCompletedMessage);
 
 			// TODO - reachability error
-			// TODO - add placeholder avatar
+			// TODO - add placeholder avatar in offline mode
 			// TODO - verify if User replacement in ServiceProviderUser works as expected
 		}
 						
