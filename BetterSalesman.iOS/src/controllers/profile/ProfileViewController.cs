@@ -91,6 +91,8 @@ namespace BetterSalesman.iOS
 				return;
 			}
 
+			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 
 			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
