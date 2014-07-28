@@ -47,7 +47,7 @@ namespace BetterSalesman.iOS
                         inputEmail.Text, 
                         inputPassword.Text, 
                         result =>
-                        {
+                        {       
                             HideHud();
                             Login();
                         },

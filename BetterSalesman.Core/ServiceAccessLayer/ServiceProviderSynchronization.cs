@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -33,26 +34,29 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         #region Requests
         
         public async void Synchronize(
-            HttpRequestSuccessEventHandler success = null, 
-            HttpRequestFailureEventHandler failure = null
+            Action<T> success = null, 
+            Action<int> failure = null
         )
         {
-            var request = new HttpRequest {
+            var request = new HttpRequest <T> {
                 Method = HTTPMethod.GET,
                 Path = pathSynchronization,
-                Parameters = ParametersWithDeviceInfo(new Dictionary<string, object>())
-            };
-            
-            request.Success += result => {
+                Parameters = ParametersWithDeviceInfo(new Dictionary<string, object>()),
+                Success = response => {
+                    if ( success != null )
+                    {
+                        success(response.MappedResponse);
+                    }
+                },
+                Failure = response => {
 
-                if ( success != null )
-                {
-                    success(result);
+                    if ( failure != null )
+                    {
+                        failure(response.Error.InternalCode);
+                    }
                 }
             };
 
-            request.Failure += failure;
-            
             await request.Perform();
         }
         

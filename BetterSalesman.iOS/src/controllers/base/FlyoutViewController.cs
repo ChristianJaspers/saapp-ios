@@ -40,8 +40,6 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            HttpRequest.AuthorizationToken = UserSessionManager.Instance.User.Token;
-            
             NavigationLayoutInit();
         }
 

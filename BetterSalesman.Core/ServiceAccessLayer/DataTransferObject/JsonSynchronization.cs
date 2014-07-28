@@ -4,7 +4,7 @@ using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.Core.ServiceAccessLayer.DataTransferObject
 {
-    public class JsonSynchronization
+    public class T
     {
         [JsonPropertyAttribute(PropertyName = "users")]
         public List<User> Users;
