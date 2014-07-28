@@ -8,6 +8,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		// TODO - localize with LocalizationProvider and ILocalicationProvider implemented per platform and remove ErrorDescriptionProvider
 		public static ServiceAccessError ErrorUnknown = new ServiceAccessError(-1000, "Something went wrong. Please try again later.");
 		public static ServiceAccessError ErrorFileNotFound = new ServiceAccessError(-1001, "Couldn't find the requested file.");
+		public static ServiceAccessError ErrorHostUnreachable = new ServiceAccessError(-1002, "Can't reach the server. Make sure you have Internet connection and try again.");
 
 		[JsonPropertyAttribute(PropertyName = "code")]
 		public int InternalCode { get; private set; }
