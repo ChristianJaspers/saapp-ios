@@ -5,10 +5,20 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	public class ServiceAccessError
 	{
-		// TODO - localize with LocalizationProvider and ILocalicationProvider implemented per platform and remove ErrorDescriptionProvider
-		public static ServiceAccessError ErrorUnknown = new ServiceAccessError(-1000, "Something went wrong. Please try again later.");
-		public static ServiceAccessError ErrorFileNotFound = new ServiceAccessError(-1001, "Couldn't find the requested file.");
-		public static ServiceAccessError ErrorHostUnreachable = new ServiceAccessError(-1002, "Can't reach the server. Make sure you have Internet connection and try again.");
+		public static ServiceAccessError ErrorUnknown
+		{ 
+			get { return new ServiceAccessError(-1000, Localized("Something went wrong. Please try again later.")); } 
+		}
+
+		public static ServiceAccessError ErrorFileNotFound
+		{
+			get { return new ServiceAccessError(-1001, Localized("Couldn't find the requested file.")); }
+		}
+
+		public static ServiceAccessError ErrorHostUnreachable
+		{
+			get { return new ServiceAccessError(-1002, Localized("Can't reach the server. Make sure you have an active Internet connection and try again.")); }
+		}
 
 		[JsonPropertyAttribute(PropertyName = "code")]
 		public int InternalCode { get; private set; }
@@ -31,6 +41,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		public override string ToString()
 		{
 			return string.Format("[Error] (\n InternalCode = {0},\n  LocalizedMessage = {1}\n)", InternalCode, LocalizedMessage);
+		}
+
+		private static string Localized(string localizationKey)
+		{
+			return Localization.Instance.GetLocalizedText(localizationKey);
 		}
 	}
 }

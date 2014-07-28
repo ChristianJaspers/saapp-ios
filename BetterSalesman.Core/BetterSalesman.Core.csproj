@@ -44,7 +44,6 @@
     <Compile Include="ServiceAccessLayer\BaseServiceProvider.cs" />
     <Compile Include="DataLayer\DatabaseHelper.cs" />
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
-    <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
     <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
     <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
     <Compile Include="BusinessLayer\Report.cs" />
@@ -56,6 +55,8 @@
     <Compile Include="ServiceAccessLayer\ServiceAccessError.cs" />
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonEmpty.cs" />
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs" />
+    <Compile Include="ServiceAccessLayer\ILocalizationProvider.cs" />
+    <Compile Include="ServiceAccessLayer\Localization.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
