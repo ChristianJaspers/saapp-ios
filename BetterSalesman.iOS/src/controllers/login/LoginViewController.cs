@@ -41,7 +41,7 @@ namespace BetterSalesman.iOS
             {
                 if (validator.Validate())
                 {
-                    ShowHud();
+                    ShowHud(I18n.AuthenticationInProgress);
                     
                     ServiceProviderUser.Instance.Authentication(
                         inputEmail.Text, 
@@ -73,7 +73,7 @@ namespace BetterSalesman.iOS
         {
             SynchronizationManagerApplication.Instance.UnsubscribeEvents();
 
-            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud();
+            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
             
             SynchronizationManagerApplication.Instance.FinishedSynchronization += () =>
             {

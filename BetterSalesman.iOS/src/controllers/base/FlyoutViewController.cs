@@ -151,7 +151,7 @@ namespace BetterSalesman.iOS
         {
             SynchronizationManagerApplication.Instance.UnsubscribeEvents();
             
-            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud();
+            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
 
             SynchronizationManagerApplication.Instance.FinishedSynchronization += () => {
                 HideHud();

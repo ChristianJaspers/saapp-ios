@@ -12,7 +12,7 @@
         public static string Logout = "Log out".t();
         
         public static string ErrorConnectionTimeout = "Connection timeout".t();
-
+        
         public static string ErrorFillFields = "Please fill marked fields to continue".t();
         
         public static string FieldEmail = "Email".t();
@@ -22,6 +22,9 @@
         
         public static string Rated = "Rated".t();
         public static string WithoutRating = "Without rating".t();
+
+        public static string AuthenticationInProgress = "Authenticating...".t();
+        public static string DataSynchronization = "Data synchronization...".t();
 
 		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
 		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
