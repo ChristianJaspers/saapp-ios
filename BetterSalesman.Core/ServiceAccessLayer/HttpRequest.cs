@@ -35,6 +35,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         public event HttpRequestSuccessEventHandler Success;
         public event HttpRequestFailureEventHandler Failure;
+        
+        const string ContentType = "application/json";
 
         public async Task<string> Perform()
         {
@@ -103,7 +105,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            var content = new StringContent(serializedParameters, Encoding.UTF8, "application/json");
+            var content = new StringContent(serializedParameters, Encoding.UTF8, ContentType);
             
             try
             {
@@ -125,7 +127,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             string result = null;
 
-            var content = new StringContent(serializedParameters, Encoding.UTF8, "application/json");
+            var content = new StringContent(serializedParameters, Encoding.UTF8, ContentType);
 
             try
             {

@@ -6,9 +6,11 @@ using XValidator;
 namespace BetterSalesman.iOS
 {
     public partial class LoginViewController : BaseUIViewController
-    {   
+    {
         const string sequeIdLogged = "LoggedSeque";
-        public LoginViewController(IntPtr handle) : base(handle)
+
+        public LoginViewController(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -37,7 +39,7 @@ namespace BetterSalesman.iOS
             
             loginButton.TouchUpInside += (sender, e) =>
             {
-                if ( validator.Validate() )
+                if (validator.Validate())
                 {
                     ShowHud();
                     
@@ -48,7 +50,6 @@ namespace BetterSalesman.iOS
                         {
                             HideHud();
                             Login();
-//                            UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
                         },
                         errorCode =>
                         {
@@ -56,10 +57,9 @@ namespace BetterSalesman.iOS
                             ShowAlert(I18n.ErrorConnectionTimeout);
                         }
                     );
-                }
-                else
+                } else
                 {
-                    ShowAlert(string.Join("\n",validator.Errors));
+                    ShowAlert(string.Join("\n", validator.Errors));
                 }
             };
             
@@ -68,10 +68,21 @@ namespace BetterSalesman.iOS
                 Login();
             }
         }
-        
+
         void Login()
         {
-            PerformSegue(sequeIdLogged, this);
+            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
+
+            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud();
+            
+            SynchronizationManagerApplication.Instance.FinishedSynchronization += () =>
+            {
+                HideHud();
+                PerformSegue(sequeIdLogged, this);
+            };
+
+            SynchronizationManagerApplication.Instance.Synchronize();
+            
         }
     }
 }
