@@ -101,12 +101,15 @@ namespace BetterSalesman.iOS
 		/// NOTE! Use this method only to remove the files that were created using SaveImageToTemporaryFilePng with the path returned by that method.
 		/// </summary>
 		/// <param name="temporaryFilePath">Temporary file path.</param>
-		public void RemoveTemporaryFile(string temporaryFilePath)
+		public async Task RemoveTemporaryFile(string temporaryFilePath)
 		{
-			if (File.Exists(temporaryFilePath))
+			await Task.Run(() =>
 			{
-				File.Delete(temporaryFilePath);
-			}
+				if (File.Exists(temporaryFilePath))
+				{
+					File.Delete(temporaryFilePath);
+				}
+			});
 		}
 	}
 }
