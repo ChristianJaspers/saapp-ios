@@ -34,8 +34,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				return new FileUploadResult(ServiceAccessError.ErrorFileNotFound);
 			}
 
-			// TODO - check network availability
-
 			try
 			{
 				return await PerformUploadAsync(uploadUrl, localFilePath, parameterName, mimeType, method);
@@ -43,6 +41,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			catch (Exception e)
 			{
 				Debug.WriteLine("An exception occured during upload: " + e);
+
 				return new FileUploadResult(ServiceAccessError.ErrorUnknown);
 			}
 		}

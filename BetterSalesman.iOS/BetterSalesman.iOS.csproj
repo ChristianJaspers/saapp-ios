@@ -225,9 +225,6 @@
     <Compile Include="src\helpers\ImageFilesManagementHelper.cs" />
     <Compile Include="src\helpers\ImagePickerPresenter.cs" />
     <Compile Include="src\helpers\Reachability.cs" />
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ErrorDescriptionProvider.cs">
-      <Link>ServiceAccessLayer\ErrorDescriptionProvider.cs</Link>
-    </Compile>
     <Compile Include="src\controllers\base\MainViewController.cs" />
     <Compile Include="src\controllers\base\MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
@@ -282,6 +279,13 @@
     </Compile>
     <Compile Include="src\helpers\ImageDownloader.cs" />
     <Compile Include="src\helpers\ImageManipulationHelper.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ILocalizationProvider.cs">
+      <Link>ServiceAccessLayer\ILocalizationProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\Localization.cs">
+      <Link>ServiceAccessLayer\Localization.cs</Link>
+    </Compile>
+    <Compile Include="src\helpers\IosLocalizationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
