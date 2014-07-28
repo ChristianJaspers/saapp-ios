@@ -45,32 +45,14 @@ namespace BetterSalesman.iOS
 			LoadUser();
 		}
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-
-            // TODO indicator if needed?
-//            ShowHud();
-			ServiceProviderUser.Instance.Profile(async result =>
-				{
-					await UserSessionManager.Instance.FetchUser(obj =>
-					{
-                        LoadUser();
-                    });
-
-                    // TODO indicator if needed?
-//                    HideHud(); 
-				},
-				errorCode =>
-				{
-                    // TODO indicator if needed?
-//                    HideHud(); 
-					ShowAlert(I18n.ErrorConnectionTimeout);
-				});
-		}
-
 		private async Task UploadImage(UIImage image)
 		{
+			if (!Reachability.IsHostReachable(HttpConfig.Host))
+			{
+				ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+				return;
+			}
+
 			ShowHud(I18n.ServiceAccessProfilePictureUpdatingProfilePicture);
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePicturePreparingForUploadMessage);
 
@@ -109,9 +91,7 @@ namespace BetterSalesman.iOS
 			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
 			ShowAlert(uploadCompletedMessage);
 
-			// TODO - reachability error
 			// TODO - add placeholder avatar in offline mode
-			// TODO - verify if User replacement in ServiceProviderUser works as expected
 		}
 						
 		private void UpdateProfileImageView(UIImage image)
