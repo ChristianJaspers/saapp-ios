@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.DataLayer;
+using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
