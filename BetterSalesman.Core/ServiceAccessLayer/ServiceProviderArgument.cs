@@ -60,6 +60,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     if ( success != null )
                     {
                         success(string.Empty);
+                        
+                        
                     }
                 },
                 Failure = response => {

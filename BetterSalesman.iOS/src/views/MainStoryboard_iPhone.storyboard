@@ -211,7 +211,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="admin@example.com" borderStyle="roundedRect" placeholder="E-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YtV-5J-KgG">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wojtowicz.bartlomiej@gmail.com" borderStyle="roundedRect" placeholder="E-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YtV-5J-KgG">
                                 <rect key="frame" x="20" y="145" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="pTF-Jt-XW6"/>
@@ -219,7 +219,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345678" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4R-hB-Y3J">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="87654321" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4R-hB-Y3J">
                                 <rect key="frame" x="20" y="183" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ubz-Oc-Ymh"/>
@@ -440,7 +440,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Fmo-Ad-ZH5">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Fmo-Ad-ZH5">
                                 <rect key="frame" x="20" y="520" width="280" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="kZw-U1-izL"/>
@@ -516,6 +516,11 @@
                     <connections>
                         <outlet property="labelBenefit" destination="44" id="name-outlet-44"/>
                         <outlet property="labelFeature" destination="43" id="name-outlet-43"/>
+                        <outlet property="chooseRating" destination="Fmo-Ad-ZH5" id="name-outlet-Fmo-Ad-ZH5"/>
+                        <outlet property="labelEarnXPForVote" destination="uig-iu-MtS" id="name-outlet-uig-iu-MtS"/>
+                        <outlet property="labelHowRelevant" destination="XPW-Ni-hk7" id="name-outlet-XPW-Ni-hk7"/>
+                        <outlet property="labelDescriptionBenefit" destination="Rnd-7g-C6q" id="name-outlet-Rnd-7g-C6q"/>
+                        <outlet property="labelDescriptionFeature" destination="KE7-qd-Yg3" id="name-outlet-KE7-qd-Yg3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SdD-zD-cjP" userLabel="First Responder" sceneMemberID="firstResponder"/>

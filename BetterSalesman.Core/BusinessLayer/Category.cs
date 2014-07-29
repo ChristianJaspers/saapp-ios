@@ -14,6 +14,9 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "position")]
         public string Position { get; set; }
         
+        [JsonPropertyAttribute(PropertyName = "color_hex")]
+        public string ColorHex { get; set; }
+        
         [JsonPropertyAttribute(PropertyName = "name")]
         public string Name { get; set; }
 	}

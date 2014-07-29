@@ -24,6 +24,10 @@ namespace BetterSalesman.iOS
             
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
+            
+            chooseRating.ValueChanged += (sender, e) => {
+                Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment );
+            };
         }
         
         #endregion

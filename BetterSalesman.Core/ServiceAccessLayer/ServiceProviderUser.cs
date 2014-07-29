@@ -42,7 +42,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                 return instance;
             }
-        }
+        } 
         
         #region Requests
         

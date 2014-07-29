@@ -16,21 +16,61 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UISegmentedControl chooseRating { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelBenefit { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelDescriptionBenefit { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelDescriptionFeature { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelEarnXPForVote { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelFeature { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelHowRelevant { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (chooseRating != null) {
+				chooseRating.Dispose ();
+				chooseRating = null;
+			}
 			if (labelBenefit != null) {
 				labelBenefit.Dispose ();
 				labelBenefit = null;
 			}
+			if (labelDescriptionBenefit != null) {
+				labelDescriptionBenefit.Dispose ();
+				labelDescriptionBenefit = null;
+			}
+			if (labelDescriptionFeature != null) {
+				labelDescriptionFeature.Dispose ();
+				labelDescriptionFeature = null;
+			}
+			if (labelEarnXPForVote != null) {
+				labelEarnXPForVote.Dispose ();
+				labelEarnXPForVote = null;
+			}
 			if (labelFeature != null) {
 				labelFeature.Dispose ();
 				labelFeature = null;
+			}
+			if (labelHowRelevant != null) {
+				labelHowRelevant.Dispose ();
+				labelHowRelevant = null;
 			}
 		}
 	}
