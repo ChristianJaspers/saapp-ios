@@ -5,7 +5,7 @@ using BetterSalesman.Core.BusinessLayer.Contracts;
 
 namespace BetterSalesman.Core.BusinessLayer
 {
-    public class Category : IBusinessEntity
+    public class ProductGroup : IBusinessEntity
 	{
         [PrimaryKey]
         [JsonPropertyAttribute(PropertyName = "id")]

@@ -11,8 +11,8 @@ namespace BetterSalesman.Core.BusinessLayer
         [JsonPropertyAttribute(PropertyName = "id")]
         public int Id { get; set; }
 
-        [JsonPropertyAttribute(PropertyName = "category_id")]
-        public int CategoryId { get; set; }
+        [JsonPropertyAttribute(PropertyName = "product_group_id")]
+        public int ProductGroupId { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "feature")]
         public string Feature { get; set; }
@@ -22,6 +22,9 @@ namespace BetterSalesman.Core.BusinessLayer
 
         [JsonPropertyAttribute(PropertyName = "rating")]
         public int Rating { get; set; }
+        
+        [JsonPropertyAttribute(PropertyName = "my_rating")]
+        public int MyRating { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "created_at")]
         public DateTime CreatedAt { get; set; }
