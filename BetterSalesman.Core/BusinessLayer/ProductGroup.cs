@@ -5,7 +5,7 @@ using BetterSalesman.Core.BusinessLayer.Contracts;
 
 namespace BetterSalesman.Core.BusinessLayer
 {
-    public class Category : IBusinessEntity
+    public class ProductGroup : IBusinessEntity
 	{
         [PrimaryKey]
         [JsonPropertyAttribute(PropertyName = "id")]
@@ -13,6 +13,9 @@ namespace BetterSalesman.Core.BusinessLayer
         
         [JsonPropertyAttribute(PropertyName = "position")]
         public string Position { get; set; }
+        
+        [JsonPropertyAttribute(PropertyName = "color_hex")]
+        public string ColorHex { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "name")]
         public string Name { get; set; }

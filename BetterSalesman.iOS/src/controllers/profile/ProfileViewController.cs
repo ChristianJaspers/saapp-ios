@@ -79,13 +79,13 @@ namespace BetterSalesman.iOS
 			}
 
 			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-			DisplayAvatarPlaceholderInProfileImageView();
 
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 
 			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
 			if (!downloadResult.IsSuccess)
 			{
+				DisplayAvatarPlaceholderInProfileImageView();
 				HideHud();
 				ShowAlert(uploadResult.Error.LocalizedMessage);
 				return;

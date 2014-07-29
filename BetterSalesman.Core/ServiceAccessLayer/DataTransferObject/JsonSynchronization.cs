@@ -10,7 +10,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer.DataTransferObject
         public List<User> Users;
 
         [JsonPropertyAttribute(PropertyName = "categories")]
-        public List<Category> Categories;
+        public List<ProductGroup> Categories;
 
         [JsonPropertyAttribute(PropertyName = "arguments")]
         public List<Argument> Arguments;

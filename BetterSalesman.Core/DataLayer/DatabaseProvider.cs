@@ -185,7 +185,7 @@ namespace BetterSalesman.Core.DataLayer
             Debug.WriteLine("DB create if not exists");
 
             connection.CreateTable<User>();
-            connection.CreateTable<Category>();
+            connection.CreateTable<ProductGroup>();
             connection.CreateTable<Argument>();
 
             Debug.WriteLine("DB ready to rumble if not exists");

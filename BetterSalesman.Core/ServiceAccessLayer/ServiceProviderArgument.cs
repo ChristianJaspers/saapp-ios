@@ -12,11 +12,10 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         private static object locker = new Object();
         
         // Parameters
-        const string paramArgumentId = "argument_id";
         const string paramRateValue = "rating";
         
         // Paths
-        const string pathRate = "api/v1/argument/rate";
+        const string pathRate = "api/v1/arguments/{0}/rating";
         
         public static ServiceProviderArgument Instance
         {
@@ -45,13 +44,12 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         )
         {
             var parameters = new Dictionary<string, object> {
-                {paramArgumentId,argument.Id},
                 {paramRateValue,rating}
             };
 
             var request = new HttpRequest <ResponseJsonArgumentRating> {
                 Method = HTTPMethod.POST,
-                Path = pathRate,
+                Path = string.Format(pathRate,argument.Id),
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
 
@@ -60,6 +58,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     if ( success != null )
                     {
                         success(string.Empty);
+                        
+                        
                     }
                 },
                 Failure = response => {
