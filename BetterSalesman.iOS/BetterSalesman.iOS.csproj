@@ -285,6 +285,12 @@
     </Compile>
     <Compile Include="src\helpers\ImageDownloader.cs" />
     <Compile Include="src\helpers\ImageManipulationHelper.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonEmpty.cs">
+      <Link>ServiceAccessLayer\DataTransferObject\JsonEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs">
+      <Link>ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs</Link>
+    </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ILocalizationProvider.cs">
       <Link>ServiceAccessLayer\ILocalizationProvider.cs</Link>
     </Compile>

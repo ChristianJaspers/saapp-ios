@@ -57,7 +57,7 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         /// <param name = "containerData">Contains DTO object to save</param>
         /// <param name="filePath">Path to database file.</param>
-        public static void FullSync(JsonSynchronization containerData, string filePath = "")
+        public static void FullSync(T containerData, string filePath = "")
         {
             // TODO - remove stopwatch code
             Debug.WriteLine("In Full sync");
@@ -144,7 +144,7 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Saves the data from memory.
         /// </summary>
-        private static void SaveDataFromMemory(JsonSynchronization containerData)
+        private static void SaveDataFromMemory(T containerData)
         {
             // TODO
 //            if (eventData == null)
@@ -193,7 +193,7 @@ namespace BetterSalesman.Core.DataLayer
         }
 
         // TODO fill container with data
-        private static void InsertRecords(SQLiteConnection connection, JsonSynchronization containerData)
+        private static void InsertRecords(SQLiteConnection connection, T containerData)
         {
             DatabaseHelper.ReplaceAll(containerData.Users,connection);
             DatabaseHelper.ReplaceAll(containerData.Categories,connection);

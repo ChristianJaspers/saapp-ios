@@ -77,5 +77,18 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 user = value;   
             }
         }
+        
+        public string AccessToken
+        {
+            get 
+            {
+                if ( user != null )
+                {
+                    return user.Token;
+                }
+                
+                return string.Empty;
+            }
+        }
     }
 }

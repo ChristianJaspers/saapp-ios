@@ -43,11 +43,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public override void FullSynchronizationTaskRun()
         {
             ServiceProviderSynchronization.Instance.Synchronize(
-                async result => {
+                result => {
                 
-                    var dataContainer = await ParseJsonAsync(result);  
-                
-                    await UpdateDatabaseAsync(dataContainer);
+                    UpdateDatabaseAsync(result);
                 
                     OnUpdatedDatabase();
                 
@@ -67,38 +65,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             });
         }
 
-        private async Task<JsonSynchronization> ParseJsonAsync(string eventJson)
-        {
-            Debug.WriteLine("Started JSON deserialization");
-            JsonSynchronization result = await Task.Run<JsonSynchronization>(() =>
-                {
-                    List<string> errors = new List<string>();
-                    JsonSerializerSettings jsonSerializationSettings = new JsonSerializerSettings
-                        {
-                            Error = (sender, args) =>
-                                {
-                                    errors.Add(args.ErrorContext.Error.Message);
-                                    args.ErrorContext.Handled = true;
-                                }
-                        };
-
-                    JsonSynchronization eventObject = JsonConvert.DeserializeObject<JsonSynchronization>(eventJson, jsonSerializationSettings);
-
-                    if (errors.Any())
-                    {
-                        Debug.WriteLine("Error! There was an error while deserializing JSON");
-                        Debug.WriteLine("Errors details: " + string.Join(", ", errors));
-                        eventObject = null;
-                    }
-
-                    return eventObject;
-                });
-            Debug.WriteLine("Finished JSON deserialization");
-
-            return result;
-        }
-
-        private async Task UpdateDatabaseAsync(JsonSynchronization dataContainer)
+        private async Task UpdateDatabaseAsync(T dataContainer)
         {
             await Task.Run(() =>
                 {

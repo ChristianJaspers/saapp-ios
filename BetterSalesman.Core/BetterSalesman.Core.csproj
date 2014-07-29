@@ -53,6 +53,8 @@
     <Compile Include="ServiceAccessLayer\SynchronizationManagerApplication.cs" />
     <Compile Include="ServiceAccessLayer\HttpClientFileUploader.cs" />
     <Compile Include="ServiceAccessLayer\ServiceAccessError.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonEmpty.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs" />
     <Compile Include="ServiceAccessLayer\ILocalizationProvider.cs" />
     <Compile Include="ServiceAccessLayer\Localization.cs" />
   </ItemGroup>
