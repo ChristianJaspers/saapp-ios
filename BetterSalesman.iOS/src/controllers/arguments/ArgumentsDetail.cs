@@ -5,10 +5,11 @@ using System.Diagnostics;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
-	public partial class ArgumentsDetail : UIViewController
+    public partial class ArgumentsDetail : BaseUIViewController
 	{
         public Argument Argument;
         
@@ -25,12 +26,35 @@ namespace BetterSalesman.iOS
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
             
-            chooseRating.ValueChanged += (sender, e) => {
+            if (Argument.MyRating > 0)
+            {
+                chooseRating.Enabled = false;
+            } 
+            else
+            {
+                chooseRating.ValueChanged += (sender, e) =>
+                {
+                    ShowHud(I18n.Sending);
                 
-                // TODO request goes here
-                    // if success / disable 
-                Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment );
-            };
+                    ServiceProviderArgument.Instance.Rate(
+                        Argument,
+                        chooseRating.SelectedSegment + 1,
+                        success =>
+                        {
+                    
+                            HideHud();
+                            chooseRating.Enabled = false;
+                        },
+                        error =>
+                        {
+                            HideHud();
+                            ShowAlert(I18n.ErrorConnectionTimeout);
+                        }
+                    );
+                
+                    Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment);
+                };
+            }
         }
         
         #endregion

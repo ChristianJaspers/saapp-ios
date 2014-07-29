@@ -240,7 +240,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         async void ResultErrorMessage(HttpRequestResult<T> result, string resultString)
         {
             var errorJson = await ParseJsonAsync<JsonErrorResponse>(resultString);
-            var isKnownError = errorJson.Error != null;
+            var isKnownError = errorJson != null && errorJson.Error != null;
             if (isKnownError)
             {
                 result.Error = errorJson.Error;
