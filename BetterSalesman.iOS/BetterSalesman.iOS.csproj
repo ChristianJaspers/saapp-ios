@@ -146,6 +146,12 @@
     <BundleResource Include="Resources\profile_mock.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\main\avatar_placeholder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\main\avatar_placeholder%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -313,6 +319,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="src\views\components\" />
     <Folder Include="ServiceAccessLayer\DataTransferObject\" />
+    <Folder Include="Resources\main\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
