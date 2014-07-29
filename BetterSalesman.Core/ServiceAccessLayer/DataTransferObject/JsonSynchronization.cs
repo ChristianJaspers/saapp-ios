@@ -14,9 +14,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer.DataTransferObject
 
         [JsonPropertyAttribute(PropertyName = "arguments")]
         public List<Argument> Arguments;
-
-        [JsonPropertyAttribute(PropertyName = "reports")]
-        public List<Report> Reports;
     }
 }
 

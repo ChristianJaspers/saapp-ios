@@ -186,7 +186,6 @@ namespace BetterSalesman.Core.DataLayer
 
             connection.CreateTable<User>();
             connection.CreateTable<Category>();
-            connection.CreateTable<Report>();
             connection.CreateTable<Argument>();
 
             Debug.WriteLine("DB ready to rumble if not exists");
@@ -197,7 +196,6 @@ namespace BetterSalesman.Core.DataLayer
         {
             DatabaseHelper.ReplaceAll(containerData.Users,connection);
             DatabaseHelper.ReplaceAll(containerData.Categories,connection);
-            DatabaseHelper.ReplaceAll(containerData.Reports,connection);
             DatabaseHelper.ReplaceAll(containerData.Arguments,connection);
         }
     }

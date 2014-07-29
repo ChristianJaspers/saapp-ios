@@ -20,23 +20,23 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel displayNameLabel { get; set; }
+		UILabel labelAllTeamsActivity { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel labelActivityAllTeams { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel labelActivityMy { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel labelActivityMyTeam { get; set; }
+		UILabel labelDisplayName { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelExperience { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelMyActivity { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelMyTeamActivity { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -52,25 +52,25 @@ namespace BetterSalesman.iOS
 				BackButton.Dispose ();
 				BackButton = null;
 			}
-			if (displayNameLabel != null) {
-				displayNameLabel.Dispose ();
-				displayNameLabel = null;
+			if (labelAllTeamsActivity != null) {
+				labelAllTeamsActivity.Dispose ();
+				labelAllTeamsActivity = null;
 			}
-			if (labelActivityAllTeams != null) {
-				labelActivityAllTeams.Dispose ();
-				labelActivityAllTeams = null;
-			}
-			if (labelActivityMy != null) {
-				labelActivityMy.Dispose ();
-				labelActivityMy = null;
-			}
-			if (labelActivityMyTeam != null) {
-				labelActivityMyTeam.Dispose ();
-				labelActivityMyTeam = null;
+			if (labelDisplayName != null) {
+				labelDisplayName.Dispose ();
+				labelDisplayName = null;
 			}
 			if (labelExperience != null) {
 				labelExperience.Dispose ();
 				labelExperience = null;
+			}
+			if (labelMyActivity != null) {
+				labelMyActivity.Dispose ();
+				labelMyActivity = null;
+			}
+			if (labelMyTeamActivity != null) {
+				labelMyTeamActivity.Dispose ();
+				labelMyTeamActivity = null;
 			}
 			if (ProfileImageEditButton != null) {
 				ProfileImageEditButton.Dispose ();
