@@ -143,7 +143,6 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\ic_menu.png" />
     <BundleResource Include="Resources\ic_menu%402x.png" />
-    <BundleResource Include="Resources\profile_mock.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
     <BundleResource Include="Resources\main\avatar_placeholder.png">
