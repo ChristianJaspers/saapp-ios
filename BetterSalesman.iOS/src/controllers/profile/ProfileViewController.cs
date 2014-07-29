@@ -74,6 +74,7 @@ namespace BetterSalesman.iOS
 			}
 
 			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+			DisplayAvatarPlaceholderInProfileImageView();
 
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 
@@ -102,6 +103,14 @@ namespace BetterSalesman.iOS
 				{
 					ProfileImageView.Image = image;
 				}
+			});
+		}
+
+		private void DisplayAvatarPlaceholderInProfileImageView()
+		{
+			InvokeOnMainThread(() =>
+			{
+				ProfileImageView.Image = UIImage.FromBundle("avatar_placeholder.png");
 			});
 		}
 
