@@ -91,8 +91,6 @@ namespace BetterSalesman.iOS
 			HideHud();
 			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
 			ShowAlert(uploadCompletedMessage);
-
-			// TODO - add placeholder avatar in offline mode
 		}
 						
 		private void UpdateProfileImageView(UIImage image)
