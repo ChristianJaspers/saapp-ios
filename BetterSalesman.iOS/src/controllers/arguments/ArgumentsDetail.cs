@@ -6,6 +6,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
@@ -26,7 +27,7 @@ namespace BetterSalesman.iOS
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
             
-            if (Argument.MyRating > 0)
+            if ( Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id )
             {
                 chooseRating.Enabled = false;
             } 

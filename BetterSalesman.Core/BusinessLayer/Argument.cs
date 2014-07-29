@@ -13,6 +13,9 @@ namespace BetterSalesman.Core.BusinessLayer
 
         [JsonPropertyAttribute(PropertyName = "product_group_id")]
         public int ProductGroupId { get; set; }
+        
+        [JsonPropertyAttribute(PropertyName = "user_id")]
+        public int UserId { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "feature")]
         public string Feature { get; set; }
