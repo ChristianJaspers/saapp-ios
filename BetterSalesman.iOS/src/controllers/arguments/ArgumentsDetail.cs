@@ -24,8 +24,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            labelFeature.Text = Argument.Feature;
-            labelBenefit.Text = Argument.Benefit;
+            updateView();
             
             if ( Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id )
             {
@@ -46,11 +45,11 @@ namespace BetterSalesman.iOS
                     ServiceProviderArgument.Instance.Rate(
                         Argument,
                         chooseRating.SelectedSegment + 1,
-                        success =>
+                        updatedArgument =>
                         {
-                    
+                            Argument = updatedArgument;
+                            updateView();
                             HideHud();
-                            chooseRating.Enabled = false;
                         },
                         error =>
                         {
@@ -61,6 +60,17 @@ namespace BetterSalesman.iOS
                 
                     Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment);
                 };
+            }
+        }
+        
+        void updateView()
+        {
+            labelFeature.Text = Argument.Feature;
+            labelBenefit.Text = Argument.Benefit;
+            
+            if (Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id)
+            {
+                chooseRating.Enabled = false;
             }
         }
         
