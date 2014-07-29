@@ -149,6 +149,12 @@ namespace BetterSalesman.iOS
 
         void Synchronization()
         {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
             SynchronizationManagerApplication.Instance.UnsubscribeEvents();
             
             SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);

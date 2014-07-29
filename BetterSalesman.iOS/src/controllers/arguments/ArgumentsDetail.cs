@@ -35,6 +35,12 @@ namespace BetterSalesman.iOS
             {
                 chooseRating.ValueChanged += (sender, e) =>
                 {
+                    if (!IsNetworkAvailable())
+                    {
+                        ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                        return;
+                    }
+                        
                     ShowHud(I18n.Sending);
                 
                     ServiceProviderArgument.Instance.Rate(
