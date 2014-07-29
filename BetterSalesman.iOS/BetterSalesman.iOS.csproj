@@ -253,14 +253,8 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderSynchronization.cs">
       <Link>ServiceAccessLayer\ServiceProviderSynchronization.cs</Link>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Report.cs">
-      <Link>BusinessLayer\Report.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\Extensions\ArgumentsExtensions.cs">
       <Link>Extensions\ArgumentsExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Category.cs">
-      <Link>BusinessLayer\Category.cs</Link>
     </Compile>
     <Compile Include="src\views\components\XUITextField.cs" />
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerApplication.cs">
@@ -300,6 +294,9 @@
     <Compile Include="src\helpers\IosLocalizationProvider.cs" />
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderArgument.cs">
       <Link>ServiceAccessLayer\ServiceProviderArgument.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\ProductGroup.cs">
+      <Link>BusinessLayer\ProductGroup.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

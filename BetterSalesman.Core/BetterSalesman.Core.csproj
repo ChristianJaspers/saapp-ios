@@ -46,7 +46,6 @@
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
     <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
     <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
-    <Compile Include="BusinessLayer\Report.cs" />
     <Compile Include="Extensions\ArgumentsExtensions.cs" />
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs" />
     <Compile Include="ServiceAccessLayer\SynchronizationManagerApplication.cs" />

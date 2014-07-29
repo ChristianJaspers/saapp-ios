@@ -11,7 +11,7 @@ namespace BetterSalesman.iOS
 	partial class ProfileViewController : BaseUIViewController
 	{
 		private ImagePickerPresenter imagePickerPresenter;
-		private User user;
+		private string currentProfilePictureUrl = null;
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
@@ -41,13 +41,18 @@ namespace BetterSalesman.iOS
 			{
 				imagePickerPresenter.ShowImagePickerTypeSelection(this);
 			};
+		}
+
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
 
 			LoadUser();
 		}
 
 		private async Task UploadImage(UIImage image)
 		{
-			if (!Reachability.IsHostReachable(HttpConfig.Host))
+			if (!IsNetworkAvailable())
 			{
 				ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
 				return;
@@ -74,13 +79,13 @@ namespace BetterSalesman.iOS
 			}
 
 			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-			DisplayAvatarPlaceholderInProfileImageView();
 
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 
 			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
 			if (!downloadResult.IsSuccess)
 			{
+				DisplayAvatarPlaceholderInProfileImageView();
 				HideHud();
 				ShowAlert(uploadResult.Error.LocalizedMessage);
 				return;
@@ -112,11 +117,65 @@ namespace BetterSalesman.iOS
 			});
 		}
 
-		void LoadUser()
+		private void LoadUser()
 		{
-			user = UserManager.LoggedInUser();
+			var user = UserManager.LoggedInUser();
             
-            displayNameLabel.Text = user.DisplayName;
+			if (user == null)
+			{
+				Debug.WriteLine("Can't display profile information - LoggedInUser is null");
+				return;
+			}
+
+			InvokeOnMainThread(() =>
+			{
+				labelDisplayName.Text = user.DisplayName;
+				labelExperience.Text = user.Experience.ToString();
+				labelMyActivity.Text = user.MyActivity.ToString();
+				labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
+				labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
+			});
+
+			UpdateProfilePicture(user);
+		}
+
+		private void UpdateProfilePicture(User user)
+		{
+			if (!ShouldDownloadProfilePicture(user))
+			{
+				return;
+			}
+
+			if (IsNetworkAvailable())
+			{
+				Task.Run(async () =>
+				{
+					var downloadResult = await ImageDownloader.DownloadImage(user.AvatarThumbUrl);
+					if (downloadResult.IsSuccess)
+					{
+						UpdateProfileImageView(downloadResult.Image);
+						currentProfilePictureUrl = user.AvatarThumbUrl;
+					}
+					else
+					{
+						DisplayAvatarPlaceholderInProfileImageView();
+					}
+				});
+			}
+			else
+			{
+				DisplayAvatarPlaceholderInProfileImageView();
+			}
+		}
+
+		private bool ShouldDownloadProfilePicture(User user)
+		{
+			return currentProfilePictureUrl == null || !currentProfilePictureUrl.Equals(user.AvatarThumbUrl);
+		}
+
+		private bool IsNetworkAvailable()
+		{
+			return Reachability.IsHostReachable(HttpConfig.Host);
 		}
 	}
 }
