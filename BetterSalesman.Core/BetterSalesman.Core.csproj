@@ -57,6 +57,7 @@
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs" />
     <Compile Include="ServiceAccessLayer\ILocalizationProvider.cs" />
     <Compile Include="ServiceAccessLayer\Localization.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

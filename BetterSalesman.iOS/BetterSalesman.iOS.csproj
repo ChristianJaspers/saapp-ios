@@ -292,6 +292,9 @@
       <Link>ServiceAccessLayer\Localization.cs</Link>
     </Compile>
     <Compile Include="src\helpers\IosLocalizationProvider.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderArgument.cs">
+      <Link>ServiceAccessLayer\ServiceProviderArgument.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
