@@ -195,7 +195,7 @@ namespace BetterSalesman.Core.DataLayer
         private static void InsertRecords(SQLiteConnection connection, T containerData)
         {
             DatabaseHelper.ReplaceAll(containerData.Users,connection);
-            DatabaseHelper.ReplaceAll(containerData.Categories,connection);
+            DatabaseHelper.ReplaceAll(containerData.ProductGroups,connection);
             DatabaseHelper.ReplaceAll(containerData.Arguments,connection);
         }
     }
