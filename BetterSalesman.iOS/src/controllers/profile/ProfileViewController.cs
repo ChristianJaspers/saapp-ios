@@ -41,11 +41,6 @@ namespace BetterSalesman.iOS
 			{
 				imagePickerPresenter.ShowImagePickerTypeSelection(this);
 			};
-		}
-
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
 
 			LoadUser();
 		}
