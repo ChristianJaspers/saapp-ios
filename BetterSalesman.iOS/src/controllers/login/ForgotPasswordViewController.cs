@@ -22,7 +22,9 @@ namespace BetterSalesman.iOS
                         Name = I18n.FieldEmail,
                         FieldView = inputEmail,
                         Validators = new [] {
-                            new XValidatorRequired()
+                            new XValidatorRequired {
+                                Message = I18n.ValidationRequired
+                            }
                         },
                     }
                 }

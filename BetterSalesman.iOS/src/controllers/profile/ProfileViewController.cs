@@ -6,10 +6,11 @@ using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.Threading.Tasks;
+using XValidator;
 
 namespace BetterSalesman.iOS
 {
-	partial class ProfileViewController : BaseUIViewController
+    partial class ProfileViewController : BaseUIViewController
 	{
 		private ImagePickerPresenter imagePickerPresenter;
 		private string currentProfilePictureUrl = null;
@@ -35,15 +36,11 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidLoad();
 
-			BackButton.Clicked += (sender, e) =>
-			{
-				DismissViewController (true, null);
-			};
+			BackButton.Clicked += (s, e) => DismissViewController(true, null);
+            
+            buttonPasswordChange.Clicked += (s, e) => DisplayPasswordChange(string.Empty,true);
 
-			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
-			{
-				imagePickerPresenter.ShowImagePickerTypeSelection(this);
-			};
+			ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
 			LoadUser();
 		}
@@ -171,5 +168,73 @@ namespace BetterSalesman.iOS
 		{
 			return currentProfilePictureUrl == null || !currentProfilePictureUrl.Equals(user.AvatarThumbUrl);
 		}
+        
+        #region Password change
+        
+        XForm<UITextField> validator;
+
+        void DisplayPasswordChange(string defaultPassword = "",bool firstTime = false)
+        {   
+            UIAlertView alert = new UIAlertView(I18n.ProvideNewPassword, I18n.ProvideNewPasswordRequirement, null, I18n.OK, I18n.Cancel);
+            
+            alert.AlertViewStyle = UIAlertViewStyle.SecureTextInput;
+            
+            var passwordField = alert.GetTextField(0);
+            
+            if ( !firstTime )
+            {
+                passwordField.Text = defaultPassword;
+                ValidateField(passwordField);
+            }
+            
+            alert.Clicked += (sender, e) =>
+            {
+                if ( e.ButtonIndex == 0 )
+                {       
+                    if ( ValidateField(passwordField) )
+                    {
+                        UpdatePassword(passwordField.Text);
+                    }
+                    else
+                    {
+                        ShowAlert( string.Join("\n", validator.Errors),() => DisplayPasswordChange(passwordField.Text) );
+                    }
+                }
+            };
+            
+            alert.Show();
+        }
+        
+        bool ValidateField(UITextField field)
+        {
+            validator = new XForm<UITextField> {
+                Inputs = new [] {
+                    new XUITextField {
+                        Name = I18n.FieldPassword,
+                        FieldView = field,
+                        Validators = new [] {
+                            new XValidatorLengthMinimum(5) {
+                                Message = I18n.ValidationLengthMinimum   
+                            }
+                        },
+                    }
+                }
+            };
+            
+            return validator.Validate();
+        }
+        
+        void UpdatePassword(string newPassword)
+        {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
+            // TODO sync call
+        }
+        
+        #endregion
 	}
 }
