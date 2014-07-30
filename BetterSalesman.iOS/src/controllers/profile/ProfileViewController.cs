@@ -1,5 +1,6 @@
 using System;
 using MonoTouch.UIKit;
+using SDWebImage;
 using System.Diagnostics;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
@@ -12,6 +13,8 @@ namespace BetterSalesman.iOS
 	{
 		private ImagePickerPresenter imagePickerPresenter;
 		private string currentProfilePictureUrl = null;
+
+		const string PlaceholderImage = "avatar_placeholder.png";
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
@@ -32,7 +35,7 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidLoad();
 
-			BackButton.TouchUpInside += (sender, e) =>
+			BackButton.Clicked += (sender, e) =>
 			{
 				DismissViewController (true, null);
 			};
@@ -99,6 +102,7 @@ namespace BetterSalesman.iOS
 			{
 				if (image != null)
 				{
+					// TODO use async image loading
 					ProfileImageView.Image = image;
 				}
 			});
@@ -108,7 +112,7 @@ namespace BetterSalesman.iOS
 		{
 			InvokeOnMainThread(() =>
 			{
-				ProfileImageView.Image = UIImage.FromBundle("avatar_placeholder.png");
+				ProfileImageView.Image = UIImage.FromBundle(PlaceholderImage);
 			});
 		}
 

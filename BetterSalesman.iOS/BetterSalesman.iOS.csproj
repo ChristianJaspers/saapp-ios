@@ -145,10 +145,16 @@
     <BundleResource Include="Resources\ic_menu%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
-    <BundleResource Include="Resources\main\avatar_placeholder.png">
+    <BundleResource Include="Resources\avatar_placeholder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\main\avatar_placeholder%402x.png">
+    <BundleResource Include="Resources\avatar_placeholder%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_change_password.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_change_password%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
   </ItemGroup>
@@ -297,6 +303,10 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\ProductGroup.cs">
       <Link>BusinessLayer\ProductGroup.cs</Link>
     </Compile>
+    <Compile Include="src\views\BetterSalesmanViewController.cs" />
+    <Compile Include="src\views\BetterSalesmanViewController.designer.cs">
+      <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -324,7 +334,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="src\views\components\" />
     <Folder Include="ServiceAccessLayer\DataTransferObject\" />
-    <Folder Include="Resources\main\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
