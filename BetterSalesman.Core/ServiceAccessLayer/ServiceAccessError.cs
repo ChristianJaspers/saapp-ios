@@ -7,17 +7,17 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 	{
 		public static ServiceAccessError ErrorUnknown
 		{ 
-			get { return new ServiceAccessError(-1000, Localized("Something went wrong. Please try again later.")); } 
-		}
-
-		public static ServiceAccessError ErrorFileNotFound
-		{
-			get { return new ServiceAccessError(-1001, Localized("Couldn't find the requested file.")); }
+			get { return new ServiceAccessError(2101, Localized("Something went wrong. Please try again later.")); } 
 		}
 
 		public static ServiceAccessError ErrorHostUnreachable
 		{
-			get { return new ServiceAccessError(-1002, Localized("Can't reach the server. Make sure you have an active Internet connection and try again.")); }
+			get { return new ServiceAccessError(2102, Localized("Can't reach the server. Make sure you have an active Internet connection and try again.")); }
+		}
+
+		public static ServiceAccessError ErrorFileNotFound
+		{
+			get { return new ServiceAccessError(2201, Localized("Couldn't find the requested file.")); }
 		}
 
 		[JsonPropertyAttribute(PropertyName = "code")]
