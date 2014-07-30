@@ -6,9 +6,6 @@ using BetterSalesman.Core.DataLayer;
 using System.Threading.Tasks;
 using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
-
-using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
-
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public class ServiceProviderUser : BaseServiceProvider

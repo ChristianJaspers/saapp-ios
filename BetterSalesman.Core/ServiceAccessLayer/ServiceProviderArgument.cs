@@ -59,8 +59,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     if ( success != null )
                     {
                         success(response.MappedResponse.Argument);
-                        
-                        
                     }
                 },
                 Failure = response => {
