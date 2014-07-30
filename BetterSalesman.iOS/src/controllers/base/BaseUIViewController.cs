@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using MBProgressHUD;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -63,6 +64,8 @@ namespace BetterSalesman.iOS
         
         #endregion
         
+        #region Alerts
+        
         protected void ShowAlert(string msg)
         {
             ShowAlert(msg, string.Empty);
@@ -74,6 +77,13 @@ namespace BetterSalesman.iOS
 			{
             	new UIAlertView(title, msg, null, I18n.OK, null).Show();
 			});
+        }
+        
+        #endregion
+        
+        protected bool IsNetworkAvailable()
+        {
+            return Reachability.IsHostReachable(HttpConfig.Host);
         }
     }
 }

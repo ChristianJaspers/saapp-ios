@@ -167,10 +167,5 @@ namespace BetterSalesman.iOS
 		{
 			return currentProfilePictureUrl == null || !currentProfilePictureUrl.Equals(user.AvatarThumbUrl);
 		}
-
-		private bool IsNetworkAvailable()
-		{
-			return Reachability.IsHostReachable(HttpConfig.Host);
-		}
 	}
 }

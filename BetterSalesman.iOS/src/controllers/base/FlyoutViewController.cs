@@ -42,6 +42,13 @@ namespace BetterSalesman.iOS
             
             NavigationLayoutInit();
         }
+        
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            Navigation.SelectedIndex = 1;
+        }
 
         #endregion
         
@@ -120,13 +127,6 @@ namespace BetterSalesman.iOS
             
             return vc;
         }
-        
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-            
-            Navigation.SelectedIndex = 1;
-        }
 
         #endregion
         
@@ -134,6 +134,8 @@ namespace BetterSalesman.iOS
 
         void Profile()
         {
+            Navigation.HideMenu();
+            
             PresentViewControllerWithStoryboardId(storyboardIdProfile);
         }
 
@@ -147,6 +149,12 @@ namespace BetterSalesman.iOS
 
         void Synchronization()
         {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
             SynchronizationManagerApplication.Instance.UnsubscribeEvents();
             
             SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);

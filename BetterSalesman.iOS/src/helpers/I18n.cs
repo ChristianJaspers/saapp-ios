@@ -26,6 +26,8 @@
         public static string AuthenticationInProgress = "Authenticating...".t();
         public static string DataSynchronization = "Data synchronization...".t();
 
+        public static string Sending = "Sending...".t();
+
 		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
 		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
 		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();

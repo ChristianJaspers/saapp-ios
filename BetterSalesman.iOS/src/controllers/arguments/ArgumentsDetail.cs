@@ -5,10 +5,12 @@ using System.Diagnostics;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
-	public partial class ArgumentsDetail : UIViewController
+    public partial class ArgumentsDetail : BaseUIViewController
 	{
         public Argument Argument;
         
@@ -22,15 +24,54 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
+            updateView();
+            
+            if ( Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id )
+            {
+                chooseRating.Enabled = false;
+            } 
+            else
+            {
+                chooseRating.ValueChanged += (sender, e) =>
+                {
+                    if (!IsNetworkAvailable())
+                    {
+                        ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                        return;
+                    }
+                        
+                    ShowHud(I18n.Sending);
+                
+                    ServiceProviderArgument.Instance.Rate(
+                        Argument,
+                        chooseRating.SelectedSegment + 1,
+                        updatedArgument =>
+                        {
+                            Argument = updatedArgument;
+                            updateView();
+                            HideHud();
+                        },
+                        error =>
+                        {
+                            HideHud();
+                            ShowAlert(I18n.ErrorConnectionTimeout);
+                        }
+                    );
+                
+                    Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment);
+                };
+            }
+        }
+        
+        void updateView()
+        {
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
             
-            chooseRating.ValueChanged += (sender, e) => {
-                
-                // TODO request goes here
-                    // if success / disable 
-                Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment );
-            };
+            if (Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id)
+            {
+                chooseRating.Enabled = false;
+            }
         }
         
         #endregion

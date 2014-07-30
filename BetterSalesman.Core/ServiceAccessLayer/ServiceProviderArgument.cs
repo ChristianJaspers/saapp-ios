@@ -39,7 +39,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public async void Rate(
             Argument argument,
             float rating,
-            Action<string> success = null, 
+            Action<Argument> success = null, 
             Action<int> failure = null
         )
         {
@@ -57,7 +57,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                     if ( success != null )
                     {
-                        success(string.Empty);
+                        success(response.MappedResponse.Argument);
                         
                         
                     }

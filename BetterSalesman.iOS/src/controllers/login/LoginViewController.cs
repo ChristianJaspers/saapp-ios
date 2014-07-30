@@ -41,6 +41,12 @@ namespace BetterSalesman.iOS
             {
                 if (validator.Validate())
                 {
+                    if (!IsNetworkAvailable())
+                    {
+                        ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                        return;
+                    }
+                        
                     ShowHud(I18n.AuthenticationInProgress);
                     
                     ServiceProviderUser.Instance.Authentication(
@@ -71,6 +77,12 @@ namespace BetterSalesman.iOS
 
         void Login()
         {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
             SynchronizationManagerApplication.Instance.UnsubscribeEvents();
 
             SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
