@@ -131,11 +131,14 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 {paramPassword,newPassword},
             };
 
-            var request = new HttpRequest <JsonEmpty> {
+            var request = new HttpRequest <ResponseJsonProfile> {
                 Method = HTTPMethod.PUT,
                 Path = pathPassword,
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
+                    
+                    DatabaseHelper.Replace<User>(response.MappedResponse.User);
+                    
                     if ( success != null )
                     {
                         success(string.Empty);

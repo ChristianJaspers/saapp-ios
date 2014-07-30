@@ -54,6 +54,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Success = response => {
 
                     DatabaseHelper.Replace<Argument>(response.MappedResponse.Argument);
+                    DatabaseHelper.Replace<User>(response.MappedResponse.User);
 
                     if ( success != null )
                     {
@@ -78,6 +79,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             [JsonPropertyAttribute(PropertyName = "argument")]
             public Argument Argument;
+            
+            [JsonPropertyAttribute(PropertyName = "user")]
+            public User User;
         }
     }
 }
