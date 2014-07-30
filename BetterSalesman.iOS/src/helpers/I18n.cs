@@ -22,6 +22,8 @@
         public static string ProvideNewPasswordRequirement = "Password must contain at least 5 characters".t();
 
         public static string SuccessMessageForgotPassword = "Email with new password has been sent".t();
+
+        public static string SuccessMessagePasswordChange = "Password has been changed".t();
         
         public static string Rated = "Rated".t();
         public static string WithoutRating = "Without rating".t();

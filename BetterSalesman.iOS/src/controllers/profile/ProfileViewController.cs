@@ -232,7 +232,21 @@ namespace BetterSalesman.iOS
                 return;
             }
             
-            // TODO sync call
+            ShowHud();
+
+            ServiceProviderUser.Instance.PasswordChange(
+                newPassword,
+                result => 
+                {
+                    HideHud();
+                    ShowAlert(I18n.SuccessMessagePasswordChange);
+                },
+                errorCode =>
+                {
+                    HideHud();
+                    ShowAlert(I18n.ErrorConnectionTimeout);
+                }
+            );
         }
         
         #endregion
