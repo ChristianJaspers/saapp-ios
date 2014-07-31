@@ -35,6 +35,8 @@
     <Compile Include="Validators\XValidatorRequired.cs" />
     <Compile Include="XField.cs" />
     <Compile Include="XForm.cs" />
+    <Compile Include="Validators\XValidatorLengthMinimum.cs" />
+    <Compile Include="Validators\XValidatorLengthMaximum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

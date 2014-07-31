@@ -6,9 +6,6 @@ using BetterSalesman.Core.DataLayer;
 using System.Threading.Tasks;
 using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
-
-using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
-
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public class ServiceProviderUser : BaseServiceProvider
@@ -23,7 +20,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         // Paths
         const string pathAuth = "api/v1/auth";
         const string pathProfile = "api/v1/profile";
-        const string pathForgotPassword = "api/v1/passwords";
+        const string pathPassword = "api/v1/passwords";
         
         public static ServiceProviderUser Instance
         {
@@ -101,9 +98,44 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             
             var request = new HttpRequest <JsonEmpty> {
                 Method = HTTPMethod.POST,
-                Path = pathForgotPassword,
+                Path = pathPassword,
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
+                    if ( success != null )
+                    {
+                        success(string.Empty);
+                    }
+                },
+                Failure = response => {
+
+                    if ( failure != null )
+                    {
+                        failure(response.Error.InternalCode);
+                    }
+                }
+            };
+
+            await request.Perform();
+        }
+        
+        public async void PasswordChange(
+            string newPassword,
+            Action<string> success = null, 
+            Action<int> failure = null
+        )
+        {
+            var parameters = new Dictionary<string, object> {
+                {paramPassword,newPassword},
+            };
+
+            var request = new HttpRequest <ResponseJsonProfile> {
+                Method = HTTPMethod.PUT,
+                Path = pathPassword,
+                Parameters = ParametersWithDeviceInfo(parameters),
+                Success = response => {
+                    
+                    DatabaseHelper.Replace<User>(response.MappedResponse.User);
+                    
                     if ( success != null )
                     {
                         success(string.Empty);

@@ -73,10 +73,35 @@ namespace BetterSalesman.iOS
         
         protected void ShowAlert(string msg, string title)
         {
-			InvokeOnMainThread(() =>
-			{
-            	new UIAlertView(title, msg, null, I18n.OK, null).Show();
-			});
+			InvokeOnMainThread(() => new UIAlertView(title, msg, null, I18n.OK, null).Show());
+        }
+        
+        AlertDismissDelegate alertDelegate;
+        
+        protected void ShowAlert(string msg, Action dismissCallback)
+        {
+            InvokeOnMainThread(() => {
+                alertDelegate = new AlertDismissDelegate(dismissCallback);
+                new UIAlertView(string.Empty, msg, alertDelegate, I18n.OK, null).Show();
+            });
+        }
+        
+        class AlertDismissDelegate : UIAlertViewDelegate
+        {
+            public Action DismissCallback;
+            
+            public AlertDismissDelegate(Action dismissCallback)
+            {
+                DismissCallback = dismissCallback;
+            }
+            
+            public override void Dismissed(UIAlertView alertView, int buttonIndex)
+            {
+                if (DismissCallback != null)
+                {
+                    DismissCallback();
+                }
+            }
         }
         
         #endregion

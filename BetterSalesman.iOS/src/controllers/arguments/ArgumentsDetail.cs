@@ -57,8 +57,6 @@ namespace BetterSalesman.iOS
                             ShowAlert(I18n.ErrorConnectionTimeout);
                         }
                     );
-                
-                    Debug.WriteLine("Changed value of rating picker " + chooseRating.SelectedSegment);
                 };
             }
         }
