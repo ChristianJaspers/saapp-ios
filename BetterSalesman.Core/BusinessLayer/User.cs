@@ -27,13 +27,13 @@ namespace BetterSalesman.Core.BusinessLayer
         public int Experience { get; set; }
 
 		[JsonPropertyAttribute(PropertyName = "my_activity")]
-		public int MyActivity { get; set; }
+		public float MyActivity { get; set; }
 
 		[JsonPropertyAttribute(PropertyName = "my_team_activity")]
-		public int MyTeamActivity { get; set; }
+		public float MyTeamActivity { get; set; }
 
 		[JsonPropertyAttribute(PropertyName = "all_teams_activity")]
-		public int AllTeamsActivity { get; set; }
+		public float AllTeamsActivity { get; set; }
         
         public DateTime UpdatedAt { get; set; }
     }
