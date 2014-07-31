@@ -12,14 +12,10 @@ namespace BetterSalesman.iOS
         
         public override void ViewStateError()
         {
-            FieldView.Layer.BorderWidth = 1;
-            FieldView.Layer.BorderColor = UIColor.Red.CGColor;
         }
         
         public override void ViewStateNormal()
         {
-            FieldView.Layer.BorderWidth = 1;
-            FieldView.Layer.BorderColor = UIColor.LightGray.CGColor;
         }
     }
 }

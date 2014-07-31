@@ -11,7 +11,7 @@ namespace BetterSalesman.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        // class-level declarations
+        public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
         public override UIWindow Window
         {
@@ -22,6 +22,8 @@ namespace BetterSalesman.iOS
 		public override bool WillFinishLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			Localization.Instance.Initialize(new IosLocalizationProvider());
+            
+            Window.TintColor = TintColor;
 
 			return true;
 		}

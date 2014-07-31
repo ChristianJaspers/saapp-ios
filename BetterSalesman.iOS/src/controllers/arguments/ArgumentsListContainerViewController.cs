@@ -1,10 +1,10 @@
 using System;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 using BetterSalesman.Core.BusinessLayer;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
@@ -13,6 +13,8 @@ namespace BetterSalesman.iOS
 		private const string SegueIdAddArgumentButton = "segueIdAddArgumentButton";
 		private const string SegueIdProductGroupPickerEmbeded = "segueIdProductGroupPickerSubview";
 		private const string SegueIdProductGroupsListEmbeded = "segueIdArgumentsListSubview";
+
+    	private const string MenuIconName = "ic_menu";
 
 		public ProductGroupsDataSource ProductGroupsDataSource { get; private set; }
 
@@ -24,6 +26,13 @@ namespace BetterSalesman.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+      var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIconName), UIBarButtonItemStyle.Plain, delegate
+          {
+              FlyoutViewController.Navigation.ToggleMenu();
+          });
+
+      NavigationItem.SetLeftBarButtonItem(menuButton, false);
 
 			Task.Run(() =>
 			{

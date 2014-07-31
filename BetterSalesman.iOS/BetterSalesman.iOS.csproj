@@ -141,8 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\ic_menu.png" />
-    <BundleResource Include="Resources\ic_menu%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
     <BundleResource Include="Resources\avatar_placeholder.png">
@@ -157,6 +155,32 @@
     <BundleResource Include="Resources\ic_change_password%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\login_form.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_add%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_menu%402x.png" />
+    <BundleResource Include="Resources\ic_star_unrated.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_unrated%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_rated%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_rated.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -247,10 +271,6 @@
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ArgumentManager.cs">
       <Link>BusinessLayer\Managers\ArgumentManager.cs</Link>
     </Compile>
-    <Compile Include="src\views\SegueNavigationWithoutAnimation.cs" />
-    <Compile Include="src\views\SegueNavigationWithoutAnimation.designer.cs">
-      <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\controllers\base\AppEntryViewController.cs" />
     <Compile Include="src\controllers\base\AppEntryViewController.designer.cs">
       <DependentUpon>AppEntryViewController.cs</DependentUpon>
@@ -326,6 +346,14 @@
     <Compile Include="src\controllers\arguments\ProductGroupsDataSource.cs" />
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ProductGroupManager.cs">
       <Link>BusinessLayer\Managers\ProductGroupManager.cs</Link>
+    </Compile>
+    <Compile Include="src\views\components\UIButtonRounded.cs" />
+    <Compile Include="src\views\components\UIButtonRounded.designer.cs">
+      <DependentUpon>UIButtonRounded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\components\SegueNavigationWithoutAnimation.cs" />
+    <Compile Include="src\views\components\SegueNavigationWithoutAnimation.designer.cs">
+      <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

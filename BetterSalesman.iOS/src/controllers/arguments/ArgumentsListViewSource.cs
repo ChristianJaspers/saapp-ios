@@ -12,6 +12,9 @@ namespace BetterSalesman.iOS
         readonly string cellIdentifierItem = "ArgumentsCell";
         readonly string cellIdentifierHeader = "ArgumentsHeader";
         
+        const string ic_rated = "ic_star_rated";
+        const string ic_unrated = "ic_star_unreated";
+        
         string[] sections = {
             I18n.WithoutRating,
             I18n.Rated
@@ -42,10 +45,18 @@ namespace BetterSalesman.iOS
             
             var titleTxt = (UILabel)cell.ViewWithTag(1);
             
-            // TODO star image here according to section
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
             titleTxt.Text = TitleForHeader(tableView, section);
+            
+            string star_icon;
+            star_icon = ic_rated;
+            if (Items.Count > 1)
+            {
+                star_icon = section == 1 ? ic_rated : ic_unrated;
+            }
+            
+            imageView.Image = UIImage.FromBundle(star_icon);
             
             return cell;
         }
