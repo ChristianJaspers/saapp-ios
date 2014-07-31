@@ -323,6 +323,10 @@
     <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
       <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupsDataSource.cs" />
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ProductGroupManager.cs">
+      <Link>BusinessLayer\Managers\ProductGroupManager.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

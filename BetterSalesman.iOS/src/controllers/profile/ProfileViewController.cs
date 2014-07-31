@@ -56,8 +56,8 @@ namespace BetterSalesman.iOS
 			ShowHud(I18n.ServiceAccessProfilePictureUpdatingProfilePicture);
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePicturePreparingForUploadMessage);
 
-			var maximumImageWithAndHeight = 1024;
-			var downsizedImage = ImageManipulationHelper.ResizeImageToMaximumSize(image, maximumImageWithAndHeight, maximumImageWithAndHeight);
+			var maximumImageWidthAndHeight = 1024;
+			var downsizedImage = ImageManipulationHelper.ResizeImageToMaximumSize(image, maximumImageWidthAndHeight, maximumImageWidthAndHeight);
 
 			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFileJpeg(downsizedImage, 0.75f);
 			var mimeType = "image/jpeg";
@@ -173,7 +173,7 @@ namespace BetterSalesman.iOS
         
         XForm<UITextField> validator;
 
-        void DisplayPasswordChange(string defaultPassword = "",bool firstTime = false)
+        void DisplayPasswordChange(string defaultPassword = "", bool firstTime = false)
         {   
             UIAlertView alert = new UIAlertView(I18n.ProvideNewPassword, I18n.ProvideNewPasswordRequirement, null, I18n.OK, I18n.Cancel);
             

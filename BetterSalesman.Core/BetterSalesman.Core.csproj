@@ -57,6 +57,7 @@
     <Compile Include="ServiceAccessLayer\Localization.cs" />
     <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
     <Compile Include="BusinessLayer\ProductGroup.cs" />
+    <Compile Include="BusinessLayer\Managers\ProductGroupManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
