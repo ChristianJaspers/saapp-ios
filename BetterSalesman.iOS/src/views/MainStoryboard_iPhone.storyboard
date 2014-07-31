@@ -377,7 +377,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Arguments" id="hnM-vT-THZ">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="s3F-kN-Nsu">
+                        <barButtonItem key="rightBarButtonItem" image="ic_add.png" style="plain" id="s3F-kN-Nsu">
                             <connections>
                                 <segue destination="lKl-jK-C5K" kind="push" id="mJU-2O-oQX"/>
                             </connections>
@@ -856,11 +856,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="dXA-F2-FyQ">
-                                            <rect key="frame" x="9" y="7" width="30" height="30"/>
+                                            <rect key="frame" x="20" y="10" width="22" height="22"/>
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.90196084980000002" green="0.90196084980000002" blue="0.90196084980000002" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -876,8 +876,9 @@
     </scenes>
     <resources>
         <image name="avatar_placeholder.png" width="180" height="220"/>
+        <image name="ic_add.png" width="22" height="22"/>
         <image name="ic_change_password.png" width="22" height="22"/>
-        <image name="ic_menu.png" width="44" height="22"/>
+        <image name="ic_menu.png" width="22" height="22"/>
         <image name="login_form.png" width="608" height="128"/>
         <image name="logo.png" width="340" height="80"/>
     </resources>

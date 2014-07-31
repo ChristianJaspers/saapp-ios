@@ -141,8 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\ic_menu.png" />
-    <BundleResource Include="Resources\ic_menu%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
     <BundleResource Include="Resources\avatar_placeholder.png">
@@ -159,6 +157,14 @@
     </BundleResource>
     <BundleResource Include="Resources\logo.png" />
     <BundleResource Include="Resources\login_form.png" />
+    <BundleResource Include="Resources\ic_add.png" />
+    <BundleResource Include="Resources\ic_add%402x.png" />
+    <BundleResource Include="Resources\ic_menu%402x.png" />
+    <BundleResource Include="Resources\ic_star_unrated.png" />
+    <BundleResource Include="Resources\ic_star_unrated%402x.png" />
+    <BundleResource Include="Resources\ic_star_rated%402x.png" />
+    <BundleResource Include="Resources\ic_star_rated.png" />
+    <BundleResource Include="Resources\ic_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
