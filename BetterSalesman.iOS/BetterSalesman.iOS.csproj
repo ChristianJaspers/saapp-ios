@@ -157,6 +157,7 @@
     <BundleResource Include="Resources\ic_change_password%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -322,6 +323,14 @@
     <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.cs" />
     <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
       <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\components\UIButtonRounded.cs" />
+    <Compile Include="src\views\components\UIButtonRounded.designer.cs">
+      <DependentUpon>UIButtonRounded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\components\UIViewRounded.cs" />
+    <Compile Include="src\views\components\UIViewRounded.designer.cs">
+      <DependentUpon>UIViewRounded.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
