@@ -8,7 +8,7 @@ namespace BetterSalesman.iOS
 
 		public static string t(this string translate)
 		{
-			return NSBundle.MainBundle.LocalizedString(translate, LocalizationMissingError, "");
+			return NSBundle.MainBundle.LocalizedString(translate, "", "");
 		}
 	}
 }
