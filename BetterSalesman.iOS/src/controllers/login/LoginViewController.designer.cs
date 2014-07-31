@@ -24,7 +24,7 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton loginButton { get; set; }
+		UIButtonRounded loginButton { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

@@ -29,11 +29,8 @@ namespace BetterSalesman.iOS
 
 			set
 			{
-				if (selectedProductGroup != value)
-				{
-					selectedProductGroup = value;
-					OnSelectedProductGroupChanged(selectedProductGroup);
-				}
+				selectedProductGroup = value;
+				OnSelectedProductGroupChanged(selectedProductGroup);
 			}
 		}
 			
@@ -68,15 +65,20 @@ namespace BetterSalesman.iOS
 		{
 			var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
 
-			var featureTxt = (UILabel)cell.ViewWithTag(1);
-			var benefitTxt = (UILabel)cell.ViewWithTag(2);
-
-			var relevanceTxt = (UILabel)cell.ViewWithTag(5);
-			var verticalLine = (UIView)cell.ViewWithTag(6);
+			var productGroupTxt = (UILabel)cell.ViewWithTag(1);
+			var cellBackground = cell.ViewWithTag(2);
 
 			var productGroup = ProductGroups[indexPath.Row];
 
+			cellBackground.BackgroundColor = UIColor.Clear.FromHex(productGroup.ColorHex);
+			productGroupTxt.Text = productGroup.Name;
+
 			return cell;
+		}
+
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+			this.SelectedProductGroup = this.ProductGroups[indexPath.Row];
 		}
 	}
 }

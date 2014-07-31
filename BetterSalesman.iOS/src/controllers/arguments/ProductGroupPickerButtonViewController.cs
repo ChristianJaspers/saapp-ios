@@ -12,8 +12,6 @@ namespace BetterSalesman.iOS
 		private const string SegueIdProductGroupPickerEmbeded = "segueIdProductGroupPickerSubview";
 		private const string SegueIdProductGroupPickerList = "segueIdProductGroupPickerList";
 
-		private ArgumentsListContainerViewController argumentsListContainerViewController;
-
 		private bool isSubscribedToSelectedProductGroupChangedEvent;
 
 		private ProductGroupsDataSource productsGroupDataSource;
@@ -58,25 +56,16 @@ namespace BetterSalesman.iOS
 		{
 			base.PrepareForSegue(segue, sender);
 
-			LogSegue(segue);
-
-			if (segue.Identifier.Equals(SegueIdProductGroupPickerEmbeded))
+			if (segue.Identifier.Equals(SegueIdProductGroupPickerList))
 			{
-				if (segue.DestinationViewController == this)
+				var productGroupPicker = segue.DestinationViewController as ProductGroupPickerListViewController;
+				if (productGroupPicker != null)
 				{
-					argumentsListContainerViewController = segue.SourceViewController as ArgumentsListContainerViewController;
-					Debug.Assert(argumentsListContainerViewController != null, "argumentsListContainerViewController can't be null");
-				}
-			}
-			else if (segue.Identifier.Equals(SegueIdProductGroupPickerList))
-			{
-				if (segue.DestinationViewController == this)
-				{
-					// TODO - assign picked ProductGroup to argumentsListContainerViewController
+					productGroupPicker.ProductGroupsDataSource = this.ProductGroupsDataSource;
 				}
 			}
 		}
-			
+
 		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
 		{
 			InvokeOnMainThread(() =>
@@ -104,11 +93,6 @@ namespace BetterSalesman.iOS
 				ProductGroupsDataSource.SelectedProductGroupChanged -= SelectedProductGroupChanged;
 				isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
-		}
-
-		private void LogSegue(UIStoryboardSegue segue)
-		{
-			Debug.WriteLine(string.Format("Segue {0} from {1} to {2}", segue.Identifier, segue.SourceViewController.GetType().Name, segue.DestinationViewController.GetType().Name));
 		}
 	}
 }
