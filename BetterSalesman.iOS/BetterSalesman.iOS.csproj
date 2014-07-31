@@ -307,6 +307,22 @@
     <Compile Include="src\views\BetterSalesmanViewController.designer.cs">
       <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.designer.cs">
+      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
