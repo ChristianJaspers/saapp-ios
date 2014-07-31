@@ -10,9 +10,7 @@ using BetterSalesman.Core.Extensions;
 namespace BetterSalesman.iOS
 {
     public partial class ArgumentsListViewController : UITableViewController
-    {
-        const string menu_icon = "ic_menu";
-        
+    {   
         const string segueIdAdding = "ArgumentAdding";
         const string segueIdSelected = "ArgumentSelected";
 
@@ -33,13 +31,6 @@ namespace BetterSalesman.iOS
             base.ViewDidLoad();
             
             Title = I18n.Arguments;
-            
-            var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
-                {
-                    FlyoutViewController.Navigation.ToggleMenu();
-                });
-            
-            NavigationItem.SetLeftBarButtonItem(menuButton, false);
             
             TableView.Source = new ArgumentsListViewSource();
         }
