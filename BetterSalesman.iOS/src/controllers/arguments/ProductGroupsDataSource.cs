@@ -24,17 +24,19 @@ namespace BetterSalesman.iOS
 		{
 			get
 			{
-				return selectedProductGroup;
+				return this.selectedProductGroup;
 			}
 
 			set
 			{
-				selectedProductGroup = value;
+				this.selectedProductGroup = value;
 				OnSelectedProductGroupChanged(selectedProductGroup);
 			}
 		}
 			
 		public List<ProductGroup> ProductGroups { get; set; }
+
+		private bool hasBeenInitialized;
 
 		public ProductGroupsDataSource() : base()
 		{
@@ -45,7 +47,11 @@ namespace BetterSalesman.iOS
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
 
-			SelectedProductGroup = ProductGroups.FirstOrDefault();
+			if (!hasBeenInitialized)
+			{
+				SelectedProductGroup = ProductGroups.FirstOrDefault();
+				hasBeenInitialized = true;
+			}
 		}
 
 		private void OnSelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
@@ -78,6 +84,7 @@ namespace BetterSalesman.iOS
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
+			Debug.WriteLine("Selected ProductGroup: " + this.ProductGroups[indexPath.Row].Name);
 			this.SelectedProductGroup = this.ProductGroups[indexPath.Row];
 		}
 	}

@@ -21,23 +21,26 @@ namespace BetterSalesman.iOS
 		public ArgumentsListContainerViewController(IntPtr handle) : base(handle)
 		{
 			ProductGroupsDataSource = new ProductGroupsDataSource();
+			ProductGroupsDataSource.Initialize();
 		}
 
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-      var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIconName), UIBarButtonItemStyle.Plain, delegate
-          {
-              FlyoutViewController.Navigation.ToggleMenu();
-          });
+      		var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIconName), UIBarButtonItemStyle.Plain, delegate
+          	{
+            	FlyoutViewController.Navigation.ToggleMenu();
+          	});
 
-      NavigationItem.SetLeftBarButtonItem(menuButton, false);
+      		NavigationItem.SetLeftBarButtonItem(menuButton, false);
+		}
 
-			Task.Run(() =>
-			{
-				ProductGroupsDataSource.Initialize();
-			});
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+
+			ProductGroupsDataSource.Initialize();
 		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)

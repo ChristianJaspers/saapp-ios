@@ -43,6 +43,8 @@ namespace BetterSalesman.iOS
 			base.ViewDidAppear(animated);
 
 			SubscribeToSelectedProductGroupChangedEvent();
+
+			UpdateButtonLabel();
 		}
 
 		public override void ViewDidDisappear(bool animated)
@@ -66,14 +68,19 @@ namespace BetterSalesman.iOS
 			}
 		}
 
+		private void UpdateButtonLabel()
+		{
+			if (productsGroupDataSource.SelectedProductGroup != null)
+			{
+				ProductGroupPickerButton.TitleLabel.Text = productsGroupDataSource.SelectedProductGroup.Name;
+			}
+		}
+
 		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
 		{
 			InvokeOnMainThread(() =>
 			{
-				if (newSelectedProductGroup != null)
-				{
-					Debug.WriteLine("Selected ProductGroup changed to: " + newSelectedProductGroup.Name);
-				}
+				UpdateButtonLabel();
 			});
 		}
 
