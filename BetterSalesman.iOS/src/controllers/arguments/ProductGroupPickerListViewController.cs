@@ -41,8 +41,6 @@ namespace BetterSalesman.iOS
             }
             const string cellIdentifierItem = "cellProductGroup";
             
-            List<ProductGroup> items;
-            
             public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
             {
                 var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
@@ -50,10 +48,13 @@ namespace BetterSalesman.iOS
                 var productGroupTxt = (UILabel)cell.ViewWithTag(1);
                 var cellBackground = cell.ViewWithTag(2);
                 
-                var productGroup = items[indexPath.Row];
+                var productGroup = new ProductGroup {
+                    ColorHex = "#14151a",
+                    Name = "Product group name",
+                };
                 
                 cellBackground.BackgroundColor = UIColor.Clear.FromHex(productGroup.ColorHex);
-                productGroupTxt.Text = 
+                productGroupTxt.Text = productGroup.Name;
 
                 return cell;
             }
