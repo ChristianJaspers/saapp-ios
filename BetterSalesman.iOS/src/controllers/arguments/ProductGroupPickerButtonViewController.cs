@@ -20,7 +20,7 @@ namespace BetterSalesman.iOS
 		{ 
 			get
 			{
-				return productsGroupDataSource;
+				return this.productsGroupDataSource;
 			}
 
 			set
@@ -28,7 +28,6 @@ namespace BetterSalesman.iOS
 				UnsubscribeFromSelectedProductGroupChangedEvent();
 
 				this.productsGroupDataSource = value;
-
 				SubscribeToSelectedProductGroupChangedEvent();
 			}
 		}
@@ -42,16 +41,12 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
-			SubscribeToSelectedProductGroupChangedEvent();
-
-			UpdateButtonLabel();
+			UpdateButtonLabel(ProductGroupsDataSource.SelectedProductGroup);
 		}
 
 		public override void ViewDidDisappear(bool animated)
 		{
 			base.ViewDidDisappear(animated);
-
-			UnsubscribeFromSelectedProductGroupChangedEvent();
 		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -68,19 +63,24 @@ namespace BetterSalesman.iOS
 			}
 		}
 
-		private void UpdateButtonLabel()
+		private void UpdateButtonLabel(ProductGroup productGroup)
 		{
-			if (productsGroupDataSource.SelectedProductGroup != null)
+			if (productGroup != null)
 			{
-				ProductGroupPickerButton.TitleLabel.Text = productsGroupDataSource.SelectedProductGroup.Name;
+				ProductGroupPickerButton.TitleLabel.Text = productGroup.Name;
 			}
 		}
 
 		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
 		{
+			if (!IsBeingPresented)
+			{
+				return;
+			}
+
 			InvokeOnMainThread(() =>
 			{
-				UpdateButtonLabel();
+				UpdateButtonLabel(newSelectedProductGroup);
 			});
 		}
 

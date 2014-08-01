@@ -20,6 +20,7 @@ namespace BetterSalesman.iOS
 
 		public ArgumentsListContainerViewController(IntPtr handle) : base(handle)
 		{
+			Debug.WriteLine("Creating ProductGroupsDataSrounce in " + this.GetType().Name);
 			ProductGroupsDataSource = new ProductGroupsDataSource();
 			ProductGroupsDataSource.Initialize();
 		}
@@ -39,8 +40,6 @@ namespace BetterSalesman.iOS
 		public override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
-
-			ProductGroupsDataSource.Initialize();
 		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
