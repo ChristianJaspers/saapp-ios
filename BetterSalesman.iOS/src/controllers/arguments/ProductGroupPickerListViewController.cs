@@ -10,54 +10,67 @@ namespace BetterSalesman.iOS
 {
 	partial class ProductGroupPickerListViewController : UITableViewController
 	{
+		private bool isSubscribedToSelectedProductGroupChangedEvent;
+		private ProductGroupsDataSource productGroupsDataSource;
+
+		public ProductGroupsDataSource ProductGroupsDataSource
+		{
+			get
+			{
+				return this.productGroupsDataSource;
+			}
+
+			set
+			{
+				this.productGroupsDataSource = value;
+				this.TableView.Source = value;
+				SubscribeToSelectedProductGroupChangedEvent();
+			}
+		}
+
 		public ProductGroupPickerListViewController(IntPtr handle) : base(handle)
 		{
+			this.isSubscribedToSelectedProductGroupChangedEvent = false;
 		}
-        
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-            
-            TableView.DataSource = new ProductGroupsDataSource();
-        }
-
-		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+			
+		public override void ViewDidAppear(bool animated)
 		{
-			base.PrepareForSegue(segue, sender);
+			base.ViewDidAppear(animated);
 
-			LogSegue(segue);
+			SubscribeToSelectedProductGroupChangedEvent();
 		}
 
-		private void LogSegue(UIStoryboardSegue segue)
+		public override void ViewDidDisappear(bool animated)
 		{
-			Debug.WriteLine(string.Format("Segue {0} from {1} to {2}", segue.Identifier, segue.SourceViewController.GetType().Name, segue.DestinationViewController.GetType().Name));
+			base.ViewDidDisappear(animated);
+
+			UnsubscribeFromSelectedProductGroupChangedEvent();
 		}
-        
-        class ProductGroupsDataSource : UITableViewDataSource
-        {
-            public override int RowsInSection(UITableView tableview, int section)
-            {
-                return 5;
-            }
-            const string cellIdentifierItem = "cellProductGroup";
-            
-            public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-            {
-                var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
 
-                var productGroupTxt = (UILabel)cell.ViewWithTag(1);
-                var cellBackground = cell.ViewWithTag(2);
-                
-                var productGroup = new ProductGroup {
-                    ColorHex = "#14151a",
-                    Name = "Product group name",
-                };
-                
-                cellBackground.BackgroundColor = UIColor.Clear.FromHex(productGroup.ColorHex);
-                productGroupTxt.Text = productGroup.Name;
+		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
+		{
+			InvokeOnMainThread(() =>
+			{
+				NavigationController.PopViewControllerAnimated(true);
+			});
+		}
 
-                return cell;
-            }
-        }
+		private void SubscribeToSelectedProductGroupChangedEvent()
+		{
+			if (this.ProductGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
+			{
+				this.ProductGroupsDataSource.SelectedProductGroupChanged += SelectedProductGroupChanged;
+				isSubscribedToSelectedProductGroupChangedEvent = true;
+			}
+		}
+
+		private void UnsubscribeFromSelectedProductGroupChangedEvent()
+		{
+			if (this.ProductGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
+			{
+				this.ProductGroupsDataSource.SelectedProductGroupChanged -= SelectedProductGroupChanged;
+				isSubscribedToSelectedProductGroupChangedEvent = false;
+			}
+		}
 	}
 }

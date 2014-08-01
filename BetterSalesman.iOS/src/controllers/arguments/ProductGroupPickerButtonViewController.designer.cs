@@ -14,8 +14,16 @@ namespace BetterSalesman.iOS
 	[Register ("ProductGroupPickerButtonViewController")]
 	partial class ProductGroupPickerButtonViewController
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton ProductGroupPickerButton { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (ProductGroupPickerButton != null) {
+				ProductGroupPickerButton.Dispose ();
+				ProductGroupPickerButton = null;
+			}
 		}
 	}
 }
