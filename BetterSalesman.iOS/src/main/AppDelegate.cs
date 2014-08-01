@@ -1,6 +1,7 @@
 ﻿
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -10,7 +11,7 @@ namespace BetterSalesman.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        // class-level declarations
+        public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
         public override UIWindow Window
         {
@@ -18,6 +19,15 @@ namespace BetterSalesman.iOS
             set;
         }
         
+		public override bool WillFinishLaunching(UIApplication application, NSDictionary launchOptions)
+		{
+			Localization.Instance.Initialize(new IosLocalizationProvider());
+            
+            Window.TintColor = TintColor;
+
+			return true;
+		}
+
         // This method is invoked when the application is about to move from active to inactive state.
         // OpenGL applications should use this method to pause.
         public override void OnResignActivation(UIApplication application)

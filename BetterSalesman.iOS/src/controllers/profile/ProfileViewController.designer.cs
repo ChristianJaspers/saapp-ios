@@ -16,11 +16,31 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton BackButton { get; set; }
+		UIBarButtonItem BackButton { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel displayNameLabel { get; set; }
+		UIBarButtonItem buttonPasswordChange { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelAllTeamsActivity { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelDisplayName { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelExperience { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelMyActivity { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelMyTeamActivity { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -36,9 +56,29 @@ namespace BetterSalesman.iOS
 				BackButton.Dispose ();
 				BackButton = null;
 			}
-			if (displayNameLabel != null) {
-				displayNameLabel.Dispose ();
-				displayNameLabel = null;
+			if (buttonPasswordChange != null) {
+				buttonPasswordChange.Dispose ();
+				buttonPasswordChange = null;
+			}
+			if (labelAllTeamsActivity != null) {
+				labelAllTeamsActivity.Dispose ();
+				labelAllTeamsActivity = null;
+			}
+			if (labelDisplayName != null) {
+				labelDisplayName.Dispose ();
+				labelDisplayName = null;
+			}
+			if (labelExperience != null) {
+				labelExperience.Dispose ();
+				labelExperience = null;
+			}
+			if (labelMyActivity != null) {
+				labelMyActivity.Dispose ();
+				labelMyActivity = null;
+			}
+			if (labelMyTeamActivity != null) {
+				labelMyTeamActivity.Dispose ();
+				labelMyTeamActivity = null;
 			}
 			if (ProfileImageEditButton != null) {
 				ProfileImageEditButton.Dispose ();

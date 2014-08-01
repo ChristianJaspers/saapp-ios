@@ -2,9 +2,9 @@
 
 namespace XValidator
 {
-    public class XFormValidator<T>
+    public class XForm<T>
     {
-        public XFieldValidate<T>[] Inputs { get; set; }
+        public XField<T>[] Inputs { get; set; }
         public List<string> Errors { get; set; }
         
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using MBProgressHUD;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -63,6 +64,8 @@ namespace BetterSalesman.iOS
         
         #endregion
         
+        #region Alerts
+        
         protected void ShowAlert(string msg)
         {
             ShowAlert(msg, string.Empty);
@@ -70,7 +73,42 @@ namespace BetterSalesman.iOS
         
         protected void ShowAlert(string msg, string title)
         {
-            new UIAlertView (title, msg, null, I18n.OK, null).Show ();
+			InvokeOnMainThread(() => new UIAlertView(title, msg, null, I18n.OK, null).Show());
+        }
+        
+        AlertDismissDelegate alertDelegate;
+        
+        protected void ShowAlert(string msg, Action dismissCallback)
+        {
+            InvokeOnMainThread(() => {
+                alertDelegate = new AlertDismissDelegate(dismissCallback);
+                new UIAlertView(string.Empty, msg, alertDelegate, I18n.OK, null).Show();
+            });
+        }
+        
+        class AlertDismissDelegate : UIAlertViewDelegate
+        {
+            public Action DismissCallback;
+            
+            public AlertDismissDelegate(Action dismissCallback)
+            {
+                DismissCallback = dismissCallback;
+            }
+            
+            public override void Dismissed(UIAlertView alertView, int buttonIndex)
+            {
+                if (DismissCallback != null)
+                {
+                    DismissCallback();
+                }
+            }
+        }
+        
+        #endregion
+        
+        protected bool IsNetworkAvailable()
+        {
+            return Reachability.IsHostReachable(HttpConfig.Host);
         }
     }
 }

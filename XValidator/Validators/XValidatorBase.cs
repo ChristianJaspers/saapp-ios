@@ -6,7 +6,7 @@ namespace XValidator
     {
         public string Message = "Field {0} is required.";
 
-        public string ErrorMessage(string fieldName)
+        public virtual string ErrorMessage(string fieldName)
         {
             return string.Format(Message, fieldName);
         }

@@ -67,6 +67,33 @@ namespace BetterSalesman.iOS
 			return temporaryImageFilePath;
 		}
 
+		public async Task<string> SaveImageToTemporaryFileJpeg(UIImage image, float quality = 1.0f)
+		{
+			var uniqueFileNamePortion = Guid.NewGuid().ToString();
+			var temporaryImageFileName = string.Format("{0}.jpg", uniqueFileNamePortion);
+
+			var documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			var temporaryStorageFolderPath = Path.Combine(documentsFolderPath, "..", "tmp");
+
+			var temporaryImageFilePath = Path.Combine(temporaryStorageFolderPath, temporaryImageFileName);
+
+			var imageData = image.AsJPEG(quality);
+			await Task.Run(() => 
+			{
+				//File.WriteAllBytes(temporaryImageFilePath, imageData);
+				NSError error = null;
+				if (imageData.Save(temporaryImageFilePath, false, out error)) 
+				{
+					Console.WriteLine("saved file");
+				} else 
+				{
+					Console.WriteLine("ERROR! Did NOT SAVE file because" + error.LocalizedDescription);
+				}
+			});
+
+			return temporaryImageFilePath;
+		}
+
 		// TODO - might require some extra checks to see if file can we opened in ReadWrite mode
 		/// <summary>
 		/// Removes the temporary file at given path. 
@@ -74,12 +101,15 @@ namespace BetterSalesman.iOS
 		/// NOTE! Use this method only to remove the files that were created using SaveImageToTemporaryFilePng with the path returned by that method.
 		/// </summary>
 		/// <param name="temporaryFilePath">Temporary file path.</param>
-		public void RemoveTemporaryFile(string temporaryFilePath)
+		public async Task RemoveTemporaryFile(string temporaryFilePath)
 		{
-			if (File.Exists(temporaryFilePath))
+			await Task.Run(() =>
 			{
-				File.Delete(temporaryFilePath);
-			}
+				if (File.Exists(temporaryFilePath))
+				{
+					File.Delete(temporaryFilePath);
+				}
+			});
 		}
 	}
 }

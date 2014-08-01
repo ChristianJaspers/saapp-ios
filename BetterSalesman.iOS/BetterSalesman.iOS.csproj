@@ -146,11 +146,46 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\ic_menu.png" />
-    <BundleResource Include="Resources\ic_menu%402x.png" />
-    <BundleResource Include="Resources\profile_mock.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\avatar_placeholder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\avatar_placeholder%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_change_password.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_change_password%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\login_form.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_add%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_menu%402x.png" />
+    <BundleResource Include="Resources\ic_star_unrated.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_unrated%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_rated%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_star_rated.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\ic_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -162,10 +197,6 @@
     <Compile Include="src\main\Main.cs" />
     <Compile Include="src\ViewModels\FlayoutNavigationItem.cs" />
     <Compile Include="src\controllers\base\BaseUINavigationController.cs" />
-    <Compile Include="src\controllers\base\RootViewController.cs" />
-    <Compile Include="src\controllers\base\RootViewController.designer.cs">
-      <DependentUpon>RootViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\controllers\login\LoginViewController.cs" />
     <Compile Include="src\controllers\login\LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
@@ -186,9 +217,6 @@
     <Compile Include="src\controllers\base\BaseUIViewController.cs" />
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Argument.cs">
       <Link>BusinessLayer\Argument.cs</Link>
-    </Compile>
-    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Product.cs">
-      <Link>BusinessLayer\Product.cs</Link>
     </Compile>
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Contracts\IBusinessEntity.cs">
       <Link>BusinessLayer\Contracts\IBusinessEntity.cs</Link>
@@ -220,9 +248,6 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\BaseServiceProvider.cs">
       <Link>ServiceAccessLayer\BaseServiceProvider.cs</Link>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\FileUploadRequest.cs">
-      <Link>ServiceAccessLayer\FileUploadRequest.cs</Link>
-    </Compile>
     <Compile Include="src\extensions\LocalizationExtensions.cs" />
     <Compile Include="src\helpers\I18n.cs" />
     <Compile Include="src\controllers\myteam\MyTeamListViewController.cs" />
@@ -239,11 +264,103 @@
     </Compile>
     <Compile Include="src\helpers\ImageFilesManagementHelper.cs" />
     <Compile Include="src\helpers\ImagePickerPresenter.cs" />
-    <Compile Include="src\views\XUITextFieldValidate.cs" />
     <Compile Include="src\helpers\Reachability.cs" />
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ErrorDescriptionProvider.cs">
-      <Link>ServiceAccessLayer\ErrorDescriptionProvider.cs</Link>
+    <Compile Include="src\controllers\base\MainViewController.cs" />
+    <Compile Include="src\controllers\base\MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\controllers\base\FlyoutViewController.cs" />
+    <Compile Include="src\controllers\base\FlyoutViewController.designer.cs">
+      <DependentUpon>FlyoutViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ArgumentManager.cs">
+      <Link>BusinessLayer\Managers\ArgumentManager.cs</Link>
+    </Compile>
+    <Compile Include="src\controllers\base\AppEntryViewController.cs" />
+    <Compile Include="src\controllers\base\AppEntryViewController.designer.cs">
+      <DependentUpon>AppEntryViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderSynchronization.cs">
+      <Link>ServiceAccessLayer\ServiceProviderSynchronization.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\Extensions\ArgumentsExtensions.cs">
+      <Link>Extensions\ArgumentsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="src\views\components\XUITextField.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerApplication.cs">
+      <Link>ServiceAccessLayer\SynchronizationManagerApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
+      <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsForm.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsForm.designer.cs">
+      <DependentUpon>ArgumentsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsDetail.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsDetail.designer.cs">
+      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpClientFileUploader.cs">
+      <Link>ServiceAccessLayer\HttpClientFileUploader.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessError.cs">
+      <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
+    </Compile>
+    <Compile Include="src\helpers\ImageDownloader.cs" />
+    <Compile Include="src\helpers\ImageManipulationHelper.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonEmpty.cs">
+      <Link>ServiceAccessLayer\DataTransferObject\JsonEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs">
+      <Link>ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ILocalizationProvider.cs">
+      <Link>ServiceAccessLayer\ILocalizationProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\Localization.cs">
+      <Link>ServiceAccessLayer\Localization.cs</Link>
+    </Compile>
+    <Compile Include="src\helpers\IosLocalizationProvider.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceProviderArgument.cs">
+      <Link>ServiceAccessLayer\ServiceProviderArgument.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\ProductGroup.cs">
+      <Link>BusinessLayer\ProductGroup.cs</Link>
+    </Compile>
+    <Compile Include="src\views\BetterSalesmanViewController.cs" />
+    <Compile Include="src\views\BetterSalesmanViewController.designer.cs">
+      <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.designer.cs">
+      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.cs" />
+    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\ProductGroupsDataSource.cs" />
+    <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ProductGroupManager.cs">
+      <Link>BusinessLayer\Managers\ProductGroupManager.cs</Link>
+    </Compile>
+    <Compile Include="src\views\components\UIButtonRounded.cs" />
+    <Compile Include="src\views\components\UIButtonRounded.designer.cs">
+      <DependentUpon>UIButtonRounded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\components\SegueNavigationWithoutAnimation.cs" />
+    <Compile Include="src\views\components\SegueNavigationWithoutAnimation.designer.cs">
+      <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\extensions\UIColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -268,6 +385,9 @@
     <Folder Include="src\helpers\" />
     <Folder Include="src\controllers\myteam\" />
     <Folder Include="BusinessLayer\Managers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="src\views\components\" />
+    <Folder Include="ServiceAccessLayer\DataTransferObject\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

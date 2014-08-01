@@ -33,7 +33,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BusinessLayer\Contracts\IBusinessEntity.cs" />
     <Compile Include="BusinessLayer\Argument.cs" />
-    <Compile Include="BusinessLayer\Product.cs" />
     <Compile Include="ServiceAccessLayer\HttpConfig.cs" />
     <Compile Include="ServiceAccessLayer\SynchronizationManagerBase.cs" />
     <Compile Include="DataLayer\DatabaseProvider.cs" />
@@ -43,10 +42,22 @@
     <Compile Include="ServiceAccessLayer\HttpRequest.cs" />
     <Compile Include="BusinessLayer\User.cs" />
     <Compile Include="ServiceAccessLayer\BaseServiceProvider.cs" />
-    <Compile Include="ServiceAccessLayer\FileUploadRequest.cs" />
     <Compile Include="DataLayer\DatabaseHelper.cs" />
     <Compile Include="BusinessLayer\Managers\UserManager.cs" />
-    <Compile Include="ServiceAccessLayer\ErrorDescriptionProvider.cs" />
+    <Compile Include="BusinessLayer\Managers\ArgumentManager.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
+    <Compile Include="Extensions\ArgumentsExtensions.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs" />
+    <Compile Include="ServiceAccessLayer\SynchronizationManagerApplication.cs" />
+    <Compile Include="ServiceAccessLayer\HttpClientFileUploader.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceAccessError.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonEmpty.cs" />
+    <Compile Include="ServiceAccessLayer\DataTransferObject\JsonErrorResponse.cs" />
+    <Compile Include="ServiceAccessLayer\ILocalizationProvider.cs" />
+    <Compile Include="ServiceAccessLayer\Localization.cs" />
+    <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
+    <Compile Include="BusinessLayer\ProductGroup.cs" />
+    <Compile Include="BusinessLayer\Managers\ProductGroupManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

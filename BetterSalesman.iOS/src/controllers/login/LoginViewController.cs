@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
 using XValidator;
@@ -7,8 +6,11 @@ using XValidator;
 namespace BetterSalesman.iOS
 {
     public partial class LoginViewController : BaseUIViewController
-    {   
-        public LoginViewController(IntPtr handle) : base(handle)
+    {
+        const string sequeIdLogged = "LoggedSeque";
+
+        public LoginViewController(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -16,52 +18,101 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            var validator = new XFormValidator<UITextField> {
+            inputEmail.ShouldReturn += (textField) =>
+            { 
+                inputEmail.ResignFirstResponder();
+                inputPassword.BecomeFirstResponder();
+                return true;
+            };
+            
+            inputPassword.ShouldReturn += (textField) =>
+            { 
+                StartLogin();
+                return true;
+            };
+            
+            loginButton.TouchUpInside += (sender, e) => StartLogin();
+            
+            if (UserSessionManager.Instance.User != null)
+            {
+                Login();
+            }
+        }
+        
+        void StartLogin()
+        {
+            var validatorRequired = new XValidatorRequired {
+                Message = I18n.ValidationRequired
+            };
+
+            var validator = new XForm<UITextField> {
                 Inputs = new [] {
-                    new XUITextFieldValidate {
+                    new XUITextField {
                         Name = I18n.FieldEmail,
                         FieldView = inputEmail,
-                        Validators = new [] {
-                            new XValidatorRequired()
-                        },
+                        Validators = new [] { validatorRequired },
                     },
-                    new XUITextFieldValidate {
+                    new XUITextField {
                         Name = I18n.FieldPassword,
                         FieldView = inputPassword,
-                        Validators = new [] {
-                            new XValidatorRequired()
-                        },
+                        Validators = new [] { validatorRequired },
                     }
                 }
             };
             
-            loginButton.TouchUpInside += (sender, e) =>
+            View.EndEditing(true);
+
+            if (validator.Validate())
             {
-                if ( validator.Validate() )
+                if (!IsNetworkAvailable())
                 {
-                    ShowHud();
-                    
-                    ServiceProviderUser.Instance.Authentication(
-                        inputEmail.Text, 
-                        inputPassword.Text, 
-                        result =>
-                        {
-                            HideHud();
-                            DismissViewController(true, null);
-//                            UserSessionManager.Instance.FetchUser(user=>ShowAlert("Recived token: " + user.Token));
-                        },
-                        errorCode =>
-                        {
-                            HideHud();
-                            ShowAlert(I18n.ErrorConnectionTimeout);
-                        }
-                    );
+                    ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                    return;
                 }
-                else
-                {
-                    ShowAlert(string.Join("\n",validator.Errors));
-                }
+
+                ShowHud(I18n.AuthenticationInProgress);
+
+                ServiceProviderUser.Instance.Authentication(
+                    inputEmail.Text, 
+                    inputPassword.Text, 
+                    result =>
+                    {       
+                        HideHud();
+                        Login();
+                    },
+                    errorMessage =>
+                    {
+                        HideHud();
+                        ShowAlert(errorMessage);
+                    }
+                );
+            }
+            else
+            {
+                ShowAlert(string.Join("\n", validator.Errors));
+            }
+        }
+
+        void Login()
+        {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
+            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
+
+            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
+            
+            SynchronizationManagerApplication.Instance.FinishedSynchronization += () =>
+            {
+                HideHud();
+                PerformSegue(sequeIdLogged, this);
             };
+
+            SynchronizationManagerApplication.Instance.Synchronize();
+            
         }
     }
 }

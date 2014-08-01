@@ -1,6 +1,5 @@
 using System;
 
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace BetterSalesman.iOS
@@ -19,9 +18,11 @@ namespace BetterSalesman.iOS
             
             TableView.Source = new MyTeamListViewSource();
             
+            Title = I18n.MyTeam;
+            
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
             {
-                RootViewController.Navigation.ToggleMenu();
+                FlyoutViewController.Navigation.ToggleMenu();
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);

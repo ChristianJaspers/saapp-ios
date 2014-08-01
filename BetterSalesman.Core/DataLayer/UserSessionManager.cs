@@ -45,9 +45,22 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             BlobCache.UserAccount.InvalidateObject<UserSession>(CacheUserKey);
         }
         
+        public async Task<UserSession> UserAsync()
+        {
+            try
+            {
+                // TODO
+                return await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheUserKey);
+            } 
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        
         public async Task FetchUser(Action<UserSession> finished = null)
         {
-            user = await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheUserKey);
+            user = await UserAsync();
             
             if (finished != null)
             {
@@ -62,6 +75,19 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
             set {
                 user = value;   
+            }
+        }
+        
+        public string AccessToken
+        {
+            get 
+            {
+                if ( user != null )
+                {
+                    return user.Token;
+                }
+                
+                return string.Empty;
             }
         }
     }

@@ -5,8 +5,9 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.IO;
+using System.Text;
+using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
+using System.Linq;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -18,33 +19,46 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         DELETE
     };
     
-    public delegate void HttpRequestSuccessEventHandler(string result);
-    public delegate void HttpRequestFailureEventHandler(int errorCode);
+    public class HttpRequestResult <T>
+    {
+        public HttpRequestResult()
+        {
+        }
+
+        public HttpRequestResult(ServiceAccessError error) : base()
+        {
+            Error = error;
+        }
+
+        public bool IsSuccess { get { return Error == null; } }
+        public T MappedResponse { get; set; }
+        public ServiceAccessError Error { get; set; }
+    }
     
-    public class HttpRequest
+    public class HttpRequest <T>
     {
         public string Path;
         public HTTPMethod Method;
         public Dictionary<string, object> Parameters;
         public Dictionary<string, string> Headers;
         
-        public string AuthorizationToken;
-        
         private HttpClient client;
 
-        public event HttpRequestSuccessEventHandler Success;
-        public event HttpRequestFailureEventHandler Failure;
+        public Action<HttpRequestResult<T>> Success;
+        public Action<HttpRequestResult<T>> Failure;
+        
+        const string ContentType = "application/json";
 
-        public async Task<string> Perform()
+        public async Task<HttpRequestResult<T>> Perform()
         {
-            string result = null;
+            HttpRequestResult<T> result;
             
             client = new HttpClient();
             client.BaseAddress = new Uri("http://" + HttpConfig.Host);
             
-            if (AuthorizationToken != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthorizationToken);
+            if (!string.IsNullOrEmpty(UserSessionManager.Instance.AccessToken))
+            {   
+                client.DefaultRequestHeaders.Add("Authorization", "Token token=\"" + UserSessionManager.Instance.AccessToken + "\"");
             }
 
             string serializedParameters = JsonConvert.SerializeObject(Parameters);
@@ -74,20 +88,25 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             case HTTPMethod.DELETE:
                 result = await PerformRequestDelete(path);
                 break;
+                    
+            default:
+                result = await PerformRequestGet(path, serializedParameters);
+                break;
+                    
             }
 
             return result;
         }
 
-        private async Task<string> PerformRequestGet(string resourcePath, string serializedParameters)
+        private async Task<HttpRequestResult<T>> PerformRequestGet(string resourcePath, string serializedParameters)
         {
-            string result = null;
+            HttpRequestResult<T> result = default(HttpRequestResult<T>);
 
             try
             {
                 using (HttpResponseMessage response = await client.GetAsync(resourcePath))
                 {
-                    result = await ParseResponse(response, resourcePath);
+                    result = await ParseResponse(response);
                 }
             }
             catch (Exception ex)
@@ -98,17 +117,17 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformRequestPost(string resourcePath, string serializedParameters)
+        private async Task<HttpRequestResult<T>> PerformRequestPost(string resourcePath, string serializedParameters)
         {
-            string result = null;
+            HttpRequestResult<T> result = default(HttpRequestResult<T>);
 
-            var content = new StringContent(serializedParameters);
+            var content = new StringContent(serializedParameters, Encoding.UTF8, ContentType);
             
             try
             {
                 using (HttpResponseMessage response = await client.PostAsync(resourcePath, content))
                 {   
-                    result = await ParseResponse(response, resourcePath);
+                    result = await ParseResponse(response);
                 }
             }
             catch (Exception ex)
@@ -120,17 +139,17 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformRequestPut(string resourcePath, string serializedParameters)
+        private async Task<HttpRequestResult<T>> PerformRequestPut(string resourcePath, string serializedParameters)
         {
-            string result = null;
+            HttpRequestResult<T> result = default(HttpRequestResult<T>);
 
-            var content = new StringContent(serializedParameters);
+            var content = new StringContent(serializedParameters, Encoding.UTF8, ContentType);
 
             try
             {
                 using (HttpResponseMessage response = await client.PutAsync(resourcePath, content))
                 {
-                    result = await ParseResponse(response, resourcePath);
+                    result = await ParseResponse(response);
                 }
             }
             catch (Exception ex)
@@ -141,15 +160,15 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        private async Task<string> PerformRequestDelete(string resourcePath)
+        private async Task<HttpRequestResult<T>> PerformRequestDelete(string resourcePath)
         {
-            string result = null;
+            HttpRequestResult<T> result = default(HttpRequestResult<T>);
 
             try
             {
                 using (HttpResponseMessage response = await client.DeleteAsync(resourcePath))
                 {
-                    result = await ParseResponse(response, resourcePath);
+                    result = await ParseResponse(response);
                 }
             }
             catch (Exception ex)
@@ -160,32 +179,35 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             return result;
         }
 
-        async Task<String> ParseResponse(HttpResponseMessage response, string resourcePath)
+        async Task<HttpRequestResult<T>> ParseResponse(HttpResponseMessage response)
         {
             Debug.WriteLine("HTTPClient Result Status code: " + response.StatusCode);
 
-            string result = string.Empty;
+            HttpRequestResult<T> result =  new HttpRequestResult<T>();
+            
+            int codeNumber = Convert.ToInt32(response.StatusCode);
+            
+            bool statusOK = (codeNumber >= 200 && codeNumber < 300);
+            bool status4xx = (codeNumber >= 400 && codeNumber < 500);
 
-            switch(response.StatusCode)
+            if ( statusOK || status4xx )
             {
-                case HttpStatusCode.OK:
-                    result = await response.Content.ReadAsStringAsync();
-    
-                    Debug.WriteLine("HTTPClient Result content: " + result);
-    
-                    if (Success != null)
-                    {
-                        Success(result);
-                    }
-                    break;
-    
-                default:
-                    if (Failure != null)
-                    {
-                        // TODO handle error here
-                        Failure(Convert.ToInt32(response.StatusCode));
-                    }
-                    break;
+                string resultString = await response.Content.ReadAsStringAsync();
+                
+                if ( statusOK )
+                {
+                    ResultOK(result, resultString);
+                } 
+                else
+                {
+                    ResultErrorMessage(result, resultString);
+                }
+            } 
+            else
+            {
+                result = new HttpRequestResult<T>(ServiceAccessError.ErrorUnknown);   
+
+                OnFailure(result);
             }
 
             return result;
@@ -195,7 +217,90 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             Debug.WriteLine("Error communicating with the server: " + ex.Message);
             
-            Failure(Convert.ToInt32(HttpStatusCode.RequestTimeout));
+            Failure(new HttpRequestResult<T> (ServiceAccessError.ErrorUnknown));
+        }
+
+        async void ResultOK(HttpRequestResult<T> result, string resultString)
+        {
+            Debug.WriteLine("HTTPClient RAW response: " + resultString);
+
+            var responseJson = await ParseJsonAsync<T>(resultString);
+
+            if ( !responseJson.Equals(default(T)) )
+            {
+                result.MappedResponse = responseJson;
+
+                OnSuccess(result);
+            } 
+            else
+            {
+                result.Error = ServiceAccessError.ErrorUnknown;
+
+                OnFailure(result);
+            }
+        }
+
+        async void ResultErrorMessage(HttpRequestResult<T> result, string resultString)
+        {
+            var errorJson = await ParseJsonAsync<JsonErrorResponse>(resultString);
+            var isKnownError = errorJson != null && errorJson.Error != null;
+            if (isKnownError)
+            {
+                result.Error = errorJson.Error;
+            }
+            else
+            {
+                result = new HttpRequestResult<T>(ServiceAccessError.ErrorUnknown);
+            }   
+
+            OnFailure(result);
+        }
+        
+        private async Task<X> ParseJsonAsync<X>(string json)
+        {
+            Debug.WriteLine("Started JSON deserialization");
+            X result = await Task.Run<X>(() =>
+            {
+                List<string> errors = new List<string>();
+                JsonSerializerSettings jsonSerializationSettings = new JsonSerializerSettings
+                    {
+                        Error = (sender, args) =>
+                            {
+                                errors.Add(args.ErrorContext.Error.Message);
+                                args.ErrorContext.Handled = true;
+                            }
+                    };
+
+                X eventObject = JsonConvert.DeserializeObject<X>(json, jsonSerializationSettings);
+
+                if (errors.Any())
+                {
+                    Debug.WriteLine("Error! There was an error while deserializing JSON");
+                    Debug.WriteLine("Errors details: " + string.Join(", ", errors));
+                    eventObject = default(X);
+                }
+
+                return eventObject;
+            });
+            Debug.WriteLine("Finished JSON deserialization");
+
+            return result;
+        }
+        
+        void OnFailure(HttpRequestResult<T> result)
+        {
+            if (Failure != null)
+            {
+                Failure(result);
+            }
+        }
+
+        void OnSuccess(HttpRequestResult<T> result)
+        {
+            if (Success != null)
+            {   
+                Success(result);
+            }
         }
     }
 }

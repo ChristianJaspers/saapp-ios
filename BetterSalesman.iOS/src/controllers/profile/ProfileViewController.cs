@@ -1,18 +1,21 @@
 using System;
 using MonoTouch.UIKit;
+using SDWebImage;
 using System.Diagnostics;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.Threading.Tasks;
+using XValidator;
 
 namespace BetterSalesman.iOS
 {
-	partial class ProfileViewController : BaseUIViewController
+    partial class ProfileViewController : BaseUIViewController
 	{
 		private ImagePickerPresenter imagePickerPresenter;
-		private UIImage cachedPickedImage;
-		private User user;
+		private string currentProfilePictureUrl = null;
+
+		const string PlaceholderImage = "avatar_placeholder.png";
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
@@ -37,89 +40,219 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidLoad();
 
-			BackButton.TouchUpInside += (sender, e) =>
-			{
-				DismissViewController (true, null);
-			};
+			BackButton.Clicked += (s, e) => DismissViewController(true, null);
+            
+            buttonPasswordChange.Clicked += (s, e) => DisplayPasswordChange(string.Empty,true);
 
-			ProfileImageEditButton.TouchUpInside += (sender, @event) => 
-			{
-				imagePickerPresenter.ShowImagePickerTypeSelection(this);
-			};
+			ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
 			//LoadUser();
 		}
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-
-//			ShowIndicator();
-//
-//			ServiceProviderUser.Instance.Profile(async result =>
-//				{
-//					await UserSessionManager.Instance.FetchUser(obj =>
-//					{
-//						LoadUser();
-//						// TODO refresh UI here?
-//					});
-//
-//					HideIndicator();
-//				},
-//				errorCode =>
-//				{
-//					HideIndicator();  
-//					ShowAlert(I18n.ErrorConnectionTimeout);
-//				});
-		}
-
 		private async Task UploadImage(UIImage image)
 		{
-			cachedPickedImage = image;
+			if (!IsNetworkAvailable())
+			{
+				ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+				return;
+			}
 
-			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFilePng(image);
+			ShowHud(I18n.ServiceAccessProfilePictureUpdatingProfilePicture);
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePicturePreparingForUploadMessage);
 
-			var fileUploadRequest = new FileUploadRequest();
+			var maximumImageWidthAndHeight = 1024;
+			var downsizedImage = ImageManipulationHelper.ResizeImageToMaximumSize(image, maximumImageWidthAndHeight, maximumImageWidthAndHeight);
 
-			fileUploadRequest.ProgressUpdated += progressPercentage =>
-            {
-                Debug.WriteLine("Upload progress: " + progressPercentage);
+			var imageFilePath = await ImageFilesManagementHelper.SharedInstance.SaveImageToTemporaryFileJpeg(downsizedImage, 0.75f);
+			var mimeType = "image/jpeg";
 
-                SetHudProgress(progressPercentage / 100.0f);
-            };
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureUploadingMessage);
 
-			fileUploadRequest.Success += async remoteFileUrl =>
-            {
-                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+			var uploadResult = await ServiceProviderUser.Instance.UpdateAvatar(imageFilePath, mimeType);
+			if (!uploadResult.IsSuccess)
+			{
+				await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
+				HideHud();
+				ShowAlert(uploadResult.Error.LocalizedMessage);
+				return;
+			}
 
-                InvokeOnMainThread(() =>
-                    {
-                        Debug.WriteLine("Upload complete - file URL: " + remoteFileUrl);
-                        ProfileImageView.Image = cachedPickedImage;
-                        cachedPickedImage = null;
-                    });
+			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 
-                HideHud();
-            };
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 
-			fileUploadRequest.Failure += (errorCode, errorMessage) =>
-            {
-                ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
-                cachedPickedImage = null;
+			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
+			if (!downloadResult.IsSuccess)
+			{
+				DisplayAvatarPlaceholderInProfileImageView();
+				HideHud();
+				ShowAlert(uploadResult.Error.LocalizedMessage);
+				return;
+			}
+            
+			UpdateProfileImageView(downloadResult.Image);
 
-                InvokeOnMainThread(() => ShowAlert(errorMessage));
-
-                HideHud();
-            };
-				
-			fileUploadRequest.Perform(imageFilePath);
+			HideHud();
+			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
+			ShowAlert(uploadCompletedMessage);
 		}
 						
-		void LoadUser()
+		private void UpdateProfileImageView(UIImage image)
 		{
-			user = UserManager.LoggedInUser();
-            
-            displayNameLabel.Text = user.DisplayName;
+			InvokeOnMainThread(() =>
+			{
+				if (image != null)
+				{
+					// TODO use async image loading
+					ProfileImageView.Image = image;
+				}
+			});
 		}
+
+		private void DisplayAvatarPlaceholderInProfileImageView()
+		{
+			InvokeOnMainThread(() =>
+			{
+				ProfileImageView.Image = UIImage.FromBundle(PlaceholderImage);
+			});
+		}
+
+		private void LoadUser()
+		{
+			var user = UserManager.LoggedInUser();
+            
+			if (user == null)
+			{
+				Debug.WriteLine("Can't display profile information - LoggedInUser is null");
+				return;
+			}
+
+			InvokeOnMainThread(() =>
+			{
+				labelDisplayName.Text = user.DisplayName;
+				labelExperience.Text = user.Experience.ToString();
+				labelMyActivity.Text = user.MyActivity.ToString();
+				labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
+				labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
+			});
+
+			UpdateProfilePicture(user);
+		}
+
+		private void UpdateProfilePicture(User user)
+		{
+			if (!ShouldDownloadProfilePicture(user))
+			{
+				return;
+			}
+
+			if (IsNetworkAvailable())
+			{
+				Task.Run(async () =>
+				{
+					var downloadResult = await ImageDownloader.DownloadImage(user.AvatarThumbUrl);
+					if (downloadResult.IsSuccess)
+					{
+						UpdateProfileImageView(downloadResult.Image);
+						currentProfilePictureUrl = user.AvatarThumbUrl;
+					}
+					else
+					{
+						DisplayAvatarPlaceholderInProfileImageView();
+					}
+				});
+			}
+			else
+			{
+				DisplayAvatarPlaceholderInProfileImageView();
+			}
+		}
+
+		private bool ShouldDownloadProfilePicture(User user)
+		{
+			return currentProfilePictureUrl == null || !currentProfilePictureUrl.Equals(user.AvatarThumbUrl);
+		}
+        
+        #region Password change
+        
+        XForm<UITextField> validator;
+
+        void DisplayPasswordChange(string defaultPassword = "", bool firstTime = false)
+        {   
+            UIAlertView alert = new UIAlertView(I18n.ProvideNewPassword, I18n.ProvideNewPasswordRequirement, null, I18n.OK, I18n.Cancel);
+            
+            alert.AlertViewStyle = UIAlertViewStyle.SecureTextInput;
+            
+            var passwordField = alert.GetTextField(0);
+            
+            if ( !firstTime )
+            {
+                passwordField.Text = defaultPassword;
+                ValidateField(passwordField);
+            }
+            
+            alert.Clicked += (sender, e) =>
+            {
+                if ( e.ButtonIndex == 0 )
+                {       
+                    if ( ValidateField(passwordField) )
+                    {
+                        UpdatePassword(passwordField.Text);
+                    }
+                    else
+                    {
+                        ShowAlert( string.Join("\n", validator.Errors),() => DisplayPasswordChange(passwordField.Text) );
+                    }
+                }
+            };
+            
+            alert.Show();
+        }
+        
+        bool ValidateField(UITextField field)
+        {
+            validator = new XForm<UITextField> {
+                Inputs = new [] {
+                    new XUITextField {
+                        Name = I18n.FieldPassword,
+                        FieldView = field,
+                        Validators = new [] {
+                            new XValidatorLengthMinimum(5) {
+                                Message = I18n.ValidationLengthMinimum   
+                            }
+                        },
+                    }
+                }
+            };
+            
+            return validator.Validate();
+        }
+        
+        void UpdatePassword(string newPassword)
+        {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+            
+            ShowHud();
+
+            ServiceProviderUser.Instance.PasswordChange(
+                newPassword,
+                result => 
+                {
+                    HideHud();
+                    ShowAlert(I18n.SuccessMessagePasswordChange);
+                },
+                errorMessage =>
+                {
+                    HideHud();
+                    ShowAlert(errorMessage);
+                }
+            );
+        }
+        
+        #endregion
 	}
 }

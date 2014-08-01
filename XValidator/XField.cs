@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace XValidator
 {
-    public class XFieldValidate <T>
+    public class XField <T>
     {
         /// <summary>
         /// Gets or sets the name of the field displayed as referenced in error messages

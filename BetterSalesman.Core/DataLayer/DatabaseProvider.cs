@@ -7,6 +7,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 
 namespace BetterSalesman.Core.DataLayer
 {
@@ -49,13 +50,14 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Determinate status of procedure
         /// </summary>
-        public static bool InProgress = false;
+        public static bool InProgress;
 
         /// <summary>
         /// Full synchronisation of database
         /// </summary>
+        /// <param name = "containerData">Contains DTO object to save</param>
         /// <param name="filePath">Path to database file.</param>
-        public static void FullSync(/*Container containerData, */string filePath = "")
+        public static void FullSync(T containerData, string filePath = "")
         {
             // TODO - remove stopwatch code
             Debug.WriteLine("In Full sync");
@@ -77,8 +79,7 @@ namespace BetterSalesman.Core.DataLayer
 
             try
             {
-                // TODO
-//                SaveDataFromMemory(eventItem);
+                SaveDataFromMemory(containerData);
             }
             catch (Exception e)
             {
@@ -143,7 +144,7 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// Saves the data from memory.
         /// </summary>
-        private static void SaveDataFromMemory(/*Container containerData*/)
+        private static void SaveDataFromMemory(T containerData)
         {
             // TODO
 //            if (eventData == null)
@@ -165,9 +166,7 @@ namespace BetterSalesman.Core.DataLayer
 
                     CreateTablesIfNotExist(connection);
 
-                    DeleteAllRecords(connection);
-
-//                    InsertRecords(connection, eventData);
+                    InsertRecords(connection, containerData);
 
                     connection.Commit();
                 }
@@ -186,37 +185,18 @@ namespace BetterSalesman.Core.DataLayer
             Debug.WriteLine("DB create if not exists");
 
             connection.CreateTable<User>();
-            connection.CreateTable<Product>();
+            connection.CreateTable<ProductGroup>();
             connection.CreateTable<Argument>();
 
             Debug.WriteLine("DB ready to rumble if not exists");
         }
 
-        private static void DeleteAllRecords(SQLiteConnection connection)
-        {
-            Debug.WriteLine("Deleting records...");
-
-            connection.DeleteAll<Product>();
-            connection.DeleteAll<Argument>();
-
-            Debug.WriteLine("Finished deleting records");
-        }
-
         // TODO fill container with data
-        private static void InsertRecords(SQLiteConnection connection/*, Container containerData*/)
+        private static void InsertRecords(SQLiteConnection connection, T containerData)
         {
-
-        }
-
-        private static void InsertAll(SQLiteConnection connection, IEnumerable objects)
-        {
-            if (objects != null)
-            {
-                foreach (var obj in objects)
-                {
-                    connection.Insert(obj);
-                }
-            }
+            DatabaseHelper.ReplaceAll(containerData.Users,connection);
+            DatabaseHelper.ReplaceAll(containerData.ProductGroups,connection);
+            DatabaseHelper.ReplaceAll(containerData.Arguments,connection);
         }
     }
 }
