@@ -18,10 +18,33 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
+            inputEmail.ShouldReturn += (textField) =>
+            { 
+                inputEmail.ResignFirstResponder();
+                inputPassword.BecomeFirstResponder();
+                return true;
+            };
+            
+            inputPassword.ShouldReturn += (textField) =>
+            { 
+                StartLogin();
+                return true;
+            };
+            
+            loginButton.TouchUpInside += (sender, e) => StartLogin();
+            
+            if (UserSessionManager.Instance.User != null)
+            {
+                Login();
+            }
+        }
+        
+        void StartLogin()
+        {
             var validatorRequired = new XValidatorRequired {
                 Message = I18n.ValidationRequired
             };
-            
+
             var validator = new XForm<UITextField> {
                 Inputs = new [] {
                     new XUITextField {
@@ -37,43 +60,36 @@ namespace BetterSalesman.iOS
                 }
             };
             
-            loginButton.TouchUpInside += (sender, e) =>
+            View.EndEditing(true);
+
+            if (validator.Validate())
             {
-                View.EndEditing(true);
-                    
-                if (validator.Validate())
+                if (!IsNetworkAvailable())
                 {
-                    if (!IsNetworkAvailable())
-                    {
-                        ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
-                        return;
-                    }
-                        
-                    ShowHud(I18n.AuthenticationInProgress);
-                    
-                    ServiceProviderUser.Instance.Authentication(
-                        inputEmail.Text, 
-                        inputPassword.Text, 
-                        result =>
-                        {       
-                            HideHud();
-                            Login();
-                        },
-                        errorMessage =>
-                        {
-                            HideHud();
-                            ShowAlert(errorMessage);
-                        }
-                    );
-                } else
-                {
-                    ShowAlert(string.Join("\n", validator.Errors));
+                    ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                    return;
                 }
-            };
-            
-            if (UserSessionManager.Instance.User != null)
+
+                ShowHud(I18n.AuthenticationInProgress);
+
+                ServiceProviderUser.Instance.Authentication(
+                    inputEmail.Text, 
+                    inputPassword.Text, 
+                    result =>
+                    {       
+                        HideHud();
+                        Login();
+                    },
+                    errorMessage =>
+                    {
+                        HideHud();
+                        ShowAlert(errorMessage);
+                    }
+                );
+            }
+            else
             {
-                Login();
+                ShowAlert(string.Join("\n", validator.Errors));
             }
         }
 
