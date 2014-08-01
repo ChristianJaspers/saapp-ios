@@ -27,11 +27,6 @@ namespace BetterSalesman.iOS
 					return;
 				}
 
-<<<<<<< HEAD
-=======
-				ShowHud(I18n.UploadingProfilePictureMessage);
-
->>>>>>> 32a736c0ea9eac6e5caf426b0f120312bbab6491
                 Task.Run(async () =>
                     {
                     	await UploadImage(pickedImage);
