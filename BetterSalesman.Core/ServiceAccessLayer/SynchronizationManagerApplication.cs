@@ -51,7 +51,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 
                     OnFinishedSynchronization();
                 },
-                errorCode => OnFinishedSynchronization()
+                // TODO display error message
+                errorMessage => OnFinishedSynchronization()
             );
         }
 

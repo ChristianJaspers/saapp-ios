@@ -35,7 +35,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         
         public async void Synchronize(
             Action<T> success = null, 
-            Action<int> failure = null
+            Action<string> failure = null
         )
         {
             var request = new HttpRequest <T> {
@@ -52,7 +52,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                     if ( failure != null )
                     {
-                        failure(response.Error.InternalCode);
+                        failure(response.Error.LocalizedMessage);
                     }
                 }
             };

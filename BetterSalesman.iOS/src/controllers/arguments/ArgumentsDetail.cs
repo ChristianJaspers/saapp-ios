@@ -51,11 +51,11 @@ namespace BetterSalesman.iOS
                             updateView();
                             HideHud();
                         },
-                        error =>
+                        errorMessage =>
                         {
                             chooseRating.SelectedSegment = -1;
                             HideHud();
-                            ShowAlert(I18n.ErrorConnectionTimeout);
+                            ShowAlert(errorMessage);
                         }
                     );
                 };

@@ -241,10 +241,10 @@ namespace BetterSalesman.iOS
                     HideHud();
                     ShowAlert(I18n.SuccessMessagePasswordChange);
                 },
-                errorCode =>
+                errorMessage =>
                 {
                     HideHud();
-                    ShowAlert(I18n.ErrorConnectionTimeout);
+                    ShowAlert(errorMessage);
                 }
             );
         }

@@ -45,10 +45,10 @@ namespace BetterSalesman.iOS
                             DismissViewController(true, null);
                             ShowAlert(I18n.SuccessMessageForgotPassword);
                         },
-                        errorCode =>
+                        errorMessage =>
                         {
                             HideHud();
-                            ShowAlert(I18n.ErrorConnectionTimeout);
+                            ShowAlert(errorMessage);
                         }
                     );
                 }

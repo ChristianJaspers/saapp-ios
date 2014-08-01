@@ -47,7 +47,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             string email, 
             string password, 
             Action<string> success = null, 
-            Action<int> failure = null
+            Action<string> failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
@@ -78,7 +78,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     
                     if ( failure != null )
                     {
-                        failure(response.Error.InternalCode);
+                        failure(response.Error.LocalizedMessage);
                     }
                 }
             };
@@ -89,7 +89,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public async void ForgotPassword(
             string email,
             Action<string> success = null, 
-            Action<int> failure = null
+            Action<string> failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
@@ -110,7 +110,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                     if ( failure != null )
                     {
-                        failure(response.Error.InternalCode);
+                        failure(response.Error.LocalizedMessage);
                     }
                 }
             };
@@ -121,7 +121,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public async void PasswordChange(
             string newPassword,
             Action<string> success = null, 
-            Action<int> failure = null
+            Action<string> failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
@@ -145,7 +145,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                     if ( failure != null )
                     {
-                        failure(response.Error.InternalCode);
+                        failure(response.Error.LocalizedMessage);
                     }
                 }
             };

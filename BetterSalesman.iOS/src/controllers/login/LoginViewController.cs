@@ -57,10 +57,10 @@ namespace BetterSalesman.iOS
                             HideHud();
                             Login();
                         },
-                        errorCode =>
+                        errorMessage =>
                         {
                             HideHud();
-                            ShowAlert(I18n.ErrorConnectionTimeout);
+                            ShowAlert(errorMessage);
                         }
                     );
                 } else

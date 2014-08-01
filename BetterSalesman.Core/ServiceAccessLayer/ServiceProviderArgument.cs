@@ -40,7 +40,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             Argument argument,
             float rating,
             Action<Argument> success = null, 
-            Action<int> failure = null
+            Action<string> failure = null
         )
         {
             var parameters = new Dictionary<string, object> {
@@ -65,7 +65,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                     if ( failure != null )
                     {
-                        failure(response.Error.InternalCode);
+                        failure(response.Error.LocalizedMessage);
                     }
                 }
             };
