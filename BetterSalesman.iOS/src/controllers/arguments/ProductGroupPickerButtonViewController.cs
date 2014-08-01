@@ -67,7 +67,7 @@ namespace BetterSalesman.iOS
 		{
 			if (productGroup != null)
 			{
-				ProductGroupPickerButton.TitleLabel.Text = productGroup.Name;
+                ProductGroupPickerButton.SetTitle(productGroup.Name, UIControlState.Normal);
 			}
 		}
 

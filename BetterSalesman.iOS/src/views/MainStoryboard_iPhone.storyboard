@@ -774,10 +774,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thi-xF-kNq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thi-xF-kNq">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <color key="backgroundColor" red="1" green="0.82591566380000003" blue="0.70743845760000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title=" ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -786,6 +787,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="thi-xF-kNq" secondAttribute="trailing" id="Afv-MU-viG"/>
+                            <constraint firstItem="b8R-NC-dof" firstAttribute="top" secondItem="thi-xF-kNq" secondAttribute="bottom" constant="27" id="ByP-mk-mLc"/>
+                            <constraint firstItem="thi-xF-kNq" firstAttribute="leading" secondItem="S0L-XE-2Ns" secondAttribute="leading" id="QAo-30-sfR"/>
+                            <constraint firstItem="thi-xF-kNq" firstAttribute="top" secondItem="ez3-Th-ZFV" secondAttribute="bottom" id="Zhd-xm-6Zh"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
