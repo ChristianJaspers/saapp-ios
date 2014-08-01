@@ -186,12 +186,15 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             HttpRequestResult<T> result =  new HttpRequestResult<T>();
             
             int codeNumber = Convert.ToInt32(response.StatusCode);
+            
+            bool statusOK = (codeNumber >= 200 && codeNumber < 300);
+            bool status4xx = (codeNumber >= 400 && codeNumber < 500);
 
-            if ( response.StatusCode.Equals(HttpStatusCode.OK) || (codeNumber >= 400 && codeNumber < 500) )
+            if ( statusOK || status4xx )
             {
                 string resultString = await response.Content.ReadAsStringAsync();
                 
-                if (response.StatusCode.Equals(HttpStatusCode.OK))
+                if ( statusOK )
                 {
                     ResultOK(result, resultString);
                 } 

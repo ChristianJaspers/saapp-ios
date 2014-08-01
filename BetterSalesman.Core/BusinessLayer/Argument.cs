@@ -39,7 +39,7 @@ namespace BetterSalesman.Core.BusinessLayer
         
         public bool Rated
         {
-            get { return Rating > 0; }   
+            get { return MyRating > 0; }   
         }
         
         #endregion

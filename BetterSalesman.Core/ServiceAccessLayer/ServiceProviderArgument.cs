@@ -15,7 +15,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         const string paramRateValue = "rating";
         
         // Paths
-        const string pathRate = "api/v1/arguments/{0}/rating";
+        const string pathRate = "api/v1/arguments/{0}/ratings";
         
         public static ServiceProviderArgument Instance
         {
