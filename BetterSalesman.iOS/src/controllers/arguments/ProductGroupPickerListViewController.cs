@@ -22,8 +22,11 @@ namespace BetterSalesman.iOS
 
 			set
 			{
+				UnsubscribeFromSelectedProductGroupChangedEvent();
+
 				this.productGroupsDataSource = value;
 				this.TableView.Source = value;
+
 				SubscribeToSelectedProductGroupChangedEvent();
 			}
 		}
@@ -57,18 +60,18 @@ namespace BetterSalesman.iOS
 
 		private void SubscribeToSelectedProductGroupChangedEvent()
 		{
-			if (this.ProductGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.ProductGroupsDataSource.SelectedProductGroupChanged += SelectedProductGroupChanged;
+				this.productGroupsDataSource.SelectedProductGroupChanged += SelectedProductGroupChanged;
 				isSubscribedToSelectedProductGroupChangedEvent = true;
 			}
 		}
 
 		private void UnsubscribeFromSelectedProductGroupChangedEvent()
 		{
-			if (this.ProductGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.ProductGroupsDataSource.SelectedProductGroupChanged -= SelectedProductGroupChanged;
+				this.productGroupsDataSource.SelectedProductGroupChanged -= SelectedProductGroupChanged;
 				isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
 		}

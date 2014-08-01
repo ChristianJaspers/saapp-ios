@@ -12,7 +12,7 @@ namespace BetterSalesman.iOS
 	{
 		private const string SegueIdAddArgumentButton = "segueIdAddArgumentButton";
 		private const string SegueIdProductGroupPickerEmbeded = "segueIdProductGroupPickerSubview";
-		private const string SegueIdProductGroupsListEmbeded = "segueIdArgumentsListSubview";
+		private const string SegueIdArgumentsListEmbeded = "segueIdArgumentsListSubview";
 
     	private const string MenuIconName = "ic_menu";
 
@@ -49,6 +49,14 @@ namespace BetterSalesman.iOS
 			if (segue.Identifier.Equals(SegueIdProductGroupPickerEmbeded))
 			{
 				var destinationController = segue.DestinationViewController as ProductGroupPickerButtonViewController;
+				if (destinationController != null)
+				{
+					destinationController.ProductGroupsDataSource = ProductGroupsDataSource;
+				}
+			}
+			else if (segue.Identifier.Equals(SegueIdArgumentsListEmbeded))
+			{
+				var destinationController = segue.DestinationViewController as ArgumentsListViewController;
 				if (destinationController != null)
 				{
 					destinationController.ProductGroupsDataSource = ProductGroupsDataSource;

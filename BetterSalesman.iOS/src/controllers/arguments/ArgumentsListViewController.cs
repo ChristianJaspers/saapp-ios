@@ -6,6 +6,7 @@ using MonoTouch.Foundation;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.Extensions;
+using System.Diagnostics;
 
 namespace BetterSalesman.iOS
 {
@@ -13,6 +14,8 @@ namespace BetterSalesman.iOS
     {   
         const string segueIdAdding = "ArgumentAdding";
         const string segueIdSelected = "ArgumentSelected";
+
+		public ProductGroupsDataSource ProductGroupsDataSource { get; set; }
 
         public ArgumentsListViewController()
             : base(UITableViewStyle.Grouped)
@@ -64,7 +67,12 @@ namespace BetterSalesman.iOS
         {
             InvokeOnMainThread(() =>
             {
-                var allArguments = ArgumentManager.Arguments();
+				var allArguments = ArgumentManager.Arguments();
+				if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
+				{
+					Debug.WriteLine("Filtering arguments by ProductGroup: " + ProductGroupsDataSource.SelectedProductGroup.Name);
+					allArguments = allArguments.Where(a => a.ProductGroupId == ProductGroupsDataSource.SelectedProductGroup.Id).ToList();
+				}
                 var notRatedArguments = allArguments.NotRated();
                 var RatedArguments = allArguments.Rated();
                 
