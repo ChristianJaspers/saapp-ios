@@ -27,8 +27,6 @@ namespace BetterSalesman.iOS
 					return;
 				}
 
-				ShowHud("Updating profile picture");
-
                 Task.Run(async () =>
                     {
                     	await UploadImage(pickedImage);
