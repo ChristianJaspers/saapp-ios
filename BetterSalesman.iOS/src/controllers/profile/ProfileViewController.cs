@@ -44,7 +44,7 @@ namespace BetterSalesman.iOS
 
 			ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
-			//LoadUser();
+			LoadUser();
 		}
 
 		private async Task UploadImage(UIImage image)
