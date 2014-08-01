@@ -67,8 +67,13 @@ namespace BetterSalesman.iOS
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
             
-            if (Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id)
+            if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
             {
+                if (Argument.UserId != UserManager.LoggedInUser().Id)
+                {
+                    chooseRating.SelectedSegment = Argument.MyRating - 1;
+                } 
+                
                 chooseRating.Enabled = false;
             }
         }
