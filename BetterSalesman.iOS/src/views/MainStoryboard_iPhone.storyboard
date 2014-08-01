@@ -377,7 +377,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Arguments" id="hnM-vT-THZ">
-                        <barButtonItem key="rightBarButtonItem" image="ic_add.png" style="plain" id="s3F-kN-Nsu">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="ic_add.png" style="plain" id="s3F-kN-Nsu">
                             <connections>
                                 <segue destination="lKl-jK-C5K" kind="push" identifier="segueIdAddArgumentButton" id="mJU-2O-oQX"/>
                             </connections>
