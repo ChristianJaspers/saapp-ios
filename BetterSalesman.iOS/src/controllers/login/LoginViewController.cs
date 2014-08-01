@@ -39,6 +39,8 @@ namespace BetterSalesman.iOS
             
             loginButton.TouchUpInside += (sender, e) =>
             {
+                View.EndEditing(true);
+                    
                 if (validator.Validate())
                 {
                     if (!IsNetworkAvailable())
