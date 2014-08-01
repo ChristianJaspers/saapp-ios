@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace BetterSalesman.iOS
 {
-    public partial class ArgumentsListViewController : UITableViewController
+    public partial class ArgumentsListViewController : BaseUITableViewController
     {   
         const string segueIdAdding = "ArgumentAdding";
         const string segueIdSelected = "ArgumentSelected";
@@ -65,33 +65,40 @@ namespace BetterSalesman.iOS
 
         void LoadArguments()
         {
+            var allArguments = ArgumentManager.Arguments();
+            if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
+            {
+                Debug.WriteLine("Filtering arguments by ProductGroup: " + ProductGroupsDataSource.SelectedProductGroup.Name);
+                allArguments = allArguments.Where(a => a.ProductGroupId == ProductGroupsDataSource.SelectedProductGroup.Id).ToList();
+            }
+            var notRatedArguments = allArguments.NotRated();
+            var RatedArguments = allArguments.Rated();
+            
+            var items = new Dictionary<int, List<Argument>>();
+            
+            if ( notRatedArguments.Any() )
+            {
+                items.Add(0,notRatedArguments);
+                items.Add(1,RatedArguments);
+            }
+            else
+            {
+                items.Add(0,RatedArguments);
+            }
+            
             InvokeOnMainThread(() =>
             {
-				var allArguments = ArgumentManager.Arguments();
-				if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
-				{
-					Debug.WriteLine("Filtering arguments by ProductGroup: " + ProductGroupsDataSource.SelectedProductGroup.Name);
-					allArguments = allArguments.Where(a => a.ProductGroupId == ProductGroupsDataSource.SelectedProductGroup.Id).ToList();
-				}
-                var notRatedArguments = allArguments.NotRated();
-                var RatedArguments = allArguments.Rated();
-                
-                var items = new Dictionary<int, List<Argument>>();
-                
-                if ( notRatedArguments.Any() )
-                {
-                    items.Add(0,notRatedArguments);
-                    items.Add(1,RatedArguments);
-                }
-                else
-                {
-                    items.Add(0,RatedArguments);
-                }
-                
                 ((ArgumentsListViewSource)TableView.Source).Items = items;
     
                 TableView.ReloadData();
             });
+        }
+        
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+            
+            LoadArguments();
         }
     }
 }

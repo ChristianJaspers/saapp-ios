@@ -356,6 +356,7 @@
       <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
     </Compile>
     <Compile Include="src\extensions\UIColorExtensions.cs" />
+    <Compile Include="src\controllers\base\BaseUITableViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

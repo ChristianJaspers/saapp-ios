@@ -43,9 +43,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         public override void FullSynchronizationTaskRun()
         {
             ServiceProviderSynchronization.Instance.Synchronize(
-                result => {
+                async result => {
                 
-                    UpdateDatabaseAsync(result);
+                    await UpdateDatabaseAsync(result);
                 
                     OnUpdatedDatabase();
                 

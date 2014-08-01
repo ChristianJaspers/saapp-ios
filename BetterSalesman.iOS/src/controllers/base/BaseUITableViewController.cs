@@ -5,9 +5,13 @@ using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
-    public class BaseUIViewController : UIViewController
+    public class BaseUITableViewController : UITableViewController
     {
-        public BaseUIViewController(IntPtr handle) : base(handle)
+        public BaseUITableViewController(IntPtr handle) : base(handle)
+        {
+        }
+        
+        public BaseUITableViewController(UITableViewStyle style) : base(style)
         {
         }
         

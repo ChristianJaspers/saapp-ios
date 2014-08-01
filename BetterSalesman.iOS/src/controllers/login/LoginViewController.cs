@@ -100,19 +100,25 @@ namespace BetterSalesman.iOS
                 ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
                 return;
             }
-            
-            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
-
-            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
-            
-            SynchronizationManagerApplication.Instance.FinishedSynchronization += () =>
-            {
-                HideHud();
-                PerformSegue(sequeIdLogged, this);
-            };
 
             SynchronizationManagerApplication.Instance.Synchronize();
             
+        }
+        
+        protected override void OnSynchronizationStart()
+        {
+            base.OnSynchronizationStart();
+            
+            ShowHud(I18n.DataSynchronization);
+        }
+        
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+            
+            HideHud();
+            
+            PerformSegue(sequeIdLogged, this);
         }
     }
 }

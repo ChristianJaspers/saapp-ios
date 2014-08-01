@@ -155,16 +155,23 @@ namespace BetterSalesman.iOS
                 return;
             }
             
-            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
-            
-            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
-
-            SynchronizationManagerApplication.Instance.FinishedSynchronization += () => {
-                HideHud();
-                Navigation.HideMenu();
-            };
-            
             SynchronizationManagerApplication.Instance.Synchronize();
+        }
+        
+        protected override void OnSynchronizationStart()
+        {
+            base.OnSynchronizationStart();
+
+            ShowHud(I18n.DataSynchronization);
+        }
+
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+
+            HideHud();
+            
+            Navigation.HideMenu();
         }
         
         #endregion
