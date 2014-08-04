@@ -302,7 +302,6 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessError.cs">
       <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
     </Compile>
-    <Compile Include="src\helpers\ImageDownloader.cs" />
     <Compile Include="src\helpers\ImageManipulationHelper.cs" />
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonEmpty.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonEmpty.cs</Link>
