@@ -200,11 +200,6 @@
     <Compile Include="src\controllers\login\ForgotPasswordViewController.designer.cs">
       <DependentUpon>ForgotPasswordViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewController.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListViewController.designer.cs">
-      <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewSource.cs" />
     <Compile Include="src\controllers\profile\ProfileViewController.cs" />
     <Compile Include="src\controllers\profile\ProfileViewController.designer.cs">
       <DependentUpon>ProfileViewController.cs</DependentUpon>
@@ -288,14 +283,6 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsForm.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsForm.designer.cs">
-      <DependentUpon>ArgumentsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsDetail.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsDetail.designer.cs">
-      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpClientFileUploader.cs">
       <Link>ServiceAccessLayer\HttpClientFileUploader.cs</Link>
     </Compile>
@@ -326,23 +313,6 @@
     <Compile Include="src\views\BetterSalesmanViewController.designer.cs">
       <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.designer.cs">
-      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.designer.cs">
-      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.designer.cs">
-      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
-      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupsDataSource.cs" />
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ProductGroupManager.cs">
       <Link>BusinessLayer\Managers\ProductGroupManager.cs</Link>
     </Compile>
@@ -356,6 +326,41 @@
     </Compile>
     <Compile Include="src\extensions\UIColorExtensions.cs" />
     <Compile Include="src\controllers\base\BaseUITableViewController.cs" />
+    <Compile Include="src\controllers\base\BaseProductCategoryPickerUIViewController.cs" />
+    <Compile Include="src\controllers\arguments\Details\ArgumentsDetail.cs" />
+    <Compile Include="src\controllers\arguments\Details\ArgumentsDetail.designer.cs">
+      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Form\ArgumentFormViewController.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentFormViewController.designer.cs">
+      <DependentUpon>ArgumentFormViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\List\ArgumentsListContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewController.cs" />
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewController.designer.cs">
+      <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewSource.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButton.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButton.designer.cs">
+      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButtonViewController.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButtonViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerListViewController.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerListViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupsDataSource.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentsFormContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentsFormContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsFormContainerViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -383,6 +388,10 @@
     <Folder Include="Extensions\" />
     <Folder Include="src\views\components\" />
     <Folder Include="ServiceAccessLayer\DataTransferObject\" />
+    <Folder Include="src\controllers\arguments\List\" />
+    <Folder Include="src\controllers\arguments\Form\" />
+    <Folder Include="src\controllers\arguments\Details\" />
+    <Folder Include="src\controllers\arguments\Picker\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
