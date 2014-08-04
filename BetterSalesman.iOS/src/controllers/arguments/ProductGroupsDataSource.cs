@@ -66,6 +66,11 @@ namespace BetterSalesman.iOS
 		{
 			return ProductGroups.Count;
 		}
+        
+        public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 66;
+        }
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
