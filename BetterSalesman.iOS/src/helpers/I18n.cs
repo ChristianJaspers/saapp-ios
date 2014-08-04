@@ -33,6 +33,8 @@
 
         public static string Sending = "Sending...".t();
 
+        public static string XP = "XP".t();
+
 		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
 		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
 		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();

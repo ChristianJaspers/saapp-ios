@@ -1,27 +1,31 @@
 ﻿using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SDWebImage;
-using System;
+using BetterSalesman.Core.BusinessLayer;
+using System.Collections.Generic;
 
 namespace BetterSalesman.iOS
 {
     public class MyTeamListViewSource : UITableViewSource
     {
         readonly string cellIdentifierItem = "MyTeamCell";
-        public MyTeamListViewSource()
+        const string ic_placeholder = "avatar_placeholder";
+        
+        List<User> items = new List<User>();
+        
+        public MyTeamListViewSource(List<User> items)
         {
+            this.items = items;
         }
 
         public override int NumberOfSections(UITableView tableView)
         {
-            // TODO: return the actual number of sections
             return 1;
         }
 
         public override int RowsInSection(UITableView tableview, int section)
         {
-            // TODO: return the actual number of items in the section
-            return 3;
+            return items.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -32,12 +36,14 @@ namespace BetterSalesman.iOS
             var subtitle = (UILabel)cell.ViewWithTag(2);
             var imageView = (UIImageView)cell.ViewWithTag(5);
             
-            // TODO change values later on
-            title.Text = "Username";
-            subtitle.Text = "99999 XP";
+            var user = items[indexPath.Row];
+            
+            title.Text = user.DisplayName;
+            subtitle.Text = user.Experience + " " + I18n.XP;
+            
             imageView.SetImage(
-                url: new NSUrl("http://lorempixel.com/400/400/?t=" + new Random().Next(99999)),
-                placeholder:  UIImage.FromBundle("ic_menu")
+                url: new NSUrl(user.AvatarThumbUrl),
+                placeholder: UIImage.FromBundle(ic_placeholder)
             );
             
             return cell;
