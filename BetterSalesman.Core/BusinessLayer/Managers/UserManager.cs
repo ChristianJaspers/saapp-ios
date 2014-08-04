@@ -19,7 +19,14 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
         
         public static List<User> GetUsers()
         {
-            return DatabaseHelper.GetAll<User>().OrderBy(u=>u.Experience).ToList();
+            var users = new List<User>();
+            
+            using (var conn = DatabaseProvider.OpenConnection())
+            {
+                users = conn.Table<User>().OrderBy(u => u.Experience).ToList();
+            }
+            
+            return  users;
         }
     }
 }
