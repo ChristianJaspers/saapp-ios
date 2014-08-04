@@ -1,5 +1,6 @@
 ﻿using BetterSalesman.Core.BusinessLayer.Contracts;
 using SQLite;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace BetterSalesman.Core.DataLayer
@@ -51,6 +52,22 @@ namespace BetterSalesman.Core.DataLayer
                 obj = conn.Get<T>(pk);
             }
             
+            return obj;
+        }
+        
+        /// <summary>
+        /// Get all objects of given type 
+        /// </summary>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static List<T> GetAll<T>() where T : new()
+        {
+            List<T> obj = default(List<T>);
+
+            using (var conn = DatabaseProvider.OpenConnection())
+            {
+                obj = conn.Table<T>().ToList();
+            }
+
             return obj;
         }
         

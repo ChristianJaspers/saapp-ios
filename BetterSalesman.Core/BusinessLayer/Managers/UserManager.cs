@@ -1,5 +1,6 @@
 ﻿using BetterSalesman.Core.DataLayer;
 using BetterSalesman.Core.ServiceAccessLayer;
+using System.Collections.Generic;
 
 namespace BetterSalesman.Core.BusinessLayer.Managers
 {
@@ -13,6 +14,11 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
             }
             
             return DatabaseHelper.Get<User>(UserSessionManager.Instance.User.UserId);
+        }
+        
+        public static List<User> Users()
+        {
+            return DatabaseHelper.GetAll<User>();
         }
     }
 }
