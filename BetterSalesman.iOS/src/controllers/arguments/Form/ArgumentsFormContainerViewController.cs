@@ -10,6 +10,8 @@ namespace BetterSalesman.iOS
 	{   
         private const string SegueIdArgumentsListEmbeded = "segueIdArgumentFormContainer";
         
+        const string ic_save_button = "ic_menu"; // TODO update save icon
+        
         public Argument Argument;
         
         ArgumentFormViewController formController;
@@ -25,6 +27,13 @@ namespace BetterSalesman.iOS
             // init validator here?
             
             // load argument if any (edit mode)
+            
+            var saveButton = new UIBarButtonItem(UIImage.FromBundle(ic_save_button), UIBarButtonItemStyle.Plain, delegate
+            {
+                // TODO save here
+            });
+
+            NavigationItem.SetRightBarButtonItem(saveButton, false);
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)

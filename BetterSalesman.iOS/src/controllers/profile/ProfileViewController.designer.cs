@@ -16,14 +16,6 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIBarButtonItem BackButton { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIBarButtonItem buttonPasswordChange { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelAllTeamsActivity { get; set; }
 
 		[Outlet]
@@ -52,14 +44,6 @@ namespace BetterSalesman.iOS
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (BackButton != null) {
-				BackButton.Dispose ();
-				BackButton = null;
-			}
-			if (buttonPasswordChange != null) {
-				buttonPasswordChange.Dispose ();
-				buttonPasswordChange = null;
-			}
 			if (labelAllTeamsActivity != null) {
 				labelAllTeamsActivity.Dispose ();
 				labelAllTeamsActivity = null;
