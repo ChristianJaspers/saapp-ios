@@ -1,28 +1,19 @@
 using System;
 using MonoTouch.UIKit;
-using System.CodeDom.Compiler;
-using BetterSalesman.Core.BusinessLayer;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
-	partial class ArgumentsListContainerViewController : UIViewController
+    partial class ArgumentsListContainerViewController : BaseProductCategoryPickerUIViewController
 	{
-		private const string SegueIdAddArgumentButton = "segueIdAddArgumentButton";
-		private const string SegueIdProductGroupPickerEmbeded = "segueIdProductGroupPickerSubview";
+        private const string SegueIdAddArgumentButton = "segueIdAddArgumentButton";
 		private const string SegueIdArgumentsListEmbeded = "segueIdArgumentsListSubview";
 
     	private const string MenuIconName = "ic_menu";
 
-		public ProductGroupsDataSource ProductGroupsDataSource { get; private set; }
-
 		public ArgumentsListContainerViewController(IntPtr handle) : base(handle)
 		{
-			Debug.WriteLine("Creating ProductGroupsDataSrounce in " + this.GetType().Name);
-			ProductGroupsDataSource = new ProductGroupsDataSource();
-			ProductGroupsDataSource.Initialize();
 		}
 
 		public override void ViewDidLoad()
@@ -37,24 +28,11 @@ namespace BetterSalesman.iOS
       		NavigationItem.SetLeftBarButtonItem(menuButton, false);
 		}
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-		}
-
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
 		{
 			base.PrepareForSegue(segue, sender);
-
-			if (segue.Identifier.Equals(SegueIdProductGroupPickerEmbeded))
-			{
-				var destinationController = segue.DestinationViewController as ProductGroupPickerButtonViewController;
-				if (destinationController != null)
-				{
-					destinationController.ProductGroupsDataSource = ProductGroupsDataSource;
-				}
-			}
-			else if (segue.Identifier.Equals(SegueIdArgumentsListEmbeded))
+            
+			if (segue.Identifier.Equals(SegueIdArgumentsListEmbeded))
 			{
 				var destinationController = segue.DestinationViewController as ArgumentsListViewController;
 				if (destinationController != null)
@@ -62,13 +40,6 @@ namespace BetterSalesman.iOS
 					destinationController.ProductGroupsDataSource = ProductGroupsDataSource;
 				}
 			}
-
-			LogSegue(segue);
-		}
-
-		private void LogSegue(UIStoryboardSegue segue)
-		{
-			Debug.WriteLine(string.Format("Segue {0} from {1} to {2}", segue.Identifier, segue.SourceViewController.GetType().Name, segue.DestinationViewController.GetType().Name));
 		}
 	}
 }
