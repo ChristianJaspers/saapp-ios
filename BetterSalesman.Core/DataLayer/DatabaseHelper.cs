@@ -59,13 +59,13 @@ namespace BetterSalesman.Core.DataLayer
         /// Get all objects of given type 
         /// </summary>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public static List<T> GetAll<T>() where T : new()
+        public static TableQuery<T> GetAll<T>() where T : new()
         {
-            List<T> obj = default(List<T>);
+            TableQuery<T> obj = default(TableQuery<T>);
 
             using (var conn = DatabaseProvider.OpenConnection())
             {
-                obj = conn.Table<T>().ToList();
+                obj = conn.Table<T>();
             }
 
             return obj;

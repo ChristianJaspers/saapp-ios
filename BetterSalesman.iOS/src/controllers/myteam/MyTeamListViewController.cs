@@ -31,7 +31,7 @@ namespace BetterSalesman.iOS
 
         void LoadUsers()
         {
-            var users = UserManager.Users();
+            var users = UserManager.GetUsers();
             
             TableView.Source = new MyTeamListViewSource(users);
             
