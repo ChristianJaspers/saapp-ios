@@ -39,7 +39,6 @@
 		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
 		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();
 		public static string ServiceAccessProfilePicturePreparingForUploadMessage = "Preparing picture for upload".t();
-		public static string ServiceAccessProfilePictureUpdateSuccessfulMessage = "We've updated your profile picture for you.".t();
 
         public static string ValidationRequired = "Field {0} is required.".t();
         public static string ValidationLengthMinimum = "Field {0} must contain at least {1} characters.".t();

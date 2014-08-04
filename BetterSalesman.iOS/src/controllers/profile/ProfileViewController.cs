@@ -92,24 +92,26 @@ namespace BetterSalesman.iOS
 				ShowAlert(uploadResult.Error.LocalizedMessage);
 				return;
 			}
-				
+
+			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
+			var imageUrl = new NSUrl(uploadResult.User.AvatarThumbUrl);
+			var downloadOptions = SDWebImageOptions.ProgressiveDownload 
+					| SDWebImageOptions.ContinueInBackground
+					| SDWebImageOptions.RetryFailed;
 			InvokeOnMainThread(() =>
 			{
-				ProfileImageView.SetImage(new NSUrl(uploadResult.User.AvatarThumbUrl), 
+				ProfileImageView.SetImage(
+					imageUrl,
 					downsizedImage, 
-					SDWebImageOptions.ProgressiveDownload 
-					& SDWebImageOptions.ContinueInBackground,
-					(UIImage downloadedImage, NSError error, SDImageCacheType cacheType) =>
-					{
-						InvokeOnMainThread(() =>
-						{
-							HideHud();
-							var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
-							ShowAlert(uploadCompletedMessage);
-						});
-					}
+					downloadOptions,
+					ProcessImageDownloadCompleted
 				);
 			});
+		}
+
+		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
+		{
+			HideHud();
 		}
 
 		private void LoadUser()
