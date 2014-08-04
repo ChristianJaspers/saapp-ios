@@ -7,7 +7,6 @@ namespace BetterSalesman.iOS
 {
     partial class ArgumentsListContainerViewController : BaseProductCategoryPickerUIViewController
 	{
-        private const string SegueIdAddArgumentButton = "segueIdAddArgumentButton";
 		private const string SegueIdArgumentsListEmbeded = "segueIdArgumentsListSubview";
 
     	private const string MenuIconName = "ic_menu";

@@ -318,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="931" y="-293"/>
         </scene>
-        <!--Arguments Form - Add argument-->
+        <!--Arguments Form Container View Controller - Add argument-->
         <scene sceneID="8oe-AB-hSB">
             <objects>
-                <viewController title="Add argument" id="lKl-jK-C5K" customClass="ArgumentsForm" sceneMemberID="viewController">
+                <viewController title="Add argument" id="lKl-jK-C5K" customClass="ArgumentsFormContainerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RaL-KM-eJ4"/>
                         <viewControllerLayoutGuide type="bottom" id="nH5-tX-3LD"/>
@@ -346,7 +346,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="rIO-f0-nlg" kind="embed" identifier="ArgumentFormContainer" id="fql-ER-0vF"/>
+                                    <segue destination="rIO-f0-nlg" kind="embed" identifier="segueIdArgumentFormContainer" id="fql-ER-0vF"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -856,10 +856,10 @@
             </objects>
             <point key="canvasLocation" x="1500" y="383"/>
         </scene>
-        <!--View Controller-->
+        <!--Argument Form View Controller-->
         <scene sceneID="N5x-ZC-MbL">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="rIO-f0-nlg" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="rIO-f0-nlg" customClass="ArgumentFormViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cUq-AM-ezL"/>
                         <viewControllerLayoutGuide type="bottom" id="rvW-M0-EIf"/>
