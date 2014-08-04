@@ -14,6 +14,9 @@ namespace BetterSalesman.iOS
 	{
 		private ImagePickerPresenter imagePickerPresenter;
 		private string currentProfilePictureUrl = null;
+        
+        const string menu_icon = "ic_menu";
+        const string menu_password_change = "ic_change_password";
 
 		const string PlaceholderImage = "avatar_placeholder.png";
 
@@ -31,19 +34,35 @@ namespace BetterSalesman.iOS
                     });
             };
 		}
+        
+        #region Lifecycle
 
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
-			BackButton.Clicked += (s, e) => DismissViewController(true, null);
             
-            buttonPasswordChange.Clicked += (s, e) => DisplayPasswordChange(string.Empty,true);
+            Title = I18n.Profile;
+            
+            var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
+            {
+                FlyoutViewController.Navigation.ToggleMenu();
+            });
+
+            NavigationItem.SetLeftBarButtonItem(menuButton, true);
+            
+            var buttonPasswordChange = new UIBarButtonItem(UIImage.FromBundle(menu_password_change), UIBarButtonItemStyle.Plain, delegate
+            {
+                DisplayPasswordChange(string.Empty,true);
+            });
+            
+            NavigationItem.SetRightBarButtonItem(buttonPasswordChange, true);
 
 			ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
 			LoadUser();
 		}
+        
+        #endregion
 
 		private async Task UploadImage(UIImage image)
 		{

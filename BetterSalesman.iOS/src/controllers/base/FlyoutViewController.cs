@@ -14,10 +14,10 @@ namespace BetterSalesman.iOS
         const string storyboardIdNavigationBase = "NavigationBase";
         
         const string VEmpty = "Empty";
+        const string VProfile = "Profile";
         const string VListArguments = "ListArguments";
         const string VListMyTeam = "ListMyTeam";
         
-        const string storyboardIdProfile = "Profile";
         const string storyboardIdLogin = "Login";
         
         const string segueIDLogout = "LogoutSegue";
@@ -70,9 +70,9 @@ namespace BetterSalesman.iOS
             var elements = new List<FlayoutNavigationItem>() {
                 new FlayoutNavigationItem(
                     I18n.Profile, 
-                    Profile,
+                    null,
                     UIImage.FromBundle(IcProfile),
-                    VEmpty
+                    VProfile
                 ),
                 new FlayoutNavigationItem(
                     I18n.Arguments, 
@@ -131,13 +131,6 @@ namespace BetterSalesman.iOS
         #endregion
         
         #region Tab actions
-
-        void Profile()
-        {
-            Navigation.HideMenu();
-            
-            PresentViewControllerWithStoryboardId(storyboardIdProfile);
-        }
 
         void Logout()
         {
