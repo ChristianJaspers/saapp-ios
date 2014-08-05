@@ -78,7 +78,6 @@ namespace BetterSalesman.iOS
 
 			imagePicker.FinishedPickingMedia += (s, e) =>
 			{
-				Debug.WriteLine("Finished picking");
 				viewController.InvokeOnMainThread(() =>
 				{
 					bool didPickAnImage = e.MediaType == ImageMediaType && e.OriginalImage != null;
@@ -100,7 +99,6 @@ namespace BetterSalesman.iOS
 
 		private void OnFinishedPicking(bool didPickAnImage, UIImage pickedImage)
 		{
-			Debug.WriteLine("Finished picking: " + pickedImage);
 			imagePicker.DismissViewController(true, null);
 			if (FinishedPicking != null)
 			{
