@@ -57,7 +57,7 @@ namespace BetterSalesman.iOS
 				NSError error = null;
 				if (imageData.Save(temporaryImageFilePath, false, out error)) 
 				{
-					Console.WriteLine("saved file");
+					Console.WriteLine("Saved image to temporary file: " + temporaryImageFilePath);
 				} else 
 				{
 					Console.WriteLine("ERROR! Did NOT SAVE file because" + error.LocalizedDescription);
@@ -84,7 +84,7 @@ namespace BetterSalesman.iOS
 				NSError error = null;
 				if (imageData.Save(temporaryImageFilePath, false, out error)) 
 				{
-					Console.WriteLine("saved file");
+					Console.WriteLine("Saved image to temporary file: " + temporaryImageFilePath);
 				} else 
 				{
 					Console.WriteLine("ERROR! Did NOT SAVE file because" + error.LocalizedDescription);

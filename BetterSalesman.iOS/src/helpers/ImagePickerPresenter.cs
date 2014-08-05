@@ -27,11 +27,10 @@ namespace BetterSalesman.iOS
 		private UIImagePickerController imagePicker;
 		private UIActionSheet mediaSourceTypePicker;
 
-		// TODO - add to localized strings
-		private string MediaSourceTypePickerLabel = "Choose source".t();
-		private string CameraButtonLabel = "Camera".t();
-		private string PhotoLibraryButtonLabel = "Photo library".t();
-		private string CancelButtonLabel = "Cancel".t();
+		private string MediaSourceTypePickerLabel = I18n.ImagePickerPresenterMediaSourceTypeSelectionTitle;
+		private string CameraButtonLabel = I18n.ImagePickerPresenterMediaSourceTypeCamera;
+		private string PhotoLibraryButtonLabel = I18n.ImagePickerPresenterMediaSourceTypePhotoLibrary;
+		private string CancelButtonLabel = I18n.Cancel;
 
 		private Dictionary<int, UIImagePickerControllerSourceType> buttonIndexesForMediaSourceTypes;
 		private int lastAddedMediaSourceTypeButtonIndex;
@@ -78,7 +77,6 @@ namespace BetterSalesman.iOS
 
 			imagePicker.FinishedPickingMedia += (s, e) =>
 			{
-				Debug.WriteLine("Finished picking");
 				viewController.InvokeOnMainThread(() =>
 				{
 					bool didPickAnImage = e.MediaType == ImageMediaType && e.OriginalImage != null;
@@ -100,7 +98,6 @@ namespace BetterSalesman.iOS
 
 		private void OnFinishedPicking(bool didPickAnImage, UIImage pickedImage)
 		{
-			Debug.WriteLine("Finished picking: " + pickedImage);
 			imagePicker.DismissViewController(true, null);
 			if (FinishedPicking != null)
 			{

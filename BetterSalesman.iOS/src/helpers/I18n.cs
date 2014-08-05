@@ -48,6 +48,10 @@
         public static string ValidationRequired = "Field {0} is required.".t();
         public static string ValidationLengthMinimum = "Field {0} must contain at least {1} characters.".t();
         public static string ValidationLengthMaximum = "Field {0} must contain not more than {1} characters.".t();
+
+		public static string ImagePickerPresenterMediaSourceTypeSelectionTitle = "Choose source".t();
+		public static string ImagePickerPresenterMediaSourceTypeCamera = "Camera".t();
+		public static string ImagePickerPresenterMediaSourceTypePhotoLibrary = "Photo library".t();
     }
 }
 

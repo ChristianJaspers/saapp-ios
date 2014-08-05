@@ -62,7 +62,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 						streamContent.Headers.Add(HttpHeaderTitleContentType, mimeType);
 
 						var fileName = Path.GetFileName(localFilePath);
-						Debug.WriteLine("File name: " + fileName);
 						content.Add(streamContent, parameterName, fileName);
 
 						if (method.Equals(HttpMethodPost))

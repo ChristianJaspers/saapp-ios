@@ -13,11 +13,11 @@ namespace BetterSalesman.iOS
 {
     partial class ProfileViewController : BaseUIViewController
 	{
-		private const string menu_icon = "ic_menu";
-		private const string menu_password_change = "ic_change_password";
+		private const string MenuIcon = "ic_menu";
+		private const string MenuIconPasswordChange = "ic_change_password";
 
-		private const string PlaceholderImageName = "avatar_placeholder.png";
-		private UIImage PlaceholderImage = UIImage.FromBundle(PlaceholderImageName);
+		private const string AvatarPlaceholderImageName = "avatar_placeholder.png";
+		private UIImage AvatarPlaceholderImage;
 
 		private ImagePickerPresenter imagePickerPresenter;
 
@@ -44,14 +44,16 @@ namespace BetterSalesman.iOS
             
             Title = I18n.Profile;
             
-            var menuButton = new UIBarButtonItem(UIImage.FromBundle(menu_icon), UIBarButtonItemStyle.Plain, delegate
+			AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName);
+
+            var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIcon), UIBarButtonItemStyle.Plain, delegate
             {
                 FlyoutViewController.Navigation.ToggleMenu();
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
             
-            var buttonPasswordChange = new UIBarButtonItem(UIImage.FromBundle(menu_password_change), UIBarButtonItemStyle.Plain, delegate
+            var buttonPasswordChange = new UIBarButtonItem(UIImage.FromBundle(MenuIconPasswordChange), UIBarButtonItemStyle.Plain, delegate
             {
                 DisplayPasswordChange(string.Empty,true);
             });
@@ -138,7 +140,7 @@ namespace BetterSalesman.iOS
 				labelMyActivity.Text = user.MyActivity.ToString();
 				labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
 				labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
-				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), PlaceholderImage);
+				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage);
 			});
 		}
         
