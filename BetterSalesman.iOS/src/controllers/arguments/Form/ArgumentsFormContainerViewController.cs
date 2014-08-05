@@ -1,5 +1,5 @@
 using System;
-
+using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
@@ -31,6 +31,9 @@ namespace BetterSalesman.iOS
             var saveButton = new UIBarButtonItem(UIImage.FromBundle(ic_save_button), UIBarButtonItemStyle.Plain, delegate
             {
                 // TODO save here
+                Debug.WriteLine("Save/Edit argument");
+                    
+                View.EndEditing(true);
             });
 
             NavigationItem.SetRightBarButtonItem(saveButton, false);

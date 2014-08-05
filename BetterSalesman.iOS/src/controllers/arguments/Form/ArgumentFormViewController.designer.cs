@@ -38,6 +38,10 @@ namespace BetterSalesman.iOS
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelFeature { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIScrollView scrollViewContainer { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (fieldBenefit != null) {
@@ -63,6 +67,10 @@ namespace BetterSalesman.iOS
 			if (labelFeature != null) {
 				labelFeature.Dispose ();
 				labelFeature = null;
+			}
+			if (scrollViewContainer != null) {
+				scrollViewContainer.Dispose ();
+				scrollViewContainer = null;
 			}
 		}
 	}
