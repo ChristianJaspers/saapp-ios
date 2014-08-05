@@ -13,7 +13,16 @@ namespace BetterSalesman.iOS
         public BaseProductCategoryPickerUIViewController(IntPtr handle) : base (handle)
         {
             ProductGroupsDataSource = new ProductGroupsDataSource();
-            ProductGroupsDataSource.ReloadProductGroups();
+        }
+        
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            if (ProductGroupsDataSource != null)
+            {
+                ProductGroupsDataSource.ReloadProductGroups();
+            }
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
