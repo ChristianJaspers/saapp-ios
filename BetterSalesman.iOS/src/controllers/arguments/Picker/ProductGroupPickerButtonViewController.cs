@@ -65,7 +65,7 @@ namespace BetterSalesman.iOS
 
 		private void UpdateButtonLabel(ProductGroup productGroup)
 		{
-			if (productGroup != null)
+			if (productGroup != null && ProductGroupPickerButton != null)
 			{
                 ProductGroupPickerButton.SetTitle(productGroup.Name, UIControlState.Normal);
 			}
@@ -73,11 +73,6 @@ namespace BetterSalesman.iOS
 
 		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
 		{
-			if (!IsBeingPresented)
-			{
-				return;
-			}
-
 			InvokeOnMainThread(() =>
 			{
 				UpdateButtonLabel(newSelectedProductGroup);

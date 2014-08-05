@@ -22,12 +22,12 @@ namespace BetterSalesman.iOS
 
 			set
 			{
-				UnsubscribeFromSelectedProductGroupChangedEvent();
+				UnsubscribeFromProductGroupPickedEvent();
 
 				this.productGroupsDataSource = value;
 				this.TableView.Source = value;
 
-				SubscribeToSelectedProductGroupChangedEvent();
+				SubscribeToProductGroupPickedEvent();
 			}
 		}
 
@@ -40,17 +40,19 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
-			SubscribeToSelectedProductGroupChangedEvent();
+			ProductGroupsDataSource.ReloadProductGroups();
+
+			SubscribeToProductGroupPickedEvent();
 		}
 
 		public override void ViewDidDisappear(bool animated)
 		{
 			base.ViewDidDisappear(animated);
 
-			UnsubscribeFromSelectedProductGroupChangedEvent();
+			UnsubscribeFromProductGroupPickedEvent();
 		}
 
-		private void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup)
+		private void ProductGroupPicked(ProductGroup newSelectedProductGroup)
 		{
 			InvokeOnMainThread(() =>
 			{
@@ -58,20 +60,20 @@ namespace BetterSalesman.iOS
 			});
 		}
 
-		private void SubscribeToSelectedProductGroupChangedEvent()
+		private void SubscribeToProductGroupPickedEvent()
 		{
 			if (this.productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.productGroupsDataSource.SelectedProductGroupChanged += SelectedProductGroupChanged;
+				this.productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
 				isSubscribedToSelectedProductGroupChangedEvent = true;
 			}
 		}
 
-		private void UnsubscribeFromSelectedProductGroupChangedEvent()
+		private void UnsubscribeFromProductGroupPickedEvent()
 		{
 			if (this.productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.productGroupsDataSource.SelectedProductGroupChanged -= SelectedProductGroupChanged;
+				this.productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
 				isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
 		}

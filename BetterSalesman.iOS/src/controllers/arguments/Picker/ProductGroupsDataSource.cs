@@ -11,12 +11,14 @@ using MonoTouch.Foundation;
 namespace BetterSalesman.iOS
 {
 	public delegate void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup);
+	public delegate void ProductGroupPicked(ProductGroup pickedProductGroup);
 
 	public class ProductGroupsDataSource : UITableViewSource
 	{
 		private const string cellIdentifierItem = "cellProductGroup";
 
 		public event SelectedProductGroupChanged SelectedProductGroupChanged;
+		public event ProductGroupPicked ProductGroupPicked;
 
 		private ProductGroup selectedProductGroup;
 
@@ -36,21 +38,19 @@ namespace BetterSalesman.iOS
 			
 		public List<ProductGroup> ProductGroups { get; set; }
 
-		private bool hasBeenInitialized;
-
 		public ProductGroupsDataSource() : base()
 		{
 			ProductGroups = new List<ProductGroup>();
 		}
 
-		public void Initialize()
+		public void ReloadProductGroups()
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
-
-			if (!hasBeenInitialized)
+			// TODO - replace with isEqual - but it also requires GetHash
+			if (SelectedProductGroup == null || !ProductGroups.Where(pg => pg.Id == SelectedProductGroup.Id).Any())
 			{
+				Debug.WriteLine("Selected argument changed");
 				SelectedProductGroup = ProductGroups.FirstOrDefault();
-				hasBeenInitialized = true;
 			}
 		}
 
@@ -91,6 +91,15 @@ namespace BetterSalesman.iOS
 		{
 			Debug.WriteLine("Selected ProductGroup: " + this.ProductGroups[indexPath.Row].Name);
 			this.SelectedProductGroup = this.ProductGroups[indexPath.Row];
+			OnProductGroupPicked(this.SelectedProductGroup);
+		}
+
+		public void OnProductGroupPicked(ProductGroup pickedProductGroup)
+		{
+			if (ProductGroupPicked != null)
+			{
+				ProductGroupPicked(pickedProductGroup);
+			}
 		}
 	}
 }
