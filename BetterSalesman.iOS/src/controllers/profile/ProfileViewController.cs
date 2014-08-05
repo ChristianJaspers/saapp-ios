@@ -7,18 +7,19 @@ using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.Threading.Tasks;
 using XValidator;
+using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
     partial class ProfileViewController : BaseUIViewController
 	{
-		private ImagePickerPresenter imagePickerPresenter;
-		private string currentProfilePictureUrl = null;
-        
-        const string menu_icon = "ic_menu";
-        const string menu_password_change = "ic_change_password";
+		private const string menu_icon = "ic_menu";
+		private const string menu_password_change = "ic_change_password";
 
-		const string PlaceholderImage = "avatar_placeholder.png";
+		private const string PlaceholderImageName = "avatar_placeholder.png";
+		private UIImage PlaceholderImage = UIImage.FromBundle(PlaceholderImageName);
+
+		private ImagePickerPresenter imagePickerPresenter;
 
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
@@ -84,52 +85,33 @@ namespace BetterSalesman.iOS
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureUploadingMessage);
 
 			var uploadResult = await ServiceProviderUser.Instance.UpdateAvatar(imageFilePath, mimeType);
+			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 			if (!uploadResult.IsSuccess)
 			{
-				await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 				HideHud();
 				ShowAlert(uploadResult.Error.LocalizedMessage);
 				return;
 			}
-
-			await ImageFilesManagementHelper.SharedInstance.RemoveTemporaryFile(imageFilePath);
 
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
-
-			var downloadResult = await ImageDownloader.DownloadImage(uploadResult.User.AvatarThumbUrl);
-			if (!downloadResult.IsSuccess)
+			var imageUrl = new NSUrl(uploadResult.User.AvatarThumbUrl);
+			var downloadOptions = SDWebImageOptions.ProgressiveDownload 
+					| SDWebImageOptions.ContinueInBackground
+					| SDWebImageOptions.RetryFailed;
+			InvokeOnMainThread(() =>
 			{
-				DisplayAvatarPlaceholderInProfileImageView();
-				HideHud();
-				ShowAlert(uploadResult.Error.LocalizedMessage);
-				return;
-			}
+				ProfileImageView.SetImage(
+					imageUrl,
+					downsizedImage, 
+					downloadOptions,
+					ProcessImageDownloadCompleted
+				);
+			});
+		}
 
-			UpdateProfileImageView(downloadResult.Image);
-
+		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
+		{
 			HideHud();
-			var uploadCompletedMessage = I18n.ServiceAccessProfilePictureUpdateSuccessfulMessage;
-			ShowAlert(uploadCompletedMessage);
-		}
-						
-		private void UpdateProfileImageView(UIImage image)
-		{
-			InvokeOnMainThread(() =>
-			{
-				if (image != null)
-				{
-					// TODO use async image loading
-					ProfileImageView.Image = image;
-				}
-			});
-		}
-
-		private void DisplayAvatarPlaceholderInProfileImageView()
-		{
-			InvokeOnMainThread(() =>
-			{
-				ProfileImageView.Image = UIImage.FromBundle(PlaceholderImage);
-			});
 		}
 
 		private void LoadUser()
@@ -149,43 +131,8 @@ namespace BetterSalesman.iOS
 				labelMyActivity.Text = user.MyActivity.ToString();
 				labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
 				labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
+				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), PlaceholderImage);
 			});
-
-			UpdateProfilePicture(user);
-		}
-
-		private void UpdateProfilePicture(User user)
-		{
-			if (!ShouldDownloadProfilePicture(user))
-			{
-				return;
-			}
-
-			if (IsNetworkAvailable())
-			{
-				Task.Run(async () =>
-				{
-					var downloadResult = await ImageDownloader.DownloadImage(user.AvatarThumbUrl);
-					if (downloadResult.IsSuccess)
-					{
-						UpdateProfileImageView(downloadResult.Image);
-						currentProfilePictureUrl = user.AvatarThumbUrl;
-					}
-					else
-					{
-						DisplayAvatarPlaceholderInProfileImageView();
-					}
-				});
-			}
-			else
-			{
-				DisplayAvatarPlaceholderInProfileImageView();
-			}
-		}
-
-		private bool ShouldDownloadProfilePicture(User user)
-		{
-			return currentProfilePictureUrl == null || !currentProfilePictureUrl.Equals(user.AvatarThumbUrl);
 		}
         
         #region Password change
