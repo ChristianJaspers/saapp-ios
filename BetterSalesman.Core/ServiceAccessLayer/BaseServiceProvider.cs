@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -20,8 +21,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         class Device
         {
+            [JsonPropertyAttribute(PropertyName = "notification_token")]
             public string NotificationToken;
+            
+            [JsonPropertyAttribute(PropertyName = "platform")]
             public string Platform;
+            
+            [JsonPropertyAttribute(PropertyName = "locale")]
             public string Locale;
         }
     }

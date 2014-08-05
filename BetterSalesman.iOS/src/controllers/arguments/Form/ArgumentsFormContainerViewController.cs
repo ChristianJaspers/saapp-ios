@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
@@ -11,9 +10,7 @@ namespace BetterSalesman.iOS
 	{   
         private const string SegueIdArgumentsListEmbeded = "segueIdArgumentFormContainer";
         
-        const string ic_save_button = "ic_menu"; // TODO update save icon
-        
-        public Argument Argument;
+        public Argument Argument = new Argument();
         
         ArgumentFormViewController formController;
         
@@ -21,15 +18,24 @@ namespace BetterSalesman.iOS
 		{
 		}
         
+        #region Lifecycle
+        
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             
-            // TODO load argument if any (edit mode)
-            
-            var saveButton = new UIBarButtonItem(UIImage.FromBundle(ic_save_button), UIBarButtonItemStyle.Plain, SaveArgument);
+            var saveButton = new UIBarButtonItem(I18n.Save, UIBarButtonItemStyle.Plain, SaveArgument);
 
             NavigationItem.SetRightBarButtonItem(saveButton, false);
+        }
+        
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            
+            // TODO update product gruoup in picker (in case of edit)
+            formController.Feature = Argument.Feature;
+            formController.Benefit = Argument.Benefit;
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -42,11 +48,10 @@ namespace BetterSalesman.iOS
             }
         }
         
+        #endregion
+        
         void SaveArgument(object o, EventArgs e)
         {
-            // TODO save here
-            Debug.WriteLine("Save/Edit argument");
-
             View.EndEditing(true);
 
             if (formController.Validator.Validate())
@@ -56,24 +61,26 @@ namespace BetterSalesman.iOS
                     ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
                     return;
                 }
+                
+                Argument.ProductGroupId = ProductGroupsDataSource.SelectedProductGroup.Id;
+                Argument.Feature = formController.Feature;
+                Argument.Benefit = formController.Benefit;
 
-                // TODO request with HUD
-
-//                    ShowHud(I18n.AuthenticationInProgress);
-//                    ServiceProviderUser.Instance.Authentication(
-//                        inputEmail.Text, 
-//                        inputPassword.Text, 
-//                        result =>
-//                        {       
-//                            HideHud();
-//                            Login();
-//                        },
-//                        errorMessage =>
-//                        {
-//                            HideHud();
-//                            ShowAlert(errorMessage);
-//                        }
-//                    );
+                ShowHud(I18n.Sending);
+                
+                ServiceProviderArgument.Instance.CreateOrUpdate(
+                    Argument,
+                    result =>
+                    {       
+                        HideHud();
+                        DismissViewController(true,null);
+                    },
+                    errorMessage =>
+                    {
+                        HideHud();
+                        ShowAlert(errorMessage);
+                    }
+                );
             }
             else
             {

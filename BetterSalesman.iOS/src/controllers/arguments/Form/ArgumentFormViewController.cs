@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using MonoTouch.UIKit;
 using XValidator;
+using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -19,6 +20,9 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
+            fieldFeature.Text = feature;
+            fieldBenefit.Text = benefit;
+            
             InitValidator();
             
             SubscribeEvents();
@@ -32,6 +36,20 @@ namespace BetterSalesman.iOS
         }
         
         #endregion
+        
+        string feature;
+        public string Feature
+        {
+            get { return fieldFeature.Text; }
+            set { feature = value; }
+        }
+        
+        string benefit;
+        public string Benefit
+        {
+            get { return fieldBenefit.Text; }
+            set { benefit = value; }
+        }
         
         #region Validation
 

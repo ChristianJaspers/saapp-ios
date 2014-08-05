@@ -4,6 +4,8 @@
     {
         public static string Cancel = "Cancel".t();
         public static string OK = "OK".t();
+        public static string Edit = "Edit".t();
+        public static string Save = "Save".t();
         
         public static string Profile = "Profile".t();
         public static string Arguments = "Arguments".t();
