@@ -108,6 +108,13 @@ namespace BetterSalesman.iOS
 				);
 			});
 		}
+        
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+            
+            LoadUser();
+        }
 
 		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
 		{
