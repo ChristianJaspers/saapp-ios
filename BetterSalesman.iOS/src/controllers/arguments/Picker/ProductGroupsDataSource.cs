@@ -46,7 +46,6 @@ namespace BetterSalesman.iOS
 		public void ReloadProductGroups()
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
-			// TODO - replace with isEqual - but it also requires GetHash
 			if (SelectedProductGroup == null || !ProductGroups.Where(pg => pg.Id == SelectedProductGroup.Id).Any())
 			{
 				Debug.WriteLine("Selected argument changed");
