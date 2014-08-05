@@ -365,14 +365,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8q-UM-Pdm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1500" y="-1119"/>
+            <point key="canvasLocation" x="2618" y="-1117"/>
         </scene>
         <!--Product Group Picker List View Controller-->
         <scene sceneID="b0y-pj-eYX">
             <objects>
                 <tableViewController id="POc-8S-Hb0" customClass="ProductGroupPickerListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="n2e-6O-2mQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -416,7 +416,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Dd-fd-hw7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2596" y="-298"/>
+            <point key="canvasLocation" x="3714" y="-298"/>
         </scene>
         <!--Arguments Detail - Argument-->
         <scene sceneID="6KB-bm-4qL">
@@ -427,7 +427,7 @@
                         <viewControllerLayoutGuide type="bottom" id="UWL-hp-JsS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6Gj-5O-73a">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="444"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Feature" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="43">
@@ -440,7 +440,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Benefit" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="44" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Benefit" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="44">
                                 <rect key="frame" x="20" y="154" width="280" height="294"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -448,7 +448,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Fmo-Ad-ZH5">
-                                <rect key="frame" x="20" y="1137" width="280" height="29"/>
+                                <rect key="frame" x="20" y="1476" width="280" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="kZw-U1-izL"/>
                                 </constraints>
@@ -459,7 +459,7 @@
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="How relevant this argument is to me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPW-Ni-hk7">
-                                <rect key="frame" x="20" y="1019" width="280" height="21"/>
+                                <rect key="frame" x="20" y="1317" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="vZN-xb-fDU"/>
                                 </constraints>
@@ -468,7 +468,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Earn 5xp by voting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uig-iu-MtS">
-                                <rect key="frame" x="20" y="1069" width="280" height="21"/>
+                                <rect key="frame" x="20" y="1382" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0A8-fT-4gF"/>
                                 </constraints>
@@ -529,11 +529,12 @@
                         <outlet property="labelEarnXPForVote" destination="uig-iu-MtS" id="name-outlet-uig-iu-MtS"/>
                         <outlet property="labelFeature" destination="43" id="name-outlet-43"/>
                         <outlet property="labelHowRelevant" destination="XPW-Ni-hk7" id="name-outlet-XPW-Ni-hk7"/>
+                        <segue destination="lKl-jK-C5K" kind="push" identifier="segueIdArgumentEdit" id="bGM-YO-hz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SdD-zD-cjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2104" y="321"/>
+            <point key="canvasLocation" x="2070" y="321"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="FX9-aj-exN">
@@ -753,7 +754,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbV-Jk-0by" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="-58"/>
+            <point key="canvasLocation" x="3222" y="-58"/>
         </scene>
         <!--Arguments List View Controller-->
         <scene sceneID="hRs-WF-hKP">
@@ -865,11 +866,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rvW-M0-EIf"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PLy-tX-hQI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTa-dA-DC4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-s5-SO7">
@@ -975,17 +976,17 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="fieldBenefit" destination="pCD-LU-4sL" id="name-outlet-pCD-LU-4sL"/>
+                        <outlet property="fieldFeature" destination="VEJ-XE-50H" id="name-outlet-VEJ-XE-50H"/>
                         <outlet property="imageViewBenefit" destination="bT1-K5-fjg" id="name-outlet-bT1-K5-fjg"/>
                         <outlet property="imageViewFeature" destination="oyf-ay-a1t" id="name-outlet-oyf-ay-a1t"/>
                         <outlet property="labelBenefit" destination="Sd4-AP-Omr" id="name-outlet-Sd4-AP-Omr"/>
                         <outlet property="labelFeature" destination="qgs-QN-3BX" id="name-outlet-qgs-QN-3BX"/>
                         <outlet property="scrollViewContainer" destination="yTa-dA-DC4" id="name-outlet-yTa-dA-DC4"/>
-                        <outlet property="fieldFeature" destination="VEJ-XE-50H" id="name-outlet-VEJ-XE-50H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpX-uy-6uK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2221" y="-1075"/>
+            <point key="canvasLocation" x="3247" y="-1073"/>
         </scene>
     </scenes>
     <resources>
@@ -994,10 +995,6 @@
         <image name="ic_menu.png" width="22" height="22"/>
         <image name="login_form.png" width="608" height="128"/>
         <image name="logo.png" width="340" height="80"/>
-        <image name="Default-568h.png" width="640" height="1136"/>
-        <image name="ic_change_password.png" width="22" height="22"/>
-        <image name="ic_star_unrated.png" width="22" height="22"/>
-        <image name="ic_star_rated.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1005,8 +1002,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Psd-rE-10c"/>
-        <segue reference="zm9-Cr-f1k"/>
+        <segue reference="bGM-YO-hz2"/>
         <segue reference="a9h-qT-ohh"/>
+        <segue reference="zm9-Cr-f1k"/>
+        <segue reference="Psd-rE-10c"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using MonoTouch.UIKit;
 using XValidator;
-using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
