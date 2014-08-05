@@ -13,7 +13,7 @@ namespace BetterSalesman.iOS
         public BaseProductCategoryPickerUIViewController(IntPtr handle) : base (handle)
         {
             ProductGroupsDataSource = new ProductGroupsDataSource();
-            ProductGroupsDataSource.Initialize();
+            ProductGroupsDataSource.ReloadProductGroups();
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
