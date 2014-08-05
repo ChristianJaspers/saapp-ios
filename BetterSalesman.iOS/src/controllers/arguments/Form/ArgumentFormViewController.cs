@@ -7,7 +7,7 @@ namespace BetterSalesman.iOS
 {
 	public partial class ArgumentFormViewController : BaseUIViewController
 	{
-        XForm<UITextField> validator;
+        public XForm<UITextView> Validator;
         
 		public ArgumentFormViewController (IntPtr handle) : base (handle)
 		{
@@ -41,27 +41,21 @@ namespace BetterSalesman.iOS
                 Message = I18n.ValidationRequired
             };
 
-            // TODO
-//            validator = new XForm<UITextField> {
-//                Inputs = new [] {
-//                    new XUITextField {
-//                        Name = I18n.FieldFeature,
-//                        FieldView = fieldFeature,
-//                        Validators = new [] { validatorRequired },
-//                    },
-//                    new XUITextField {
-//                        Name = I18n.FieldBenefit,
-//                        FieldView = (UIView)fieldBenefit,
-//                        Validators = new [] { validatorRequired },
-//                    }
-//                }
-//            };
+            Validator = new XForm<UITextView> {
+                Inputs = new [] {
+                    new XUITextViewField {
+                        Name = I18n.FieldFeature,
+                        FieldView = fieldFeature,
+                        Validators = new [] { validatorRequired },
+                    },
+                    new XUITextViewField {
+                        Name = I18n.FieldBenefit,
+                        FieldView = fieldBenefit,
+                        Validators = new [] { validatorRequired },
+                    }
+                }
+            };
         }
-        
-//        public bool Valid()
-//        {
-//            return validator.Validate();
-//        }
         
         #endregion
         

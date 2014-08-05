@@ -3,6 +3,7 @@ using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
@@ -24,17 +25,9 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            // init validator here?
+            // TODO load argument if any (edit mode)
             
-            // load argument if any (edit mode)
-            
-            var saveButton = new UIBarButtonItem(UIImage.FromBundle(ic_save_button), UIBarButtonItemStyle.Plain, delegate
-            {
-                // TODO save here
-                Debug.WriteLine("Save/Edit argument");
-                    
-                View.EndEditing(true);
-            });
+            var saveButton = new UIBarButtonItem(UIImage.FromBundle(ic_save_button), UIBarButtonItemStyle.Plain, SaveArgument);
 
             NavigationItem.SetRightBarButtonItem(saveButton, false);
         }
@@ -46,6 +39,45 @@ namespace BetterSalesman.iOS
             if (segue.Identifier.Equals(SegueIdArgumentsListEmbeded))
             {
                 formController = segue.DestinationViewController as ArgumentFormViewController;
+            }
+        }
+        
+        void SaveArgument(object o, EventArgs e)
+        {
+            // TODO save here
+            Debug.WriteLine("Save/Edit argument");
+
+            View.EndEditing(true);
+
+            if (formController.Validator.Validate())
+            {
+                if (!IsNetworkAvailable())
+                {
+                    ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                    return;
+                }
+
+                // TODO request with HUD
+
+//                    ShowHud(I18n.AuthenticationInProgress);
+//                    ServiceProviderUser.Instance.Authentication(
+//                        inputEmail.Text, 
+//                        inputPassword.Text, 
+//                        result =>
+//                        {       
+//                            HideHud();
+//                            Login();
+//                        },
+//                        errorMessage =>
+//                        {
+//                            HideHud();
+//                            ShowAlert(errorMessage);
+//                        }
+//                    );
+            }
+            else
+            {
+                ShowAlert(string.Join("\n", formController.Validator.Errors));
             }
         }
 	}

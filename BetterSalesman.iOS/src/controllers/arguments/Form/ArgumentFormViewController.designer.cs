@@ -20,7 +20,7 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField fieldFeature { get; set; }
+		UITextView fieldFeature { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]

@@ -361,12 +361,14 @@
     <Compile Include="src\controllers\arguments\Form\ArgumentsFormContainerViewController.designer.cs">
       <DependentUpon>ArgumentsFormContainerViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\views\components\XUITextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
     <InterfaceDefinition Include="src\views\MainStoryboard_iPhone.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\controllers\" />
