@@ -8,6 +8,7 @@ namespace BetterSalesman.iOS
     partial class ArgumentsListContainerViewController : BaseProductCategoryPickerUIViewController
 	{
 		private const string SegueIdArgumentsListEmbeded = "segueIdArgumentsListSubview";
+        private const string segueIdArgumentAdd = "segueIdArgumentAdd";
 
     	private const string MenuIconName = "ic_menu";
 
@@ -46,6 +47,16 @@ namespace BetterSalesman.iOS
 					destinationController.ProductGroupsDataSource = ProductGroupsDataSource;
 				}
 			}
+            
+            if (segue.Identifier.Equals(segueIdArgumentAdd))
+            {
+                var vc = segue.DestinationViewController as ArgumentsFormContainerViewController;
+                
+                if (vc != null)
+                {
+                    vc.Argument.ProductGroupId = ProductGroupsDataSource.SelectedProductGroup.Id;
+                }
+            }
 		}
 	}
 }
