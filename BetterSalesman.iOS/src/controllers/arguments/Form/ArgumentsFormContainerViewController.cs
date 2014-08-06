@@ -24,18 +24,11 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
+            Title = Argument.Id > 0 ? I18n.ArgumentEdit : I18n.ArgumentAdd;
+            
             var saveButton = new UIBarButtonItem(I18n.Save, UIBarButtonItemStyle.Plain, SaveArgument);
 
             NavigationItem.SetRightBarButtonItem(saveButton, false);
-        }
-        
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-            
-            // TODO update product gruoup in picker (in case of edit)
-            formController.Feature = Argument.Feature;
-            formController.Benefit = Argument.Benefit;
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -45,6 +38,8 @@ namespace BetterSalesman.iOS
             if (segue.Identifier.Equals(SegueIdArgumentsListEmbeded))
             {
                 formController = segue.DestinationViewController as ArgumentFormViewController;
+                
+                formController.Argument = Argument;
             }
         }
         
@@ -62,9 +57,7 @@ namespace BetterSalesman.iOS
                     return;
                 }
                 
-                Argument.ProductGroupId = ProductGroupsDataSource.SelectedProductGroup.Id;
-                Argument.Feature = formController.Feature;
-                Argument.Benefit = formController.Benefit;
+                Argument = formController.Argument;
 
                 ShowHud(I18n.Sending);
                 

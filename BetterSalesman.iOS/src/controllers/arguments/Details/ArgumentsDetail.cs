@@ -70,6 +70,18 @@ namespace BetterSalesman.iOS
             }
         }
         
+        public override void PrepareForSegue(UIStoryboardSegue segue, MonoTouch.Foundation.NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            
+            if (segue.Identifier.Equals(segueIdArgumentEdit))
+            {
+                var vc = (ArgumentsFormContainerViewController)segue.DestinationViewController;
+                
+                vc.Argument = Argument;
+            }
+        }
+        
         void updateView()
         {
             labelFeature.Text = Argument.Feature;

@@ -2,12 +2,15 @@ using System;
 using System.Drawing;
 using MonoTouch.UIKit;
 using XValidator;
+using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
 	public partial class ArgumentFormViewController : BaseUIViewController
 	{
         public XForm<UITextView> Validator;
+        
+        public Argument Argument;
         
 		public ArgumentFormViewController (IntPtr handle) : base (handle)
 		{
@@ -19,10 +22,10 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            fieldFeature.Text = feature;
-            fieldBenefit.Text = benefit;
-            
             InitValidator();
+            
+            Feature = Argument.Feature;
+            Benefit = Argument.Benefit;
             
             SubscribeEvents();
         }
@@ -36,18 +39,16 @@ namespace BetterSalesman.iOS
         
         #endregion
         
-        string feature;
         public string Feature
         {
             get { return fieldFeature.Text; }
-            set { feature = value; }
+            set { fieldFeature.Text = value; }
         }
         
-        string benefit;
         public string Benefit
         {
             get { return fieldBenefit.Text; }
-            set { benefit = value; }
+            set { fieldBenefit.Text = value; }
         }
         
         #region Validation
@@ -80,6 +81,9 @@ namespace BetterSalesman.iOS
         
         void DidStartEditing(object sender, EventArgs e)
         {
+            Argument.Feature = Feature;
+            Argument.Benefit = Benefit;
+            
             scrollViewContainer.SetContentOffset(new PointF(0,((UIView)sender).Frame.Y), true);
         }
         
