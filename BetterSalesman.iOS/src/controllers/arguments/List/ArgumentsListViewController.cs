@@ -15,7 +15,7 @@ namespace BetterSalesman.iOS
         const string segueIdSelected = "ArgumentSelected";
         
         const string ic_rated = "ic_star_rated";
-        const string ic_unrated = "ic_star_unreated";
+        const string ic_unrated = "ic_star_unrated";
 
 		public ProductGroupsDataSource ProductGroupsDataSource { get; set; }
 
