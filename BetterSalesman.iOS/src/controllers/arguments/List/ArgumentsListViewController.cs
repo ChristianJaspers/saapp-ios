@@ -40,12 +40,12 @@ namespace BetterSalesman.iOS
             TableView.Source = new ArgumentsListViewSource();
         }
         
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-            
-            LoadArguments();
-        }
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+
+			LoadArguments();
+		}
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
         {
