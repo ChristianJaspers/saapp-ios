@@ -7,18 +7,10 @@ namespace BetterSalesman.iOS
 {
     public class ArgumentsListViewSource : UITableViewSource
     {
-        public Dictionary<int, List<Argument>> Items = new Dictionary<int, List<Argument>>();
+        public Dictionary<int, ListSectionArguments> Sections = new Dictionary<int, ListSectionArguments>();
         
         readonly string cellIdentifierItem = "ArgumentsCell";
         readonly string cellIdentifierHeader = "ArgumentsHeader";
-        
-        const string ic_rated = "ic_star_rated";
-        const string ic_unrated = "ic_star_unreated";
-        
-        string[] sections = {
-            I18n.WithoutRating,
-            I18n.Rated
-        };
 
         public ArgumentsListViewSource()
         {
@@ -26,17 +18,7 @@ namespace BetterSalesman.iOS
 
         public override int NumberOfSections(UITableView tableView)
         {
-            return Items.Count;
-        }
-
-        public override string TitleForHeader(UITableView tableView, int section)
-        {
-            if (Items.Count > 1) // not ordered & ordered
-            {
-                return sections[section];
-            }
-            
-            return sections[1];
+            return Sections.Count;
         }
 
         public override UIView GetViewForHeader(UITableView tableView, int section)
@@ -47,16 +29,9 @@ namespace BetterSalesman.iOS
             
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
-            titleTxt.Text = TitleForHeader(tableView, section);
+            titleTxt.Text = Sections[section].Title;
             
-            string star_icon;
-            star_icon = ic_rated;
-            if (Items.Count > 1)
-            {
-                star_icon = section == 1 ? ic_rated : ic_unrated;
-            }
-            
-            imageView.Image = UIImage.FromBundle(star_icon);
+            imageView.Image = UIImage.FromBundle(Sections[section].Icon);
             
             return cell;
         }
@@ -73,7 +48,7 @@ namespace BetterSalesman.iOS
 
         public override int RowsInSection(UITableView tableview, int section)
         {
-            return Items[section].Count;
+            return Sections[section].Arguments.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -84,9 +59,9 @@ namespace BetterSalesman.iOS
             var benefitTxt = (UILabel)cell.ViewWithTag(2);
             
             var relevanceTxt = (UILabel)cell.ViewWithTag(5);
-            var verticalLine = (UIView)cell.ViewWithTag(6);
+            var verticalLine = cell.ViewWithTag(6);
             
-            var argument = Items[indexPath.Section][indexPath.Row];
+            var argument = Sections[indexPath.Section].Arguments[indexPath.Row];
             
             verticalLine.Hidden = !argument.Rated;
             relevanceTxt.Hidden = !argument.Rated;

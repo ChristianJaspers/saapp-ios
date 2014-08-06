@@ -362,6 +362,7 @@
       <DependentUpon>ArgumentsFormContainerViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="src\views\components\XUITextView.cs" />
+    <Compile Include="src\ViewModels\ListSectionArguments.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

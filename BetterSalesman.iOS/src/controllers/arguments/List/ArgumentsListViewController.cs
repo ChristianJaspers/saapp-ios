@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using BetterSalesman.Core.BusinessLayer.Managers;
-using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.Extensions;
 using System.Diagnostics;
 
@@ -14,6 +13,9 @@ namespace BetterSalesman.iOS
     {   
         const string segueIdAdding = "ArgumentAdding";
         const string segueIdSelected = "ArgumentSelected";
+        
+        const string ic_rated = "ic_star_rated";
+        const string ic_unrated = "ic_star_unreated";
 
 		public ProductGroupsDataSource ProductGroupsDataSource { get; set; }
 
@@ -57,7 +59,7 @@ namespace BetterSalesman.iOS
                 
                 var vc = (ArgumentsDetail)segue.DestinationViewController;
                 
-                vc.Argument = ((ArgumentsListViewSource)TableView.Source).Items[indexPath.Section][indexPath.Row];
+                vc.Argument = ((ArgumentsListViewSource)TableView.Source).Sections[indexPath.Section].Arguments[indexPath.Row];
             }
         }
         
@@ -71,24 +73,29 @@ namespace BetterSalesman.iOS
                 Debug.WriteLine("Filtering arguments by ProductGroup: " + ProductGroupsDataSource.SelectedProductGroup.Name);
                 allArguments = allArguments.Where(a => a.ProductGroupId == ProductGroupsDataSource.SelectedProductGroup.Id).ToList();
             }
+            
             var notRatedArguments = allArguments.NotRated();
-            var RatedArguments = allArguments.Rated();
+            var ratedArguments = allArguments.Rated();
             
-            var items = new Dictionary<int, List<Argument>>();
+            var notRatedArgumentsSection = new ListSectionArguments { Arguments = notRatedArguments, Title = I18n.WithoutRating, Icon = ic_unrated };
+            var RatedArgumentsSection = new ListSectionArguments { Arguments = ratedArguments, Title = I18n.Rated, Icon = ic_rated };
             
+            var items = new Dictionary<int, ListSectionArguments>();
+            
+            int i = 0;
             if ( notRatedArguments.Any() )
             {
-                items.Add(0,notRatedArguments);
-                items.Add(1,RatedArguments);
+                items.Add(i,notRatedArgumentsSection);
+                i++;
             }
-            else
+            if (ratedArguments.Any())
             {
-                items.Add(0,RatedArguments);
+                items.Add(i,RatedArgumentsSection);
             }
             
             InvokeOnMainThread(() =>
             {
-                ((ArgumentsListViewSource)TableView.Source).Items = items;
+                ((ArgumentsListViewSource)TableView.Source).Sections = items;
     
                 TableView.ReloadData();
             });
