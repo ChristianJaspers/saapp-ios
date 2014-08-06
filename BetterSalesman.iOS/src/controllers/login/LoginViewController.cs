@@ -18,14 +18,20 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            inputEmail.ShouldReturn += (textField) =>
+            buttonForgotPassword.TouchUpInside += (s, e) => DisplayPasswordChange(string.Empty, true);
+            buttonForgotPassword.SetTitle(I18n.ForgotPassword, UIControlState.Normal);
+            
+            inputEmail.Placeholder = I18n.FieldEmail;
+            inputPassword.Placeholder = I18n.FieldPassword;
+            
+            inputEmail.ShouldReturn += textField =>
             { 
                 inputEmail.ResignFirstResponder();
                 inputPassword.BecomeFirstResponder();
                 return true;
             };
             
-            inputPassword.ShouldReturn += (textField) =>
+            inputPassword.ShouldReturn += textField =>
             { 
                 StartLogin();
                 return true;
@@ -120,6 +126,86 @@ namespace BetterSalesman.iOS
             
             PerformSegue(sequeIdLogged, this);
         }
+        
+        #region Forgot password
+
+        XForm<UITextField> validator;
+
+        void DisplayPasswordChange(string defaultEmail = "", bool firstTime = false)
+        {   
+            UIAlertView alert = new UIAlertView(I18n.ProvideYourEmail, string.Empty, null, I18n.OK, I18n.Cancel);
+
+            alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
+
+            var emailField = alert.GetTextField(0);
+
+            if ( !firstTime )
+            {
+                emailField.Text = defaultEmail;
+                ValidateField(emailField);
+            }
+
+            alert.Clicked += (sender, e) =>
+                {
+                    if ( e.ButtonIndex == 0 )
+                    {       
+                        if ( ValidateField(emailField) )
+                        {
+                            ResetMyPassword(emailField.Text);
+                        }
+                        else
+                        {
+                            ShowAlert( string.Join("\n", validator.Errors),() => DisplayPasswordChange(emailField.Text) );
+                        }
+                    }
+                };
+
+            alert.Show();
+        }
+
+        bool ValidateField(UITextField field)
+        {
+            validator = new XForm<UITextField> {
+                Inputs = new [] {
+                    new XUITextField {
+                        Name = I18n.FieldEmail,
+                        FieldView = field,
+                        Validators = new [] {
+                            new XValidatorRequired { Message = I18n.ValidationRequired }
+                        },
+                    }
+                }
+            };
+
+            return validator.Validate();
+        }
+
+        void ResetMyPassword(string email)
+        {
+            if (!IsNetworkAvailable())
+            {
+                ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                return;
+            }
+
+            ShowHud();
+
+            ServiceProviderUser.Instance.ForgotPassword(
+                email,
+                result => 
+                {
+                    HideHud();
+                    ShowAlert(I18n.SuccessMessageForgotPassword);
+                },
+                errorMessage =>
+                {
+                    HideHud();
+                    ShowAlert(errorMessage);
+                }
+            );
+        }
+
+        #endregion
     }
 }
 

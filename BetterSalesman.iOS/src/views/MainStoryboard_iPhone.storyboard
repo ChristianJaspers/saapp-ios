@@ -178,7 +178,6 @@
                                     <color key="titleColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="XNh-xx-dKY" kind="modal" id="5et-LY-Gfb"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Wh-jB-cc8">
@@ -200,7 +199,7 @@
                                             <constraint firstAttribute="width" constant="304" id="Yz5-KZ-a1S"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3gCilUei" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4R-hB-Y3J">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4R-hB-Y3J">
                                         <rect key="frame" x="35" y="37" width="260" height="26"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -210,7 +209,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wojtowicz.bartlomiej+bart@gmail.com" placeholder="E-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YtV-5J-KgG">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" placeholder="E-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YtV-5J-KgG">
                                         <rect key="frame" x="35" y="1" width="260" height="26"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -256,6 +255,7 @@
                         <outlet property="inputPassword" destination="I4R-hB-Y3J" id="name-outlet-I4R-hB-Y3J"/>
                         <outlet property="loginButton" destination="g8E-F0-NLD" id="name-outlet-g8E-F0-NLD"/>
                         <segue destination="wVP-bY-Y9v" kind="custom" identifier="LoggedSeque" customClass="SegueNavigationWithoutAnimation" id="zm9-Cr-f1k"/>
+                        <outlet property="buttonForgotPassword" destination="ueZ-ih-i2f" id="name-outlet-ueZ-ih-i2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plD-aC-shG" sceneMemberID="firstResponder"/>
@@ -590,67 +590,6 @@
             <point key="canvasLocation" x="481" y="-298"/>
         </scene>
         <!--Forgot Password View Controller - Password change-->
-        <scene sceneID="MiA-tf-o2i">
-            <objects>
-                <viewController title="Password change" id="XNh-xx-dKY" customClass="ForgotPasswordViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dah-Lu-myd"/>
-                        <viewControllerLayoutGuide type="bottom" id="KVi-82-kg8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="77h-qL-HEd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x7d-T2-cfP">
-                                <rect key="frame" x="20" y="183" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="nmp-mh-eqK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdv-Q3-KP4">
-                                <rect key="frame" x="137" y="236" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="TFS-sN-RJb"/>
-                                </constraints>
-                                <state key="normal" title="send">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-UN-Qsu">
-                                <rect key="frame" x="20" y="20" width="55" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Whk-2E-YLl"/>
-                                    <constraint firstAttribute="width" constant="55" id="xoe-dm-bF9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                <state key="normal" title="cancel"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="9dr-UN-Qsu" firstAttribute="top" secondItem="77h-qL-HEd" secondAttribute="top" constant="20" symbolic="YES" id="Afp-Uu-Mnx"/>
-                            <constraint firstItem="KVi-82-kg8" firstAttribute="top" secondItem="Jdv-Q3-KP4" secondAttribute="bottom" constant="302" id="BFU-tY-Ly7"/>
-                            <constraint firstAttribute="trailing" secondItem="Jdv-Q3-KP4" secondAttribute="trailing" constant="137" id="DBa-Hq-Awd"/>
-                            <constraint firstItem="9dr-UN-Qsu" firstAttribute="leading" secondItem="x7d-T2-cfP" secondAttribute="leading" id="Vhl-ON-5vB"/>
-                            <constraint firstItem="Jdv-Q3-KP4" firstAttribute="leading" secondItem="77h-qL-HEd" secondAttribute="leading" constant="137" id="YSK-zf-tGt"/>
-                            <constraint firstItem="Jdv-Q3-KP4" firstAttribute="top" secondItem="x7d-T2-cfP" secondAttribute="bottom" constant="23" id="flh-EM-UTq"/>
-                            <constraint firstAttribute="trailing" secondItem="x7d-T2-cfP" secondAttribute="trailing" constant="20" id="rez-Sb-Hsy"/>
-                            <constraint firstItem="x7d-T2-cfP" firstAttribute="leading" secondItem="77h-qL-HEd" secondAttribute="leading" constant="20" id="x0U-jE-Wtf"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="8Mo-0n-KYO"/>
-                    <connections>
-                        <outlet property="forgotPasswordButton" destination="Jdv-Q3-KP4" id="name-outlet-Jdv-Q3-KP4"/>
-                        <outlet property="inputEmail" destination="x7d-T2-cfP" id="name-outlet-x7d-T2-cfP"/>
-                        <outlet property="skipButton" destination="9dr-UN-Qsu" id="name-outlet-9dr-UN-Qsu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iiv-CF-dpG" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-19" y="-1000"/>
-        </scene>
         <!--My Team List View Controller - My Team-->
         <scene sceneID="6dG-H6-BPa">
             <objects>

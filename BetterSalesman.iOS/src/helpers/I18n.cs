@@ -33,6 +33,10 @@
         public static string ProvideNewPassword = "Provide new password".t();
         public static string ProvideNewPasswordRequirement = "Password must contain at least 5 characters".t();
 
+        public static string ProvideYourEmail = "Provide Your email to restart Your password".t();
+
+        public static string ForgotPassword = "Forgot password?".t();
+
         public static string SuccessMessageForgotPassword = "Email with new password has been sent".t();
 
         public static string SuccessMessagePasswordChange = "Password has been changed".t();
