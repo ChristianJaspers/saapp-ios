@@ -3,6 +3,7 @@ using BetterSalesman.Core.BusinessLayer;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
@@ -29,6 +30,13 @@ namespace BetterSalesman.iOS
             var saveButton = new UIBarButtonItem(I18n.Save, UIBarButtonItemStyle.Plain, SaveArgument);
 
             NavigationItem.SetRightBarButtonItem(saveButton, false);
+            
+            if (Argument.ProductGroupId > 0)
+            {
+                var productGroup = ProductGroupManager.GetProductGroup(Argument.ProductGroupId);
+            
+                ProductGroupsDataSource.SelectedProductGroup = productGroup;
+            }
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -58,6 +66,7 @@ namespace BetterSalesman.iOS
                 }
                 
                 Argument = formController.Argument;
+                Argument.ProductGroupId = ProductGroupsDataSource.SelectedProductGroup.Id;
 
                 ShowHud(I18n.Sending);
                 
