@@ -37,6 +37,8 @@ namespace BetterSalesman.iOS
             
                 ProductGroupsDataSource.SelectedProductGroup = productGroup;
             }
+            
+            LeftBarButtonAsArrowIconOnly();
         }
         
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)

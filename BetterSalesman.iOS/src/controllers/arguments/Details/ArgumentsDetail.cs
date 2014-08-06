@@ -24,6 +24,8 @@ namespace BetterSalesman.iOS
             
             updateView();
             
+            LeftBarButtonAsArrowIconOnly();
+            
             if (Argument.UserId == UserManager.LoggedInUser().Id)
             {
                 var buttonPasswordChange = new UIBarButtonItem(I18n.Edit, UIBarButtonItemStyle.Plain, delegate

@@ -4,7 +4,7 @@ using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
 {
-	partial class ProductGroupPickerListViewController : UITableViewController
+    partial class ProductGroupPickerListViewController : BaseUITableViewController
 	{
         const string ic_back = "ic_back";
         
@@ -42,11 +42,7 @@ namespace BetterSalesman.iOS
             
             Title = I18n.ProductGroups;
             
-            NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(
-                UIImage.FromBundle(ic_back),
-                UIBarButtonItemStyle.Plain, 
-                (o, s) => NavigationController.PopViewControllerAnimated(true))
-            ,false);
+            LeftBarButtonAsArrowIconOnly();
         }
 			
 		public override void ViewDidAppear(bool animated)

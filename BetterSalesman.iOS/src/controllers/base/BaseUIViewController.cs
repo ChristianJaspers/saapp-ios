@@ -7,6 +7,8 @@ namespace BetterSalesman.iOS
 {
     public class BaseUIViewController : UIViewController
     {
+        const string ic_back = "ic_back";
+        
         public BaseUIViewController(IntPtr handle) : base(handle)
         {
         }
@@ -138,6 +140,15 @@ namespace BetterSalesman.iOS
         }
         
         #endregion
+        
+        protected void LeftBarButtonAsArrowIconOnly()
+        {
+            NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(
+                UIImage.FromBundle(ic_back),
+                UIBarButtonItemStyle.Plain, 
+                (o, s) => NavigationController.PopViewControllerAnimated(true))
+                ,false);
+        }  
     }
 }
 
