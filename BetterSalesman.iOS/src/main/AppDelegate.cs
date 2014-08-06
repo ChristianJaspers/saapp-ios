@@ -13,6 +13,8 @@ namespace BetterSalesman.iOS
     {
         public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
+        public static UIColor ColorTextOrange = UIColor.Clear.FromHex("#F04006");
+        
         public override UIWindow Window
         {
             get;
@@ -24,6 +26,12 @@ namespace BetterSalesman.iOS
 			Localization.Instance.Initialize(new IosLocalizationProvider());
             
             Window.TintColor = TintColor;
+            
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() {
+                TextColor = ColorTextOrange,
+                TextShadowOffset = new UIOffset(0,0),
+                Font = UIFont.FromName("HelveticaNeue-Light",20)
+            });
 
 			return true;
 		}

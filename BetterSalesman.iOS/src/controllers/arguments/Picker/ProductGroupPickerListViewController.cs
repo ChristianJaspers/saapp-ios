@@ -1,15 +1,13 @@
 using System;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.CodeDom.Compiler;
-using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
-using System.Collections.Generic;
 
 namespace BetterSalesman.iOS
 {
 	partial class ProductGroupPickerListViewController : UITableViewController
 	{
+        const string ic_back = "ic_back";
+        
 		private bool isSubscribedToSelectedProductGroupChangedEvent;
 		private ProductGroupsDataSource productGroupsDataSource;
 
@@ -17,15 +15,15 @@ namespace BetterSalesman.iOS
 		{
 			get
 			{
-				return this.productGroupsDataSource;
+                return productGroupsDataSource;
 			}
 
 			set
 			{
 				UnsubscribeFromProductGroupPickedEvent();
 
-				this.productGroupsDataSource = value;
-				this.TableView.Source = value;
+				productGroupsDataSource = value;
+				TableView.Source = value;
 
 				SubscribeToProductGroupPickedEvent();
 			}
@@ -33,8 +31,23 @@ namespace BetterSalesman.iOS
 
 		public ProductGroupPickerListViewController(IntPtr handle) : base(handle)
 		{
-			this.isSubscribedToSelectedProductGroupChangedEvent = false;
+			isSubscribedToSelectedProductGroupChangedEvent = false;
 		}
+        
+        #region Lifecycle
+        
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            
+            Title = I18n.ProductGroups;
+            
+            NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(
+                UIImage.FromBundle(ic_back),
+                UIBarButtonItemStyle.Plain, 
+                (o, s) => NavigationController.PopViewControllerAnimated(true))
+            ,false);
+        }
 			
 		public override void ViewDidAppear(bool animated)
 		{
@@ -51,29 +64,28 @@ namespace BetterSalesman.iOS
 
 			UnsubscribeFromProductGroupPickedEvent();
 		}
+        
+        #endregion
 
 		private void ProductGroupPicked(ProductGroup newSelectedProductGroup)
 		{
-			InvokeOnMainThread(() =>
-			{
-				NavigationController.PopViewControllerAnimated(true);
-			});
+			InvokeOnMainThread(() => NavigationController.PopViewControllerAnimated(true));
 		}
 
 		private void SubscribeToProductGroupPickedEvent()
 		{
-			if (this.productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
+			if (productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
+				productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
 				isSubscribedToSelectedProductGroupChangedEvent = true;
 			}
 		}
 
 		private void UnsubscribeFromProductGroupPickedEvent()
 		{
-			if (this.productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
+			if (productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				this.productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
+				productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
 				isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
 		}
