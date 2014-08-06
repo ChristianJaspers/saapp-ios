@@ -44,7 +44,9 @@ namespace BetterSalesman.iOS
             
             Title = I18n.Profile;
             
-			AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName);
+            imageViewBorder.Image = imageViewBorder.Image.Circle();
+            
+            AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName).Circle();
 
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIcon), UIBarButtonItemStyle.Plain, delegate
             {
@@ -121,6 +123,8 @@ namespace BetterSalesman.iOS
 		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
 		{
 			HideHud();
+            
+            ProfileImageView.Image = downloadedImage.Circle();
 		}
 
 		private void LoadUser()
@@ -140,7 +144,12 @@ namespace BetterSalesman.iOS
 				labelMyActivity.Text = user.MyActivity.ToString();
 				labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
 				labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
-				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage);
+                    
+                var downloadOptions = SDWebImageOptions.ProgressiveDownload 
+                    | SDWebImageOptions.ContinueInBackground
+                    | SDWebImageOptions.RetryFailed;
+                    
+                ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
 			});
 		}
         

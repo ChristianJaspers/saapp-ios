@@ -183,6 +183,7 @@
     <BundleResource Include="Resources\ic_menu.png" />
     <BundleResource Include="Resources\ic_back%402x.png" />
     <BundleResource Include="Resources\ic_back.png" />
+    <BundleResource Include="Resources\orange.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

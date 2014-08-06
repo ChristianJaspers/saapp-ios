@@ -59,7 +59,7 @@ namespace BetterSalesman.iOS
             Navigation = new FlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
-            Navigation.ShouldReceiveTouch += (recognizer, touch) => false;
+            Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 
             PopulateNavigationItems();
@@ -137,7 +137,6 @@ namespace BetterSalesman.iOS
             UserSessionManager.Instance.Discard();
             
             PerformSegue(segueIDLogout, this);
-            
         }
 
         void Synchronization()

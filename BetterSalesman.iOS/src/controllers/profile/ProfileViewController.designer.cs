@@ -16,6 +16,10 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView imageViewBorder { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelAllTeamsActivity { get; set; }
 
 		[Outlet]
@@ -44,6 +48,10 @@ namespace BetterSalesman.iOS
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (imageViewBorder != null) {
+				imageViewBorder.Dispose ();
+				imageViewBorder = null;
+			}
 			if (labelAllTeamsActivity != null) {
 				labelAllTeamsActivity.Dispose ();
 				labelAllTeamsActivity = null;
