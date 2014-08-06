@@ -37,6 +37,10 @@ namespace BetterSalesman.iOS
             
             Title = I18n.Arguments;
             
+            labelEmptyList.Hidden = true;
+            
+            labelEmptyList.Text = I18n.ListOfArgumentsEmpty;
+            
             TableView.Source = new ArgumentsListViewSource();
         }
         
@@ -68,11 +72,14 @@ namespace BetterSalesman.iOS
         void LoadArguments()
         {
             var allArguments = ArgumentManager.Arguments();
+            
             if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
             {
                 Debug.WriteLine("Filtering arguments by ProductGroup: " + ProductGroupsDataSource.SelectedProductGroup.Name);
                 allArguments = allArguments.Where(a => a.ProductGroupId == ProductGroupsDataSource.SelectedProductGroup.Id).ToList();
             }
+            
+            labelEmptyList.Hidden = allArguments.Any();
             
             var notRatedArguments = allArguments.NotRated();
             var ratedArguments = allArguments.Rated();

@@ -26,6 +26,8 @@
         public static string ArgumentEdit = "Edit argument".t();
         public static string ArgumentAdd = "Add argument".t();
 
+        public static string ListOfArgumentsEmpty = "No arguments in selected product group".t();
+
         public static string ProductGroups = "Product group".t();
 
         public static string ProvideNewPassword = "Provide new password".t();

@@ -14,8 +14,16 @@ namespace BetterSalesman.iOS
 	[Register ("ArgumentsListViewController")]
 	partial class ArgumentsListViewController
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelEmptyList { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (labelEmptyList != null) {
+				labelEmptyList.Dispose ();
+				labelEmptyList = null;
+			}
 		}
 	}
 }
