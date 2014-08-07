@@ -37,6 +37,7 @@ namespace BetterSalesman.iOS
                 return true;
             };
             
+			loginButton.SetTitle(I18n.Login, UIControlState.Normal);
             loginButton.TouchUpInside += (sender, e) => StartLogin();
             
             if (UserSessionManager.Instance.User != null)
@@ -115,7 +116,7 @@ namespace BetterSalesman.iOS
         {
             base.OnSynchronizationStart();
             
-            ShowHud(I18n.DataSynchronization);
+            ShowHud(I18n.SynchronizationInProgress);
         }
         
         protected override void OnSynchronizationFinished()

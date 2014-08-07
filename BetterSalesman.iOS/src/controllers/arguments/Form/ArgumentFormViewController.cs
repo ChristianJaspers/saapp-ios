@@ -23,6 +23,13 @@ namespace BetterSalesman.iOS
             base.ViewDidLoad();
             
             InitValidator();
+
+			labelFeature.Text = I18n.ArgumentAddFeature;
+			labelBenefit.Text = I18n.ArgumentAddBenefit;
+
+			// TODO
+			// labelEarnXpForFeature.Text = I18n.FeatureAddEarnXp;
+			// labelEarnXpForBenefit.Text = I18n.BenefitAddEarnXp;
             
             Feature = Argument.Feature;
             Benefit = Argument.Benefit;

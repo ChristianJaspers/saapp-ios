@@ -20,6 +20,8 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidLoad();
 
+			Title = I18n.Arguments;
+
       		var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIconName), UIBarButtonItemStyle.Plain, delegate
           	{
             	FlyoutViewController.Navigation.ToggleMenu();
