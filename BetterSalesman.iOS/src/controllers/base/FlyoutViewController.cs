@@ -110,7 +110,9 @@ namespace BetterSalesman.iOS
 
             Navigation.NavigationRoot = new RootElement("") { new Section { elements } };
 
-            Navigation.NavigationRoot.TableView.BackgroundColor = UIColor.Clear.FromHex("#DFDFDF");
+            Navigation.NavigationRoot.TableView.BackgroundColor = AppDelegate.ColorBackgroundGray;
+            
+            Navigation.NavigationRoot.TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
             

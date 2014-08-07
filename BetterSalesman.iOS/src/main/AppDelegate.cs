@@ -14,6 +14,9 @@ namespace BetterSalesman.iOS
         public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
         public static UIColor ColorTextOrange = UIColor.Clear.FromHex("#F04006");
+        public static UIColor ColorTextGray = UIColor.Clear.FromHex("#3D3D3D");
+        public static UIColor ColorBackgroundOrange = UIColor.Clear.FromHex("#F25309");
+        public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#DFDFDF");
         
         public override UIWindow Window
         {

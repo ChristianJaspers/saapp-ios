@@ -33,30 +33,35 @@ namespace BetterSalesman.iOS
 
         public static UIImage RoundCorners (this UIImage image, float roundnessPercentage)
         {
-            float width = image.Size.Width;
-            float height = image.Size.Height;
-            float radius = ((width+height)/2) * (roundnessPercentage/(100*2));
+            if (image != null)
+            {
+                float width = image.Size.Width;
+                float height = image.Size.Height;
+                float radius = ((width + height) / 2) * (roundnessPercentage / (100 * 2));
 
-            UIGraphics.BeginImageContext (new SizeF (width, height));
-            CGContext c = UIGraphics.GetCurrentContext();
+                UIGraphics.BeginImageContext(new SizeF(width, height));
+                CGContext c = UIGraphics.GetCurrentContext();
 
-            c.BeginPath ();
-            c.MoveTo(width, height/2);
-            //Bottom-right Corner
-            c.AddArcToPoint(width, height, height / 2, width, radius);
-            //Bottom-left Corner
-            c.AddArcToPoint(0, height, 0, 0, radius);
-            //Top-left Corner
-            c.AddArcToPoint(0, 0, width/2, 0, radius);
-            //Top-right Corner
-            c.AddArcToPoint(width, 0, width, height/2, radius);
-            c.ClosePath();
-            c.Clip();
+                c.BeginPath();
+                c.MoveTo(width, height / 2);
+                //Bottom-right Corner
+                c.AddArcToPoint(width, height, height / 2, width, radius);
+                //Bottom-left Corner
+                c.AddArcToPoint(0, height, 0, 0, radius);
+                //Top-left Corner
+                c.AddArcToPoint(0, 0, width / 2, 0, radius);
+                //Top-right Corner
+                c.AddArcToPoint(width, 0, width, height / 2, radius);
+                c.ClosePath();
+                c.Clip();
 
-            image.Draw (new PointF (0, 0));
-            UIImage converted = UIGraphics.GetImageFromCurrentImageContext();
-            UIGraphics.EndImageContext ();
-            return converted;
+                image.Draw(new PointF(0, 0));
+                UIImage converted = UIGraphics.GetImageFromCurrentImageContext();
+                UIGraphics.EndImageContext();
+                return converted;
+            }
+            
+            return null;
         }
         
         public static UIImage Circle(this UIImage image)
@@ -66,27 +71,31 @@ namespace BetterSalesman.iOS
 
         public static UIImage CropToMaxSquare(this UIImage image)
         {
-            int width = (int)image.Size.Width;
-            int height = (int)image.Size.Height;
-
-            int newWidth = width;
-            int newHeight = height;
-
-            int crop_x = 0;
-            int crop_y = 0;
-
-            if (width > height)
+            if (image != null)
             {
-                crop_x = (int)(width - height) / 2;
-                newWidth = height;
-            } 
-            else
-            {
-                crop_y = (int)(height - width) / 2;
-                newHeight = width;
+                int width = (int)image.Size.Width;
+                int height = (int)image.Size.Height;
+
+                int newWidth = width;
+                int newHeight = height;
+
+                int crop_x = 0;
+                int crop_y = 0;
+
+                if (width > height)
+                {
+                    crop_x = (int)(width - height) / 2;
+                    newWidth = height;
+                } else
+                {
+                    crop_y = (int)(height - width) / 2;
+                    newHeight = width;
+                }
+                
+                return image.CropImage(crop_x, crop_y, newWidth, newHeight);
             }
 
-            return image.CropImage(crop_x, crop_y, newWidth, newHeight);
+            return null;
         }
 
         public static UIImage CropImage(this UIImage sourceImage, int crop_x, int crop_y, int width, int height)
