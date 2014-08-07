@@ -38,12 +38,12 @@ namespace BetterSalesman.iOS
 
         public override float GetHeightForHeader(UITableView tableView, int section)
         {
-            return 45;
+            return 30;
         }
 
         public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            return 100;
+            return 70;
         }
 
         public override int RowsInSection(UITableView tableview, int section)
@@ -54,6 +54,10 @@ namespace BetterSalesman.iOS
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
+            
+            var bg = cell.ViewWithTag(15);
+            
+            bg.BackgroundColor = indexPath.Row % 2 > 0 ? AppDelegate.ColorBackgroundZebraEven : AppDelegate.ColorBackgroundZebraOdd; 
             
             var featureTxt = (UILabel)cell.ViewWithTag(1);
             var benefitTxt = (UILabel)cell.ViewWithTag(2);

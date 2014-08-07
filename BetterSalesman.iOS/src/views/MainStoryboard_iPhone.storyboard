@@ -710,98 +710,117 @@
         <scene sceneID="hRs-WF-hKP">
             <objects>
                 <tableViewController id="bWD-Mt-ZKG" customClass="ArgumentsListViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fJb-O9-Xkd">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fJb-O9-Xkd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="444"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                         <label key="tableFooterView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZSK-8s-DsB">
-                            <rect key="frame" x="0.0" y="167" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="122" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArgumentsCell" rowHeight="100" id="YZ1-Hf-JRi">
-                                <rect key="frame" x="0.0" y="22" width="320" height="100"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArgumentsCell" rowHeight="70" id="YZ1-Hf-JRi">
+                                <rect key="frame" x="0.0" y="22" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YZ1-Hf-JRi" id="gej-pk-VBP">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benefit lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcu-XZ-FTI">
-                                            <rect key="frame" x="20" y="57" width="236" height="21"/>
+                                        <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HxJ-on-yG5">
+                                            <rect key="frame" x="5" y="0.0" width="310" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benefit lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcu-XZ-FTI">
+                                                    <rect key="frame" x="10" y="38" width="237" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="3sJ-Km-o0d"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rte-Eg-azR">
+                                                    <rect key="frame" x="10" y="11" width="237" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="eb8-ul-FnK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="96" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nl-Si-p1r">
+                                                    <rect key="frame" x="264" y="15" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="BgW-jK-rNZ"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="QBA-6f-T9c"/>
+                                                        <constraint firstAttribute="height" constant="40" id="VvJ-dO-NzV"/>
+                                                        <constraint firstAttribute="width" constant="40" id="pFc-YT-Tf2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <color key="textColor" red="0.56862747670000002" green="0.56862747670000002" blue="0.56862747670000002" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-QI-2jz" userLabel="vertical line">
+                                                    <rect key="frame" x="255" y="6" width="1" height="57"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="1" id="JcB-pS-obF"/>
+                                                        <constraint firstAttribute="height" constant="57" id="hPi-fk-ajw"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="3sJ-Km-o0d"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rte-Eg-azR">
-                                            <rect key="frame" x="20" y="21" width="236" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="eb8-ul-FnK"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="96" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nl-Si-p1r">
-                                            <rect key="frame" x="273" y="30" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="VvJ-dO-NzV"/>
-                                                <constraint firstAttribute="width" constant="40" id="pFc-YT-Tf2"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                            <color key="textColor" red="0.56862747670000002" green="0.56862747670000002" blue="0.56862747670000002" alpha="1" colorSpace="deviceRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-QI-2jz" userLabel="vertical line">
-                                            <rect key="frame" x="264" y="21" width="1" height="57"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="1" id="JcB-pS-obF"/>
+                                                <constraint firstItem="kcu-XZ-FTI" firstAttribute="leading" secondItem="HxJ-on-yG5" secondAttribute="leading" constant="10" id="4so-o0-hIb"/>
+                                                <constraint firstItem="qLL-QI-2jz" firstAttribute="leading" secondItem="Rte-Eg-azR" secondAttribute="trailing" constant="8" id="FY8-a1-Wtm"/>
+                                                <constraint firstItem="1nl-Si-p1r" firstAttribute="top" secondItem="HxJ-on-yG5" secondAttribute="top" constant="15" id="IfO-7f-FJe"/>
+                                                <constraint firstAttribute="trailing" secondItem="1nl-Si-p1r" secondAttribute="trailing" constant="6" id="Mlq-TC-6Fd"/>
+                                                <constraint firstItem="qLL-QI-2jz" firstAttribute="leading" secondItem="kcu-XZ-FTI" secondAttribute="trailing" constant="8" id="URF-zN-klv"/>
+                                                <constraint firstAttribute="height" constant="70" id="X17-7f-UYd"/>
+                                                <constraint firstItem="Rte-Eg-azR" firstAttribute="top" secondItem="HxJ-on-yG5" secondAttribute="top" constant="11" id="XPf-tu-26A"/>
+                                                <constraint firstItem="kcu-XZ-FTI" firstAttribute="top" secondItem="Rte-Eg-azR" secondAttribute="bottom" constant="6" id="kfI-g8-B4a"/>
+                                                <constraint firstItem="qLL-QI-2jz" firstAttribute="top" secondItem="HxJ-on-yG5" secondAttribute="top" constant="6" id="ml6-Ss-Y66"/>
+                                                <constraint firstItem="1nl-Si-p1r" firstAttribute="leading" secondItem="qLL-QI-2jz" secondAttribute="trailing" constant="8" id="vy9-SR-2yp"/>
+                                                <constraint firstItem="Rte-Eg-azR" firstAttribute="leading" secondItem="HxJ-on-yG5" secondAttribute="leading" constant="10" id="yhT-88-yAa"/>
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="kcu-XZ-FTI" firstAttribute="leading" secondItem="gej-pk-VBP" secondAttribute="leading" constant="20" id="3uM-22-Gf6"/>
-                                        <constraint firstItem="1nl-Si-p1r" firstAttribute="top" secondItem="gej-pk-VBP" secondAttribute="top" constant="30" id="6Yk-HY-cIp"/>
-                                        <constraint firstItem="kcu-XZ-FTI" firstAttribute="top" secondItem="Rte-Eg-azR" secondAttribute="bottom" constant="15" id="H86-Iz-n3S"/>
-                                        <constraint firstItem="qLL-QI-2jz" firstAttribute="leading" secondItem="Rte-Eg-azR" secondAttribute="trailing" constant="8" id="Ov2-f6-eOu"/>
-                                        <constraint firstAttribute="trailing" secondItem="1nl-Si-p1r" secondAttribute="trailing" constant="7" id="PaQ-i9-w5B"/>
-                                        <constraint firstItem="Rte-Eg-azR" firstAttribute="top" secondItem="gej-pk-VBP" secondAttribute="top" constant="21" id="ZHC-z3-8TG"/>
-                                        <constraint firstItem="1nl-Si-p1r" firstAttribute="leading" secondItem="qLL-QI-2jz" secondAttribute="trailing" constant="8" id="Zxt-xH-72O"/>
-                                        <constraint firstAttribute="bottom" secondItem="qLL-QI-2jz" secondAttribute="bottom" constant="21" id="mLb-IY-bcf"/>
-                                        <constraint firstItem="Rte-Eg-azR" firstAttribute="leading" secondItem="gej-pk-VBP" secondAttribute="leading" constant="20" id="nZV-kl-MzR"/>
-                                        <constraint firstItem="qLL-QI-2jz" firstAttribute="top" secondItem="gej-pk-VBP" secondAttribute="top" constant="21" id="v5V-69-E8r"/>
-                                        <constraint firstItem="qLL-QI-2jz" firstAttribute="leading" secondItem="kcu-XZ-FTI" secondAttribute="trailing" constant="8" id="zJE-Y1-XvU"/>
+                                        <constraint firstItem="HxJ-on-yG5" firstAttribute="top" secondItem="gej-pk-VBP" secondAttribute="top" id="Uch-S6-JCu"/>
+                                        <constraint firstAttribute="trailing" secondItem="HxJ-on-yG5" secondAttribute="trailing" constant="5" id="mfz-bX-S1G"/>
+                                        <constraint firstItem="HxJ-on-yG5" firstAttribute="leading" secondItem="gej-pk-VBP" secondAttribute="leading" constant="5" id="p33-CA-zbP"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="ILJ-1q-cUo" kind="push" identifier="ArgumentSelected" id="16r-Nt-KBZ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArgumentsHeader" rowHeight="45" id="CNm-e0-4Wb">
-                                <rect key="frame" x="0.0" y="122" width="320" height="45"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArgumentsHeader" rowHeight="30" id="CNm-e0-4Wb">
+                                <rect key="frame" x="0.0" y="92" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNm-e0-4Wb" id="ftt-hL-ZaE">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxL-wS-5BG">
-                                            <rect key="frame" x="53" y="11" width="247" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <rect key="frame" x="53" y="4" width="247" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="dXA-F2-FyQ">
-                                            <rect key="frame" x="20" y="10" width="22" height="22"/>
+                                            <rect key="frame" x="20" y="4" width="22" height="22"/>
                                         </imageView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
