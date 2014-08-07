@@ -75,6 +75,11 @@
 		public static string ImagePickerPresenterMediaSourceTypeSelectionTitle = "choose_source".t();
 		public static string ImagePickerPresenterMediaSourceTypeCamera = "camera".t();
 		public static string ImagePickerPresenterMediaSourceTypePhotoLibrary = "photo_library".t();
+
+		public static string ArgumentAddFeature = "argument_add_feature".t();
+		public static string ArgumentAddBenefit = "argument_add_benefit".t();
+		public static string FeatureAddEarnXp = "earn_xp_for_adding_feature".t();
+		public static string BenefitAddEarnXp = "earn_xp_for_adding_benefit".t();
     }
 }
 

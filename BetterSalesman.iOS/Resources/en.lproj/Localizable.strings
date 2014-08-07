@@ -51,3 +51,7 @@
 "something_went_wrong" = "Something went wrong. Please try again later.";
 "cant_reach_server" = "Can't reach the server. Make sure you have an active Internet connection and try again.";
 "file_not_found" = "Couldn't find the requested file.";
+"argument_add_feature" = "Add product feature";
+"argument_add_benefit" = "Add benefit for customer";
+"earn_xp_for_adding_feature" = "Earn 3xp";
+"earn_xp_for_adding_benefit" = "Earn 6xp";
