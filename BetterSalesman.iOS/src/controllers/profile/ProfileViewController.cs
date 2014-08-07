@@ -43,7 +43,7 @@ namespace BetterSalesman.iOS
 			base.ViewDidLoad();
             
             Title = I18n.Profile;
-            
+
 			AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName);
 
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIcon), UIBarButtonItemStyle.Plain, delegate

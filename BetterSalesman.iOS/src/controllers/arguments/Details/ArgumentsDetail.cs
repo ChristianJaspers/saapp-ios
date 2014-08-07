@@ -25,6 +25,9 @@ namespace BetterSalesman.iOS
             updateView();
             
             LeftBarButtonAsArrowIconOnly();
+
+			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
+			labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
             
             if (Argument.UserId == UserManager.LoggedInUser().Id)
             {
@@ -88,6 +91,7 @@ namespace BetterSalesman.iOS
         {
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
+			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
             
             if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
             {

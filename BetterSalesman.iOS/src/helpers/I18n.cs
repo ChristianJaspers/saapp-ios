@@ -2,67 +2,79 @@
 {
     public static class I18n
     {
-        public static string Cancel = "Cancel".t();
-        public static string OK = "OK".t();
-        public static string Edit = "Edit".t();
-        public static string Save = "Save".t();
+        public static string Cancel = "cancel".t();
+        public static string OK = "ok".t();
+		public static string Edit = "edit".t();
+        public static string Save = "save".t();
         
-        public static string Profile = "Profile".t();
-        public static string Arguments = "Arguments".t();
-        public static string MyTeam = "My Team".t();
-        public static string Synchronization = "Synchronization".t();
-        public static string Logout = "Log out".t();
+		public static string Profile = "profile".t();
+		public static string ViewProfile = "view_profile".t();
+		public static string Arguments = "arguments".t();
+		public static string MyTeam = "my_team".t();
+		public static string Notifications = "notifications".t();
+		public static string Synchronization = "synchronization".t();
+		public static string Logout = "logout".t();
+
+		public static string MyActivity = "my_activity".t();
+		public static string MyTeamActivity = "my_team_activity".t();
+		public static string AllTeamsActivity = "all_teams_activity".t();
         
-        public static string ErrorConnectionTimeout = "Connection timeout".t();
+		public static string ErrorConnectionTimeout = "connection_timeout".t();
         
-        public static string ErrorFillFields = "Please fill marked fields to continue".t();
+		public static string ErrorFillFields = "fill_in_required_fields".t();
         
-        public static string FieldEmail = "Email".t();
-        public static string FieldPassword = "Password".t();
+		public static string Login = "login".t();
 
-        public static string FieldFeature = "Feature".t();
-        public static string FieldBenefit = "Benefit".t();
+		public static string FieldEmail = "email".t();
+		public static string FieldPassword = "password".t();
 
-        public static string ArgumentEdit = "Edit argument".t();
-        public static string ArgumentAdd = "Add argument".t();
+		public static string FieldFeature = "feature".t();
+		public static string FieldBenefit = "benefit".t();
 
-        public static string ListOfArgumentsEmpty = "No arguments in selected product group".t();
+		public static string ArgumentEdit = "edit_argument".t();
+		public static string ArgumentAdd = "add_argument".t();
 
-        public static string ProductGroups = "Product group".t();
+		public static string ListOfArgumentsEmpty = "no_arguments_for_group".t();
 
-        public static string ProvideNewPassword = "Provide new password".t();
-        public static string ProvideNewPasswordRequirement = "Password must contain at least 5 characters".t();
+		public static string ProductGroups = "product_group".t();
 
-        public static string ProvideYourEmail = "Provide Your email to restart Your password".t();
+		public static string ProvideNewPassword = "provide_new_password".t();
+		public static string ProvideNewPasswordRequirement = "password_not_long_enough".t();
 
-        public static string ForgotPassword = "Forgot password?".t();
+		public static string ProvideYourEmail = "provide_email_for_password_reset".t();
 
-        public static string SuccessMessageForgotPassword = "Email with new password has been sent".t();
+		public static string ForgotPassword = "forgot_password".t();
 
-        public static string SuccessMessagePasswordChange = "Password has been changed".t();
+		public static string SuccessMessageForgotPassword = "email_with_new_password_sent".t();
+
+		public static string SuccessMessagePasswordChange = "password_changed".t();
         
-        public static string Rated = "Rated".t();
-        public static string WithoutRating = "Without rating".t();
+		public static string Rated = "rated".t();
+		public static string WithoutRating = "without_rating".t();
 
-        public static string AuthenticationInProgress = "Authenticating...".t();
-        public static string DataSynchronization = "Data synchronization...".t();
+		public static string AuthenticationInProgress = "authenticating".t();
+		public static string SynchronizationInProgress = "synchronizing".t();
 
-        public static string Sending = "Sending...".t();
+		public static string Sending = "sending".t();
 
-        public static string XP = "XP".t();
+		public static string XP = "xp".t();
 
-		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "Updating profile picture".t();
-		public static string ServiceAccessProfilePictureUploadingMessage = "Uploading picture".t();
-		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "Downloading thumbnail".t();
-		public static string ServiceAccessProfilePicturePreparingForUploadMessage = "Preparing picture for upload".t();
+		public static string ArgumentRelevanceTitle = "how_relevant_is_argument_to_me".t();
+		public static string ArgumentThanksForVoting = "thanks_for_voting".t();
+		public static string ArgumentEarnXpByVoting = "earn_xp_by_voting".t();
 
-        public static string ValidationRequired = "Field {0} is required.".t();
-        public static string ValidationLengthMinimum = "Field {0} must contain at least {1} characters.".t();
-        public static string ValidationLengthMaximum = "Field {0} must contain not more than {1} characters.".t();
+		public static string ServiceAccessProfilePictureUpdatingProfilePicture = "updating_profile_picture".t();
+		public static string ServiceAccessProfilePictureUploadingMessage = "uploading_picture".t();
+		public static string ServiceAccessProfilePictureDownloadingThumbnailMessage = "downloading_thumbnail".t();
+		public static string ServiceAccessProfilePicturePreparingForUploadMessage = "preparing_picture_for_upload".t();
 
-		public static string ImagePickerPresenterMediaSourceTypeSelectionTitle = "Choose source".t();
-		public static string ImagePickerPresenterMediaSourceTypeCamera = "Camera".t();
-		public static string ImagePickerPresenterMediaSourceTypePhotoLibrary = "Photo library".t();
+		public static string ValidationRequired = "field_required".t();
+		public static string ValidationLengthMinimum = "field_must_contain_required_number_of_characters".t();
+		public static string ValidationLengthMaximum = "field_must_contain_no_more_than_maximum_number_of_characters".t();
+
+		public static string ImagePickerPresenterMediaSourceTypeSelectionTitle = "choose_source".t();
+		public static string ImagePickerPresenterMediaSourceTypeCamera = "camera".t();
+		public static string ImagePickerPresenterMediaSourceTypePhotoLibrary = "photo_library".t();
     }
 }
 

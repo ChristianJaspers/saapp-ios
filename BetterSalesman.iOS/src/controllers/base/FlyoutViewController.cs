@@ -155,7 +155,7 @@ namespace BetterSalesman.iOS
         {
             base.OnSynchronizationStart();
 
-            ShowHud(I18n.DataSynchronization);
+            ShowHud(I18n.SynchronizationInProgress);
         }
 
         protected override void OnSynchronizationFinished()
