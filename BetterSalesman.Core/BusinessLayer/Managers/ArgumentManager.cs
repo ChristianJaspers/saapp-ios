@@ -16,7 +16,7 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
                     
                 if ( items.Any() )
                 {
-                    items = items.OrderBy(a=>a.Rating).ThenBy(a=>a.CreatedAt).ToList();
+					items = items.OrderByDescending(a=>a.Rating).ThenBy(a=>a.CreatedAt).ToList();
                 }
             }
             
