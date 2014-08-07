@@ -77,7 +77,7 @@ namespace BetterSalesman.iOS
                     result =>
                     {       
                         HideHud();
-                        DismissViewController(true,null);
+						InvokeOnMainThread(() => NavigationController.PopViewControllerAnimated(true));
                     },
                     errorMessage =>
                     {

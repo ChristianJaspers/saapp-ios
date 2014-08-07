@@ -22,13 +22,10 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            updateView();
+            UpdateView();
             
             LeftBarButtonAsArrowIconOnly();
 
-			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
-			labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
-            
             if (Argument.UserId == UserManager.LoggedInUser().Id)
             {
                 var buttonPasswordChange = new UIBarButtonItem(I18n.Edit, UIBarButtonItemStyle.Plain, delegate
@@ -61,7 +58,7 @@ namespace BetterSalesman.iOS
                         updatedArgument =>
                         {
                             Argument = updatedArgument;
-                            updateView();
+                            UpdateView();
                             HideHud();
                         },
                         errorMessage =>
@@ -75,6 +72,13 @@ namespace BetterSalesman.iOS
             }
         }
         
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+
+			UpdateView();
+		}
+
         public override void PrepareForSegue(UIStoryboardSegue segue, MonoTouch.Foundation.NSObject sender)
         {
             base.PrepareForSegue(segue, sender);
@@ -87,10 +91,14 @@ namespace BetterSalesman.iOS
             }
         }
         
-        void updateView()
+        void UpdateView()
         {
+			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
+			labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
+
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
+
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
             
             if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
