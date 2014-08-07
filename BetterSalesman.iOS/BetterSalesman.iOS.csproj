@@ -365,10 +365,13 @@
     <Compile Include="src\ViewModels\ListSectionArguments.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="src\ViewModels\FlayoutNavigationItemProfile.cs" />
+    <Compile Include="src\ViewModels\IFlyoutNavigationItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
     <InterfaceDefinition Include="src\views\MainStoryboard_iPhone.storyboard" />
+    <InterfaceDefinition Include="src\views\sidebarProfile.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -397,6 +400,7 @@
     <Folder Include="src\controllers\arguments\Form\" />
     <Folder Include="src\controllers\arguments\Details\" />
     <Folder Include="src\controllers\arguments\Picker\" />
+    <Folder Include="src\ViewModels\IFlyoutNavigationItem.xcassets\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

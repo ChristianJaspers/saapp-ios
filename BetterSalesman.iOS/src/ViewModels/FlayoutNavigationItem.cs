@@ -4,9 +4,9 @@ using MonoTouch.Dialog;
 
 namespace BetterSalesman.iOS
 {
-    public class FlayoutNavigationItem : ImageStringElement
+    public class FlayoutNavigationItem : ImageStringElement, IFlyoutNavigationItem
     {
-        public string Controller;
+        public string Controller { get; set; }
 
         public FlayoutNavigationItem(string caption, NSAction tapped, UIImage image, string controller) : base(caption, tapped, image)
         {

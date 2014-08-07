@@ -4,12 +4,16 @@ using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 using BetterSalesman.Core.ServiceAccessLayer;
+using MonoTouch.Foundation;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
     public partial class FlyoutViewController : BaseUIViewController
     {
         public static FlyoutNavigationController Navigation;
+        
+        FlayoutNavigationItemProfile profileElement;
         
         const string storyboardIdNavigationBase = "NavigationBase";
         
@@ -56,7 +60,7 @@ namespace BetterSalesman.iOS
         
         void NavigationLayoutInit()
         {
-            Navigation = new FlyoutNavigationController();
+            Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
             Navigation.ShouldReceiveTouch += (r, t) => false;
@@ -67,13 +71,10 @@ namespace BetterSalesman.iOS
 
         void PopulateNavigationItems()
         {
-            var elements = new List<FlayoutNavigationItem>() {
-                new FlayoutNavigationItem(
-                    I18n.Profile, 
-                    null,
-                    UIImage.FromBundle(IcProfile),
-                    VProfile
-                ),
+            profileElement = new FlayoutNavigationItemProfile(string.Empty,VProfile);
+            
+            var elements = new List<Element>() {
+                profileElement,
                 new FlayoutNavigationItem(
                     I18n.Arguments, 
                     null,
@@ -105,13 +106,15 @@ namespace BetterSalesman.iOS
             int a = 0;
             foreach (var element in elements)
             {
-                controllers[a] = element.Controller;
+                controllers[a] = (element as IFlyoutNavigationItem).Controller;
                 a++;
             }
 
             Navigation.NavigationRoot = new RootElement("") { new Section { elements } };
 
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
+            
+            profileElement.RefreshUserData();
         }
 
         UIViewController controllerForSection(string title = storyboardIdNavigationBase)
@@ -163,10 +166,25 @@ namespace BetterSalesman.iOS
 
             HideHud();
             
+            profileElement.RefreshUserData();
+            
             Navigation.HideMenu();
         }
         
         #endregion
+        
+        class CustomFlyoutNavigationController : FlyoutNavigationController
+        {
+            public const int menuWidth = 180;
+            
+            public CustomFlyoutNavigationController(IntPtr handle) : base(handle)
+            {
+            }
+
+            public CustomFlyoutNavigationController(UITableViewStyle navigationStyle = UITableViewStyle.Plain) : base(navigationStyle)
+            {
+            }
+        }
     }
 }
 

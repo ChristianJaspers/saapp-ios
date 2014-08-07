@@ -8,6 +8,9 @@
         public static string Save = "Save".t();
         
         public static string Profile = "Profile".t();
+
+        public static string ViewProfile = "VIEW PROFILE".t();
+
         public static string Arguments = "Arguments".t();
         public static string MyTeam = "My Team".t();
         public static string Synchronization = "Synchronization".t();
