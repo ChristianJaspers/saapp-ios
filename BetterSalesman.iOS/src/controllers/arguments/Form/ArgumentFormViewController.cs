@@ -80,15 +80,15 @@ namespace BetterSalesman.iOS
         #region Field events
         
         void DidStartEditing(object sender, EventArgs e)
-        {
-            Argument.Feature = Feature;
-            Argument.Benefit = Benefit;
-            
+        {   
             scrollViewContainer.SetContentOffset(new PointF(0,((UIView)sender).Frame.Y), true);
         }
         
         void DidEndEditing(object sender, EventArgs e)
         {
+            Argument.Feature = Feature;
+            Argument.Benefit = Benefit;
+            
             scrollViewContainer.SetContentOffset(PointF.Empty, true);
         }
 

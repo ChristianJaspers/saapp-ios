@@ -1,11 +1,8 @@
 ﻿using System;
 using MonoTouch.UIKit;
-using FlyoutNavigation;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
 using BetterSalesman.Core.ServiceAccessLayer;
-using MonoTouch.Foundation;
-using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
@@ -63,6 +60,7 @@ namespace BetterSalesman.iOS
             Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
+            Navigation.ShadowViewColor = UIColor.Clear;
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 
@@ -112,6 +110,8 @@ namespace BetterSalesman.iOS
 
             Navigation.NavigationRoot = new RootElement("") { new Section { elements } };
 
+            Navigation.NavigationRoot.TableView.BackgroundColor = UIColor.Clear.FromHex("#DFDFDF");
+            
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
             
             profileElement.RefreshUserData();
@@ -172,19 +172,6 @@ namespace BetterSalesman.iOS
         }
         
         #endregion
-        
-        class CustomFlyoutNavigationController : FlyoutNavigationController
-        {
-            public const int menuWidth = 180;
-            
-            public CustomFlyoutNavigationController(IntPtr handle) : base(handle)
-            {
-            }
-
-            public CustomFlyoutNavigationController(UITableViewStyle navigationStyle = UITableViewStyle.Plain) : base(navigationStyle)
-            {
-            }
-        }
     }
 }
 

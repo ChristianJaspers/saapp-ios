@@ -367,6 +367,8 @@
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="src\ViewModels\FlayoutNavigationItemProfile.cs" />
     <Compile Include="src\ViewModels\IFlyoutNavigationItem.cs" />
+    <Compile Include="src\ViewModels\CustomFlyoutNavigationController.cs" />
+    <Compile Include="src\ViewModels\FlyoutNavigationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

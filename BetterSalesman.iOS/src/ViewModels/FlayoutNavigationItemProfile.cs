@@ -47,7 +47,7 @@ namespace BetterSalesman.iOS
                 | SDWebImageOptions.ContinueInBackground
                 | SDWebImageOptions.RetryFailed;
 
-            ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
+            ProfileImageView.SetImage(new NSUrl(user.AvatarUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
         }
         
         private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
