@@ -24,11 +24,10 @@ namespace BetterSalesman.iOS
         const string segueIDLogout = "LogoutSegue";
         
         // TODO update icons
-        const string IcProfile = "";
-        const string IcArguments = "";
-        const string IcMyTeam = "";
-        const string IcLogout = "";
-        const string IcSynchronization = "";
+        const string IcArguments = "ic_add";
+        const string IcMyTeam = "ic_menu";
+        const string IcLogout = "ic_menu";
+        const string IcSynchronization = "ic_add";
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -60,7 +59,7 @@ namespace BetterSalesman.iOS
             Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
-            Navigation.ShadowViewColor = UIColor.Clear;
+            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,48);
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 

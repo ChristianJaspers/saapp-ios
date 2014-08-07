@@ -13,10 +13,13 @@ namespace BetterSalesman.iOS
     {
         public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
-        public static UIColor ColorTextOrange = UIColor.Clear.FromHex("#F04006");
+        public static UIColor ColorTextOrange = UIColor.Clear.FromHex("#f76500");
         public static UIColor ColorTextGray = UIColor.Clear.FromHex("#3D3D3D");
-        public static UIColor ColorBackgroundOrange = UIColor.Clear.FromHex("#F25309");
-        public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#DFDFDF");
+        public static UIColor ColorBackgroundOrange = UIColor.Clear.FromHex("#f76500");
+        public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#e6e6e6");
+        
+        public static UIColor ColorBackgroundZebraOdd = UIColor.Clear.FromHex("#f8f8f8");
+        public static UIColor ColorBackgroundZebraEven = UIColor.Clear.FromHex("#FFFFFF");
         
         public override UIWindow Window
         {

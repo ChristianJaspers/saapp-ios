@@ -54,6 +54,18 @@ namespace BetterSalesman.iOS
         {
             ProfileImageView.Image = downloadedImage.Circle();
         }
+        
+        public override UITableViewCell GetCell(UITableView tv)
+        {
+            var cell = base.GetCell(tv);
+            
+            var clearView = new UIView { BackgroundColor = UIColor.Clear };
+            
+            cell.BackgroundView = clearView;
+            cell.SelectedBackgroundView = clearView;
+            
+            return cell;
+        }
     }
 }
 
