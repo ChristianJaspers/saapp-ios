@@ -38,7 +38,7 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         public static string DatabaseFilename
         {
-            get { return HttpConfig.Lang + ".sqlite3"; }
+            get { return "db.sqlite3"; }
         }
 
         /// <summary>
