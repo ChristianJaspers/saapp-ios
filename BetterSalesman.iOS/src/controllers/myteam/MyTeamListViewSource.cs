@@ -41,10 +41,17 @@ namespace BetterSalesman.iOS
             title.Text = user.DisplayName;
             subtitle.Text = user.Experience + " " + I18n.XP;
             
-            imageView.SetImage(
-                url: new NSUrl(user.AvatarThumbUrl),
-                placeholder: UIImage.FromBundle(ic_placeholder)
-            );
+			if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+			{
+	            imageView.SetImage(
+	                url: new NSUrl(user.AvatarThumbUrl),
+	                placeholder: UIImage.FromBundle(ic_placeholder)
+	            );
+			}
+			else
+			{
+				imageView.Image = UIImage.FromBundle(ic_placeholder);
+			}
             
             return cell;
         }
