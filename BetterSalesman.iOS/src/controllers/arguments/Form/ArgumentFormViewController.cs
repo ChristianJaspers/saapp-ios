@@ -58,6 +58,7 @@ namespace BetterSalesman.iOS
 
 			toolbar.Items = new UIBarButtonItem[]
 			{
+				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
 				new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate {
 					textView.ResignFirstResponder();
 				})
