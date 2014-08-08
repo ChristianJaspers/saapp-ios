@@ -146,12 +146,6 @@
     <BundleResource Include="Resources\avatar_placeholder%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\ic_change_password.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
-    <BundleResource Include="Resources\ic_change_password%402x.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
     <BundleResource Include="Resources\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -181,6 +175,16 @@
     <BundleResource Include="Resources\ic_back%402x.png" />
     <BundleResource Include="Resources\ic_back.png" />
     <BundleResource Include="Resources\orange.png" />
+    <BundleResource Include="Resources\ic_team.png" />
+    <BundleResource Include="Resources\ic_team%402x.png" />
+    <BundleResource Include="Resources\circle.png" />
+    <BundleResource Include="Resources\circle%402x.png" />
+    <BundleResource Include="Resources\ic_arguments.png" />
+    <BundleResource Include="Resources\ic_arguments%402x.png" />
+    <BundleResource Include="Resources\ic_logout.png" />
+    <BundleResource Include="Resources\ic_logout%402x.png" />
+    <BundleResource Include="Resources\ic_key.png" />
+    <BundleResource Include="Resources\ic_key%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

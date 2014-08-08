@@ -36,7 +36,7 @@ namespace BetterSalesman.iOS
             cell.ImageView.TintColor = AppDelegate.ColorBackgroundGray;
             
             // TODO image tinting
-            cell.ImageView.Image = new UIImage();
+//            cell.ImageView.Image = new UIImage();
 //            cell.ImageView.Image = Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
 //            cell.ImageView.TintColor = UIColor.White;
             

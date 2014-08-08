@@ -23,11 +23,12 @@ namespace BetterSalesman.iOS
         
         const string segueIDLogout = "LogoutSegue";
         
-        // TODO update icons
-        const string IcArguments = "ic_add";
-        const string IcMyTeam = "ic_menu";
-        const string IcLogout = "ic_menu";
-        const string IcSynchronization = "ic_add";
+        const string IcArguments = "ic_arguments";
+        const string IcMyTeam = "ic_team";
+        const string IcLogout = "ic_logout";
+        
+        // TODO remove synchronization button
+        const string IcSynchronization = "";
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -90,15 +91,15 @@ namespace BetterSalesman.iOS
                     VListMyTeam
                 ),
                 new FlayoutNavigationItem(
-                    I18n.Synchronization, 
-                    Synchronization,
-                    UIImage.FromBundle(IcSynchronization),
-                    VEmpty
-                ),
-                new FlayoutNavigationItem(
                     I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(IcLogout),
+                    VEmpty
+                ),
+                new FlayoutNavigationItem(
+                    I18n.Synchronization, 
+                    Synchronization,
+                    UIImage.FromBundle(IcSynchronization),
                     VEmpty
                 )
             };

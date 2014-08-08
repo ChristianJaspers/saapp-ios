@@ -57,7 +57,7 @@ namespace BetterSalesman.iOS
             
             var bg = cell.ViewWithTag(15);
             
-            bg.BackgroundColor = indexPath.Row % 2 > 0 ? AppDelegate.ColorBackgroundZebraEven : AppDelegate.ColorBackgroundZebraOdd; 
+            bg.BackgroundColor = indexPath.Row % 2 > 0 ? AppDelegate.ColorBackgroundZebraOdd : AppDelegate.ColorBackgroundZebraEven; 
             
             var featureTxt = (UILabel)cell.ViewWithTag(1);
             var benefitTxt = (UILabel)cell.ViewWithTag(2);
