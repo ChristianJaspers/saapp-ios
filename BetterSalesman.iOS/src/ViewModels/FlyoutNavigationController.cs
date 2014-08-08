@@ -18,6 +18,7 @@ using MonoTouch.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 using MonoTouch.UIKit;
+using System.Diagnostics;
 
 namespace BetterSalesman.iOS
 {
@@ -455,6 +456,7 @@ namespace BetterSalesman.iOS
                 return screenShot;
             }
             catch(Exception ex) {
+				Debug.WriteLine("There was an error when capturing StatusBarImage: " + ex.Message + "\n" + ex.StackTrace);
                 return null;
             }
         }

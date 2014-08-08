@@ -35,14 +35,38 @@ namespace BetterSalesman.iOS
             Benefit = Argument.Benefit;
             
             SubscribeEvents();
+
+			AddKeyboardAccessoryView(fieldFeature);
+			AddKeyboardAccessoryView(fieldBenefit);
         }
-        
+			
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
             
             UnsubscribeEvents();
         }
+
+		private void AddKeyboardAccessoryView(UITextView textView)
+		{
+			int toolbarHeight = 44;
+			int toolbarWidth = (int)View.Frame.Width;
+
+			var toolbar = new UIToolbar(new Rectangle(0, 0, toolbarWidth, toolbarHeight));
+			toolbar.TintColor = UIColor.Black;
+			toolbar.BarStyle = UIBarStyle.Default;
+
+			toolbar.Items = new UIBarButtonItem[]
+			{
+				new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate {
+					textView.ResignFirstResponder();
+				})
+			};
+
+			textView.KeyboardAppearance = UIKeyboardAppearance.Light;
+			textView.InputAccessoryView = toolbar;
+		}
+
         
         #endregion
         

@@ -3,6 +3,7 @@ using System;
 using Akavache;
 using ReactiveUI;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -54,6 +55,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             } 
             catch (Exception ex)
             {
+				Debug.WriteLine("Failed to fetch user from database: " + ex.Message + "\n" + ex.StackTrace);
                 return null;
             }
         }

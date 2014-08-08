@@ -76,6 +76,8 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
+			// TODO - there's update view in ViewDidLoad - consider adding flag like isFirstViewDidAppear (set it to false in ViewDidLoad)
+			// 		   that is set in the first ViewDidAppear (but without update), so that update doesn't get called twice, potentially blocking the view
 			UpdateView();
 		}
 
@@ -100,17 +102,29 @@ namespace BetterSalesman.iOS
             labelBenefit.Text = Argument.Benefit;
 
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
-            
+
             if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
             {
                 if (Argument.UserId != UserManager.LoggedInUser().Id)
                 {
                     chooseRating.SelectedSegment = Argument.MyRating - 1;
-                } 
+					SetRatingControlsHidden(false);
+                }
+				else
+				{
+					SetRatingControlsHidden(true);
+				}
                 
                 chooseRating.Enabled = false;
             }
         }
+
+		private void SetRatingControlsHidden(bool hidden)
+		{
+			labelHowRelevant.Hidden = hidden;
+			labelEarnXPForVote.Hidden = hidden;
+			chooseRating.Hidden = hidden;
+		}
         
         #endregion
 	}
