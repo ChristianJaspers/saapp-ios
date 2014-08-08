@@ -19,6 +19,9 @@ namespace BetterSalesman.iOS
 		private const string AvatarPlaceholderImageName = "avatar_placeholder.png";
 		private UIImage AvatarPlaceholderImage;
 
+        // TODO make it via Xamarin bindings not tags
+        UIImageView fakeImageView;
+
 		private ImagePickerPresenter imagePickerPresenter;
 
 		public ProfileViewController(IntPtr handle) : base (handle)
@@ -45,6 +48,8 @@ namespace BetterSalesman.iOS
             Title = I18n.Profile;
             
             imageViewBorder.Image = imageViewBorder.Image.Circle();
+            
+            fakeImageView = (UIImageView)View.ViewWithTag(30);
             
             AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName).Circle();
 
