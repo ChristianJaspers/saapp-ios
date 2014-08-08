@@ -8,7 +8,7 @@ namespace BetterSalesman.iOS
 {
     public partial class FlyoutViewController : BaseUIViewController
     {
-        public static FlyoutNavigationController Navigation;
+		public static CustomFlyoutNavigationController Navigation;
         
         FlayoutNavigationItemProfile profileElement;
         
@@ -63,6 +63,11 @@ namespace BetterSalesman.iOS
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 
+			Navigation.MenuWasShown += () =>
+			{
+				profileElement.RefreshUserData();
+			};
+
             PopulateNavigationItems();
         }
 
@@ -114,8 +119,6 @@ namespace BetterSalesman.iOS
             Navigation.NavigationRoot.TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
-            
-            profileElement.RefreshUserData();
         }
 
         UIViewController controllerForSection(string title = storyboardIdNavigationBase)
