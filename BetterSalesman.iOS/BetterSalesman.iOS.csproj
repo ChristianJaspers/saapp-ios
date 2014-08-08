@@ -190,6 +190,7 @@
     <BundleResource Include="Resources\ic_benefit%402x.png" />
     <BundleResource Include="Resources\ic_feature.png" />
     <BundleResource Include="Resources\ic_feature%402x.png" />
+    <BundleResource Include="Resources\da.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
