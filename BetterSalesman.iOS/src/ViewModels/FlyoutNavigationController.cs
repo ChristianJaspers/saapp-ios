@@ -367,7 +367,7 @@ namespace BetterSalesman.iOS
 
         //bool isOpen {get{ return mainView.Frame.X == menuWidth; }}
 
-        public void ShowMenu()
+        public virtual void ShowMenu()
         {
             if (mainView == null)
                 return;

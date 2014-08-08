@@ -67,6 +67,13 @@ namespace BetterSalesman.iOS
 			LoadUser();
 		}
         
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+
+			LoadUser();
+		}
+
         #endregion
 
 		private async Task UploadImage(UIImage image)
