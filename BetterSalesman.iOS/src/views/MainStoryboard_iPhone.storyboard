@@ -87,6 +87,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EQJ-eu-qEE">
+                                <rect key="frame" x="13" y="29" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -561,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SdD-zD-cjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="321"/>
+            <point key="canvasLocation" x="2068" y="329"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="FX9-aj-exN">
@@ -777,8 +781,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="96" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nl-Si-p1r">
                                                     <rect key="frame" x="264" y="15" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="BgW-jK-rNZ"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="QBA-6f-T9c"/>
                                                         <constraint firstAttribute="height" constant="40" id="VvJ-dO-NzV"/>
                                                         <constraint firstAttribute="width" constant="40" id="pFc-YT-Tf2"/>
                                                     </constraints>
@@ -788,7 +790,7 @@
                                                 </label>
                                                 <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-QI-2jz" userLabel="vertical line">
                                                     <rect key="frame" x="255" y="6" width="1" height="57"/>
-                                                    <color key="backgroundColor" red="0.78431379800000001" green="0.78039222959999999" blue="0.80000007149999997" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="JcB-pS-obF"/>
                                                         <constraint firstAttribute="height" constant="57" id="hPi-fk-ajw"/>
@@ -1015,7 +1017,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mJU-2O-oQX"/>
+        <segue reference="bGM-YO-hz2"/>
         <segue reference="a9h-qT-ohh"/>
         <segue reference="Psd-rE-10c"/>
         <segue reference="zm9-Cr-f1k"/>

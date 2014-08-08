@@ -16,6 +16,7 @@ namespace BetterSalesman.iOS
         
         UIImage AvatarPlaceholderImage;
         UIImageView ProfileImageView;
+        UIImageView fakeProfileImageView;
         UILabel labelViewProfile;
         UILabel labelDisplayName;
         
@@ -32,9 +33,13 @@ namespace BetterSalesman.iOS
             labelDisplayName = View.ViewWithTag(2) as UILabel;
             labelViewProfile = View.ViewWithTag(3) as UILabel;
             
+            fakeProfileImageView = View.ViewWithTag(30) as UIImageView;
+            
             labelViewProfile.Text = I18n.ViewProfile;
             
             AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName).Circle();
+            
+            ProfileImageView.Image = AvatarPlaceholderImage;
         }
         
         public void RefreshUserData()
@@ -47,7 +52,7 @@ namespace BetterSalesman.iOS
                 | SDWebImageOptions.ContinueInBackground
                 | SDWebImageOptions.RetryFailed;
 
-            ProfileImageView.SetImage(new NSUrl(user.AvatarUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
+            fakeProfileImageView.SetImage(new NSUrl(user.AvatarUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
         }
         
         private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)

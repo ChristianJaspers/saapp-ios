@@ -2,6 +2,7 @@
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace BetterSalesman.iOS
 {
@@ -68,6 +69,11 @@ namespace BetterSalesman.iOS
             var argument = Sections[indexPath.Section].Arguments[indexPath.Row];
             
             verticalLine.Hidden = !argument.Rated;
+            
+            var frame = verticalLine.Frame;
+            frame.Width = 0.5f;
+            verticalLine.Frame = frame;
+            
             relevanceTxt.Hidden = !argument.Rated;
             
             featureTxt.Text = argument.Feature;
