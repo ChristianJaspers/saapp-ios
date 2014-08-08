@@ -14,7 +14,7 @@ namespace BetterSalesman.iOS
     partial class ProfileViewController : BaseUIViewController
 	{
 		private const string MenuIcon = "ic_menu";
-		private const string MenuIconPasswordChange = "ic_change_password";
+		private const string MenuIconPasswordChange = "ic_key";
 
 		private const string AvatarPlaceholderImageName = "avatar_placeholder.png";
 		private UIImage AvatarPlaceholderImage;
