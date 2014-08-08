@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange.png" translatesAutoresizingMaskIntoConstraints="NO" id="wvY-26-ouP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="wvY-26-ouP">
                                 <rect key="frame" x="98" y="79" width="124" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1002,13 +1002,13 @@
     </scenes>
     <resources>
         <image name="avatar_placeholder.png" width="256" height="256"/>
+        <image name="circle.png" width="256" height="256"/>
         <image name="ic_add.png" width="22" height="22"/>
         <image name="ic_benefit.png" width="22" height="22"/>
         <image name="ic_feature.png" width="22" height="22"/>
         <image name="ic_menu.png" width="22" height="22"/>
         <image name="login_form.png" width="608" height="128"/>
         <image name="logo.png" width="340" height="80"/>
-        <image name="orange.png" width="300" height="300"/>
         <image name="product_picker_button.png" width="640" height="89"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
