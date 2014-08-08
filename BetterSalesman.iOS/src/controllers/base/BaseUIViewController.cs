@@ -28,7 +28,7 @@ namespace BetterSalesman.iOS
         {
             InvokeOnMainThread(() =>
                 {
-                    myHud = MTMBProgressHUD.ShowHUD(View, true);
+                    myHud = MTMBProgressHUD.ShowHUD(UIApplication.SharedApplication.KeyWindow.RootViewController.View, true);
                     myHud.LabelText = titleLabel;
                     myHud.Mode = mode;
                 });
