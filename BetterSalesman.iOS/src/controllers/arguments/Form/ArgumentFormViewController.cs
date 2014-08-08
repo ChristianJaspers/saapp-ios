@@ -53,7 +53,7 @@ namespace BetterSalesman.iOS
 			int toolbarWidth = (int)View.Frame.Width;
 
 			var toolbar = new UIToolbar(new Rectangle(0, 0, toolbarWidth, toolbarHeight));
-			toolbar.TintColor = UIColor.Black;
+			toolbar.TintColor = AppDelegate.TintColor;
 			toolbar.BarStyle = UIBarStyle.Default;
 
 			toolbar.Items = new UIBarButtonItem[]
