@@ -21,8 +21,6 @@ namespace BetterSalesman.iOS
 
 		private ImagePickerPresenter imagePickerPresenter;
 
-		private bool firstTimeViewAppears;
-
 		public ProfileViewController(IntPtr handle) : base (handle)
 		{
 			imagePickerPresenter = new ImagePickerPresenter ();
@@ -67,22 +65,13 @@ namespace BetterSalesman.iOS
 			ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
 			LoadUser();
-
-			firstTimeViewAppears = true;
 		}
         
 		public override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
 
-			if (!firstTimeViewAppears)
-			{
-				LoadUser();
-			}
-			else
-			{
-				firstTimeViewAppears = false;
-			}
+			LoadUser();
 		}
 
         #endregion
