@@ -181,6 +181,14 @@
     <BundleResource Include="Resources\ic_back%402x.png" />
     <BundleResource Include="Resources\ic_back.png" />
     <BundleResource Include="Resources\orange.png" />
+    <BundleResource Include="Resources\ic_team.png" />
+    <BundleResource Include="Resources\ic_team%402x.png" />
+    <BundleResource Include="Resources\circle.png" />
+    <BundleResource Include="Resources\circle%402x.png" />
+    <BundleResource Include="Resources\ic_arguments.png" />
+    <BundleResource Include="Resources\ic_arguments%402x.png" />
+    <BundleResource Include="Resources\ic_logout.png" />
+    <BundleResource Include="Resources\ic_logout%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
