@@ -52,7 +52,10 @@ namespace BetterSalesman.iOS
                 | SDWebImageOptions.ContinueInBackground
                 | SDWebImageOptions.RetryFailed;
 
-            fakeProfileImageView.SetImage(new NSUrl(user.AvatarUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
+			if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+			{
+				fakeProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
+			}
         }
         
         private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)

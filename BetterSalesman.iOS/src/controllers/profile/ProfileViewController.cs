@@ -161,11 +161,14 @@ namespace BetterSalesman.iOS
                 var downloadOptions = SDWebImageOptions.ProgressiveDownload 
                     | SDWebImageOptions.ContinueInBackground
                     | SDWebImageOptions.RetryFailed;
-                    
-				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, (UIImage downloadedImage, NSError error, SDImageCacheType cacheType) => 
-					{
-						ProfileImageView.Image = downloadedImage.Circle();
-					});
+                
+				if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+				{
+					ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, (UIImage downloadedImage, NSError error, SDImageCacheType cacheType) => 
+						{
+							ProfileImageView.Image = downloadedImage.Circle();
+						});
+				}
 			});
 		}
         
