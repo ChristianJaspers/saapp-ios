@@ -11,6 +11,7 @@ using MonoTouch.Foundation;
 
 namespace BetterSalesman.iOS
 {
+	// TODO - don't call LoadUser when getting back from camera roll (basically when upload starts?)
     partial class ProfileViewController : BaseUIViewController
 	{
 		private const string MenuIcon = "ic_menu";
@@ -112,11 +113,11 @@ namespace BetterSalesman.iOS
 			SetHudDetailsLabel(I18n.ServiceAccessProfilePictureDownloadingThumbnailMessage);
 			var imageUrl = new NSUrl(uploadResult.User.AvatarThumbUrl);
 			var downloadOptions = SDWebImageOptions.ProgressiveDownload 
-					| SDWebImageOptions.ContinueInBackground
-					| SDWebImageOptions.RetryFailed;
+				| SDWebImageOptions.ContinueInBackground
+				| SDWebImageOptions.RetryFailed;
 			InvokeOnMainThread(() =>
 			{
-				ProfileImageView.SetImage(
+				fakeImageView.SetImage(
 					imageUrl,
 					downsizedImage, 
 					downloadOptions,
@@ -134,9 +135,9 @@ namespace BetterSalesman.iOS
 
 		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
 		{
-			HideHud();
-            
             ProfileImageView.Image = downloadedImage.Circle();
+
+			HideHud();
 		}
 
 		private void LoadUser()
@@ -161,7 +162,10 @@ namespace BetterSalesman.iOS
                     | SDWebImageOptions.ContinueInBackground
                     | SDWebImageOptions.RetryFailed;
                     
-                ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, ProcessImageDownloadCompleted);
+				ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, (UIImage downloadedImage, NSError error, SDImageCacheType cacheType) => 
+					{
+						ProfileImageView.Image = downloadedImage.Circle();
+					});
 			});
 		}
         
