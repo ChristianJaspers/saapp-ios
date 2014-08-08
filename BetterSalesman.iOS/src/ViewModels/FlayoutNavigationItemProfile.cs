@@ -61,6 +61,8 @@ namespace BetterSalesman.iOS
             
             var clearView = new UIView { BackgroundColor = UIColor.Clear };
             
+            cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+            
             cell.BackgroundView = clearView;
             cell.SelectedBackgroundView = clearView;
             
