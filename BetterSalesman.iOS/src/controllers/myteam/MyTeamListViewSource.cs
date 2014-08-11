@@ -22,6 +22,11 @@ namespace BetterSalesman.iOS
         {
             return 1;
         }
+        
+        public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 78;
+        }
 
         public override int RowsInSection(UITableView tableview, int section)
         {
@@ -32,25 +37,25 @@ namespace BetterSalesman.iOS
         {
             var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
             
-            var title = (UILabel)cell.ViewWithTag(1);
-            var subtitle = (UILabel)cell.ViewWithTag(2);
-            var imageView = (UIImageView)cell.ViewWithTag(5);
+            var displayName = (UILabel)cell.ViewWithTag(1);
+            var experience = (UILabel)cell.ViewWithTag(2);
+            var avatar = (UIImageView)cell.ViewWithTag(5);
             
             var user = items[indexPath.Row];
             
-            title.Text = user.DisplayName;
-            subtitle.Text = user.Experience + " " + I18n.XP;
+            displayName.Text = user.DisplayName;
+            experience.Text = user.Experience + " " + I18n.XP;
             
 			if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
 			{
-	            imageView.SetImage(
+	            avatar.SetImage(
 	                url: new NSUrl(user.AvatarThumbUrl),
 	                placeholder: UIImage.FromBundle(ic_placeholder)
 	            );
 			}
 			else
 			{
-				imageView.Image = UIImage.FromBundle(ic_placeholder);
+				avatar.Image = UIImage.FromBundle(ic_placeholder);
 			}
             
             return cell;
