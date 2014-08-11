@@ -11,6 +11,8 @@ namespace BetterSalesman.iOS
     {
         public string Controller { get; set; }
 
+        public NSAction Callback { get; set; }
+
         const string AvatarPlaceholderImageName = "avatar_placeholder.png";
         const string profileXib = "sidebarProfile";
         
@@ -75,6 +77,15 @@ namespace BetterSalesman.iOS
             cell.SelectedBackgroundView = clearView;
             
             return cell;
+        }
+        
+        public void Highlighted()
+        {
+        }
+
+        public float GetHeight()
+        {
+            return 155;
         }
     }
 }

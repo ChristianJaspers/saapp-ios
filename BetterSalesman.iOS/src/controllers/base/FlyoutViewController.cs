@@ -119,6 +119,8 @@ namespace BetterSalesman.iOS
             
             Navigation.NavigationRoot.TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             
+            Navigation.NavigationRoot.TableView.Source = new UIFLyoutNavigationSource(elements);
+            
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
 

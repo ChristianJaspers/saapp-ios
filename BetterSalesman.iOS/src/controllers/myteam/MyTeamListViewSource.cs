@@ -12,7 +12,7 @@ namespace BetterSalesman.iOS
         const string ic_placeholder = "avatar_placeholder";
         
         List<User> items = new List<User>();
-        
+
         public MyTeamListViewSource(List<User> items)
         {
             this.items = items;
@@ -22,7 +22,7 @@ namespace BetterSalesman.iOS
         {
             return 1;
         }
-        
+
         public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
             return 73;
@@ -46,17 +46,17 @@ namespace BetterSalesman.iOS
             displayName.Text = user.DisplayName;
             experience.Text = user.Experience + " " + I18n.XP;
             
-			if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
-			{
-	            avatar.SetImage(
-	                url: new NSUrl(user.AvatarThumbUrl),
-	                placeholder: UIImage.FromBundle(ic_placeholder)
-	            );
-			}
-			else
-			{
-				avatar.Image = UIImage.FromBundle(ic_placeholder);
-			}
+            if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+            {
+                avatar.SetImage(
+                    url: new NSUrl(user.AvatarThumbUrl),
+                    placeholder: UIImage.FromBundle(ic_placeholder)
+                );
+            } 
+            else
+            {
+                avatar.Image = UIImage.FromBundle(ic_placeholder);
+            }
             
             return cell;
         }
