@@ -25,7 +25,7 @@ namespace BetterSalesman.iOS
         
         public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            return 78;
+            return 73;
         }
 
         public override int RowsInSection(UITableView tableview, int section)

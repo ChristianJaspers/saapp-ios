@@ -22,7 +22,7 @@ namespace BetterSalesman.iOS
         {
             return Sections.Count;
         }
-        
+
         public override UIView GetViewForFooter(UITableView tableView, int section)
         {
             var cell = tableView.DequeueReusableCell(cellIdentifierFooter) ?? new UITableViewCell();
@@ -49,7 +49,7 @@ namespace BetterSalesman.iOS
         {
             return 30;
         }
-        
+
         public override float GetHeightForFooter(UITableView tableView, int section)
         {
             return 1;

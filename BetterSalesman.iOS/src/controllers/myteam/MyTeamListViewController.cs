@@ -1,7 +1,9 @@
 using System;
-
+using System.Linq;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer.Managers;
+using BetterSalesman.Core.BusinessLayer;
+using BetterSalesman.Core.DataLayer;
 
 namespace BetterSalesman.iOS
 {
