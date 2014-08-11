@@ -1,8 +1,10 @@
 ﻿using System;
-using MonoTouch.UIKit;
 using System.Collections.Generic;
+using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;
+using System.Threading;
 
 namespace BetterSalesman.iOS
 {
@@ -47,8 +49,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
-            Navigation.SelectedIndex = 1;
+            
+            SelectTab(1);
         }
 
         #endregion
@@ -159,10 +161,14 @@ namespace BetterSalesman.iOS
             
             SynchronizationManagerApplication.Instance.Synchronize();
         }
+
+        int lastSelectedIndex;
         
         protected override void OnSynchronizationStart()
         {
             base.OnSynchronizationStart();
+            
+            lastSelectedIndex = Navigation.SelectedIndex;
 
             ShowHud(I18n.SynchronizationInProgress);
         }
@@ -175,7 +181,14 @@ namespace BetterSalesman.iOS
             
             profileElement.RefreshUserData();
             
-            Navigation.HideMenu();
+            SelectTab(lastSelectedIndex);
+        }
+        
+        void SelectTab(int row)
+        {   
+            Navigation.SelectedIndex = row;
+            
+            Navigation.NavigationRoot.TableView.SelectRow(NSIndexPath.FromRowSection(row, 0),false,UITableViewScrollPosition.None);
         }
         
         #endregion

@@ -43,6 +43,12 @@ namespace BetterSalesman.iOS
             
             cell.ImageView.TintColor = tintColor;
             
+            // TODO try to find out some nicer solution for selecting arguments tab on start issue
+            if (Caption.Equals(I18n.Arguments))
+            {
+                Highlighted();
+            }
+            
             var selectedView = new UIView { BackgroundColor = AppDelegate.ColorBackgroundOrange };
             cell.SelectedBackgroundView = selectedView;
             cell.BackgroundColor = AppDelegate.ColorBackgroundGray;

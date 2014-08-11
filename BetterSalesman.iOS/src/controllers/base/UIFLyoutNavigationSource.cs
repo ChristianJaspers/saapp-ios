@@ -44,6 +44,8 @@ namespace BetterSalesman.iOS
                 var element = (IFlyoutNavigationItem)elements[rowIndexPath.Row];
                 
                 element.Highlighted();
+                
+                System.Diagnostics.Debug.WriteLine("Select element " + rowIndexPath.Row);
             }
         }
         
@@ -55,13 +57,14 @@ namespace BetterSalesman.iOS
             {
                 element.Callback();
                 
+                tableView.DeselectRow(indexPath, true);
             } 
-            
-            tableView.DeselectRow(indexPath, true);
             
             FlyoutViewController.Navigation.SelectedIndex = indexPath.Row;
             
             FlyoutViewController.Navigation.HideMenu();
+            
+            RowHighlighted(tableView, indexPath);
         }
 	}
 }
