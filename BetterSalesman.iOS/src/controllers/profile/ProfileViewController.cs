@@ -48,6 +48,11 @@ namespace BetterSalesman.iOS
             
             Title = I18n.Profile;
             
+            // TODO transparent navigation bar 
+            NavigationController.NavigationBar.Translucent = true;
+            NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+            NavigationController.NavigationBar.ShadowImage = new UIImage();
+            
             imageViewBorder.Image = imageViewBorder.Image.Circle();
             
             fakeImageView = (UIImageView)View.ViewWithTag(30);
@@ -165,9 +170,10 @@ namespace BetterSalesman.iOS
 				if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
 				{
 					ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, (UIImage downloadedImage, NSError error, SDImageCacheType cacheType) => 
-						{
-							ProfileImageView.Image = downloadedImage.Circle();
-						});
+					{
+						ProfileImageView.Image = downloadedImage.Circle();
+                        profilePictureInBackground.Image = downloadedImage;
+					});
 				}
 			});
 		}

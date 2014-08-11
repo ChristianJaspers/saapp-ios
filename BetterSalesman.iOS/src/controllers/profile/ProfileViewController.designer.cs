@@ -46,6 +46,10 @@ namespace BetterSalesman.iOS
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIImageView ProfileImageView { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView profilePictureInBackground { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (imageViewBorder != null) {
@@ -79,6 +83,10 @@ namespace BetterSalesman.iOS
 			if (ProfileImageView != null) {
 				ProfileImageView.Dispose ();
 				ProfileImageView = null;
+			}
+			if (profilePictureInBackground != null) {
+				profilePictureInBackground.Dispose ();
+				profilePictureInBackground = null;
 			}
 		}
 	}
