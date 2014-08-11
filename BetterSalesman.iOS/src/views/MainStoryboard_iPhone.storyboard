@@ -646,7 +646,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhj-PP-dw5">
-                                                    <rect key="frame" x="78" y="24" width="137" height="21"/>
+                                                    <rect key="frame" x="77" y="24" width="138" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="jPQ-nw-L9E"/>
                                                     </constraints>
@@ -673,21 +673,21 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qrU-4b-YJ3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                    <rect key="frame" x="1" y="1" width="68" height="68"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="9r5-im-v9e"/>
-                                                        <constraint firstAttribute="width" constant="70" id="pOC-JY-qhW"/>
+                                                        <constraint firstAttribute="height" constant="68" id="9r5-im-v9e"/>
+                                                        <constraint firstAttribute="width" constant="68" id="pOC-JY-qhW"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="yhj-PP-dw5" firstAttribute="leading" secondItem="qrU-4b-YJ3" secondAttribute="trailing" constant="8" id="7Bc-3v-6fs"/>
-                                                <constraint firstItem="qrU-4b-YJ3" firstAttribute="leading" secondItem="Y12-RH-b2m" secondAttribute="leading" id="DHW-7A-18S"/>
+                                                <constraint firstItem="qrU-4b-YJ3" firstAttribute="leading" secondItem="Y12-RH-b2m" secondAttribute="leading" constant="1" id="DHW-7A-18S"/>
                                                 <constraint firstItem="CWC-Qr-0z1" firstAttribute="top" secondItem="Y12-RH-b2m" secondAttribute="top" constant="6" id="EXj-hf-HhQ"/>
                                                 <constraint firstAttribute="height" constant="70" id="GIF-Xr-x99"/>
                                                 <constraint firstItem="yhj-PP-dw5" firstAttribute="top" secondItem="Y12-RH-b2m" secondAttribute="top" constant="24" id="Lf7-k3-okc"/>
-                                                <constraint firstItem="qrU-4b-YJ3" firstAttribute="top" secondItem="Y12-RH-b2m" secondAttribute="top" id="mH1-vc-MOv"/>
+                                                <constraint firstItem="qrU-4b-YJ3" firstAttribute="top" secondItem="Y12-RH-b2m" secondAttribute="top" constant="1" id="mH1-vc-MOv"/>
                                                 <constraint firstAttribute="trailing" secondItem="lLf-NU-QSY" secondAttribute="trailing" constant="6" id="pVU-jf-ona"/>
                                                 <constraint firstItem="lLf-NU-QSY" firstAttribute="leading" secondItem="CWC-Qr-0z1" secondAttribute="trailing" constant="8" id="vU6-qP-gpH"/>
                                                 <constraint firstItem="lLf-NU-QSY" firstAttribute="top" secondItem="Y12-RH-b2m" secondAttribute="top" constant="15" id="wAr-2C-lWo"/>
