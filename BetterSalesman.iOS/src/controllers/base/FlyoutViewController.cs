@@ -50,7 +50,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidAppear(animated);
             
-            SelectTab(1);
+            SelectTab(0);
         }
 
         #endregion

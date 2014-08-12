@@ -126,7 +126,7 @@ namespace BetterSalesman.iOS
 					imageUrl,
 					downsizedImage, 
 					downloadOptions,
-					ProcessImageDownloadCompleted
+					ProcessImageDownloadCompletedAfterUpload
 				);
 			});
 		}
@@ -137,12 +137,17 @@ namespace BetterSalesman.iOS
             
             LoadUser();
         }
+        
+        private void ProcessImageDownloadCompletedAfterUpload(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
+        {
+            ProcessImageDownloadCompleted(downloadedImage, error, cacheType);
+            
+            HideHud();
+        }
 
 		private void ProcessImageDownloadCompleted(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
 		{
-            ProfileImageView.Image = downloadedImage.Circle();
-
-			HideHud();
+            UpdateImage(downloadedImage);
 		}
 
 		private void LoadUser()
@@ -169,14 +174,22 @@ namespace BetterSalesman.iOS
                 
 				if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
 				{
-					ProfileImageView.SetImage(new NSUrl(user.AvatarThumbUrl), AvatarPlaceholderImage, downloadOptions, (UIImage downloadedImage, NSError error, SDImageCacheType cacheType) => 
-					{
-						ProfileImageView.Image = downloadedImage.Circle();
-                        profilePictureInBackground.Image = downloadedImage;
-					});
+					WebCacheUIImageViewExtension.SetImage(
+                            ProfileImageView, 
+                            new NSUrl(user.AvatarThumbUrl), 
+                            AvatarPlaceholderImage, 
+                            downloadOptions, 
+                            ProcessImageDownloadCompleted
+                    );
 				}
 			});
 		}
+
+        void UpdateImage(UIImage downloadedImage)
+        {
+            ProfileImageView.Image = downloadedImage.Circle();
+            profilePictureInBackground.Image = downloadedImage;
+        }
         
         #region Password change
         
