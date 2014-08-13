@@ -379,6 +379,9 @@
     <Compile Include="src\ViewModels\CustomFlyoutNavigationController.cs" />
     <Compile Include="src\ViewModels\FlyoutNavigationController.cs" />
     <Compile Include="src\controllers\base\UIFLyoutNavigationSource.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressLabel.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -413,6 +416,7 @@
     <Folder Include="src\controllers\arguments\Details\" />
     <Folder Include="src\controllers\arguments\Picker\" />
     <Folder Include="src\ViewModels\IFlyoutNavigationItem.xcassets\" />
+    <Folder Include="src\views\MDRadialProgress\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">

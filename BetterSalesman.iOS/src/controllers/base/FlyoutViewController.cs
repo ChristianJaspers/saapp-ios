@@ -50,6 +50,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidAppear(animated);
             
+            // TODO change selected tab as default to "1" - arguments
             SelectTab(0);
         }
 
