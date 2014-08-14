@@ -88,26 +88,24 @@ namespace BetterSalesman.iOS
 
         void InitMyActivityViews()
         {
-            progressMyActivity = new MDRadialProgressView(new RectangleF(0, 0, 150, 150), ThemeWithThickness(12)) {
-                ProgressTotal = 100,
-                ProgressCounter = 4,
+            progressMyActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myActivityView.Frame.Size), ThemeWithThickness(12)) {
+                ProgressTotal = 100
             };
             
-            var smallProgressFrame = new RectangleF(0, 0, 120, 120);
-            
-            progressMyTeamActivity = new MDRadialProgressView(smallProgressFrame, ThemeWithThickness(8)) {
-                ProgressTotal = 100,
-                ProgressCounter = 90,
+            progressMyTeamActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myTeamActivityView.Frame.Size), ThemeWithThickness(8)) {
+                ProgressTotal = 100
             };
             
-            progressAllTeamsActivity = new MDRadialProgressView(smallProgressFrame, ThemeWithThickness(8)) {
-                ProgressTotal = 100,
-                ProgressCounter = 40,
+            progressAllTeamsActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),allTeamsActivityView.Frame.Size), ThemeWithThickness(8)) {
+                ProgressTotal = 100
             };
             
             myActivityView.AddSubview(progressMyActivity);
+            myActivityView.SendSubviewToBack(progressMyActivity);
             myTeamActivityView.AddSubview(progressMyTeamActivity);
+            myTeamActivityView.SendSubviewToBack(progressMyTeamActivity);
             allTeamsActivityView.AddSubview(progressAllTeamsActivity);
+            allTeamsActivityView.SendSubviewToBack(allTeamsActivityView);
         }
 
         static MDRadialProgressTheme ThemeWithThickness(float thickness)
@@ -205,34 +203,33 @@ namespace BetterSalesman.iOS
             }
 
             InvokeOnMainThread(() =>
-                {
-                    labelDisplayName.Text = user.DisplayName;
-                    labelExperience.Text = string.Format("{0} {1}",user.Experience.ToString(),I18n.XP);
-                    
-                    
-                    labelMyActivity.Text = I18n.MyActivity;
-                    labelMyTeamActivity.Text = I18n.MyTeamActivity;
-                    labelAllTeamsActivity.Text = I18n.AllTeamsActivity;
-                    // TODO update progress according to percentage from my activity
-//                    labelMyActivity.Text = user.MyActivity.ToString();
-//                    labelMyTeamActivity.Text = user.MyTeamActivity.ToString();
-//                    labelAllTeamsActivity.Text = user.AllTeamsActivity.ToString();
-                    
-                    var downloadOptions = SDWebImageOptions.ProgressiveDownload
-                                      | SDWebImageOptions.ContinueInBackground
-                                      | SDWebImageOptions.RetryFailed;
+            {
+                labelDisplayName.Text = user.DisplayName;
+                labelExperience.Text = string.Format("{0} {1}", user.Experience, I18n.XP);
                 
-                    if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
-                    {
-                        WebCacheUIImageViewExtension.SetImage(
-                            ProfileImageView, 
-                            new NSUrl(user.AvatarThumbUrl), 
-                            AvatarPlaceholderImage, 
-                            downloadOptions, 
-                            ProcessImageDownloadCompleted
-                        );
-                    }
-                });
+                labelMyActivity.Text = I18n.MyActivity;
+                labelMyTeamActivity.Text = I18n.MyTeamActivity;
+                labelAllTeamsActivity.Text = I18n.AllTeamsActivity;
+                
+                progressMyActivity.ProgressCounter = Convert.ToUInt32(user.MyActivity);
+                progressMyTeamActivity.ProgressCounter = Convert.ToUInt32(user.MyTeamActivity);
+                progressAllTeamsActivity.ProgressCounter = Convert.ToUInt32(user.AllTeamsActivity);
+                
+                var downloadOptions = SDWebImageOptions.ProgressiveDownload
+                                  | SDWebImageOptions.ContinueInBackground
+                                  | SDWebImageOptions.RetryFailed;
+            
+                if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+                {
+                    WebCacheUIImageViewExtension.SetImage(
+                        ProfileImageView, 
+                        new NSUrl(user.AvatarThumbUrl), 
+                        AvatarPlaceholderImage, 
+                        downloadOptions, 
+                        ProcessImageDownloadCompleted
+                    );
+                }
+            });
         }
 
         void UpdateImage(UIImage downloadedImage)
