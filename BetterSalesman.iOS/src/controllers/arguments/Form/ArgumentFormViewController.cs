@@ -33,11 +33,16 @@ namespace BetterSalesman.iOS
             
             Feature = Argument.Feature;
             Benefit = Argument.Benefit;
-            
-            SubscribeEvents();
 
 			AddKeyboardAccessoryView(fieldFeature);
 			AddKeyboardAccessoryView(fieldBenefit);
+        }
+        
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            
+            SubscribeEvents();
         }
 			
         public override void ViewWillDisappear(bool animated)
