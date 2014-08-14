@@ -18,6 +18,13 @@ namespace BetterSalesman.iOS
         {
         }
         
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            
+            launchScreenImageView.Image = UIImage.FromBundle("Default");
+        }
+        
         public async override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);

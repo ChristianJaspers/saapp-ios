@@ -4,7 +4,6 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;
-using System.Threading;
 
 namespace BetterSalesman.iOS
 {

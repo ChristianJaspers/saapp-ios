@@ -253,12 +253,25 @@
                     <view key="view" contentMode="scaleToFill" id="RU7-8C-AFb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e6l-LG-vEF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="e6l-LG-vEF" firstAttribute="leading" secondItem="RU7-8C-AFb" secondAttribute="leading" id="6cm-4x-kwu"/>
+                            <constraint firstItem="e6l-LG-vEF" firstAttribute="top" secondItem="RU7-8C-AFb" secondAttribute="top" id="NUi-WF-Faw"/>
+                            <constraint firstAttribute="trailing" secondItem="e6l-LG-vEF" secondAttribute="trailing" id="hlc-HP-yNN"/>
+                            <constraint firstItem="Egd-qG-UJt" firstAttribute="top" secondItem="e6l-LG-vEF" secondAttribute="bottom" id="ndH-S5-Gvo"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ciQ-2K-9Da"/>
                     <connections>
                         <segue destination="ZQo-R8-Nf1" kind="custom" identifier="NotLoggedInSegue" customClass="SegueNavigationWithoutAnimation" id="qcJ-g0-neX"/>
                         <segue destination="wVP-bY-Y9v" kind="custom" identifier="LoggedInSegue" customClass="SegueNavigationWithoutAnimation" id="4gg-Rf-XQM"/>
+                        <outlet property="launchScreenImageView" destination="e6l-LG-vEF" id="name-outlet-e6l-LG-vEF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvN-7D-lkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -300,7 +313,7 @@
                                     <color key="titleColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Wh-jB-cc8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Wh-jB-cc8">
                                 <rect key="frame" x="75" y="68" width="170" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -492,7 +505,7 @@
             <objects>
                 <tableViewController id="POc-8S-Hb0" customClass="ProductGroupPickerListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="n2e-6O-2mQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196084980000002" green="0.90196084980000002" blue="0.90196084980000002" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
@@ -564,7 +577,7 @@
                         <viewControllerLayoutGuide type="bottom" id="UWL-hp-JsS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6Gj-5O-73a">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Feature" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="43">
@@ -577,7 +590,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Benefit" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="44">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Benefit" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="44" misplaced="YES">
                                 <rect key="frame" x="20" y="154" width="280" height="294"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -884,7 +897,7 @@
                         <color key="backgroundColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                         <label key="tableFooterView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZSK-8s-DsB">
-                            <rect key="frame" x="0.0" y="123" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="416" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1047,11 +1060,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rvW-M0-EIf"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PLy-tX-hQI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTa-dA-DC4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-s5-SO7">
@@ -1178,8 +1191,18 @@
         <image name="ic_feature.png" width="22" height="22"/>
         <image name="ic_menu.png" width="22" height="22"/>
         <image name="login_form.png" width="608" height="128"/>
-        <image name="logo.png" width="340" height="80"/>
+        <image name="logo.png" width="170" height="29"/>
         <image name="product_picker_button.png" width="640" height="89"/>
+        <image name="Default-568h.png" width="640" height="1136"/>
+        <image name="ic_star_unrated.png" width="22" height="22"/>
+        <image name="ic_star_rated.png" width="22" height="22"/>
+        <image name="ic_back.png" width="22" height="22"/>
+        <image name="orange.png" width="300" height="300"/>
+        <image name="ic_team.png" width="22" height="22"/>
+        <image name="ic_arguments.png" width="22" height="22"/>
+        <image name="ic_logout.png" width="22" height="22"/>
+        <image name="ic_key.png" width="22" height="22"/>
+        <image name="Default.png" width="320" height="480"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1187,9 +1210,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mJU-2O-oQX"/>
+        <segue reference="4gg-Rf-XQM"/>
+        <segue reference="qcJ-g0-neX"/>
         <segue reference="LHY-w2-Th4"/>
-        <segue reference="Psd-rE-10c"/>
-        <segue reference="zm9-Cr-f1k"/>
+        <segue reference="mJU-2O-oQX"/>
     </inferredMetricsTieBreakers>
 </document>

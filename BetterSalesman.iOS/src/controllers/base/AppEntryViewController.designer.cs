@@ -14,8 +14,16 @@ namespace BetterSalesman.iOS
 	[Register ("AppEntryViewController")]
 	partial class AppEntryViewController
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView launchScreenImageView { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (launchScreenImageView != null) {
+				launchScreenImageView.Dispose ();
+				launchScreenImageView = null;
+			}
 		}
 	}
 }
