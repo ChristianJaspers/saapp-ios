@@ -1076,18 +1076,22 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOv-Hh-KXk" userLabel="shadow benefit">
-                                                <rect key="frame" x="6" y="115" width="310" height="100"/>
+                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOv-Hh-KXk" userLabel="shadow benefit">
+                                                <rect key="frame" x="6" y="115" width="310" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="310" id="cqt-U6-uUg"/>
+                                                    <constraint firstAttribute="height" constant="80" id="hGN-F7-GW8"/>
+                                                </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCD-LU-4sL" userLabel="benefit Text View">
-                                                <rect key="frame" x="5" y="114" width="310" height="100"/>
+                                                <rect key="frame" x="5" y="114" width="310" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="310" id="CX7-WO-NJy"/>
-                                                    <constraint firstAttribute="height" constant="100" id="MiE-hw-iAd"/>
+                                                    <constraint firstAttribute="height" constant="80" id="MiE-hw-iAd"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.46666669849999998" green="0.50196081400000003" blue="0.52941179279999995" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -1184,7 +1188,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.81176477670669556" green="0.80784320831298828" blue="0.82352948188781738" alpha="1" colorSpace="deviceRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZB-0G-JPV" userLabel="horizontal_line">
+                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZB-0G-JPV" userLabel="horizontal_line">
                                                 <rect key="frame" x="5" y="113" width="310" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.81176477670669556" green="0.80784320831298828" blue="0.82352948188781738" alpha="1" colorSpace="deviceRGB"/>
@@ -1203,8 +1207,11 @@
                                             <constraint firstItem="ay3-Go-d6M" firstAttribute="top" secondItem="VEJ-XE-50H" secondAttribute="bottom" constant="5" id="PbJ-Ve-ddU"/>
                                             <constraint firstItem="oyf-ay-a1t" firstAttribute="top" secondItem="DYR-s5-SO7" secondAttribute="top" constant="4" id="RRO-YI-s48"/>
                                             <constraint firstItem="qgs-QN-3BX" firstAttribute="top" secondItem="DYR-s5-SO7" secondAttribute="top" constant="1" id="WPI-Du-ebh"/>
+                                            <constraint firstItem="HOv-Hh-KXk" firstAttribute="top" secondItem="GZB-0G-JPV" secondAttribute="bottom" constant="1" id="alh-K0-od3"/>
+                                            <constraint firstAttribute="trailing" secondItem="HOv-Hh-KXk" secondAttribute="trailing" constant="4" id="cS5-UP-ctL"/>
                                             <constraint firstAttribute="height" constant="320" id="fBO-1Q-kVW"/>
                                             <constraint firstAttribute="width" constant="320" id="faC-ge-eLP"/>
+                                            <constraint firstItem="HOv-Hh-KXk" firstAttribute="leading" secondItem="DYR-s5-SO7" secondAttribute="leading" constant="6" id="hOO-1L-akY"/>
                                             <constraint firstItem="qgs-QN-3BX" firstAttribute="leading" secondItem="oyf-ay-a1t" secondAttribute="trailing" constant="8" id="jbx-jK-LHb"/>
                                             <constraint firstItem="Sd4-AP-Omr" firstAttribute="top" secondItem="VEJ-XE-50H" secondAttribute="bottom" constant="5" id="kCv-7s-JMN"/>
                                             <constraint firstItem="pCD-LU-4sL" firstAttribute="top" secondItem="ay3-Go-d6M" secondAttribute="bottom" constant="8" id="lFk-6u-b4n"/>
