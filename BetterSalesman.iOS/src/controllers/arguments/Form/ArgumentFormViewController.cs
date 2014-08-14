@@ -25,11 +25,10 @@ namespace BetterSalesman.iOS
             InitValidator();
 
 			labelFeature.Text = I18n.ArgumentAddFeature;
-			labelBenefit.Text = I18n.ArgumentAddBenefit;
+            labelBenefit.Text = I18n.ArgumentAddBenefit;
 
-			// TODO
-			// labelEarnXpForFeature.Text = I18n.FeatureAddEarnXp;
-			// labelEarnXpForBenefit.Text = I18n.BenefitAddEarnXp;
+            labelFeatureEarn.Text = I18n.FeatureAddEarnXp;
+            labelBenefitEarn.Text = I18n.BenefitAddEarnXp;
             
             Feature = Argument.Feature;
             Benefit = Argument.Benefit;
@@ -61,7 +60,7 @@ namespace BetterSalesman.iOS
 			toolbar.TintColor = AppDelegate.TintColor;
 			toolbar.BarStyle = UIBarStyle.Default;
 
-			toolbar.Items = new UIBarButtonItem[]
+			toolbar.Items = new []
 			{
 				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
 				new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate {
@@ -118,7 +117,7 @@ namespace BetterSalesman.iOS
         
         void DidStartEditing(object sender, EventArgs e)
         {   
-            scrollViewContainer.SetContentOffset(new PointF(0,((UIView)sender).Frame.Y), true);
+            scrollViewContainer.SetContentOffset(new PointF(0,((UIView)sender).Frame.Y-30), true);
         }
         
         void DidEndEditing(object sender, EventArgs e)

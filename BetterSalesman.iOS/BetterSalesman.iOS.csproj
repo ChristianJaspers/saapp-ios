@@ -191,6 +191,8 @@
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\logo%402x.png" />
     <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\ic_earn.png" />
+    <BundleResource Include="Resources\ic_earn%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
