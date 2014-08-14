@@ -18,11 +18,23 @@ namespace BetterSalesman.iOS
         {
         }
         
+        public static bool IsTall
+        {
+            get
+            {
+                return UIDevice.CurrentDevice.UserInterfaceIdiom
+                    == UIUserInterfaceIdiom.Phone
+                    && UIScreen.MainScreen.Bounds.Height
+                    * UIScreen.MainScreen.Scale >= 1136;
+            }
+        }
+        
+        
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             
-            launchScreenImageView.Image = UIImage.FromBundle("Default");
+            launchScreenImageView.Image = UIImage.FromBundle(IsTall ? "Default-568h" : "Default");
         }
         
         public async override void ViewWillAppear(bool animated)
