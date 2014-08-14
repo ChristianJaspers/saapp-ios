@@ -105,7 +105,7 @@ namespace BetterSalesman.iOS
             myTeamActivityView.AddSubview(progressMyTeamActivity);
             myTeamActivityView.SendSubviewToBack(progressMyTeamActivity);
             allTeamsActivityView.AddSubview(progressAllTeamsActivity);
-            allTeamsActivityView.SendSubviewToBack(allTeamsActivityView);
+            allTeamsActivityView.SendSubviewToBack(progressAllTeamsActivity);
         }
 
         static MDRadialProgressTheme ThemeWithThickness(float thickness)
