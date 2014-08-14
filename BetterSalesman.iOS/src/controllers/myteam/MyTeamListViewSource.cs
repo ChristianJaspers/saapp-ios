@@ -63,8 +63,7 @@ namespace BetterSalesman.iOS
         
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            // TODO
-            tableView.DeselectRow(indexPath, true);
+            tableView.DeselectRow(indexPath, false);
         }
     }
 }
