@@ -677,7 +677,7 @@
                                 <rect key="frame" x="0.0" y="370" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Fmo-Ad-ZH5">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Fmo-Ad-ZH5">
                                         <rect key="frame" x="5" y="52" width="310" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="kZw-U1-izL"/>

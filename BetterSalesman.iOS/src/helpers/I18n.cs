@@ -80,6 +80,10 @@
 		public static string ArgumentAddBenefit = "argument_add_benefit".t();
 		public static string FeatureAddEarnXp = "earn_xp_for_adding_feature".t();
 		public static string BenefitAddEarnXp = "earn_xp_for_adding_benefit".t();
+        
+        public static string VoteLow = "vote_low".t();
+        public static string VoteMedium = "vote_medium".t();
+        public static string VoteHigh = "vote_high".t();
     }
 }
 

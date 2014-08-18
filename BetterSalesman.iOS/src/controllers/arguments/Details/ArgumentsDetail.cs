@@ -14,6 +14,12 @@ namespace BetterSalesman.iOS
         public Argument Argument;
         
         const string extraWhiteSpace = "   ";
+        const string HelveticaBold = "HelveticaNeue-Bold";
+        
+        UIColor lowColor = UIColor.Clear.FromHex("#F10006");
+        UIColor mediumColor = UIColor.Clear.FromHex("#F4860A");
+        UIColor highColor = UIColor.Clear.FromHex("#51AA1D");
+        
         
 		public ArgumentsDetail (IntPtr handle) : base (handle)
 		{
@@ -36,6 +42,10 @@ namespace BetterSalesman.iOS
             labelBenefit.Editable = true;
             labelBenefit.Font = UIFont.FromName("HelveticaNeue-Light", 15);
             labelBenefit.Editable = false;
+            
+            chooseRating.SetTitle(I18n.VoteLow, 0);
+            chooseRating.SetTitle(I18n.VoteMedium, 1);
+            chooseRating.SetTitle(I18n.VoteHigh, 2);
             
             Title = ProductGroupManager.GetProductGroup(Argument.ProductGroupId).Name;
             
@@ -64,16 +74,18 @@ namespace BetterSalesman.iOS
                     if (!IsNetworkAvailable())
                     {
                         ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
+                        chooseRating.SelectedSegment = -1;
                         return;
                     }
                         
                     ShowHud(I18n.Sending);
-                
+                 
                     ServiceProviderArgument.Instance.Rate(
                         Argument,
                         chooseRating.SelectedSegment + 1,
                         updatedArgument =>
                         {
+                            ColorSelectedRating();
                             Argument = updatedArgument;
                             UpdateView();
                             HideHud();
@@ -118,6 +130,8 @@ namespace BetterSalesman.iOS
             labelBenefit.Text = Argument.Benefit;
 
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
+                    
+            ColorSelectedRating();
             
             // extra space for styling
             labelEarnXPForVote.Text = extraWhiteSpace + extraWhiteSpace + labelEarnXPForVote.Text + extraWhiteSpace;
@@ -140,19 +154,31 @@ namespace BetterSalesman.iOS
 
 		private void SetRatingControlsHidden(bool hidden) 
 		{
-            if (hidden)
-            {
-                var oldFrame = rateContainer.Frame;
-                
-                rateContainer.Frame = new RectangleF(
-                    oldFrame.X,
-                    oldFrame.Y+oldFrame.Height,
-                    oldFrame.Width,
-                    oldFrame.Height
-                );
-            }
+            rateContainer.Hidden = hidden;
 		}
         
+
+        void ColorSelectedRating()
+        {
+            UIColor selectedColor = UIColor.Clear;
+            switch (chooseRating.SelectedSegment)
+            {
+                case 0:
+                    selectedColor = lowColor;
+                    break;
+                case 1:
+                    selectedColor = mediumColor;
+                    break;
+                case 2:
+                    selectedColor = highColor;
+                    break;
+            }
+                    
+            if ( chooseRating.SelectedSegment != -1 )
+            {
+                chooseRating.TintColor = selectedColor;
+            }
+        }
         #endregion
 	}
 }
