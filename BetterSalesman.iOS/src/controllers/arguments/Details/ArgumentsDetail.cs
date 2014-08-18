@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
@@ -156,7 +155,6 @@ namespace BetterSalesman.iOS
 		{
             rateContainer.Hidden = hidden;
 		}
-        
 
         void ColorSelectedRating()
         {

@@ -61,7 +61,7 @@ namespace BetterSalesman.iOS
             Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
-            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,48);
+            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,0);
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 

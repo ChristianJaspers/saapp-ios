@@ -386,6 +386,7 @@
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressLabel.cs" />
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
+    <Compile Include="src\helpers\DeviceInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
