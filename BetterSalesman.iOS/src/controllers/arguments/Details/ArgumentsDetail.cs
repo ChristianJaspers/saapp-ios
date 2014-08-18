@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using BetterSalesman.Core.BusinessLayer;
 using BetterSalesman.Core.ServiceAccessLayer;
 using BetterSalesman.Core.BusinessLayer.Managers;
@@ -12,6 +13,8 @@ namespace BetterSalesman.iOS
         
         public Argument Argument;
         
+        const string extraWhiteSpace = "   ";
+        
 		public ArgumentsDetail (IntPtr handle) : base (handle)
 		{
 		}
@@ -21,6 +24,20 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
+            labelDescriptionFeature.Text = I18n.FieldFeature;
+            labelDescriptionBenefit.Text = I18n.FieldBenefit;
+            labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
+            
+            labelFeature.Editable = true;
+            labelFeature.Font = UIFont.FromName("HelveticaNeue-Bold", 19);
+            labelFeature.Editable = false;
+
+            labelBenefit.Editable = true;
+            labelBenefit.Font = UIFont.FromName("HelveticaNeue-Light", 15);
+            labelBenefit.Editable = false;
+            
+            Title = ProductGroupManager.GetProductGroup(Argument.ProductGroupId).Name;
             
             UpdateView();
             
@@ -96,12 +113,14 @@ namespace BetterSalesman.iOS
         void UpdateView()
         {
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
-			labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
 
             labelFeature.Text = Argument.Feature;
             labelBenefit.Text = Argument.Benefit;
 
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
+            
+            // extra space for styling
+            labelEarnXPForVote.Text = extraWhiteSpace + extraWhiteSpace + labelEarnXPForVote.Text + extraWhiteSpace;
 
             if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
             {
@@ -119,11 +138,19 @@ namespace BetterSalesman.iOS
             }
         }
 
-		private void SetRatingControlsHidden(bool hidden)
+		private void SetRatingControlsHidden(bool hidden) 
 		{
-			labelHowRelevant.Hidden = hidden;
-			labelEarnXPForVote.Hidden = hidden;
-			chooseRating.Hidden = hidden;
+            if (hidden)
+            {
+                var oldFrame = rateContainer.Frame;
+                
+                rateContainer.Frame = new RectangleF(
+                    oldFrame.X,
+                    oldFrame.Y+oldFrame.Height,
+                    oldFrame.Width,
+                    oldFrame.Height
+                );
+            }
 		}
         
         #endregion
