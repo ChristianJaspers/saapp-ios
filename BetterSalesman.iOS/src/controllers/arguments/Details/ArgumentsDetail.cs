@@ -13,7 +13,9 @@ namespace BetterSalesman.iOS
         public Argument Argument;
         
         const string extraWhiteSpace = "   ";
-        const string HelveticaBold = "HelveticaNeue-Bold";
+        
+        const string FontHelveticaBold = "HelveticaNeue-Bold";
+        const string FontHelveticaLight = "HelveticaNeue-Light";
         
         UIColor lowColor = UIColor.Clear.FromHex("#F10006");
         UIColor mediumColor = UIColor.Clear.FromHex("#F4860A");
@@ -35,11 +37,11 @@ namespace BetterSalesman.iOS
             labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
             
             labelFeature.Editable = true;
-            labelFeature.Font = UIFont.FromName("HelveticaNeue-Bold", 19);
+            labelFeature.Font = UIFont.FromName(FontHelveticaBold, 19);
             labelFeature.Editable = false;
 
             labelBenefit.Editable = true;
-            labelBenefit.Font = UIFont.FromName("HelveticaNeue-Light", 15);
+            labelBenefit.Font = UIFont.FromName(FontHelveticaLight, 15);
             labelBenefit.Editable = false;
             
             chooseRating.SetTitle(I18n.VoteLow, 0);
