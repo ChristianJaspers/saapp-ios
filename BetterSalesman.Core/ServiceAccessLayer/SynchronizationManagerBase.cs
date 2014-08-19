@@ -58,8 +58,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         }
 
         /// <summary>
-        /// This method downloads Event data from backend.
-        /// @note It's caller's responsibility to check if there's network connection available before calling this method.
+        /// This method downloads data from backend.
+        /// @note It's caller's responsibility to check if there's a network connection available before calling this method.
         /// </summary>
         /// <returns></returns>
         public void Synchronize()
