@@ -1,5 +1,4 @@
 using System;
-
 using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer.Managers;
 

@@ -8,12 +8,18 @@ namespace BetterSalesman.iOS
     public class FlayoutNavigationItem : ImageStringElement, IFlyoutNavigationItem
     {   
         public string Controller { get; set; }
+        public NSAction Callback { get; set; }
         UIImage Image;
+        UIImageView cellImageView;     
+        
+        UIColor tintColor = AppDelegate.ColorTextGray;
+        UIColor tintColorHightlighted = UIColor.White;
 
         public FlayoutNavigationItem(string caption, NSAction tapped, UIImage image, string controller) : base(caption, tapped, image)
         {
             Controller = controller;
             Image = image;
+            Callback = tapped;
         }
 
         public override UITableViewCell GetCell(UITableView tv)
@@ -33,23 +39,42 @@ namespace BetterSalesman.iOS
                 cell.Add(line);
             }
             
-            cell.ImageView.TintColor = AppDelegate.ColorBackgroundGray;
+            cellImageView = cell.ImageView;
             
-            // TODO image tinting
-//            cell.ImageView.Image = new UIImage();
-//            cell.ImageView.Image = Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
-//            cell.ImageView.TintColor = UIColor.White;
+            cell.ImageView.TintColor = tintColor;
+            
+            // TODO try to find out some nicer solution for selecting arguments tab on start issue
+            if (Caption.Equals(I18n.Arguments))
+            {
+                Highlighted();
+            }
             
             var selectedView = new UIView { BackgroundColor = AppDelegate.ColorBackgroundOrange };
             cell.SelectedBackgroundView = selectedView;
             cell.BackgroundColor = AppDelegate.ColorBackgroundGray;
             
             cell.TextLabel.Font = UIFont.FromName("HelveticaNeue", 12);
-            cell.TextLabel.TextColor = AppDelegate.ColorTextGray;
-            cell.TextLabel.HighlightedTextColor = UIColor.White;
+            cell.TextLabel.TextColor = tintColor;
+            cell.TextLabel.HighlightedTextColor = tintColorHightlighted;
             
             return cell;
         }
+
+        public void Highlighted()
+        {
+            if (Image != null)
+            {
+                cellImageView.TintColor = tintColorHightlighted;
+                
+                cellImageView.HighlightedImage = Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+            }
+        }
+        
+        public float GetHeight()
+        {
+            return 45;
+        }
+        
     }
 }
 

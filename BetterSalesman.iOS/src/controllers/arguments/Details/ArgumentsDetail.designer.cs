@@ -20,7 +20,7 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel labelBenefit { get; set; }
+		UITextView labelBenefit { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -36,11 +36,15 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel labelFeature { get; set; }
+		UITextView labelFeature { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelHowRelevant { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIView rateContainer { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -71,6 +75,10 @@ namespace BetterSalesman.iOS
 			if (labelHowRelevant != null) {
 				labelHowRelevant.Dispose ();
 				labelHowRelevant = null;
+			}
+			if (rateContainer != null) {
+				rateContainer.Dispose ();
+				rateContainer = null;
 			}
 		}
 	}
