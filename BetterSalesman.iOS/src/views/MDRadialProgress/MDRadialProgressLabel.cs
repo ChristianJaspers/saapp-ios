@@ -6,9 +6,7 @@ using MonoTouch.Foundation;
 namespace BetterSalesman.iOS
 {
     public class MDRadialProgressLabel : UILabel
-    {
-        private RectangleF originalFrame;
-        
+    {   
         public float PointSizeToWidthFactor;
         
         public bool AdjustFontSizeToFitBounds;

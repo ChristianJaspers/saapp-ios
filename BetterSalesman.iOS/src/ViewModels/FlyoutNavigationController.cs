@@ -34,7 +34,6 @@ namespace BetterSalesman.iOS
         public const int menuWidth = 220;
         //public UISearchBar SearchBar;
         UIButton closeButton;
-        bool firstLaunch = true;
         FlyOutNavigationPosition position;
         DialogViewController navigation;
         int selectedIndex;

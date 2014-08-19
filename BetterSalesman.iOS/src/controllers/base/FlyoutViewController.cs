@@ -30,6 +30,8 @@ namespace BetterSalesman.iOS
         
         // TODO remove synchronization button
         const string IcSynchronization = "";
+        
+        int lastSelectedIndex;
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -65,10 +67,7 @@ namespace BetterSalesman.iOS
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 
-			Navigation.MenuWasShown += () =>
-			{
-				profileElement.RefreshUserData();
-			};
+			Navigation.MenuWasShown += () => profileElement.RefreshUserData();
 
             PopulateNavigationItems();
         }
@@ -114,7 +113,11 @@ namespace BetterSalesman.iOS
                 a++;
             }
 
-            Navigation.NavigationRoot = new RootElement("") { new Section { elements } };
+            var rootElement = new RootElement("");
+            var section = new Section();
+            section.Add(elements);
+            rootElement.Add(section);
+            Navigation.NavigationRoot = rootElement;
 
             Navigation.NavigationRoot.TableView.BackgroundColor = AppDelegate.ColorBackgroundGray;
             
@@ -160,8 +163,6 @@ namespace BetterSalesman.iOS
             
             SynchronizationManagerApplication.Instance.Synchronize();
         }
-
-        int lastSelectedIndex;
         
         protected override void OnSynchronizationStart()
         {
