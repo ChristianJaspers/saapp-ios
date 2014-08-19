@@ -36,7 +36,15 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelBenefitEarn { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelFeature { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelFeatureEarn { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -64,9 +72,17 @@ namespace BetterSalesman.iOS
 				labelBenefit.Dispose ();
 				labelBenefit = null;
 			}
+			if (labelBenefitEarn != null) {
+				labelBenefitEarn.Dispose ();
+				labelBenefitEarn = null;
+			}
 			if (labelFeature != null) {
 				labelFeature.Dispose ();
 				labelFeature = null;
+			}
+			if (labelFeatureEarn != null) {
+				labelFeatureEarn.Dispose ();
+				labelFeatureEarn = null;
 			}
 			if (scrollViewContainer != null) {
 				scrollViewContainer.Dispose ();

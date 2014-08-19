@@ -1,7 +1,8 @@
 ﻿using System;
-using MonoTouch.UIKit;
 using System.Collections.Generic;
+using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
@@ -47,8 +48,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
-            Navigation.SelectedIndex = 1;
+            
+            SelectTab(1);
         }
 
         #endregion
@@ -60,7 +61,7 @@ namespace BetterSalesman.iOS
             Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
-            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,48);
+            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,0);
             Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
 
@@ -119,6 +120,8 @@ namespace BetterSalesman.iOS
             
             Navigation.NavigationRoot.TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             
+            Navigation.NavigationRoot.TableView.Source = new UIFLyoutNavigationSource(elements);
+            
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
 
@@ -157,10 +160,14 @@ namespace BetterSalesman.iOS
             
             SynchronizationManagerApplication.Instance.Synchronize();
         }
+
+        int lastSelectedIndex;
         
         protected override void OnSynchronizationStart()
         {
             base.OnSynchronizationStart();
+            
+            lastSelectedIndex = Navigation.SelectedIndex;
 
             ShowHud(I18n.SynchronizationInProgress);
         }
@@ -173,7 +180,14 @@ namespace BetterSalesman.iOS
             
             profileElement.RefreshUserData();
             
-            Navigation.HideMenu();
+            SelectTab(lastSelectedIndex);
+        }
+        
+        void SelectTab(int row)
+        {   
+            Navigation.SelectedIndex = row;
+            
+            Navigation.NavigationRoot.TableView.SelectRow(NSIndexPath.FromRowSection(row, 0),false,UITableViewScrollPosition.None);
         }
         
         #endregion

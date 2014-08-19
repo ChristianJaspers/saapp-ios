@@ -12,10 +12,20 @@ namespace BetterSalesman.iOS
     {
         const string segueIDLoggedIn = "LoggedInSegue";
         const string segueIDNotLoggedIn = "NotLoggedInSegue";
+        
+        const string defaultIPhone5Screen = "Default-568h";
+        const string defaultIPhone3halfInch = "Default";
 
         public AppEntryViewController(IntPtr handle)
             : base(handle)
         {
+        }        
+        
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            
+            launchScreenImageView.Image = UIImage.FromBundle(DeviceInfo.IsIPhoneTall ? defaultIPhone5Screen : defaultIPhone3halfInch);
         }
         
         public async override void ViewWillAppear(bool animated)

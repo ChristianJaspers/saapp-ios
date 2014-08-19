@@ -23,7 +23,7 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
             
             using (var conn = DatabaseProvider.OpenConnection())
             {
-                users = conn.Table<User>().OrderBy(u => u.Experience).ToList();
+                users = conn.Table<User>().OrderByDescending(u => u.Experience).ToList();
             }
             
             return  users;

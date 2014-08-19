@@ -65,6 +65,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -146,9 +147,6 @@
     <BundleResource Include="Resources\avatar_placeholder%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
     <BundleResource Include="Resources\login_form.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -191,6 +189,12 @@
     <BundleResource Include="Resources\ic_feature.png" />
     <BundleResource Include="Resources\ic_feature%402x.png" />
     <BundleResource Include="Resources\da.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\logo%402x.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\ic_earn.png" />
+    <BundleResource Include="Resources\ic_earn%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -379,6 +383,11 @@
     <Compile Include="src\ViewModels\IFlyoutNavigationItem.cs" />
     <Compile Include="src\ViewModels\CustomFlyoutNavigationController.cs" />
     <Compile Include="src\ViewModels\FlyoutNavigationController.cs" />
+    <Compile Include="src\controllers\base\UIFLyoutNavigationSource.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressLabel.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
+    <Compile Include="src\helpers\DeviceInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -413,6 +422,7 @@
     <Folder Include="src\controllers\arguments\Details\" />
     <Folder Include="src\controllers\arguments\Picker\" />
     <Folder Include="src\ViewModels\IFlyoutNavigationItem.xcassets\" />
+    <Folder Include="src\views\MDRadialProgress\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
@@ -433,5 +443,24 @@
       <Project>{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}</Project>
       <Name>XValidator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
 </Project>

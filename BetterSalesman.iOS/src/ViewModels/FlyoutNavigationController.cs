@@ -108,7 +108,7 @@ namespace BetterSalesman.iOS
 
         public UIViewController CurrentViewController { get; private set; }
 
-        UIView mainView
+        protected UIView mainView
         {
             get
             {
@@ -468,7 +468,7 @@ namespace BetterSalesman.iOS
             UIApplication.SharedApplication.StatusBarHidden = false;
         }
 
-        public void HideMenu()
+        public virtual void HideMenu()
         {
             if (mainView == null || mainView.Frame.X == 0)
                 return;
