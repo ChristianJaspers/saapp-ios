@@ -39,7 +39,7 @@ namespace BetterSalesman.iOS
         int selectedIndex;
         UIView shadowView;
         float startX;
-        UIColor tintColor;
+        UIColor tintColor = UIColor.Clear;
         UIView statusImage;
         protected UIViewController[] viewControllers;
         bool hideShadow;

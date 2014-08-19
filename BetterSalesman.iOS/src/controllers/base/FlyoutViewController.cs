@@ -76,7 +76,7 @@ namespace BetterSalesman.iOS
         {
             profileElement = new FlayoutNavigationItemProfile(string.Empty,VProfile);
             
-            var elements = new List<Element>() {
+            var elements = new List<Element> {
                 profileElement,
                 new FlayoutNavigationItem(
                     I18n.Arguments, 
@@ -115,7 +115,7 @@ namespace BetterSalesman.iOS
 
             var rootElement = new RootElement("");
             var section = new Section();
-            section.Add(elements);
+            section.AddAll(elements);
             rootElement.Add(section);
             Navigation.NavigationRoot = rootElement;
 
