@@ -78,6 +78,10 @@
 
 		public static string ArgumentAddFeature = "argument_add_feature".t();
 		public static string ArgumentAddBenefit = "argument_add_benefit".t();
+        
+        public static string ArgumentEditFeature = "argument_edit_feature".t();
+        public static string ArgumentEditBenefit = "argument_edit_benefit".t();
+        
 		public static string FeatureAddEarnXp = "earn_xp_for_adding_feature".t();
 		public static string BenefitAddEarnXp = "earn_xp_for_adding_benefit".t();
         
