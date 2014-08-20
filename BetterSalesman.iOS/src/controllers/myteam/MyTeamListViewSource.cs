@@ -1,46 +1,69 @@
 ﻿using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SDWebImage;
-using System;
+using BetterSalesman.Core.BusinessLayer;
+using System.Collections.Generic;
 
 namespace BetterSalesman.iOS
 {
     public class MyTeamListViewSource : UITableViewSource
     {
         readonly string cellIdentifierItem = "MyTeamCell";
-        public MyTeamListViewSource()
+        const string ic_placeholder = "avatar_placeholder";
+        
+        List<User> items = new List<User>();
+
+        public MyTeamListViewSource(List<User> items)
         {
+            this.items = items;
         }
 
         public override int NumberOfSections(UITableView tableView)
         {
-            // TODO: return the actual number of sections
             return 1;
+        }
+
+        public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return 73;
         }
 
         public override int RowsInSection(UITableView tableview, int section)
         {
-            // TODO: return the actual number of items in the section
-            return 3;
+            return items.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
             
-            var title = (UILabel)cell.ViewWithTag(1);
-            var subtitle = (UILabel)cell.ViewWithTag(2);
-            var imageView = (UIImageView)cell.ViewWithTag(5);
+            var displayName = (UILabel)cell.ViewWithTag(1);
+            var experience = (UILabel)cell.ViewWithTag(2);
+            var avatar = (UIImageView)cell.ViewWithTag(5);
             
-            // TODO change values later on
-            title.Text = "Username";
-            subtitle.Text = "99999 XP";
-            imageView.SetImage(
-                url: new NSUrl("http://lorempixel.com/400/400/?t=" + new Random().Next(99999)),
-                placeholder:  UIImage.FromBundle("ic_menu")
-            );
+            var user = items[indexPath.Row];
+            
+            displayName.Text = user.DisplayName;
+            experience.Text = user.Experience + " " + I18n.XP;
+            
+            if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
+            {
+                avatar.SetImage(
+                    url: new NSUrl(user.AvatarThumbUrl),
+                    placeholder: UIImage.FromBundle(ic_placeholder)
+                );
+            } 
+            else
+            {
+                avatar.Image = UIImage.FromBundle(ic_placeholder);
+            }
             
             return cell;
+        }
+        
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            tableView.DeselectRow(indexPath, false);
         }
     }
 }

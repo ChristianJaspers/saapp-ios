@@ -1,10 +1,10 @@
 using System;
-
 using MonoTouch.UIKit;
+using BetterSalesman.Core.BusinessLayer.Managers;
 
 namespace BetterSalesman.iOS
 {
-	public partial class MyTeamListViewController : UITableViewController
+    public partial class MyTeamListViewController : BaseUITableViewController
 	{
         const string menu_icon = "ic_menu";
         
@@ -16,7 +16,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidLoad();
             
-            TableView.Source = new MyTeamListViewSource();
+            LoadUsers();
             
             Title = I18n.MyTeam;
             
@@ -26,6 +26,22 @@ namespace BetterSalesman.iOS
             });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
+        }
+
+        void LoadUsers()
+        {
+            var users = UserManager.GetUsers();
+            
+            TableView.Source = new MyTeamListViewSource(users);
+            
+            InvokeOnMainThread(TableView.ReloadData);
+        }
+        
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+
+            LoadUsers();
         }
 	}
 }

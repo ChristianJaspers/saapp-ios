@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using BetterSalesman.Core.DataLayer;
 using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
+using System;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
-    internal class SynchronizationManagerApplication : SynchronizationManagerBase
+    public class SynchronizationManagerApplication : SynchronizationManagerBase
     {
         #region Singleton
 
@@ -40,18 +41,31 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
         }
 
+		public void ExecuteActionAsSoonAsSynchronizationNotRunning(Action action)
+		{
+			if (IsSynchronizationInProgress)
+			{
+				// TODO - execute action on sync finished
+			}
+			else
+			{
+				// TODO - execute action immediately
+			}
+		}
+
+		// TODO - consider passing SynchronizationResult to OnFinishedSynchronization 
+		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
         public override void FullSynchronizationTaskRun()
         {
             ServiceProviderSynchronization.Instance.Synchronize(
-                result => {
+                async result => {
                 
-                    UpdateDatabaseAsync(result);
+                    await UpdateDatabaseAsync(result);
                 
                     OnUpdatedDatabase();
                 
                     OnFinishedSynchronization();
                 },
-                // TODO display error message
                 errorMessage => OnFinishedSynchronization()
             );
         }

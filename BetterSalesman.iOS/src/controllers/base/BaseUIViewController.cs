@@ -7,6 +7,8 @@ namespace BetterSalesman.iOS
 {
     public class BaseUIViewController : UIViewController
     {
+        const string ic_back = "ic_back";
+        
         public BaseUIViewController(IntPtr handle) : base(handle)
         {
         }
@@ -26,7 +28,7 @@ namespace BetterSalesman.iOS
         {
             InvokeOnMainThread(() =>
                 {
-                    myHud = MTMBProgressHUD.ShowHUD(View, true);
+                    myHud = MTMBProgressHUD.ShowHUD(UIApplication.SharedApplication.KeyWindow.RootViewController.View, true);
                     myHud.LabelText = titleLabel;
                     myHud.Mode = mode;
                 });
@@ -110,6 +112,43 @@ namespace BetterSalesman.iOS
         {
             return Reachability.IsHostReachable(HttpConfig.Host);
         }
+        
+        #region Synchronization delegates
+        
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            SynchronizationManagerApplication.Instance.StartedSynchronization += OnSynchronizationStart;
+            SynchronizationManagerApplication.Instance.FinishedSynchronization += OnSynchronizationFinished;
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            SynchronizationManagerApplication.Instance.StartedSynchronization -= OnSynchronizationStart;
+            SynchronizationManagerApplication.Instance.FinishedSynchronization -= OnSynchronizationFinished;
+        }
+        
+        protected virtual void OnSynchronizationStart()
+        {
+        }
+
+        protected virtual void OnSynchronizationFinished()
+        {
+        }
+        
+        #endregion
+        
+        protected void LeftBarButtonAsArrowIconOnly()
+        {
+            NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(
+                UIImage.FromBundle(ic_back),
+                UIBarButtonItemStyle.Plain, 
+                (o, s) => NavigationController.PopViewControllerAnimated(true))
+                ,false);
+        }  
     }
 }
 

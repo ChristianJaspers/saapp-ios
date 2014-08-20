@@ -70,6 +70,8 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -105,9 +107,6 @@
       <HintPath>..\Components\flyoutnavigation-1.3\lib\ios\FlyoutNavigation.dll</HintPath>
     </Reference>
     <Reference Include="MonoTouch.Dialog-1" />
-    <Reference Include="SQLite">
-      <HintPath>..\Components\sqlite-net-1.0.1\lib\ios\SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -154,15 +153,6 @@
     <BundleResource Include="Resources\avatar_placeholder%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\ic_change_password.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
-    <BundleResource Include="Resources\ic_change_password%402x.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
-    <BundleResource Include="Resources\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
     <BundleResource Include="Resources\login_form.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -186,6 +176,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
     <BundleResource Include="Resources\ic_menu.png" />
+    <BundleResource Include="Resources\ic_back%402x.png" />
+    <BundleResource Include="Resources\ic_back.png" />
+    <BundleResource Include="Resources\orange.png" />
+    <BundleResource Include="Resources\ic_team.png" />
+    <BundleResource Include="Resources\ic_team%402x.png" />
+    <BundleResource Include="Resources\circle.png" />
+    <BundleResource Include="Resources\circle%402x.png" />
+    <BundleResource Include="Resources\ic_arguments.png" />
+    <BundleResource Include="Resources\ic_arguments%402x.png" />
+    <BundleResource Include="Resources\ic_logout.png" />
+    <BundleResource Include="Resources\ic_logout%402x.png" />
+    <BundleResource Include="Resources\ic_key.png" />
+    <BundleResource Include="Resources\ic_key%402x.png" />
+    <BundleResource Include="Resources\product_picker_button.png" />
+    <BundleResource Include="Resources\ic_benefit.png" />
+    <BundleResource Include="Resources\ic_benefit%402x.png" />
+    <BundleResource Include="Resources\ic_feature.png" />
+    <BundleResource Include="Resources\ic_feature%402x.png" />
+    <BundleResource Include="Resources\da.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\logo%402x.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\ic_earn.png" />
+    <BundleResource Include="Resources\ic_earn%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -205,11 +220,6 @@
     <Compile Include="src\controllers\login\ForgotPasswordViewController.designer.cs">
       <DependentUpon>ForgotPasswordViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewController.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListViewController.designer.cs">
-      <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListViewSource.cs" />
     <Compile Include="src\controllers\profile\ProfileViewController.cs" />
     <Compile Include="src\controllers\profile\ProfileViewController.designer.cs">
       <DependentUpon>ProfileViewController.cs</DependentUpon>
@@ -293,21 +303,12 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsForm.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsForm.designer.cs">
-      <DependentUpon>ArgumentsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsDetail.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsDetail.designer.cs">
-      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpClientFileUploader.cs">
       <Link>ServiceAccessLayer\HttpClientFileUploader.cs</Link>
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ServiceAccessError.cs">
       <Link>ServiceAccessLayer\ServiceAccessError.cs</Link>
     </Compile>
-    <Compile Include="src\helpers\ImageDownloader.cs" />
     <Compile Include="src\helpers\ImageManipulationHelper.cs" />
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonEmpty.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonEmpty.cs</Link>
@@ -332,23 +333,6 @@
     <Compile Include="src\views\BetterSalesmanViewController.designer.cs">
       <DependentUpon>BetterSalesmanViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.cs" />
-    <Compile Include="src\controllers\arguments\ArgumentsListContainerViewController.designer.cs">
-      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButton.designer.cs">
-      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerButtonViewController.designer.cs">
-      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.cs" />
-    <Compile Include="src\controllers\arguments\ProductGroupPickerListViewController.designer.cs">
-      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\controllers\arguments\ProductGroupsDataSource.cs" />
     <Compile Include="..\BetterSalesman.Core\BusinessLayer\Managers\ProductGroupManager.cs">
       <Link>BusinessLayer\Managers\ProductGroupManager.cs</Link>
     </Compile>
@@ -361,12 +345,63 @@
       <DependentUpon>SegueNavigationWithoutAnimation.cs</DependentUpon>
     </Compile>
     <Compile Include="src\extensions\UIColorExtensions.cs" />
+    <Compile Include="src\controllers\base\BaseUITableViewController.cs" />
+    <Compile Include="src\controllers\base\BaseProductCategoryPickerUIViewController.cs" />
+    <Compile Include="src\controllers\arguments\Details\ArgumentsDetail.cs" />
+    <Compile Include="src\controllers\arguments\Details\ArgumentsDetail.designer.cs">
+      <DependentUpon>ArgumentsDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Form\ArgumentFormViewController.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentFormViewController.designer.cs">
+      <DependentUpon>ArgumentFormViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\List\ArgumentsListContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsListContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewController.cs" />
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewController.designer.cs">
+      <DependentUpon>ArgumentsListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\List\ArgumentsListViewSource.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButton.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButton.designer.cs">
+      <DependentUpon>ProductGroupPickerButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButtonViewController.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerButtonViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerButtonViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerListViewController.cs" />
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupPickerListViewController.designer.cs">
+      <DependentUpon>ProductGroupPickerListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\controllers\arguments\Picker\ProductGroupsDataSource.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentsFormContainerViewController.cs" />
+    <Compile Include="src\controllers\arguments\Form\ArgumentsFormContainerViewController.designer.cs">
+      <DependentUpon>ArgumentsFormContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\components\XUITextView.cs" />
+    <Compile Include="src\ViewModels\ListSectionArguments.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="src\ViewModels\FlayoutNavigationItemProfile.cs" />
+    <Compile Include="src\ViewModels\IFlyoutNavigationItem.cs" />
+    <Compile Include="src\ViewModels\CustomFlyoutNavigationController.cs" />
+    <Compile Include="src\ViewModels\FlyoutNavigationController.cs" />
+    <Compile Include="src\controllers\base\UIFLyoutNavigationSource.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressLabel.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
+    <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
+    <Compile Include="src\helpers\DeviceInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
     <InterfaceDefinition Include="src\views\MainStoryboard_iPhone.storyboard" />
+    <InterfaceDefinition Include="src\views\sidebarProfile.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\controllers\" />
@@ -388,14 +423,16 @@
     <Folder Include="Extensions\" />
     <Folder Include="src\views\components\" />
     <Folder Include="ServiceAccessLayer\DataTransferObject\" />
+    <Folder Include="src\controllers\arguments\List\" />
+    <Folder Include="src\controllers\arguments\Form\" />
+    <Folder Include="src\controllers\arguments\Details\" />
+    <Folder Include="src\controllers\arguments\Picker\" />
+    <Folder Include="src\ViewModels\IFlyoutNavigationItem.xcassets\" />
+    <Folder Include="src\views\MDRadialProgress\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="flyoutnavigation">
       <Version>1.3</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="sqlite-net">
-      <Version>1.0.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="mbprogresshud">
@@ -412,5 +449,24 @@
       <Project>{AC50FD98-29D9-4DB8-B88A-4A9B545BC5B2}</Project>
       <Name>XValidator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
 </Project>

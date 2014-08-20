@@ -22,6 +22,16 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
 
 			return items;
 		}
+        
+        public static ProductGroup GetProductGroup(int pk)
+        {
+            ProductGroup pg = null;
+            using (var connection = DatabaseProvider.OpenConnection())
+            {
+                pg = connection.Get<ProductGroup>(pk);
+            }
+            return pg;
+        }
 	}
 }
 

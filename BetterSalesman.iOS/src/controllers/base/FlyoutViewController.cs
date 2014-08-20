@@ -1,33 +1,37 @@
 ﻿using System;
-using MonoTouch.UIKit;
-using FlyoutNavigation;
 using System.Collections.Generic;
+using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
     public partial class FlyoutViewController : BaseUIViewController
     {
-        public static FlyoutNavigationController Navigation;
+		public static CustomFlyoutNavigationController Navigation;
+        
+        FlayoutNavigationItemProfile profileElement;
         
         const string storyboardIdNavigationBase = "NavigationBase";
         
         const string VEmpty = "Empty";
+        const string VProfile = "Profile";
         const string VListArguments = "ListArguments";
         const string VListMyTeam = "ListMyTeam";
         
-        const string storyboardIdProfile = "Profile";
         const string storyboardIdLogin = "Login";
         
         const string segueIDLogout = "LogoutSegue";
         
-        // TODO update icons
-        const string IcProfile = "";
-        const string IcArguments = "";
-        const string IcMyTeam = "";
-        const string IcLogout = "";
+        const string IcArguments = "ic_arguments";
+        const string IcMyTeam = "ic_team";
+        const string IcLogout = "ic_logout";
+        
+        // TODO remove synchronization button
         const string IcSynchronization = "";
+        
+        int lastSelectedIndex;
 
         public FlyoutViewController(IntPtr handle)
             : base(handle)
@@ -46,8 +50,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
-            Navigation.SelectedIndex = 1;
+            
+            SelectTab(1);
         }
 
         #endregion
@@ -56,24 +60,24 @@ namespace BetterSalesman.iOS
         
         void NavigationLayoutInit()
         {
-            Navigation = new FlyoutNavigationController();
+            Navigation = new CustomFlyoutNavigationController();
             Navigation.View.Frame = UIScreen.MainScreen.Bounds;
             Navigation.AlwaysShowLandscapeMenu = false;
-            Navigation.ShouldReceiveTouch += (recognizer, touch) => false;
+            Navigation.ShadowViewColor = UIColor.FromRGBA(0,0,0,0);
+            Navigation.ShouldReceiveTouch += (r, t) => false;
             View.AddSubview(Navigation.View);
+
+			Navigation.MenuWasShown += () => profileElement.RefreshUserData();
 
             PopulateNavigationItems();
         }
 
         void PopulateNavigationItems()
         {
-            var elements = new List<FlayoutNavigationItem>() {
-                new FlayoutNavigationItem(
-                    I18n.Profile, 
-                    Profile,
-                    UIImage.FromBundle(IcProfile),
-                    VEmpty
-                ),
+            profileElement = new FlayoutNavigationItemProfile(string.Empty,VProfile);
+            
+            var elements = new List<Element> {
+                profileElement,
                 new FlayoutNavigationItem(
                     I18n.Arguments, 
                     null,
@@ -87,15 +91,15 @@ namespace BetterSalesman.iOS
                     VListMyTeam
                 ),
                 new FlayoutNavigationItem(
-                    I18n.Synchronization, 
-                    Synchronization,
-                    UIImage.FromBundle(IcSynchronization),
-                    VEmpty
-                ),
-                new FlayoutNavigationItem(
                     I18n.Logout, 
                     Logout,
                     UIImage.FromBundle(IcLogout),
+                    VEmpty
+                ),
+                new FlayoutNavigationItem(
+                    I18n.Synchronization, 
+                    Synchronization,
+                    UIImage.FromBundle(IcSynchronization),
                     VEmpty
                 )
             };
@@ -105,12 +109,22 @@ namespace BetterSalesman.iOS
             int a = 0;
             foreach (var element in elements)
             {
-                controllers[a] = element.Controller;
+                controllers[a] = (element as IFlyoutNavigationItem).Controller;
                 a++;
             }
 
-            Navigation.NavigationRoot = new RootElement("") { new Section { elements } };
+            var rootElement = new RootElement("");
+            var section = new Section();
+            section.AddAll(elements);
+            rootElement.Add(section);
+            Navigation.NavigationRoot = rootElement;
 
+            Navigation.NavigationRoot.TableView.BackgroundColor = AppDelegate.ColorBackgroundGray;
+            
+            Navigation.NavigationRoot.TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+            
+            Navigation.NavigationRoot.TableView.Source = new UIFLyoutNavigationSource(elements);
+            
             Navigation.ViewControllers = Array.ConvertAll(controllers, title => controllerForSection(title));
         }
 
@@ -132,19 +146,11 @@ namespace BetterSalesman.iOS
         
         #region Tab actions
 
-        void Profile()
-        {
-            Navigation.HideMenu();
-            
-            PresentViewControllerWithStoryboardId(storyboardIdProfile);
-        }
-
         void Logout()
         {
             UserSessionManager.Instance.Discard();
             
             PerformSegue(segueIDLogout, this);
-            
         }
 
         void Synchronization()
@@ -155,16 +161,34 @@ namespace BetterSalesman.iOS
                 return;
             }
             
-            SynchronizationManagerApplication.Instance.UnsubscribeEvents();
-            
-            SynchronizationManagerApplication.Instance.StartedSynchronization += () => ShowHud(I18n.DataSynchronization);
-
-            SynchronizationManagerApplication.Instance.FinishedSynchronization += () => {
-                HideHud();
-                Navigation.HideMenu();
-            };
-            
             SynchronizationManagerApplication.Instance.Synchronize();
+        }
+        
+        protected override void OnSynchronizationStart()
+        {
+            base.OnSynchronizationStart();
+            
+            lastSelectedIndex = Navigation.SelectedIndex;
+
+            ShowHud(I18n.SynchronizationInProgress);
+        }
+
+        protected override void OnSynchronizationFinished()
+        {
+            base.OnSynchronizationFinished();
+
+            HideHud();
+            
+            profileElement.RefreshUserData();
+            
+            SelectTab(lastSelectedIndex);
+        }
+        
+        void SelectTab(int row)
+        {   
+            Navigation.SelectedIndex = row;
+            
+            Navigation.NavigationRoot.TableView.SelectRow(NSIndexPath.FromRowSection(row, 0),false,UITableViewScrollPosition.None);
         }
         
         #endregion

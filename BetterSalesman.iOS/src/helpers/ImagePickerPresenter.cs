@@ -27,9 +27,9 @@ namespace BetterSalesman.iOS
 		private UIImagePickerController imagePicker;
 		private UIActionSheet mediaSourceTypePicker;
 
-		private string MediaSourceTypePickerLabel = I18n.ChooseSourceImagePickerText;
-		private string CameraButtonLabel = I18n.CameraImagePickerText;
-		private string PhotoLibraryButtonLabel = I18n.PhotoLibraryImagePickerText;
+		private string MediaSourceTypePickerLabel = I18n.ImagePickerPresenterMediaSourceTypeSelectionTitle;
+		private string CameraButtonLabel = I18n.ImagePickerPresenterMediaSourceTypeCamera;
+		private string PhotoLibraryButtonLabel = I18n.ImagePickerPresenterMediaSourceTypePhotoLibrary;
 		private string CancelButtonLabel = I18n.Cancel;
 
 		private Dictionary<int, UIImagePickerControllerSourceType> buttonIndexesForMediaSourceTypes;
@@ -77,7 +77,6 @@ namespace BetterSalesman.iOS
 
 			imagePicker.FinishedPickingMedia += (s, e) =>
 			{
-				Debug.WriteLine("Finished picking");
 				viewController.InvokeOnMainThread(() =>
 				{
 					bool didPickAnImage = e.MediaType == ImageMediaType && e.OriginalImage != null;
@@ -99,7 +98,6 @@ namespace BetterSalesman.iOS
 
 		private void OnFinishedPicking(bool didPickAnImage, UIImage pickedImage)
 		{
-			Debug.WriteLine("Finished picking: " + pickedImage);
 			imagePicker.DismissViewController(true, null);
 			if (FinishedPicking != null)
 			{
