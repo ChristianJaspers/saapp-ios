@@ -34,13 +34,12 @@ namespace BetterSalesman.iOS
         public const int menuWidth = 220;
         //public UISearchBar SearchBar;
         UIButton closeButton;
-        bool firstLaunch = true;
         FlyOutNavigationPosition position;
         DialogViewController navigation;
         int selectedIndex;
         UIView shadowView;
         float startX;
-        UIColor tintColor;
+        UIColor tintColor = UIColor.Clear;
         UIView statusImage;
         protected UIViewController[] viewControllers;
         bool hideShadow;
