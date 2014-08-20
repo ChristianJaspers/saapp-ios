@@ -7,7 +7,7 @@
         <!--Profile View Controller - Profile-->
         <scene sceneID="9cq-kg-nLu">
             <objects>
-                <viewController storyboardIdentifier="Profile" title="Profile" extendedLayoutIncludesOpaqueBars="YES" id="hE5-mn-LrY" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" title="Profile" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="hE5-mn-LrY" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0tb-O9-4wZ"/>
                         <viewControllerLayoutGuide type="bottom" id="WJ6-Jc-xuW"/>
@@ -224,17 +224,17 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2Pb-gr-XhN" firstAttribute="leading" secondItem="8sK-2e-Chu" secondAttribute="leading" id="e3z-Dr-lF8"/>
-                                    <constraint firstAttribute="height" constant="568" id="hdL-xy-utD"/>
                                     <constraint firstAttribute="bottom" secondItem="2Pb-gr-XhN" secondAttribute="bottom" id="ko0-4D-9qj"/>
                                     <constraint firstItem="2Pb-gr-XhN" firstAttribute="top" secondItem="8sK-2e-Chu" secondAttribute="top" id="phL-Wl-7Cw"/>
-                                    <constraint firstAttribute="width" constant="320" id="qXp-gS-W10"/>
                                     <constraint firstAttribute="trailing" secondItem="2Pb-gr-XhN" secondAttribute="trailing" id="tg1-Aw-Zpl"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196084976196289" green="0.90196084976196289" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8sK-2e-Chu" secondAttribute="trailing" id="Obo-NM-rzN"/>
                             <constraint firstItem="8sK-2e-Chu" firstAttribute="top" secondItem="zA1-1y-Uve" secondAttribute="top" id="TzU-7P-kne"/>
+                            <constraint firstItem="WJ6-Jc-xuW" firstAttribute="top" secondItem="8sK-2e-Chu" secondAttribute="bottom" id="XzH-WZ-auI"/>
                             <constraint firstItem="8sK-2e-Chu" firstAttribute="leading" secondItem="zA1-1y-Uve" secondAttribute="leading" id="hyE-jG-n10"/>
                         </constraints>
                     </view>
