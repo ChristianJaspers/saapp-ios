@@ -41,18 +41,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
         }
 
-		public void ExecuteActionAsSoonAsSynchronizationNotRunning(Action action)
-		{
-			if (IsSynchronizationInProgress)
-			{
-				// TODO - execute action on sync finished
-			}
-			else
-			{
-				// TODO - execute action immediately
-			}
-		}
-
 		// TODO - consider passing SynchronizationResult to OnFinishedSynchronization 
 		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
         public override void FullSynchronizationTaskRun()
