@@ -112,7 +112,7 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         public static SQLiteConnection OpenConnection()
         {
-            return new SQLiteConnection(DatabaseFileFullPath);
+			return new SQLiteConnection(DatabaseFileFullPath, SQLiteOpenFlags.ReadWrite);
         }
 
         private static void CopyFileIfNotExists(string sourcePath, string destinationPath)
@@ -129,12 +129,11 @@ namespace BetterSalesman.Core.DataLayer
         /// </summary>
         private static void SaveDataFromMemory(T containerData)
         {
-            // TODO
-//            if (eventData == null)
-//            {
-//                Debug.WriteLine("ERROR! EventContainer is null.");
-//                return;
-//            }
+			if (containerData == null)
+            {
+                Debug.WriteLine("ERROR! EventContainer is null.");
+                return;
+            }
 
             using (var connection = OpenConnection())
             {
@@ -166,10 +165,9 @@ namespace BetterSalesman.Core.DataLayer
             connection.CreateTable<ProductGroup>();
             connection.CreateTable<Argument>();
 
-            Debug.WriteLine("DB ready to rumble if not exists");
+            Debug.WriteLine("DB finished creating tables if not exist");
         }
-
-        // TODO fill container with data
+			
         private static void InsertRecords(SQLiteConnection connection, T containerData)
         {
             DatabaseHelper.ReplaceAll(containerData.Users,connection);
