@@ -2,7 +2,7 @@
 {
     public class XValidatorLengthMaximum : XValidatorBase
     {
-        public string Message = "Field {0} must contain not more than {1} characters.";
+        public new string Message = "Field {0} must contain not more than {1} characters.";
         
         int max;        
         
