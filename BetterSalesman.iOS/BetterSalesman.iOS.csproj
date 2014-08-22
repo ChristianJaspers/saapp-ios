@@ -195,11 +195,14 @@
     <BundleResource Include="Resources\logo.png" />
     <BundleResource Include="Resources\ic_earn.png" />
     <BundleResource Include="Resources\ic_earn%402x.png" />
+    <BundleResource Include="Resources\avatar_placeholder_square.png" />
+    <BundleResource Include="Resources\avatar_placeholder_square%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
+    <None Include="RELEASE-NOTES.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\main\AppDelegate.cs" />
