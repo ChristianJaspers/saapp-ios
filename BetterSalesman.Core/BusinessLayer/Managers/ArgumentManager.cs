@@ -6,7 +6,7 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
 {
     public static class ArgumentManager
     {        
-        public static List<Argument> Arguments()
+        public static List<Argument> GetArguments()
         {
             var items = new List<Argument>();
             

@@ -71,7 +71,7 @@ namespace BetterSalesman.iOS
 
         void LoadArguments()
         {
-            var allArguments = ArgumentManager.Arguments();
+            var allArguments = ArgumentManager.GetArguments();
             
             if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
             {

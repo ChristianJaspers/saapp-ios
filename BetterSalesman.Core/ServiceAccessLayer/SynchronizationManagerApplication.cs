@@ -68,12 +68,12 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             });
         }
 
-        private async Task UpdateDatabaseAsync(T dataContainer)
+		private async Task UpdateDatabaseAsync(SynchronizationDataContainer dataContainer)
         {
             await Task.Run(() =>
-                {
-                    DatabaseProvider.FullSync(dataContainer);
-                });
+            {
+                DatabaseProvider.FullSync(dataContainer);
+            });
         }
     }
 }

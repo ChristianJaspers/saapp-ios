@@ -34,11 +34,11 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         #region Requests
         
         public async void Synchronize(
-            Action<T> success = null, 
+			Action<SynchronizationDataContainer> success = null, 
             Action<string> failure = null
         )
         {
-            var request = new HttpRequest <T> {
+			var request = new HttpRequest <SynchronizationDataContainer> {
                 Method = HTTPMethod.GET,
                 Path = pathSynchronization,
                 Parameters = ParametersWithDeviceInfo(new Dictionary<string, object>()),
