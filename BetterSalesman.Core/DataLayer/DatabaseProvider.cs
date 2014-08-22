@@ -16,7 +16,12 @@ namespace BetterSalesman.Core.DataLayer
     /// </summary>
     public static class DatabaseProvider
     {
-		private static object databaseWriteLocker = new object();
+		/// <summary>
+		/// Ensures that write access to the database is serialized and doesn't cause exception
+		/// 
+		/// @note Only use this object in DatabaseProvider and DatabaseHelper
+		/// </summary>
+		public static object databaseWriteLocker = new object();
 
         /// <summary>
         /// The filepath.
@@ -82,7 +87,7 @@ namespace BetterSalesman.Core.DataLayer
         {   
 			lock (databaseWriteLocker)
 			{
-	            using (var connection = OpenConnection())
+	            using (var connection = OpenConnectionReadWrite())
 	            {
 	                CreateTablesIfNotExist(connection);
 	            }
@@ -91,11 +96,19 @@ namespace BetterSalesman.Core.DataLayer
 
         /// <summary>
         /// Database connection instance
+		///
+		/// @note ALWAYS call lock (databaseWriteLocker) after calling this method and enclose all the code using that connection in the lock block
+		/// 	  to ensure that there's no simultaneous write access to database and avoid exception caused by it
         /// </summary>
-        public static SQLiteConnection OpenConnection()
+        public static SQLiteConnection OpenConnectionReadWrite()
         {
 			return new SQLiteConnection(DatabaseFileFullPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite);
         }
+
+		public static SQLiteConnection OpenConnectionReadOnly()
+		{
+			return new SQLiteConnection(DatabaseFileFullPath, SQLiteOpenFlags.ReadOnly);
+		}
 
         /// <summary>
         /// Saves the data from memory.
@@ -108,26 +121,29 @@ namespace BetterSalesman.Core.DataLayer
                 return;
             }
 
-            using (var connection = OpenConnection())
-            {
-                try
-                {
-                    connection.BeginTransaction();
+			lock (databaseWriteLocker)
+			{
+	            using (var connection = OpenConnectionReadWrite())
+	            {
+	                try
+	                {
+	                    connection.BeginTransaction();
 
-                    CreateTablesIfNotExist(connection);
+	                    CreateTablesIfNotExist(connection);
 
-                    InsertRecords(connection, containerData);
+	                    InsertRecords(connection, containerData);
 
-                    connection.Commit();
-                }
-                catch (Exception ex)
-                {
-                    // try catch for dev purpose / easier debuging
-                    Debug.WriteLine("Message: " + ex.Message);
-                    Debug.WriteLine("Stack: " + ex.StackTrace);
-                    Debug.WriteLine("Source: " + ex.Source);
-                }
-            }
+	                    connection.Commit();
+	                }
+	                catch (Exception ex)
+	                {
+	                    // try catch for dev purpose / easier debuging
+	                    Debug.WriteLine("Message: " + ex.Message);
+	                    Debug.WriteLine("Stack: " + ex.StackTrace);
+	                    Debug.WriteLine("Source: " + ex.Source);
+	                }
+	            }
+			}
         }
 
         private static void CreateTablesIfNotExist(SQLiteConnection connection)

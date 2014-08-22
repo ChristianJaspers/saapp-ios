@@ -13,24 +13,12 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
 
 		public static List<ProductGroup> GetProductGroups()
 		{
-			var items = new List<ProductGroup>();
-
-			using (var connection = DatabaseProvider.OpenConnection())
-			{
-				items = connection.Table<ProductGroup>().ToList();
-			}
-
-			return items;
+			return DatabaseHelper.GetAll<ProductGroup>().ToList();
 		}
         
-        public static ProductGroup GetProductGroup(int pk)
+        public static ProductGroup GetProductGroup(int id)
         {
-            ProductGroup pg = null;
-            using (var connection = DatabaseProvider.OpenConnection())
-            {
-                pg = connection.Get<ProductGroup>(pk);
-            }
-            return pg;
+			return DatabaseHelper.Get<ProductGroup>(id);
         }
 	}
 }

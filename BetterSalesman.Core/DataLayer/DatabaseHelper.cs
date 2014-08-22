@@ -14,15 +14,18 @@ namespace BetterSalesman.Core.DataLayer
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static void Replace<T>(IBusinessEntity @object)
         {
-            using (var conn = DatabaseProvider.OpenConnection())
-            {
-                conn.BeginTransaction();
-                
-                conn.Delete<T>(@object.Id);
-                conn.Insert(@object);
-                
-                conn.Commit();
-            }
+			lock (DatabaseProvider.databaseWriteLocker)
+			{
+	            using (var conn = DatabaseProvider.OpenConnectionReadWrite())
+	            {
+	                conn.BeginTransaction();
+	                
+	                conn.Delete<T>(@object.Id);
+	                conn.Insert(@object);
+	                
+	                conn.Commit();
+	            }
+			}
         }
 
         /// <summary>
@@ -32,10 +35,13 @@ namespace BetterSalesman.Core.DataLayer
         /// <param name="connection">Connection.</param>
         public static void Insert(IBusinessEntity @object, SQLiteConnection connection = null)
         {
-            using (var conn = DatabaseProvider.OpenConnection())
-            {
-                conn.Insert(@object);
-            }
+			lock (DatabaseProvider.databaseWriteLocker)
+			{
+	            using (var conn = DatabaseProvider.OpenConnectionReadWrite())
+	            {
+	                conn.Insert(@object);
+	            }
+			}
         }
         
         /// <summary>
@@ -47,7 +53,7 @@ namespace BetterSalesman.Core.DataLayer
         {
             T obj;
             
-            using (var conn = DatabaseProvider.OpenConnection())
+            using (var conn = DatabaseProvider.OpenConnectionReadOnly())
             {
                 obj = conn.Get<T>(pk);
             }
@@ -63,7 +69,7 @@ namespace BetterSalesman.Core.DataLayer
         {
             List<T> obj = default(List<T>);
 
-            using (var conn = DatabaseProvider.OpenConnection())
+            using (var conn = DatabaseProvider.OpenConnectionReadOnly())
             {
                 obj = conn.Table<T>().ToList();
             }
@@ -77,12 +83,15 @@ namespace BetterSalesman.Core.DataLayer
         /// <param name="items">List of items.</param>
         public static void ReplaceAll<T>(List<T> items)
         {
-            using (var conn = DatabaseProvider.OpenConnection())
-            {
-                conn.BeginTransaction();
-                ReplaceAll(items, conn);
-                conn.Commit();
-            }
+			lock (DatabaseProvider.databaseWriteLocker)
+			{
+	            using (var conn = DatabaseProvider.OpenConnectionReadWrite())
+	            {
+	                conn.BeginTransaction();
+	                ReplaceAll(items, conn);
+	                conn.Commit();
+	            }
+			}
         }
         
         /// <summary>
@@ -93,8 +102,11 @@ namespace BetterSalesman.Core.DataLayer
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static void ReplaceAll<T>(List<T> items, SQLiteConnection connection)
         {
-            connection.DeleteAll<T>();
-            InsertAll<T>(connection, items);
+			lock (DatabaseProvider.databaseWriteLocker)
+			{
+	            connection.DeleteAll<T>();
+	            InsertAll<T>(connection, items);
+			}
         }
         
         /// <summary>
@@ -106,10 +118,13 @@ namespace BetterSalesman.Core.DataLayer
         {
             if (objects != null)
             {
-                foreach (var obj in objects)
-                {
-                    connection.Insert(obj);
-                }
+				lock (DatabaseProvider.databaseWriteLocker)
+				{
+	                foreach (var obj in objects)
+	                {
+	                    connection.Insert(obj);
+	                }
+				}
             }
         }
     }
