@@ -2,7 +2,7 @@
 {
     public class XValidatorLengthMinimum : XValidatorBase
     {
-        public string Message = "Field {0} must contain at least {1} characters.";
+        public new string Message = "Field {0} must contain at least {1} characters.";
         
         int min;
         

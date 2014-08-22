@@ -24,8 +24,16 @@ namespace BetterSalesman.iOS
             
             InitValidator();
 
-			labelFeature.Text = I18n.ArgumentAddFeature;
-            labelBenefit.Text = I18n.ArgumentAddBenefit;
+            if (Argument.Id > 0)
+            {
+                labelFeature.Text = I18n.ArgumentEditFeature;
+                labelBenefit.Text = I18n.ArgumentEditBenefit;
+            } 
+            else
+            {
+                labelFeature.Text = I18n.ArgumentAddFeature;
+                labelBenefit.Text = I18n.ArgumentAddBenefit;
+            }
 
             labelFeatureEarn.Text = I18n.FeatureAddEarnXp;
             labelBenefitEarn.Text = I18n.BenefitAddEarnXp;

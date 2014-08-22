@@ -1,1 +1,5 @@
-Danish localization added
+- Argument details view
+- Scrollable profile on iPhone 3,5 inch
+- Square placeholder image in my team
+- Dark overlay over disabled area when sidebar is visible
+- Missing localizations added

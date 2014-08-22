@@ -6,6 +6,10 @@
 
 "argument_add_feature" = "Add product feature";
 
+"argument_edit_benefit" = "Edit benefit for customer";
+
+"argument_edit_feature" = "Edit product feature";
+
 "arguments" = "Arguments";
 
 "authenticating" = "Authenticating...";
@@ -108,13 +112,13 @@
 
 "view_profile" = "VIEW PROFILE";
 
-"without_rating" = "Without rating";
-
-"xp" = "XP";
+"vote_high" = "High";
 
 "vote_low" = "Low";
 
 "vote_medium" = "Medium";
 
-"vote_high" = "High";
+"without_rating" = "Without rating";
+
+"xp" = "XP";
 

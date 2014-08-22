@@ -48,34 +48,21 @@ namespace BetterSalesman.Core.DataLayer
         public static string DatabaseFileFullPath = Path.Combine(Filepath, DatabaseFilename);
 
         /// <summary>
-        /// Determinate status of procedure
-        /// </summary>
-        public static bool InProgress;
-
-        /// <summary>
         /// Full synchronisation of database
         /// </summary>
         /// <param name = "containerData">Contains DTO object to save</param>
         /// <param name="filePath">Path to database file.</param>
         public static void FullSync(T containerData, string filePath = "")
         {
-            // TODO - remove stopwatch code
-            Debug.WriteLine("In Full sync");
-            if (InProgress)
-            {
-                Debug.WriteLine("DB Task in progress - skip");
-                return;
-            }
-
             if (!string.IsNullOrEmpty(filePath))
             {
                 Filepath = filePath;
             }
 
-            InProgress = true;
-
+			#if DEBUG
             Stopwatch sw = new Stopwatch();
             sw.Start();
+			#endif
 
             try
             {
@@ -85,16 +72,12 @@ namespace BetterSalesman.Core.DataLayer
             {
                 throw e;
             }
-            finally
-            {
-                sw.Stop();
 
-                long microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L * 1000L)) / 1000;
-
-                Debug.WriteLine("-----> DB Task completed in : {0} ms", microseconds);
-
-                InProgress = false;
-            }
+			#if DEBUG
+			sw.Stop();
+			long microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L * 1000L)) / 1000;
+			Debug.WriteLine("-----> DB Task completed in : {0} ms", microseconds);
+			#endif
         }
 
         /// <summary>
@@ -113,7 +96,7 @@ namespace BetterSalesman.Core.DataLayer
                 string resourcePath = Path.Combine(Environment.CurrentDirectory, DatabaseFilename);
                 CopyFileIfNotExists(resourcePath, DatabaseFileFullPath);
                 #elif __ANDROID__
-                // Android has platform specfic mecha
+                // Android has platform specfic mechanism
                 #endif
             }
             
@@ -155,11 +138,6 @@ namespace BetterSalesman.Core.DataLayer
 
             using (var connection = OpenConnection())
             {
-                #if DEBUG
-                //connection.Trace = true;
-                //connection.TimeExecution = true;
-                #endif
-
                 try
                 {
                     connection.BeginTransaction();

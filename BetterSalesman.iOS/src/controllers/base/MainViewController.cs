@@ -17,23 +17,8 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            
-            LanguageSetup();
 
             DatabaseProvider.Setup();
-        }
-        
-        void LanguageSetup()
-        {   
-            string[] availableLanguages = { "pl", "en" };
-
-            var currentLocale = NSLocale.PreferredLanguages[0];
-
-            var userLocale = availableLanguages.Contains(currentLocale) ? currentLocale : "en"; 
-
-            Debug.WriteLine("Current locale: " + currentLocale + " / user locale: " + userLocale);
-
-            HttpConfig.Lang = userLocale;
         }
 	}
 }

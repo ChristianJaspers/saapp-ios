@@ -1,4 +1,6 @@
 ﻿using System;
+using MonoTouch.Foundation;
+using System.Diagnostics;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -9,21 +11,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 //        public static string Host = "sap.t.proxylocal.com";
 		public static string ApiBaseAddress = string.Format("{0}{1}/api/v1/", Protocol, Host);
 
-        static string lang;
-
         public static string Lang
         {
             get
             {
-                if (string.IsNullOrEmpty(lang))
-                {
-                    throw new NotImplementedException("Lang value must be filled with current locale information before read");
-                }
-
-                return lang;
+                return Language();
             }
+        }
+        
+        static string Language()
+        {
+            var currentLocale = NSLocale.PreferredLanguages[0];
 
-            set { lang = value; }
+            Debug.WriteLine("Current locale: " + currentLocale);
+
+            return currentLocale;
         }
     }
 }
