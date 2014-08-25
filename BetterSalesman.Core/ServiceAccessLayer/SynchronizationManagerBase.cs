@@ -9,8 +9,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
     public delegate void FinishedSynchronizationEventHandler();
 
-    public delegate void UpdatedDatabaseEventHandler();
-
     #endregion Delegates
 
     public class SynchronizationManagerBase
@@ -21,8 +19,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         public event FinishedSynchronizationEventHandler FinishedSynchronization;
 
-        public event UpdatedDatabaseEventHandler UpdatedDatabase;
-
         #endregion Events
 
         public static object locker = new Object();
@@ -31,7 +27,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             get
             {
-                lock (downloadInProgressLocker)
+                lock (isSynchronizationInProgressLocker)
                 {
                     return isSynchronizationInProgress;
                 }
@@ -39,7 +35,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
             set
             {
-                lock (downloadInProgressLocker)
+                lock (isSynchronizationInProgressLocker)
                 {
                     isSynchronizationInProgress = value;
                 }
@@ -47,9 +43,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         }
 
         private bool isSynchronizationInProgress;
-        public DateTime lastSuccessfulSynchronizationTimestamp = DateTime.MinValue;
 
-        private object downloadInProgressLocker = new object();
+		private object isSynchronizationInProgressLocker = new object();
 
         public SynchronizationManagerBase()
             : base()
@@ -93,34 +88,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             throw new NotImplementedException("FullSynchronization");
         }
 
-        /// <summary>
-        /// Peforms synchronization only if the elapsed time since last synchronization is greater than supplied value
-        /// </summary>
-        /// <param name="requiredElapsedTimeSinceLastSuccessfulSynchronization"></param>
-        /// <returns></returns>
-        public void SynchronizeIfElapsedTimespan(TimeSpan requiredElapsedTimeSinceLastSuccessfulSynchronization)
-        {
-            TimeSpan timespanSinceLastSynchronization = DateTime.Now - lastSuccessfulSynchronizationTimestamp;
-            if (timespanSinceLastSynchronization > requiredElapsedTimeSinceLastSuccessfulSynchronization)
-            {
-                Synchronize();
-            }
-            else
-            {
-                Debug.WriteLine("INFO! Skipping sync. Actual elapsed time since last sync is " + timespanSinceLastSynchronization + " and required elapsed time is " + requiredElapsedTimeSinceLastSuccessfulSynchronization);
-            }
-        }
-
-        /// <summary>
-        /// Unsubscribes attached events.
-        /// </summary>
-        public virtual void UnsubscribeEvents()
-        {
-            StartedSynchronization = null;
-            FinishedSynchronization = null;
-            UpdatedDatabase = null;
-        }
-        
         protected virtual void OnStartedSynchronization()
         {
             if (StartedSynchronization != null)
@@ -140,15 +107,5 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 }
             }
         }
-
-        protected virtual void OnUpdatedDatabase()
-        {
-            lastSuccessfulSynchronizationTimestamp = DateTime.Now;
-            if (UpdatedDatabase != null)
-            {
-                UpdatedDatabase();
-            }
-        }
-        
     }
 }

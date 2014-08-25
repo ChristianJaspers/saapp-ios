@@ -17,7 +17,7 @@ namespace BetterSalesman.Core.DataLayer
     public static class DatabaseProvider
     {
 		/// <summary>
-		/// Ensures that write access to the database is serialized and doesn't cause exception
+		/// Ensures that write access to the database is serialized and doesn't cause exceptions
 		/// 
 		/// @note Only use this object in DatabaseProvider and DatabaseHelper
 		/// </summary>
@@ -41,10 +41,7 @@ namespace BetterSalesman.Core.DataLayer
         /// <summary>
         /// The database file name.
         /// </summary>
-        public static string DatabaseFilename
-        {
-            get { return "db.sqlite3"; }
-        }
+		public const string DatabaseFilename = "db.sqlite3";
 
         /// <summary>
         /// Full path to database file.
@@ -53,25 +50,48 @@ namespace BetterSalesman.Core.DataLayer
         public static string DatabaseFileFullPath = Path.Combine(Filepath, DatabaseFilename);
 
         /// <summary>
-        /// Full synchronisation of database
+        /// This method overwites all existing data in the database with data from synchronization request
         /// </summary>
-        /// <param name = "containerData">Contains DTO object to save</param>
-        /// <param name="filePath">Path to database file.</param>
+        /// <param name = "containerData">Contains DTO object to save. Note! It's caller's responsibility to ensure that containerData is not null when calling this method.</param>
 		public static void FullSync(SynchronizationDataContainer containerData)
         {
+			Debug.Assert(containerData != null, "FullSync method requires containerData to not be null");
+
 			#if DEBUG
             Stopwatch sw = new Stopwatch();
             sw.Start();
 			#endif
 
-            try
-            {
-                SaveDataFromMemory(containerData);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+			lock (databaseWriteLocker)
+			{
+		        try
+		        {
+					using (var connection = OpenConnectionReadWrite())
+					{
+						try
+						{
+							connection.BeginTransaction();
+
+							CreateTablesIfNotExist(connection);
+
+							ReplaceRecords(connection, containerData);
+
+							connection.Commit();
+						}
+						catch (Exception ex)
+						{
+							// try catch for dev purpose / easier debuging
+							Debug.WriteLine("Message: " + ex.Message);
+							Debug.WriteLine("Stack: " + ex.StackTrace);
+							Debug.WriteLine("Source: " + ex.Source);
+						}
+					}
+				}
+		        catch (Exception e)
+		        {
+		            throw e;
+		        }
+			}
 
 			#if DEBUG
 			sw.Stop();
@@ -98,7 +118,7 @@ namespace BetterSalesman.Core.DataLayer
         /// Database connection instance
 		///
 		/// @note ALWAYS call lock (databaseWriteLocker) after calling this method and enclose all the code using that connection in the lock block
-		/// 	  to ensure that there's no simultaneous write access to database and avoid exception caused by it
+		/// 	  to ensure that there's no simultaneous write access to database and avoid exceptions caused by it
         /// </summary>
         public static SQLiteConnection OpenConnectionReadWrite()
         {
@@ -109,42 +129,6 @@ namespace BetterSalesman.Core.DataLayer
 		{
 			return new SQLiteConnection(DatabaseFileFullPath, SQLiteOpenFlags.ReadOnly);
 		}
-
-        /// <summary>
-        /// Saves the data from memory.
-        /// </summary>
-		private static void SaveDataFromMemory(SynchronizationDataContainer containerData)
-        {
-			if (containerData == null)
-            {
-				Debug.WriteLine("ERROR! SynchronizationDataContainer is null. Skipping updating database");
-                return;
-            }
-
-			lock (databaseWriteLocker)
-			{
-	            using (var connection = OpenConnectionReadWrite())
-	            {
-	                try
-	                {
-	                    connection.BeginTransaction();
-
-	                    CreateTablesIfNotExist(connection);
-
-	                    InsertRecords(connection, containerData);
-
-	                    connection.Commit();
-	                }
-	                catch (Exception ex)
-	                {
-	                    // try catch for dev purpose / easier debuging
-	                    Debug.WriteLine("Message: " + ex.Message);
-	                    Debug.WriteLine("Stack: " + ex.StackTrace);
-	                    Debug.WriteLine("Source: " + ex.Source);
-	                }
-	            }
-			}
-        }
 
         private static void CreateTablesIfNotExist(SQLiteConnection connection)
         {
@@ -157,7 +141,7 @@ namespace BetterSalesman.Core.DataLayer
             Debug.WriteLine("DB finished creating tables if not exist");
         }
 			
-		private static void InsertRecords(SQLiteConnection connection, SynchronizationDataContainer containerData)
+		private static void ReplaceRecords(SQLiteConnection connection, SynchronizationDataContainer containerData)
         {
             DatabaseHelper.ReplaceAll(containerData.Users,connection);
             DatabaseHelper.ReplaceAll(containerData.ProductGroups,connection);
