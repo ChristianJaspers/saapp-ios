@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BetterSalesman.Core.DataLayer;
 using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 using System;
+using System.Timers;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
@@ -36,14 +37,26 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
         #endregion Singleton
 
-		private object synchronizationCanceledLocker = new object();
+		#region Background timer
+
+		/// <summary>
+		/// The synchronization in background invocation interval in milliseconds
+		/// </summary>
+		const double SynchronizationInBackgroundInvocationInterval = 30 * 60 * 1000;
+		Timer synchronizationInBackgroundInvocationTimer;
+
+		#endregion Background timer
+
+		#region SynchronizationCancelledLocker
+
+		private object synchronizationCancelledLocker = new object();
 		private bool shouldCancelSynchronization;
 
 		public bool ShouldCancelSynchronization
 		{
 			get 
 			{
-				lock (synchronizationCanceledLocker)
+				lock (synchronizationCancelledLocker)
 				{
 					return shouldCancelSynchronization;
 				}
@@ -51,18 +64,39 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 			private set
 			{
-				lock (synchronizationCanceledLocker)
+				lock (synchronizationCancelledLocker)
 				{
 					shouldCancelSynchronization = value;
 				}
 			}
 		}
 
+		#endregion SynchronizationCancelledLocker
+
         private SynchronizationManagerApplication()
             : base()
         {
 			ShouldCancelSynchronization = false;
+
+			synchronizationInBackgroundInvocationTimer = new Timer();
+			synchronizationInBackgroundInvocationTimer.Interval = SynchronizationInBackgroundInvocationInterval;
+			synchronizationInBackgroundInvocationTimer.Elapsed += (object source, ElapsedEventArgs e) => 
+				{
+					FullSynchronizationTaskRun();
+				};
         }
+
+		public void StartSynchronizationInBackgroundTimer()
+		{
+			Debug.WriteLine("INFO: Starting sync background timer");
+			synchronizationInBackgroundInvocationTimer.Enabled = true;
+		}
+
+		public void StopSynchronizationInBackgroundTimer()
+		{
+			Debug.WriteLine("INFO: Stopping sync background timer");
+			synchronizationInBackgroundInvocationTimer.Enabled = false;
+		}
 
 		/// <summary>
 		/// This method is meant to be used to cancel writing to database after synchronization. Since synchronization is run in background and user can concurrently perform actions that may result in writing to database, user changes should be favored over those of synchronization (since it might have downloaded data before user updated it).
