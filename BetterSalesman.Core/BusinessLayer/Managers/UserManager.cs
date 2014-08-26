@@ -9,12 +9,12 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
     {        
         public static User LoggedInUser()
         {
-            if (UserSessionManager.Instance.User == null)
+			if (!UserSessionManager.Instance.HasValidSession)
             {
                 return null;       
             }
             
-            return DatabaseHelper.Get<User>(UserSessionManager.Instance.User.UserId);
+            return DatabaseHelper.Get<User>(UserSessionManager.Instance.CurrentSession.UserId);
         }
         
         public static List<User> GetUsers()

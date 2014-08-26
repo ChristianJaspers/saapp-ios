@@ -9,11 +9,10 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
     public class UserSessionManager
     {
-        const string CacheUserKey = "user";
-        UserSession user;
+        private const string CacheKeySession = "session";
 
-        static UserSessionManager instance;
-        static object locker = new Object();
+        private static UserSessionManager instance;
+        private static object locker = new Object();
         
         public static UserSessionManager Instance
         {
@@ -34,24 +33,50 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
         }
         
-        public void Save()
+		/// <summary>
+		/// Save CurrentSession to database.
+		/// </summary>
+        private void Save()
         {
-            BlobCache.UserAccount.InsertObject(CacheUserKey, user, DateTimeOffset.MaxValue);
+            BlobCache.UserAccount.InsertObject(CacheKeySession, CurrentSession, DateTimeOffset.MaxValue);
         }
         
         public void Discard()
         {
-            user = null;
+            CurrentSession = null;
             
-            BlobCache.UserAccount.InvalidateObject<UserSession>(CacheUserKey);
+            BlobCache.UserAccount.InvalidateObject<UserSession>(CacheKeySession);
         }
-        
-        public async Task<UserSession> UserAsync()
+
+		/// <summary>
+		/// Saves session created from userId and accessToken to database.
+		/// </summary>
+		/// <param name="userId">BetterSalesman user identifier in BetterSalesman database (session and business data are stored in separate databases).</param>
+		/// <param name="accessToken">Access token for BetterSalesman service.</param>
+		public void SaveSession(int userId, string accessToken)
+		{
+			if (string.IsNullOrEmpty(accessToken))
+			{
+				Debug.WriteLine("ERROR! Save session requires accessToken to be non-null. Cancelling saving session.");
+				return;
+			}
+
+			CurrentSession = new UserSession
+			{
+				UserId = userId,
+				Token = accessToken
+			};
+
+			Save();
+		}
+
+        public async Task<UserSession> LoadSessionAsync()
         {
             try
             {
-                // TODO
-                return await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheUserKey);
+				CurrentSession = await BlobCache.UserAccount.GetObjectAsync<UserSession>(CacheKeySession);
+
+				return CurrentSession;
             } 
             catch (Exception ex)
             {
@@ -59,34 +84,28 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 return null;
             }
         }
+
+		public bool HasValidSession
+		{
+			get
+			{
+				return CurrentSession != null;
+			}
+		}
         
-        public async Task FetchUser(Action<UserSession> finished = null)
+        public UserSession CurrentSession
         {
-            user = await UserAsync();
-            
-            if (finished != null)
-            {
-                finished(user);
-            }
-        }
-        
-        public UserSession User
-        {
-            get {
-                return user;
-            }
-            set {
-                user = value;   
-            }
+			get;
+			set;
         }
         
         public string AccessToken
         {
             get 
             {
-                if ( user != null )
+                if (CurrentSession != null)
                 {
-                    return user.Token;
+                    return CurrentSession.Token;
                 }
                 
                 return string.Empty;

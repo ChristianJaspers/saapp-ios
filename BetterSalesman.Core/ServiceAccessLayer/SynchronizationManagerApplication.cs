@@ -82,6 +82,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			synchronizationInBackgroundInvocationTimer.Interval = SynchronizationInBackgroundInvocationInterval;
 			synchronizationInBackgroundInvocationTimer.Elapsed += (object source, ElapsedEventArgs e) => 
 				{
+					Debug.WriteLine("INFO: Performing background sync");
 					FullSynchronizationTaskRun();
 				};
         }

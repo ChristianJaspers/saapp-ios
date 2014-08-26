@@ -40,7 +40,7 @@ namespace BetterSalesman.iOS
 			loginButton.SetTitle(I18n.Login, UIControlState.Normal);
             loginButton.TouchUpInside += (sender, e) => StartLogin();
             
-            if (UserSessionManager.Instance.User != null)
+			if (UserSessionManager.Instance.HasValidSession)
             {
                 Login();
             }

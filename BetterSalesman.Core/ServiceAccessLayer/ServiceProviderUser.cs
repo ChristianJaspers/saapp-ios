@@ -39,7 +39,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
                 return instance;
             }
-        } 
+        }
         
         #region Requests
         
@@ -60,23 +60,19 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Path = pathAuth,
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
-                    UserSessionManager.Instance.User = new UserSession {
-                        UserId = response.MappedResponse.User.Id,
-                        Token = response.MappedResponse.AccessToken,
-                    };
+					var user = response.MappedResponse.User;
+					var token = response.MappedResponse.AccessToken;
 
-                    UserSessionManager.Instance.Save();
-
-                    DatabaseHelper.Replace<User>(response.MappedResponse.User);
+					DatabaseHelper.Replace<User>(user);
+					UserSessionManager.Instance.SaveSession(user.Id, token);
                     
-                    if ( success != null )
+                    if (success != null)
                     {
                         success(string.Empty);
                     }
                 },
                 Failure = response => {
-                    
-                    if ( failure != null )
+                    if (failure != null)
                     {
                         failure(response.Error.LocalizedMessage);
                     }
