@@ -164,16 +164,23 @@ namespace BetterSalesman.iOS
         {
             if (selectedRating != -1)
             {
+                var bgImageBorderLeft = UIImage.FromBundle("rating_button_red").CreateResizableImage(new UIEdgeInsets(4, 4, 4, 1));
+                var bgImageBorderRight = UIImage.FromBundle("rating_button_green").CreateResizableImage(new UIEdgeInsets(4, 1, 4, 4));
+                var bgImageBorderCenter = UIImage.FromBundle("rating_button_orange").CreateResizableImage(new UIEdgeInsets(1, 1, 1, 1));
+                
                 switch (selectedRating)
                 {
                     case 1:
-                    
+                        ratedButtonLow.SetBackgroundImage(bgImageBorderLeft);
+                        ratedButtonLow.SetTitleColor(UIColor.White);
                         break;
                     case 2:
-                    
+                        ratedButtonMedium.SetBackgroundImage(bgImageBorderCenter);
+                        ratedButtonMedium.SetTitleColor(UIColor.White);
                         break;
                     case 3:
-                        
+                        ratedButtonHigh.SetBackgroundImage(bgImageBorderRight);
+                        ratedButtonHigh.SetTitleColor(UIColor.White);
                         break;
                 }
             }
@@ -192,13 +199,13 @@ namespace BetterSalesman.iOS
             var bgImageBorderRight = UIImage.FromBundle(ratingbuttonborderright).CreateResizableImage(new UIEdgeInsets(4, 1, 4, 4));
             var bgImageBorderCenter = UIImage.FromBundle(ratingbuttonbordermiddle).CreateResizableImage(new UIEdgeInsets(1, 1, 1, 1));
             
-            ratedButtonLow.SetBackgroundImage(bgImageBorderLeft, UIControlState.Normal);
-            ratedButtonMedium.SetBackgroundImage(bgImageBorderCenter, UIControlState.Normal);
-            ratedButtonHigh.SetBackgroundImage(bgImageBorderRight, UIControlState.Normal);
+            ratedButtonLow.SetBackgroundImage(bgImageBorderLeft);
+            ratedButtonMedium.SetBackgroundImage(bgImageBorderCenter);
+            ratedButtonHigh.SetBackgroundImage(bgImageBorderRight);
             
-            ratedButtonLow.SetTitleColor(AppDelegate.RatingLowColor, UIControlState.Normal);
-            ratedButtonMedium.SetTitleColor(AppDelegate.RatingMediumColor, UIControlState.Normal);
-            ratedButtonHigh.SetTitleColor(AppDelegate.RatingHighColor,UIControlState.Normal);
+            ratedButtonLow.SetTitleColor(AppDelegate.RatingLowColor);
+            ratedButtonMedium.SetTitleColor(AppDelegate.RatingMediumColor);
+            ratedButtonHigh.SetTitleColor(AppDelegate.RatingHighColor);
             
             selectedRating = -1;
             
@@ -209,9 +216,9 @@ namespace BetterSalesman.iOS
         
         void DisableRating()
         {
-            ratedButtonLow.TouchUpInside -= RateButtonTouched;
-            ratedButtonMedium.TouchUpInside -= RateButtonTouched;
-            ratedButtonHigh.TouchUpInside -= RateButtonTouched;
+//            ratedButtonLow.TouchUpInside -= RateButtonTouched;
+//            ratedButtonMedium.TouchUpInside -= RateButtonTouched;
+//            ratedButtonHigh.TouchUpInside -= RateButtonTouched;
         }
         
         void RateButtonTouched(object sender, EventArgs e)
@@ -220,25 +227,43 @@ namespace BetterSalesman.iOS
             
             if (sender.Equals(ratedButtonLow))
             {
-                ratedButtonLow.SetTitleColor(UIColor.White, UIControlState.Normal);
+                ratedButtonLow.SetTitleColor(UIColor.White);
                 selectedRating = 1;
             }
             
             if (sender.Equals(ratedButtonMedium))
             {
-                ratedButtonMedium.SetTitleColor(UIColor.White, UIControlState.Normal);
                 selectedRating = 2;
             }
             
             if (sender.Equals(ratedButtonHigh))
             {
-                ratedButtonHigh.SetTitleColor(UIColor.White, UIControlState.Normal);
+                ratedButtonHigh.SetTitleColor(UIColor.White);
                 selectedRating = 3;
             }
             
-            RateElementRequest();
+            
+            // TODO
+            ColorSelectedRating();
+//            RateElementRequest();
         }
         
+        
         #endregion
-	}
+    }
+    
+    static class UIButtonExtension
+    {
+        public static void SetTitleColor(this UIButton button, UIColor titleColor)
+        {
+            button.SetTitleColor(titleColor, UIControlState.Normal);
+            button.SetTitleColor(titleColor, UIControlState.Highlighted);
+        }
+        
+        public static void SetBackgroundImage(this UIButton button, UIImage image)
+        {
+            button.SetBackgroundImage(image, UIControlState.Normal);
+            button.SetBackgroundImage(image, UIControlState.Highlighted);
+        }
+    }
 }
