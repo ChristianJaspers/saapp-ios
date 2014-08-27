@@ -9,7 +9,7 @@ namespace BetterSalesman.iOS
     public class MyTeamListViewSource : UITableViewSource
     {
         readonly string cellIdentifierItem = "MyTeamCell";
-        const string ic_placeholder = "avatar_placeholder";
+        const string ic_placeholder = "avatar_placeholder_square";
         
         List<User> items = new List<User>();
 
