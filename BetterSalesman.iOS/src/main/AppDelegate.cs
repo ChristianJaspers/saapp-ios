@@ -21,6 +21,10 @@ namespace BetterSalesman.iOS
         public static UIColor ColorBackgroundZebraOdd = UIColor.Clear.FromHex("#f8f8f8");
         public static UIColor ColorBackgroundZebraEven = UIColor.Clear.FromHex("#FFFFFF");
         
+        public static UIColor RatingLowColor = UIColor.Clear.FromHex("#f74343");
+        public static UIColor RatingMediumColor = UIColor.Clear.FromHex("#f89406");
+        public static UIColor RatingHighColor = UIColor.Clear.FromHex("#60b528");
+        
         public override UIWindow Window
         {
             get;

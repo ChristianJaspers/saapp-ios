@@ -197,6 +197,17 @@
     <BundleResource Include="Resources\ic_earn%402x.png" />
     <BundleResource Include="Resources\avatar_placeholder_square.png" />
     <BundleResource Include="Resources\avatar_placeholder_square%402x.png" />
+    <BundleResource Include="Resources\rating_button_green.png" />
+    <BundleResource Include="Resources\rating_button_green%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_middle%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_middle.png" />
+    <BundleResource Include="Resources\rating_button_red.png" />
+    <BundleResource Include="Resources\rating_button_red%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_left.png" />
+    <BundleResource Include="Resources\rating_button_border_left%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_right.png" />
+    <BundleResource Include="Resources\rating_button_border_right%402x.png" />
+    <BundleResource Include="Resources\rating_button_orange.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
