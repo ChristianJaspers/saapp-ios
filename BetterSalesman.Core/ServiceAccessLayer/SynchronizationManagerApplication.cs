@@ -42,7 +42,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// <summary>
 		/// The synchronization in background invocation interval in milliseconds
 		/// </summary>
-		const double SynchronizationInBackgroundInvocationInterval = 30 * 60 * 1000;
+		const double SynchronizationInBackgroundInvocationInterval = 30 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
 		Timer synchronizationInBackgroundInvocationTimer;
 
 		#endregion Background timer
@@ -101,7 +101,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 		/// <summary>
 		/// This method is meant to be used to cancel writing to database after synchronization. Since synchronization is run in background and user can concurrently perform actions that may result in writing to database, user changes should be favored over those of synchronization (since it might have downloaded data before user updated it).
-		/// For this reason this method should be used to inform the synchronization manager that it should not save the synchronization response when synchronization is finished (usually because there are other write actions to be performed that have higher priority).
+		/// For this reason this method should be used to inform the synchronization manager that it should not save the synchronization response when synchronization is finished (usually because there are other write actions to be performed that have higher priority e.g. actions initiated by user).
 		/// </summary>
 		public void CancelWriteToDatabaseIfSynchronizationInProgress()
 		{
@@ -115,6 +115,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
         public override void FullSynchronizationTaskRun()
         {
+			if (!UserSessionManager.Instance.HasStoredSession)
+			{
+				Debug.WriteLine("INFO: No valid session found. Skipping synchronization.");
+				ShouldCancelSynchronization = false;
+				OnFinishedSynchronization();
+				return;
+			}
+
+			// TODO - check if network available
+
             ServiceProviderSynchronization.Instance.Synchronize(
                 async result => 
 				{

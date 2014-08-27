@@ -85,7 +85,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             }
         }
 
-		public bool HasValidSession
+		public bool HasStoredSession
 		{
 			get
 			{

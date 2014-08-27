@@ -9,7 +9,7 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
     {        
         public static User LoggedInUser()
         {
-			if (!UserSessionManager.Instance.HasValidSession)
+			if (!UserSessionManager.Instance.HasStoredSession)
             {
                 return null;       
             }
