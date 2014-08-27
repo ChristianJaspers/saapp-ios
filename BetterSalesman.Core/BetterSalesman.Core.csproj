@@ -58,6 +58,8 @@
     <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
     <Compile Include="BusinessLayer\ProductGroup.cs" />
     <Compile Include="BusinessLayer\Managers\ProductGroupManager.cs" />
+    <Compile Include="ServiceAccessLayer\IReachabilityProvider.cs" />
+    <Compile Include="ServiceAccessLayer\ReachabilityChecker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

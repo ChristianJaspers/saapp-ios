@@ -4,7 +4,9 @@ using System.Diagnostics;
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	/// <summary>
-	/// This class is responsible for supplying localized text in a cross-platform fashion. Since localization is done differently for each platform a ILocalizationProvider interface has to be implemented for each platform and passed during initialization.
+	/// This class is responsible for supplying localized text in a cross-platform fashion.
+	///
+	/// NOTE! Since localization is done differently for each platform a ILocalizationProvider interface has to be implemented for each platform and passed during initialization.
 	/// </summary>
 	public class Localization
 	{

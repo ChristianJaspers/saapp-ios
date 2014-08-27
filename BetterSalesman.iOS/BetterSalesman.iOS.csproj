@@ -391,6 +391,13 @@
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
     <Compile Include="src\helpers\DeviceInfo.cs" />
+    <Compile Include="src\helpers\IosReachabilityProvider.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\IReachabilityProvider.cs">
+      <Link>ServiceAccessLayer\IReachabilityProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ReachabilityChecker.cs">
+      <Link>ServiceAccessLayer\ReachabilityChecker.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

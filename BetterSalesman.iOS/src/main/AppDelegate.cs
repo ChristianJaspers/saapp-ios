@@ -30,6 +30,7 @@ namespace BetterSalesman.iOS
 		public override bool WillFinishLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			Localization.Instance.Initialize(new IosLocalizationProvider());
+			ReachabilityChecker.Instance.Initialize(new IosReachabilityProvider());
             
             Window.TintColor = TintColor;
             

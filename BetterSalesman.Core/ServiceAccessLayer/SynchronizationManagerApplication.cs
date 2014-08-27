@@ -123,7 +123,13 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				return;
 			}
 
-			// TODO - check if network available
+			if (!ReachabilityChecker.Instance.IsHostReachable(HttpConfig.Host))
+			{
+				Debug.WriteLine("INFO: Host " + HttpConfig.Host + " is not reachable. Skipping synchronization.");
+				ShouldCancelSynchronization = false;
+				OnFinishedSynchronization();
+				return;
+			}
 
             ServiceProviderSynchronization.Instance.Synchronize(
                 async result => 
