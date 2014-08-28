@@ -2,6 +2,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
+using System.Diagnostics;
 
 namespace BetterSalesman.iOS
 {
@@ -48,12 +49,18 @@ namespace BetterSalesman.iOS
         public override void OnResignActivation(UIApplication application)
         {
         }
-        
+
+		public override void OnActivated(UIApplication application)
+		{
+			SynchronizationManagerApplication.Instance.StartSynchronizationInBackgroundTimer();
+		}
+
         // This method should be used to release shared resources and it should store the application state.
         // If your application supports background exection this method is called instead of WillTerminate
         // when the user quits.
         public override void DidEnterBackground(UIApplication application)
         {
+			SynchronizationManagerApplication.Instance.StopSynchronizationInBackgroundTimer();
         }
         
         // This method is called as part of the transiton from background to active state.
