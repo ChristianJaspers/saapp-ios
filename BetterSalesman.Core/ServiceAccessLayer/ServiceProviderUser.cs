@@ -129,7 +129,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Path = pathPassword,
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
-                    
+					SynchronizationManager.Instance.CancelWriteToDatabaseIfSynchronizationInProgress();
                     DatabaseHelper.Replace<User>(response.MappedResponse.User);
                     
                     if ( success != null )
@@ -159,6 +159,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			var result = await uploader.UploadFileAsync(uploadUrl, localFilePath, parameterName, mimeType, HttpClientFileUploader.HttpMethodPut);
 			if (result.IsSuccess)
 			{
+				SynchronizationManager.Instance.CancelWriteToDatabaseIfSynchronizationInProgress();
 				DatabaseHelper.Replace<User>(result.User);
 			}
 
