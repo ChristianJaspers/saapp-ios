@@ -61,6 +61,8 @@ namespace BetterSalesman.iOS
                 
                 var indexPath = TableView.IndexPathForCell(cell);
                 
+                TableView.DeselectRow(indexPath, false);
+                
                 var vc = (ArgumentsDetail)segue.DestinationViewController;
                 
                 vc.Argument = ((ArgumentsListViewSource)TableView.Source).Sections[indexPath.Section].Arguments[indexPath.Row];
