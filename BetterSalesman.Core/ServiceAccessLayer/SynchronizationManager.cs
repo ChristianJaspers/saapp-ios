@@ -10,13 +10,22 @@ using System.Timers;
 
 namespace BetterSalesman.Core.ServiceAccessLayer
 {
-    public class SynchronizationManagerApplication : SynchronizationManagerBase
+	#region Delegates
+
+	public delegate void StartedSynchronizationEventHandler();
+
+	public delegate void FinishedSynchronizationEventHandler();
+
+	#endregion Delegates
+
+    public class SynchronizationManager
     {
         #region Singleton
+		private static object locker = new object();
 
-        private static SynchronizationManagerApplication instance;
+		private static SynchronizationManager instance;
 
-        public static SynchronizationManagerApplication Instance
+        public static SynchronizationManager Instance
         {
             get
             {
@@ -26,7 +35,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                     {
                         if (instance == null)
                         {
-                            instance = new SynchronizationManagerApplication();
+                            instance = new SynchronizationManager();
                         }
                     }
                 }
@@ -42,7 +51,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// <summary>
 		/// The synchronization in background invocation interval in milliseconds
 		/// </summary>
-		const double SynchronizationInBackgroundInvocationInterval = 30 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
+		const double SynchronizationInBackgroundInvocationInterval = 0.25 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
 		Timer synchronizationInBackgroundInvocationTimer;
 
 		#endregion Background timer
@@ -73,17 +82,53 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 
 		#endregion SynchronizationCancelledLocker
 
-        private SynchronizationManagerApplication()
+		#region Events
+
+		public event StartedSynchronizationEventHandler StartedSynchronization;
+
+		public event FinishedSynchronizationEventHandler FinishedSynchronization;
+
+		#endregion Events
+
+		#region SynchronizationInProgressLocker
+
+		public bool IsSynchronizationInProgress
+		{
+			get
+			{
+				lock (isSynchronizationInProgressLocker)
+				{
+					return isSynchronizationInProgress;
+				}
+			}
+
+			set
+			{
+				lock (isSynchronizationInProgressLocker)
+				{
+					isSynchronizationInProgress = value;
+				}
+			}
+		}
+
+		private bool isSynchronizationInProgress;
+
+		private object isSynchronizationInProgressLocker = new object();
+
+		#endregion SynchronizationInProgressLocker
+
+        private SynchronizationManager()
             : base()
         {
-			ShouldCancelSynchronization = false;
+			this.isSynchronizationInProgress = false;
+			this.shouldCancelSynchronization = false;
 
-			synchronizationInBackgroundInvocationTimer = new Timer();
-			synchronizationInBackgroundInvocationTimer.Interval = SynchronizationInBackgroundInvocationInterval;
-			synchronizationInBackgroundInvocationTimer.Elapsed += (object source, ElapsedEventArgs e) => 
+			this.synchronizationInBackgroundInvocationTimer = new Timer();
+			this.synchronizationInBackgroundInvocationTimer.Interval = SynchronizationInBackgroundInvocationInterval;
+			this.synchronizationInBackgroundInvocationTimer.Elapsed += (object source, ElapsedEventArgs e) => 
 				{
 					Debug.WriteLine("INFO: Performing background sync");
-					FullSynchronizationTaskRun();
+					Synchronize();
 				};
         }
 
@@ -111,14 +156,22 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			}
 		}
 
-		// TODO - consider passing SynchronizationResult to OnFinishedSynchronization
-		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
-        public override void FullSynchronizationTaskRun()
-        {
+		/// <summary>
+		/// This method downloads data from backend.
+		/// @note It's caller's responsibility to check if there's a network connection available before calling this method.
+		/// </summary>
+		/// <returns></returns>
+		public void Synchronize()
+		{
+			if (IsSynchronizationInProgress)
+			{
+				Debug.WriteLine("Info: Synchronization already in progress. Skipping synchronization.");
+				return;
+			}
+
 			if (!UserSessionManager.Instance.HasStoredSession)
 			{
 				Debug.WriteLine("INFO: No valid session found. Skipping synchronization.");
-				ShouldCancelSynchronization = false;
 				OnFinishedSynchronization();
 				return;
 			}
@@ -126,17 +179,33 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			if (!ReachabilityChecker.Instance.IsHostReachable(HttpConfig.Host))
 			{
 				Debug.WriteLine("INFO: Host " + HttpConfig.Host + " is not reachable. Skipping synchronization.");
-				ShouldCancelSynchronization = false;
 				OnFinishedSynchronization();
 				return;
 			}
 
+			try
+			{
+				IsSynchronizationInProgress = true;
+				OnStartedSynchronization();
+
+				FullSynchronizationTaskRun();
+			}
+			catch (Exception e)
+			{
+				OnFinishedSynchronization();
+				Debug.WriteLine("Error! There was an exception during synchronization process: " + e.Message);
+			}
+		}
+
+		// TODO - consider passing SynchronizationResult to OnFinishedSynchronization
+		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
+        private void FullSynchronizationTaskRun()
+        {
             ServiceProviderSynchronization.Instance.Synchronize(
                 async result => 
 				{
 					if (result == null)
 					{
-						ShouldCancelSynchronization = false;
 						OnFinishedSynchronization();
 						return;
 					}
@@ -145,7 +214,6 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 					{
 						if (ShouldCancelSynchronization)
 						{
-							ShouldCancelSynchronization = false;
 							OnFinishedSynchronization();
 							return;
 						}
@@ -159,7 +227,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
             );
         }
 
-        private async Task CopyInitialDatabaseAsync()
+        private async Task InitializeDatabaseAsync()
         {
             await Task.Run(() =>
             {
@@ -168,5 +236,26 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Debug.WriteLine("Finished copying initial databse.");
             });
         }
+
+		protected virtual void OnStartedSynchronization()
+		{
+			if (StartedSynchronization != null)
+			{
+				StartedSynchronization();
+			}
+		}
+
+		protected virtual void OnFinishedSynchronization()
+		{
+			if (IsSynchronizationInProgress)
+			{
+				IsSynchronizationInProgress = false;
+				ShouldCancelSynchronization = false;
+				if (FinishedSynchronization != null)
+				{
+					FinishedSynchronization();
+				}
+			}
+		}
     }
 }

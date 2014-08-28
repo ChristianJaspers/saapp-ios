@@ -161,7 +161,7 @@ namespace BetterSalesman.iOS
                 return;
             }
             
-            SynchronizationManagerApplication.Instance.Synchronize();
+            SynchronizationManager.Instance.Synchronize();
         }
         
         protected override void OnSynchronizationStart()
@@ -177,11 +177,14 @@ namespace BetterSalesman.iOS
         {
             base.OnSynchronizationFinished();
 
-            HideHud();
-            
-            profileElement.RefreshUserData();
-            
-            SelectTab(lastSelectedIndex);
+			InvokeOnMainThread(() =>
+				{
+		            HideHud();
+		            
+		            profileElement.RefreshUserData();
+		            
+		            SelectTab(lastSelectedIndex);
+				});
         }
         
         void SelectTab(int row)

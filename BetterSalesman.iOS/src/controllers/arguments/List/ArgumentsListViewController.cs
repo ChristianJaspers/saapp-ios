@@ -110,9 +110,12 @@ namespace BetterSalesman.iOS
         
         protected override void OnSynchronizationFinished()
         {
-            base.OnSynchronizationFinished();
-            
-            LoadArguments();
+			InvokeOnMainThread(() =>
+				{
+		            base.OnSynchronizationFinished();
+
+		            LoadArguments();
+				});
         }
     }
 }

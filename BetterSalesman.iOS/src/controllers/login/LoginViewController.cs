@@ -108,7 +108,7 @@ namespace BetterSalesman.iOS
                 return;
             }
 
-            SynchronizationManagerApplication.Instance.Synchronize();
+            SynchronizationManager.Instance.Synchronize();
             
         }
         

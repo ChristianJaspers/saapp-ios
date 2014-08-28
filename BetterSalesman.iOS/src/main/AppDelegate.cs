@@ -52,7 +52,7 @@ namespace BetterSalesman.iOS
 
 		public override void OnActivated(UIApplication application)
 		{
-			SynchronizationManagerApplication.Instance.StartSynchronizationInBackgroundTimer();
+			SynchronizationManager.Instance.StartSynchronizationInBackgroundTimer();
 		}
 
         // This method should be used to release shared resources and it should store the application state.
@@ -60,7 +60,7 @@ namespace BetterSalesman.iOS
         // when the user quits.
         public override void DidEnterBackground(UIApplication application)
         {
-			SynchronizationManagerApplication.Instance.StopSynchronizationInBackgroundTimer();
+			SynchronizationManager.Instance.StopSynchronizationInBackgroundTimer();
         }
         
         // This method is called as part of the transiton from background to active state.

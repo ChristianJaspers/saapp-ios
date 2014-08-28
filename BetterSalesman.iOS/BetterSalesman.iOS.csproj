@@ -231,9 +231,6 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpConfig.cs">
       <Link>ServiceAccessLayer\HttpConfig.cs</Link>
     </Compile>
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerBase.cs">
-      <Link>ServiceAccessLayer\SynchronizationManagerBase.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\DataLayer\DatabaseProvider.cs">
       <Link>DataLayer\DatabaseProvider.cs</Link>
     </Compile>
@@ -294,9 +291,6 @@
       <Link>Extensions\ArgumentsExtensions.cs</Link>
     </Compile>
     <Compile Include="src\views\components\XUITextField.cs" />
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerApplication.cs">
-      <Link>ServiceAccessLayer\SynchronizationManagerApplication.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
     </Compile>
@@ -397,6 +391,9 @@
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ReachabilityChecker.cs">
       <Link>ServiceAccessLayer\ReachabilityChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManager.cs">
+      <Link>ServiceAccessLayer\SynchronizationManager.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
