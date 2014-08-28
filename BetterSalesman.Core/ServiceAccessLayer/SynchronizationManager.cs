@@ -51,7 +51,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// <summary>
 		/// The synchronization in background invocation interval in milliseconds
 		/// </summary>
-		const double SynchronizationInBackgroundInvocationInterval = 0.25 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
+		const double SynchronizationInBackgroundInvocationInterval = 15 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
 		Timer synchronizationInBackgroundInvocationTimer;
 
 		#endregion Background timer

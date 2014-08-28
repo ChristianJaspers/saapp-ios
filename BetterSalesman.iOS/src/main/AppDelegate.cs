@@ -57,6 +57,7 @@ namespace BetterSalesman.iOS
 		public override void OnActivated(UIApplication application)
 		{
 			SynchronizationManager.Instance.StartSynchronizationInBackgroundTimer();
+			SynchronizationManager.Instance.Synchronize(isBackgroundSynchronization: true);
 		}
 
         // This method should be used to release shared resources and it should store the application state.
