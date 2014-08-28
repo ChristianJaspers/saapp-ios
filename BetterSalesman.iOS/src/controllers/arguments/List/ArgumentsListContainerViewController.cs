@@ -30,12 +30,12 @@ namespace BetterSalesman.iOS
       		NavigationItem.SetLeftBarButtonItem(menuButton, false);
 		}
 
-		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
-		{
-			base.OnSynchronizationFinished(isBackgroundSynchronization);
-
-			ProductGroupsDataSource.ReloadProductGroups();
-		}
+//		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
+//		{
+//			base.OnSynchronizationFinished(isBackgroundSynchronization);
+//
+//			ProductGroupsDataSource.ReloadProductGroups();
+//		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
 		{

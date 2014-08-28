@@ -7,11 +7,13 @@ using System.Linq;
 using System.Diagnostics;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
 	public delegate void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup);
 	public delegate void ProductGroupPicked(ProductGroup pickedProductGroup);
+	public delegate void ProductGroupsReloaded();
 
 	public class ProductGroupsDataSource : UITableViewSource
 	{
@@ -19,6 +21,7 @@ namespace BetterSalesman.iOS
 
 		public event SelectedProductGroupChanged SelectedProductGroupChanged;
 		public event ProductGroupPicked ProductGroupPicked;
+		public event ProductGroupsReloaded ProductGroupsReloaded;
 
 		private ProductGroup selectedProductGroup;
 
@@ -41,11 +44,17 @@ namespace BetterSalesman.iOS
 		public ProductGroupsDataSource() : base()
 		{
 			ProductGroups = new List<ProductGroup>();
+
+			SynchronizationManager.Instance.FinishedSynchronization += (bool isBackgroundSynchronization) => 
+				{
+					ReloadProductGroups();
+				};
 		}
 
 		public void ReloadProductGroups()
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
+			OnProductGroupsReloaded();
 			if (SelectedProductGroup == null || !ProductGroups.Where(pg => pg.Id == SelectedProductGroup.Id).Any())
 			{
 				Debug.WriteLine("Selected argument changed");
@@ -93,11 +102,19 @@ namespace BetterSalesman.iOS
 			OnProductGroupPicked(this.SelectedProductGroup);
 		}
 
-		public void OnProductGroupPicked(ProductGroup pickedProductGroup)
+		private void OnProductGroupPicked(ProductGroup pickedProductGroup)
 		{
 			if (ProductGroupPicked != null)
 			{
 				ProductGroupPicked(pickedProductGroup);
+			}
+		}
+
+		private void OnProductGroupsReloaded()
+		{
+			if (ProductGroupsReloaded != null)
+			{
+				ProductGroupsReloaded();
 			}
 		}
 	}

@@ -150,6 +150,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// </summary>
 		public void CancelWriteToDatabaseIfSynchronizationInProgress()
 		{
+			Debug.WriteLine("INFO: Cancelling sync db write if sync in progress... Sync in progress? " + IsSynchronizationInProgress);
+
 			if (IsSynchronizationInProgress)
 			{
 				ShouldCancelSynchronization = true;

@@ -60,6 +60,14 @@ namespace BetterSalesman.iOS
 
 			UnsubscribeFromProductGroupPickedEvent();
 		}
+
+		public void RefreshProductGroupsList()
+		{
+			InvokeOnMainThread(() =>
+			{
+				TableView.ReloadData();
+			});
+		}
         
         #endregion
 
@@ -70,19 +78,21 @@ namespace BetterSalesman.iOS
 
 		private void SubscribeToProductGroupPickedEvent()
 		{
-			if (productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && !this.isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
-				isSubscribedToSelectedProductGroupChangedEvent = true;
+				this.productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
+				this.productGroupsDataSource.ProductGroupsReloaded += RefreshProductGroupsList;
+				this.isSubscribedToSelectedProductGroupChangedEvent = true;
 			}
 		}
 
 		private void UnsubscribeFromProductGroupPickedEvent()
 		{
-			if (productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && this.isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
-				isSubscribedToSelectedProductGroupChangedEvent = false;
+				this.productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
+				this.productGroupsDataSource.ProductGroupsReloaded -= RefreshProductGroupsList;
+				this.isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
 		}
 	}
