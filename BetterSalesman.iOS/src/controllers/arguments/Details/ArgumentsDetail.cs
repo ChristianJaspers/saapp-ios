@@ -79,6 +79,13 @@ namespace BetterSalesman.iOS
             //         that is set in the first ViewDidAppear (but without update), so that update doesn't get called twice, potentially blocking the view
             UpdateView();
         }
+        
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            
+            DisableRating();
+        }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, MonoTouch.Foundation.NSObject sender)
         {
@@ -96,6 +103,8 @@ namespace BetterSalesman.iOS
 
         void RateElementRequest()
         {
+            DisableRating();
+            
             if (!IsNetworkAvailable())
             {
                 ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
@@ -110,7 +119,6 @@ namespace BetterSalesman.iOS
                 selectedRating, 
                 updatedArgument => 
                 {
-                    ColorSelectedRating();
                     Argument = updatedArgument;
                     UpdateView();
                     HideHud();
@@ -131,26 +139,26 @@ namespace BetterSalesman.iOS
             labelBenefit.Text = Argument.Benefit;
 
 			labelEarnXPForVote.Text = Argument.Rated ? I18n.ArgumentThanksForVoting : I18n.ArgumentEarnXpByVoting;
-                    
-            ColorSelectedRating();
             
             // extra space for styling
             labelEarnXPForVote.Text = extraWhiteSpace + extraWhiteSpace + labelEarnXPForVote.Text + extraWhiteSpace;
 
             if (Argument.Rated || Argument.UserId == UserManager.LoggedInUser().Id)
             {
+                selectedRating = Argument.MyRating;
                 if (Argument.UserId != UserManager.LoggedInUser().Id)
                 {
-                    selectedRating = Argument.MyRating;
 					SetRatingControlsHidden(false);
                 }
 				else
 				{
 					SetRatingControlsHidden(true);
-				}
+                }
                 
                 DisableRating();
             }
+            
+            ColorRatingButtons();
         }
         
         #region Rating
@@ -160,44 +168,25 @@ namespace BetterSalesman.iOS
             rateContainer.Hidden = hidden;
 		}
 
-        void ColorSelectedRating()
-        {
-            if (selectedRating != -1)
-            {
-                var bgImageBorderLeft = UIImage.FromBundle("rating_button_red").CreateResizableImage(new UIEdgeInsets(4, 4, 4, 1));
-                var bgImageBorderRight = UIImage.FromBundle("rating_button_green").CreateResizableImage(new UIEdgeInsets(4, 1, 4, 4));
-                var bgImageBorderCenter = UIImage.FromBundle("rating_button_orange").CreateResizableImage(new UIEdgeInsets(1, 1, 1, 1));
-                
-                switch (selectedRating)
-                {
-                    case 1:
-                        ratedButtonLow.SetBackgroundImage(bgImageBorderLeft);
-                        ratedButtonLow.SetTitleColor(UIColor.White);
-                        break;
-                    case 2:
-                        ratedButtonMedium.SetBackgroundImage(bgImageBorderCenter);
-                        ratedButtonMedium.SetTitleColor(UIColor.White);
-                        break;
-                    case 3:
-                        ratedButtonHigh.SetBackgroundImage(bgImageBorderRight);
-                        ratedButtonHigh.SetTitleColor(UIColor.White);
-                        break;
-                }
-            }
-        }
-
+        // not selected
         const string ratingbuttonborderleft = "rating_button_border_left";
         const string ratingbuttonborderright = "rating_button_border_right";
         const string ratingbuttonbordermiddle = "rating_button_border_middle";
+        
+        // selected
+        const string ratingbuttonred = "rating_button_red";
+        const string ratingbuttongreen = "rating_button_green";
+        const string ratingbuttonorange = "rating_button_orange";
+        
+        UIEdgeInsets insetLeft = new UIEdgeInsets(4,4,4,1);
+        UIEdgeInsets insetMiddle = new UIEdgeInsets(4,1,4,4);
+        UIEdgeInsets insetRight = new UIEdgeInsets(1,1,1,1);
 
-        void RestartRatingViews()
+        void ColorRatingButtons()
         {
-            DisableRating();
-           
-            // borders
-            var bgImageBorderLeft = UIImage.FromBundle(ratingbuttonborderleft).CreateResizableImage(new UIEdgeInsets(4, 4, 4, 1));
-            var bgImageBorderRight = UIImage.FromBundle(ratingbuttonborderright).CreateResizableImage(new UIEdgeInsets(4, 1, 4, 4));
-            var bgImageBorderCenter = UIImage.FromBundle(ratingbuttonbordermiddle).CreateResizableImage(new UIEdgeInsets(1, 1, 1, 1));
+            var bgImageBorderLeft = UIImage.FromBundle(ratingbuttonborderleft).CreateResizableImage(insetLeft);
+            var bgImageBorderRight = UIImage.FromBundle(ratingbuttonborderright).CreateResizableImage(insetMiddle);
+            var bgImageBorderCenter = UIImage.FromBundle(ratingbuttonbordermiddle).CreateResizableImage(insetRight);
             
             ratedButtonLow.SetBackgroundImage(bgImageBorderLeft);
             ratedButtonMedium.SetBackgroundImage(bgImageBorderCenter);
@@ -207,47 +196,60 @@ namespace BetterSalesman.iOS
             ratedButtonMedium.SetTitleColor(AppDelegate.RatingMediumColor);
             ratedButtonHigh.SetTitleColor(AppDelegate.RatingHighColor);
             
+            if (selectedRating != -1)
+            {
+                var bgImageBorderLeftSelected = UIImage.FromBundle(ratingbuttonred).CreateResizableImage(insetLeft);
+                var bgImageBorderRightSelected = UIImage.FromBundle(ratingbuttongreen).CreateResizableImage(insetMiddle);
+                var bgImageBorderCenterSelected = UIImage.FromBundle(ratingbuttonorange).CreateResizableImage(insetRight);
+                
+                switch (selectedRating)
+                {
+                    case 1:
+                        ratedButtonLow.SetBackgroundImage(bgImageBorderLeftSelected);
+                        ratedButtonLow.SetTitleColor(UIColor.White);
+                    break;
+                        
+                    case 2:
+                        ratedButtonMedium.SetBackgroundImage(bgImageBorderCenterSelected);
+                        ratedButtonMedium.SetTitleColor(UIColor.White);
+                    break;
+                        
+                    case 3:
+                        ratedButtonHigh.SetBackgroundImage(bgImageBorderRightSelected);
+                        ratedButtonHigh.SetTitleColor(UIColor.White);
+                    break;
+                }
+            }
+        }
+
+        void RestartRatingViews()
+        {
+            DisableRating();
+            
             selectedRating = -1;
             
-            ratedButtonLow.TouchUpInside += RateButtonTouched;
-            ratedButtonMedium.TouchUpInside += RateButtonTouched;
-            ratedButtonHigh.TouchUpInside += RateButtonTouched;
+            ratedButtonLow.TouchUpInside += OnRateButtonTouched;
+            ratedButtonMedium.TouchUpInside += OnRateButtonTouched;
+            ratedButtonHigh.TouchUpInside += OnRateButtonTouched;
         }
         
         void DisableRating()
         {
-//            ratedButtonLow.TouchUpInside -= RateButtonTouched;
-//            ratedButtonMedium.TouchUpInside -= RateButtonTouched;
-//            ratedButtonHigh.TouchUpInside -= RateButtonTouched;
+            ratedButtonLow.TouchUpInside -= OnRateButtonTouched;
+            ratedButtonMedium.TouchUpInside -= OnRateButtonTouched;
+            ratedButtonHigh.TouchUpInside -= OnRateButtonTouched;
         }
         
-        void RateButtonTouched(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Button touched!");
+        void OnRateButtonTouched(object sender, EventArgs e)
+        {   
+            if (sender.Equals(ratedButtonLow)) selectedRating = 1;
             
-            if (sender.Equals(ratedButtonLow))
-            {
-                ratedButtonLow.SetTitleColor(UIColor.White);
-                selectedRating = 1;
-            }
+            if (sender.Equals(ratedButtonMedium)) selectedRating = 2;
             
-            if (sender.Equals(ratedButtonMedium))
-            {
-                selectedRating = 2;
-            }
+            if (sender.Equals(ratedButtonHigh)) selectedRating = 3;
             
-            if (sender.Equals(ratedButtonHigh))
-            {
-                ratedButtonHigh.SetTitleColor(UIColor.White);
-                selectedRating = 3;
-            }
-            
-            
-            // TODO
-            ColorSelectedRating();
-//            RateElementRequest();
+            RateElementRequest();
         }
-        
         
         #endregion
     }

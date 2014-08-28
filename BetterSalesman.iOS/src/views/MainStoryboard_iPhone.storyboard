@@ -713,9 +713,6 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="   Earn 5xp by voting   " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uig-iu-MtS">
                                         <rect key="frame" x="97" y="28" width="126" height="21"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="0A8-fT-4gF"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                         <color key="textColor" red="0.46666669849999998" green="0.50196081400000003" blue="0.52941179279999995" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
@@ -729,14 +726,14 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgK-eW-U4j">
-                                        <rect key="frame" x="10" y="50" width="300" height="36"/>
+                                        <rect key="frame" x="10" y="55" width="300" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djr-a8-aI0">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="NdO-xe-8eA"/>
+                                                    <constraint firstAttribute="height" constant="31" id="NdO-xe-8eA"/>
                                                     <constraint firstAttribute="width" constant="100" id="UaY-FT-nNq"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -745,10 +742,10 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8r0-9a-R89">
-                                                <rect key="frame" x="100" y="0.0" width="100" height="36"/>
+                                                <rect key="frame" x="100" y="0.0" width="100" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="Szf-oe-GpA"/>
+                                                    <constraint firstAttribute="height" constant="31" id="Szf-oe-GpA"/>
                                                     <constraint firstAttribute="width" constant="100" id="vY9-dD-AFt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -757,11 +754,11 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ql-p0a">
-                                                <rect key="frame" x="200" y="0.0" width="100" height="36"/>
+                                                <rect key="frame" x="200" y="0.0" width="100" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="4Sq-hk-sTM"/>
-                                                    <constraint firstAttribute="height" constant="36" id="Gej-90-b0o"/>
+                                                    <constraint firstAttribute="height" constant="31" id="Gej-90-b0o"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                                 <state key="normal" title="Button">
@@ -781,7 +778,7 @@
                                             <constraint firstAttribute="trailing" secondItem="e7W-Ql-p0a" secondAttribute="trailing" id="rS2-Bl-Zug"/>
                                             <constraint firstItem="e7W-Ql-p0a" firstAttribute="top" secondItem="SgK-eW-U4j" secondAttribute="top" id="s7P-AG-Bgy"/>
                                             <constraint firstAttribute="width" constant="300" id="xGY-Ki-ZNE"/>
-                                            <constraint firstAttribute="height" constant="36" id="xO9-gh-azc"/>
+                                            <constraint firstAttribute="height" constant="31" id="xO9-gh-azc"/>
                                             <constraint firstAttribute="bottom" secondItem="8r0-9a-R89" secondAttribute="bottom" id="ywW-b3-LF5"/>
                                             <constraint firstItem="8r0-9a-R89" firstAttribute="top" secondItem="SgK-eW-U4j" secondAttribute="top" id="z9Q-6M-BEc"/>
                                             <constraint firstItem="e7W-Ql-p0a" firstAttribute="leading" secondItem="8r0-9a-R89" secondAttribute="trailing" id="zIf-rF-9UE"/>
@@ -801,7 +798,7 @@
                                     <constraint firstItem="ggc-Rc-AZb" firstAttribute="leading" secondItem="3Vh-5s-bXS" secondAttribute="leading" constant="5" id="aDg-eg-wxo"/>
                                     <constraint firstAttribute="trailing" secondItem="ggc-Rc-AZb" secondAttribute="trailing" constant="5" id="jEa-ty-5kb"/>
                                     <constraint firstItem="5RS-9J-upU" firstAttribute="top" secondItem="XPW-Ni-hk7" secondAttribute="bottom" constant="4" id="kcl-vA-TfW"/>
-                                    <constraint firstItem="SgK-eW-U4j" firstAttribute="top" secondItem="uig-iu-MtS" secondAttribute="bottom" constant="1" id="l20-u2-Iws"/>
+                                    <constraint firstItem="SgK-eW-U4j" firstAttribute="top" secondItem="uig-iu-MtS" secondAttribute="bottom" constant="5" id="l20-u2-Iws"/>
                                     <constraint firstAttribute="bottom" secondItem="SgK-eW-U4j" secondAttribute="bottom" constant="4" id="mOH-jO-qc6"/>
                                     <constraint firstAttribute="centerX" secondItem="uig-iu-MtS" secondAttribute="centerX" id="yLa-MI-7mo"/>
                                 </constraints>
