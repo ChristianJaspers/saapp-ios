@@ -131,11 +131,11 @@ namespace BetterSalesman.iOS
             SynchronizationManager.Instance.FinishedSynchronization -= OnSynchronizationFinished;
         }
         
-        protected virtual void OnSynchronizationStart()
+		protected virtual void OnSynchronizationStart(bool isBackgroundSynchronization)
         {
         }
 
-        protected virtual void OnSynchronizationFinished()
+		protected virtual void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
         }
         

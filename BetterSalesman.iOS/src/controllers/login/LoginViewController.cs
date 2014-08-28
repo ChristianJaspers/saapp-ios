@@ -112,18 +112,24 @@ namespace BetterSalesman.iOS
             
         }
         
-        protected override void OnSynchronizationStart()
+		protected override void OnSynchronizationStart(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationStart();
+			base.OnSynchronizationStart(isBackgroundSynchronization);
             
-            ShowHud(I18n.SynchronizationInProgress);
+			if (!isBackgroundSynchronization)
+			{
+            	ShowHud(I18n.SynchronizationInProgress);
+			}
         }
         
-        protected override void OnSynchronizationFinished()
+		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
+			base.OnSynchronizationFinished(isBackgroundSynchronization);
             
-            HideHud();
+			if (!isBackgroundSynchronization)
+			{
+            	HideHud();
+			}
             
             PerformSegue(sequeIdLogged, this);
         }

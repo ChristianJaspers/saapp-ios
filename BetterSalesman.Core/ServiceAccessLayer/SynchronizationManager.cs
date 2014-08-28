@@ -12,9 +12,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 {
 	#region Delegates
 
-	public delegate void StartedSynchronizationEventHandler();
+	public delegate void StartedSynchronizationEventHandler(bool isBackgroundSynchronization);
 
-	public delegate void FinishedSynchronizationEventHandler();
+	public delegate void FinishedSynchronizationEventHandler(bool isBackgroundSynchronization);
 
 	#endregion Delegates
 
@@ -128,7 +128,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			this.synchronizationInBackgroundInvocationTimer.Elapsed += (object source, ElapsedEventArgs e) => 
 				{
 					Debug.WriteLine("INFO: Performing background sync");
-					Synchronize();
+					Synchronize(isBackgroundSynchronization: true);
 				};
         }
 
@@ -161,52 +161,52 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// @note It's caller's responsibility to check if there's a network connection available before calling this method.
 		/// </summary>
 		/// <returns></returns>
-		public void Synchronize()
+		public void Synchronize(bool isBackgroundSynchronization = false)
 		{
 			if (IsSynchronizationInProgress)
 			{
-				Debug.WriteLine("Info: Synchronization already in progress. Skipping synchronization.");
+				Debug.WriteLine("INFO: Synchronization already in progress. Skipping synchronization.");
 				return;
 			}
 
 			if (!UserSessionManager.Instance.HasStoredSession)
 			{
 				Debug.WriteLine("INFO: No valid session found. Skipping synchronization.");
-				OnFinishedSynchronization();
+				OnFinishedSynchronization(isBackgroundSynchronization);
 				return;
 			}
 
 			if (!ReachabilityChecker.Instance.IsHostReachable(HttpConfig.Host))
 			{
 				Debug.WriteLine("INFO: Host " + HttpConfig.Host + " is not reachable. Skipping synchronization.");
-				OnFinishedSynchronization();
+				OnFinishedSynchronization(isBackgroundSynchronization);
 				return;
 			}
 
 			try
 			{
 				IsSynchronizationInProgress = true;
-				OnStartedSynchronization();
+				OnStartedSynchronization(isBackgroundSynchronization);
 
-				FullSynchronizationTaskRun();
+				FullSynchronizationTaskRun(isBackgroundSynchronization);
 			}
 			catch (Exception e)
 			{
-				OnFinishedSynchronization();
-				Debug.WriteLine("Error! There was an exception during synchronization process: " + e.Message);
+				OnFinishedSynchronization(isBackgroundSynchronization);
+				Debug.WriteLine("ERROR! There was an exception during synchronization process: " + e.Message);
 			}
 		}
 
 		// TODO - consider passing SynchronizationResult to OnFinishedSynchronization
 		//		  (for example informing whether it was successful or not and any Error objects that occured during the process)
-        private void FullSynchronizationTaskRun()
+		private void FullSynchronizationTaskRun(bool isBackgroundSynchronization)
         {
             ServiceProviderSynchronization.Instance.Synchronize(
                 async result => 
 				{
 					if (result == null)
 					{
-						OnFinishedSynchronization();
+						OnFinishedSynchronization(isBackgroundSynchronization);
 						return;
 					}
 
@@ -214,16 +214,16 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 					{
 						if (ShouldCancelSynchronization)
 						{
-							OnFinishedSynchronization();
+							OnFinishedSynchronization(isBackgroundSynchronization);
 							return;
 						}
 
 						DatabaseProvider.FullSync(result);
 					});
                 
-                    OnFinishedSynchronization();
+					OnFinishedSynchronization(isBackgroundSynchronization);
                 },
-                errorMessage => OnFinishedSynchronization()
+				errorMessage => OnFinishedSynchronization(isBackgroundSynchronization)
             );
         }
 
@@ -231,21 +231,21 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             await Task.Run(() =>
             {
-                Debug.WriteLine("Copying initial databse...");
+                Debug.WriteLine("INFO: Copying initial databse...");
                 DatabaseProvider.Setup();
-                Debug.WriteLine("Finished copying initial databse.");
+                Debug.WriteLine("INFO: Finished copying initial databse.");
             });
         }
 
-		protected virtual void OnStartedSynchronization()
+		protected virtual void OnStartedSynchronization(bool isBackgroundSynchronization)
 		{
 			if (StartedSynchronization != null)
 			{
-				StartedSynchronization();
+				StartedSynchronization(isBackgroundSynchronization);
 			}
 		}
 
-		protected virtual void OnFinishedSynchronization()
+		protected virtual void OnFinishedSynchronization(bool isBackgroundSynchronization)
 		{
 			if (IsSynchronizationInProgress)
 			{
@@ -253,7 +253,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 				ShouldCancelSynchronization = false;
 				if (FinishedSynchronization != null)
 				{
-					FinishedSynchronization();
+					FinishedSynchronization(isBackgroundSynchronization);
 				}
 			}
 		}

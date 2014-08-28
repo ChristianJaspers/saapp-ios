@@ -37,11 +37,14 @@ namespace BetterSalesman.iOS
             InvokeOnMainThread(TableView.ReloadData);
         }
         
-        protected override void OnSynchronizationFinished()
+		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
+			base.OnSynchronizationFinished(isBackgroundSynchronization);
 
-            LoadUsers();
+			InvokeOnMainThread(() =>
+				{
+	            	LoadUsers();
+				});
         }
 	}
 }
