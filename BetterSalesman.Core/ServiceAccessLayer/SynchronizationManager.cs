@@ -188,6 +188,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 			try
 			{
 				IsSynchronizationInProgress = true;
+
 				OnStartedSynchronization(isBackgroundSynchronization);
 
 				FullSynchronizationTaskRun(isBackgroundSynchronization);
@@ -216,6 +217,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 					{
 						if (ShouldCancelSynchronization)
 						{
+							Debug.WriteLine("INFO! Cancelling sync write to db");
 							OnFinishedSynchronization(isBackgroundSynchronization);
 							return;
 						}
@@ -233,9 +235,9 @@ namespace BetterSalesman.Core.ServiceAccessLayer
         {
             await Task.Run(() =>
             {
-                Debug.WriteLine("INFO: Copying initial databse...");
+                Debug.WriteLine("INFO: Initializing database...");
                 DatabaseProvider.Setup();
-                Debug.WriteLine("INFO: Finished copying initial databse.");
+                Debug.WriteLine("INFO: Finished initializing database.");
             });
         }
 
