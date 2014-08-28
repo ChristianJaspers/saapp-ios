@@ -63,11 +63,11 @@ namespace BetterSalesman.iOS
             
             if ( Argument.MyRating > 0 && Argument.UserId == UserManager.LoggedInUser().Id )
             {
-                DisableRating();
+                DisableRatingButtons();
             } 
             else
             {
-                RestartRatingViews();
+                RestartRatingButtons();
             }
         }
         
@@ -84,7 +84,7 @@ namespace BetterSalesman.iOS
         {
             base.ViewDidDisappear(animated);
             
-            DisableRating();
+            DisableRatingButtons();
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, MonoTouch.Foundation.NSObject sender)
@@ -101,14 +101,14 @@ namespace BetterSalesman.iOS
         
         #endregion
 
-        void RateElementRequest()
+        void PerformRateRequest()
         {
-            DisableRating();
+            DisableRatingButtons();
             
             if (!IsNetworkAvailable())
             {
                 ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
-                RestartRatingViews();
+                RestartRatingButtons();
                 return;
             }
             
@@ -124,7 +124,7 @@ namespace BetterSalesman.iOS
                     HideHud();
                 }, errorMessage => 
                 {
-                    RestartRatingViews();
+                    RestartRatingButtons();
                     HideHud();
                     ShowAlert(errorMessage);
                 }
@@ -155,7 +155,7 @@ namespace BetterSalesman.iOS
 					SetRatingControlsHidden(true);
                 }
                 
-                DisableRating();
+                DisableRatingButtons();
             }
             
             ColorRatingButtons();
@@ -222,9 +222,9 @@ namespace BetterSalesman.iOS
             }
         }
 
-        void RestartRatingViews()
+        void RestartRatingButtons()
         {
-            DisableRating();
+            DisableRatingButtons();
             
             selectedRating = -1;
             
@@ -233,7 +233,7 @@ namespace BetterSalesman.iOS
             ratedButtonHigh.TouchUpInside += OnRateButtonTouched;
         }
         
-        void DisableRating()
+        void DisableRatingButtons()
         {
             ratedButtonLow.TouchUpInside -= OnRateButtonTouched;
             ratedButtonMedium.TouchUpInside -= OnRateButtonTouched;
@@ -248,7 +248,7 @@ namespace BetterSalesman.iOS
             
             if (sender.Equals(ratedButtonHigh)) selectedRating = 3;
             
-            RateElementRequest();
+            PerformRateRequest();
         }
         
         #endregion
