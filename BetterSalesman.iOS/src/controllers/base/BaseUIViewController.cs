@@ -118,6 +118,11 @@ namespace BetterSalesman.iOS
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            
+            if (NavigationItem.RightBarButtonItem != null)
+            {
+                NavigationItem.RightBarButtonItem.TintColor = AppDelegate.ColorOrange;
+            }
 
             SynchronizationManager.Instance.StartedSynchronization += OnSynchronizationStart;
             SynchronizationManager.Instance.FinishedSynchronization += OnSynchronizationFinished;
