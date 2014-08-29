@@ -19,6 +19,9 @@
 		public static string MyTeamActivity = "my_team_activity".t();
 		public static string AllTeamsActivity = "all_teams_activity".t();
         
+        public static string ActivityLevelLastWeek = "activity_level_last_week".t();
+        public static string EarnedInTotal = "earned_in_total".t();
+        
 		public static string ErrorConnectionTimeout = "connection_timeout".t();
         
 		public static string ErrorFillFields = "fill_in_required_fields".t();
@@ -89,7 +92,6 @@
         public static string VoteMedium = "vote_medium".t();
         public static string VoteHigh = "vote_high".t();
 
-        public static string Votes = "votes".t();
         public static string YouAlreadyRateThisElement = "you_already_rate_this_element".t();
     }
 }

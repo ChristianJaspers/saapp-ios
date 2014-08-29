@@ -20,6 +20,7 @@ namespace BetterSalesman.iOS
             
             buttonForgotPassword.TouchUpInside += (s, e) => DisplayPasswordChange(string.Empty, true);
             buttonForgotPassword.SetTitle(I18n.ForgotPassword, UIControlState.Normal);
+            buttonForgotPassword.SetTitleColor(AppDelegate.ColorOrange, UIControlState.Normal);
             
             inputEmail.Placeholder = I18n.FieldEmail;
             inputPassword.Placeholder = I18n.FieldPassword;

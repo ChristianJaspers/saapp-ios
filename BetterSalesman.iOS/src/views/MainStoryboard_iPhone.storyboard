@@ -455,7 +455,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Arguments" id="hnM-vT-THZ">
-                        <barButtonItem key="rightBarButtonItem" image="ic_add.png" style="plain" id="s3F-kN-Nsu">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="s3F-kN-Nsu">
                             <connections>
                                 <segue destination="lKl-jK-C5K" kind="push" identifier="segueIdArgumentAdd" id="mJU-2O-oQX"/>
                             </connections>
@@ -476,11 +476,11 @@
                         <viewControllerLayoutGuide type="bottom" id="nH5-tX-3LD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XBT-wI-PAA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfr-xe-ByT">
-                                <rect key="frame" x="0.0" y="64" width="320" height="0.0"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="108"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -490,7 +490,7 @@
                                     <segue destination="XZ5-QX-gR2" kind="embed" identifier="segueIdProductGroupPickerSubview" id="a9h-qT-ohh"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-yb-Clw">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-yb-Clw">
                                 <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1172,23 +1172,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-QO-acu">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Feature lorem ipsum dolor sit amet very long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-QO-acu">
                                             <rect key="frame" x="37" y="4" width="210" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="sgH-bY-GxN"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.45490196078431372" green="0.4823529411764706" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npe-Gg-Meu">
-                                            <rect key="frame" x="250" y="4" width="60" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="Mxe-UG-Nvd"/>
-                                                <constraint firstAttribute="height" constant="21" id="s2x-SU-eTK"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" red="0.4549019608" green="0.4823529412" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-Zb-NzO">
@@ -1204,10 +1194,7 @@
                                         <constraint firstItem="dZR-Zb-NzO" firstAttribute="top" secondItem="PNI-wl-hQy" secondAttribute="top" constant="4" id="EMV-hf-oCB"/>
                                         <constraint firstItem="UDu-QO-acu" firstAttribute="leading" secondItem="dZR-Zb-NzO" secondAttribute="trailing" constant="6" id="LS2-xY-KuB"/>
                                         <constraint firstItem="dZR-Zb-NzO" firstAttribute="leading" secondItem="PNI-wl-hQy" secondAttribute="leading" constant="9" id="VuR-nz-HI9"/>
-                                        <constraint firstItem="npe-Gg-Meu" firstAttribute="top" secondItem="PNI-wl-hQy" secondAttribute="top" constant="4" id="eRG-7G-MFH"/>
-                                        <constraint firstAttribute="trailing" secondItem="npe-Gg-Meu" secondAttribute="trailing" constant="10" id="loh-kc-mZy"/>
                                         <constraint firstItem="UDu-QO-acu" firstAttribute="top" secondItem="PNI-wl-hQy" secondAttribute="top" constant="4" id="nNB-sK-G23"/>
-                                        <constraint firstItem="npe-Gg-Meu" firstAttribute="leading" secondItem="UDu-QO-acu" secondAttribute="trailing" constant="3" id="tSN-2u-bxU"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1444,7 +1431,6 @@
     <resources>
         <image name="avatar_placeholder.png" width="256" height="256"/>
         <image name="circle.png" width="256" height="256"/>
-        <image name="ic_add.png" width="22" height="22"/>
         <image name="ic_benefit.png" width="22" height="22"/>
         <image name="ic_earn.png" width="22" height="22"/>
         <image name="ic_feature.png" width="22" height="22"/>
@@ -1459,9 +1445,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="LHY-w2-Th4"/>
+        <segue reference="mJU-2O-oQX"/>
         <segue reference="Psd-rE-10c"/>
         <segue reference="zm9-Cr-f1k"/>
-        <segue reference="LHY-w2-Th4"/>
-        <segue reference="bGM-YO-hz2"/>
     </inferredMetricsTieBreakers>
 </document>

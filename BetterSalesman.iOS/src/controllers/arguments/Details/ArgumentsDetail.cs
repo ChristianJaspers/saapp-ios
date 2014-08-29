@@ -110,9 +110,7 @@ namespace BetterSalesman.iOS
         #endregion
 
         void PerformRateRequest()
-        {
-            DisableRatingButtons();
-            
+        {   
             if (!IsNetworkAvailable())
             {
                 ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
@@ -162,8 +160,6 @@ namespace BetterSalesman.iOS
 				{
 					SetRatingControlsHidden(true);
                 }
-                
-                DisableRatingButtons();
             }
             
             ColorRatingButtons();
@@ -250,13 +246,23 @@ namespace BetterSalesman.iOS
         
         void OnRateButtonTouched(object sender, EventArgs e)
         {   
-            if (sender.Equals(ratedButtonLow)) selectedRating = 1;
+            if (Argument.Rated)
+            {
+                ShowAlert(I18n.YouAlreadyRateThisElement);
+            } 
+            else
+            {
+                if (sender.Equals(ratedButtonLow))
+                    selectedRating = 1;
             
-            if (sender.Equals(ratedButtonMedium)) selectedRating = 2;
+                if (sender.Equals(ratedButtonMedium))
+                    selectedRating = 2;
             
-            if (sender.Equals(ratedButtonHigh)) selectedRating = 3;
+                if (sender.Equals(ratedButtonHigh))
+                    selectedRating = 3;
             
-            PerformRateRequest();
+                PerformRateRequest();
+            }
         }
         
         #endregion

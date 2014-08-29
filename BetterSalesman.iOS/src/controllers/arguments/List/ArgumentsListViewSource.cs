@@ -27,17 +27,11 @@ namespace BetterSalesman.iOS
             var cell = tableView.DequeueReusableCell(cellIdentifierHeader) ?? new UITableViewCell();
             
             var titleTxt = (UILabel)cell.ViewWithTag(1);
-            var votesTxt = (UILabel)cell.ViewWithTag(3);
             
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
             titleTxt.Text = Sections[section].Title;
             titleTxt.TextColor = AppDelegate.ColorTextDarkGray;
-            
-            votesTxt.Hidden = Sections[section].Title == I18n.WithoutRating;
-            
-            votesTxt.Text = I18n.Votes;
-            votesTxt.TextColor = AppDelegate.ColorTextDarkGray;
             
             imageView.Image = UIImage.FromBundle(Sections[section].Icon);
             
