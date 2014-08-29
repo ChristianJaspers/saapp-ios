@@ -88,6 +88,8 @@
         public static string VoteLow = "vote_low".t();
         public static string VoteMedium = "vote_medium".t();
         public static string VoteHigh = "vote_high".t();
+
+        public static string Votes = "votes".t();
     }
 }
 

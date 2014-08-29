@@ -24,7 +24,7 @@ namespace BetterSalesman.Core.BusinessLayer
         public string Benefit { get; set; }
 
         [JsonPropertyAttribute(PropertyName = "rating")]
-        public int Rating { get; set; }
+        public float Rating { get; set; }
         
         [JsonPropertyAttribute(PropertyName = "my_rating")]
         public int MyRating { get; set; }

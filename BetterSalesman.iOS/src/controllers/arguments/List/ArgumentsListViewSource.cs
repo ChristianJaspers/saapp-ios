@@ -12,7 +12,6 @@ namespace BetterSalesman.iOS
         
         readonly string cellIdentifierItem = "ArgumentsCell";
         readonly string cellIdentifierHeader = "ArgumentsHeader";
-        readonly string cellIdentifierFooter = "ArgumentsFooter";
 
         public ArgumentsListViewSource()
         {
@@ -23,23 +22,22 @@ namespace BetterSalesman.iOS
             return Sections.Count;
         }
 
-        public override UIView GetViewForFooter(UITableView tableView, int section)
-        {
-            var cell = tableView.DequeueReusableCell(cellIdentifierFooter) ?? new UITableViewCell();
-            
-            return cell;
-        }
-
         public override UIView GetViewForHeader(UITableView tableView, int section)
         {   
             var cell = tableView.DequeueReusableCell(cellIdentifierHeader) ?? new UITableViewCell();
             
             var titleTxt = (UILabel)cell.ViewWithTag(1);
+            var votesTxt = (UILabel)cell.ViewWithTag(3);
             
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
             titleTxt.Text = Sections[section].Title;
             titleTxt.TextColor = AppDelegate.ColorTextDarkGray;
+            
+            votesTxt.Hidden = Sections[section].Title == I18n.WithoutRating;
+            
+            votesTxt.Text = I18n.Votes;
+            votesTxt.TextColor = AppDelegate.ColorTextDarkGray;
             
             imageView.Image = UIImage.FromBundle(Sections[section].Icon);
             
@@ -49,11 +47,6 @@ namespace BetterSalesman.iOS
         public override float GetHeightForHeader(UITableView tableView, int section)
         {
             return 30;
-        }
-
-        public override float GetHeightForFooter(UITableView tableView, int section)
-        {
-            return 1;
         }
 
         public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
@@ -82,17 +75,16 @@ namespace BetterSalesman.iOS
             
             var argument = Sections[indexPath.Section].Arguments[indexPath.Row];
             
-            verticalLine.Hidden = !argument.Rated;
-            
             var frame = verticalLine.Frame;
             frame.Width = 0.5f;
             verticalLine.Frame = frame;
             
-            relevanceTxt.Hidden = !argument.Rated;
+            relevanceTxt.TextColor = AppDelegate.ColorOrange;
             
             featureTxt.Text = argument.Feature;
             benefitTxt.Text = argument.Benefit;
-            relevanceTxt.Text = argument.Rating.ToString();
+            
+            relevanceTxt.Text = Sections[indexPath.Section].Title != I18n.WithoutRating ? argument.Rating.ToString() : "!";
             
             return cell;
         }
