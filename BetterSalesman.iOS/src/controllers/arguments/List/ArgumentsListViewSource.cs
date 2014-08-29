@@ -39,6 +39,7 @@ namespace BetterSalesman.iOS
             var imageView = (UIImageView)cell.ViewWithTag(2);
             
             titleTxt.Text = Sections[section].Title;
+            titleTxt.TextColor = AppDelegate.ColorTextDarkGray;
             
             imageView.Image = UIImage.FromBundle(Sections[section].Icon);
             

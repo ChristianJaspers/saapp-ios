@@ -208,6 +208,8 @@
     <BundleResource Include="Resources\rating_button_border_right.png" />
     <BundleResource Include="Resources\rating_button_border_right%402x.png" />
     <BundleResource Include="Resources\rating_button_orange.png" />
+    <BundleResource Include="Resources\ic_unrated.png" />
+    <BundleResource Include="Resources\ic_unrated%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -406,6 +408,7 @@
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManager.cs">
       <Link>ServiceAccessLayer\SynchronizationManager.cs</Link>
     </Compile>
+    <Compile Include="src\extensions\ObjectExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

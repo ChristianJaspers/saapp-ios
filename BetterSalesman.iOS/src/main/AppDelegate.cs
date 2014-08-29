@@ -2,7 +2,6 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using BetterSalesman.Core.ServiceAccessLayer;
-using System.Diagnostics;
 
 namespace BetterSalesman.iOS
 {
@@ -19,6 +18,7 @@ namespace BetterSalesman.iOS
         public static UIColor ColorTextProductGroupPicker = UIColor.White;
         public static UIColor ColorBackgroundGreen = UIColor.Clear.FromHex("#50AA1D");
         public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#e6e6e6");
+        public static UIColor ColorTextDarkGray = UIColor.Clear.FromHex("#2b2b2b");
         
         public static UIColor ColorBackgroundZebraOdd = UIColor.White;
         public static UIColor ColorBackgroundZebraEven = UIColor.White;
@@ -40,10 +40,11 @@ namespace BetterSalesman.iOS
             
             Window.TintColor = TintColor;
             
+            UINavigationBar.Appearance.TintColor = ColorTextGreen;
             UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() {
                 TextColor = ColorTextGreen,
                 TextShadowOffset = new UIOffset(0,0),
-                Font = UIFont.FromName("HelveticaNeue-Light",20)
+                Font = UIFont.FromName("HelveticaNeue-Light",20),
             });
 
 			return true;

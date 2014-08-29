@@ -31,6 +31,13 @@ namespace BetterSalesman.iOS
             
             labelDescriptionFeature.Text = I18n.FieldFeature;
             labelDescriptionBenefit.Text = I18n.FieldBenefit;
+            
+            labelFeature.TextColor = AppDelegate.ColorTextDarkGray;
+            labelBenefit.TextColor = AppDelegate.ColorTextDarkGray;
+            
+            labelDescriptionFeature.TextColor = AppDelegate.ColorTextDarkGray;
+            labelDescriptionBenefit.TextColor = AppDelegate.ColorTextDarkGray;
+            
             labelHowRelevant.Text = I18n.ArgumentRelevanceTitle;
             
             labelFeature.Editable = true;
@@ -95,6 +102,7 @@ namespace BetterSalesman.iOS
             {
                 var vc = (ArgumentsFormContainerViewController)segue.DestinationViewController;
 
+                // TODO add cloning of this object here to avoiding problems if there was no save, and there were some changes?
                 vc.Argument = Argument;
             }
         }
