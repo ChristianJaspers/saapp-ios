@@ -38,6 +38,7 @@ namespace BetterSalesman.iOS
             };
             
 			loginButton.SetTitle(I18n.Login, UIControlState.Normal);
+            loginButton.BackgroundColor = AppDelegate.ColorBackgroundGreen;
             loginButton.TouchUpInside += (sender, e) => StartLogin();
             
 			if (UserSessionManager.Instance.HasStoredSession)

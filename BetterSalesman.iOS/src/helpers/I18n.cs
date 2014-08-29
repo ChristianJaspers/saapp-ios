@@ -90,6 +90,7 @@
         public static string VoteHigh = "vote_high".t();
 
         public static string Votes = "votes".t();
+        public static string YouAlreadyRateThisElement = "you_already_rate_this_element".t();
     }
 }
 
