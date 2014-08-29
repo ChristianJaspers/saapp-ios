@@ -61,6 +61,8 @@ namespace BetterSalesman.iOS
             NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
             NavigationController.NavigationBar.ShadowImage = new UIImage();
             
+            labelExperience.TextColor = AppDelegate.ColorTextGreen;
+            
             imageViewBorder.Image = imageViewBorder.Image.Circle();
             
             fakeImageView = (UIImageView)View.ViewWithTag(30);
@@ -113,7 +115,7 @@ namespace BetterSalesman.iOS
             var theme = MDRadialProgressTheme.StandardTheme();
             theme.Thickness = 8;
             theme.IncompletedColor = UIColor.Clear;
-            theme.CompletedColor = AppDelegate.ColorTextOrange;
+            theme.CompletedColor = AppDelegate.ColorTextGreen;
             theme.SliceDividerHidden = true;
             theme.CenterColor = UIColor.White;
             

@@ -68,6 +68,7 @@ namespace BetterSalesman.iOS
 			if (productGroup != null && ProductGroupPickerButton != null)
 			{
                 ProductGroupPickerButton.SetTitle(productGroup.Name, UIControlState.Normal);
+                ProductGroupPickerButton.SetTitleColor(AppDelegate.ColorTextProductGroupPicker, UIControlState.Normal);
 			}
 		}
 

@@ -14,13 +14,14 @@ namespace BetterSalesman.iOS
     {
         public static UIColor TintColor = UIColor.FromRGB(116,123,129);
         
-        public static UIColor ColorTextOrange = UIColor.Clear.FromHex("#f76500");
+        public static UIColor ColorTextGreen = UIColor.Clear.FromHex("#50AA1D");
         public static UIColor ColorTextGray = UIColor.Clear.FromHex("#3D3D3D");
-        public static UIColor ColorBackgroundOrange = UIColor.Clear.FromHex("#f76500");
+        public static UIColor ColorTextProductGroupPicker = UIColor.White;
+        public static UIColor ColorBackgroundGreen = UIColor.Clear.FromHex("#50AA1D");
         public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#e6e6e6");
         
-        public static UIColor ColorBackgroundZebraOdd = UIColor.Clear.FromHex("#f8f8f8");
-        public static UIColor ColorBackgroundZebraEven = UIColor.Clear.FromHex("#FFFFFF");
+        public static UIColor ColorBackgroundZebraOdd = UIColor.White;
+        public static UIColor ColorBackgroundZebraEven = UIColor.White;
         
         public static UIColor RatingLowColor = UIColor.Clear.FromHex("#f74343");
         public static UIColor RatingMediumColor = UIColor.Clear.FromHex("#f89406");
@@ -40,7 +41,7 @@ namespace BetterSalesman.iOS
             Window.TintColor = TintColor;
             
             UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() {
-                TextColor = ColorTextOrange,
+                TextColor = ColorTextGreen,
                 TextShadowOffset = new UIOffset(0,0),
                 Font = UIFont.FromName("HelveticaNeue-Light",20)
             });
