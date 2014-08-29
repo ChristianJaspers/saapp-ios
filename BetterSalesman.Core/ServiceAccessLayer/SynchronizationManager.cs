@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using BetterSalesman.Core.DataLayer;
-using BetterSalesman.Core.ServiceAccessLayer.DataTransferObject;
 using System;
 using System.Timers;
 
@@ -52,9 +48,8 @@ namespace BetterSalesman.Core.ServiceAccessLayer
 		/// The synchronization in background invocation interval in milliseconds
 		/// </summary>
         
-        // TODO uncomment in production
-//		const double SynchronizationInBackgroundInvocationInterval = 15 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
-        const double SynchronizationInBackgroundInvocationInterval = 30 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
+		const double SynchronizationInBackgroundInvocationInterval = 15 * 60 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
+//        const double SynchronizationInBackgroundInvocationInterval = 30 * 1000; // calculated as minutes * seconds_per_minute * milliseconds_per_second
 		Timer synchronizationInBackgroundInvocationTimer;
 
 		#endregion Background timer

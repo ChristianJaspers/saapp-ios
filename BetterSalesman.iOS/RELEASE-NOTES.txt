@@ -1,3 +1,16 @@
+build 3
+
+- Background synchronization
+- Hide excess text of long product group
+- Apply original layout for rating (custom component)
+- Product group header should  be more clear
+- Green menues and replace of each orange item with green
+- Styling changes regarding rated/not rated items
+- Block layout for the argument list
+- New/updated translations
+
+build 2
+
 - Argument details view
 - Scrollable profile on iPhone 3,5 inch
 - Square placeholder image in my team

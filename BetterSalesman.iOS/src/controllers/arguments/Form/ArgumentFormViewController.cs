@@ -44,6 +44,9 @@ namespace BetterSalesman.iOS
             labelFeatureEarn.Text = I18n.FeatureAddEarnXp;
             labelBenefitEarn.Text = I18n.BenefitAddEarnXp;
             
+            fieldFeature.TextColor = AppDelegate.ColorTextDarkGray;
+            fieldBenefit.TextColor = AppDelegate.ColorTextDarkGray;
+            
             Feature = Argument.Feature;
             Benefit = Argument.Benefit;
 

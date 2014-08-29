@@ -1269,7 +1269,7 @@
                                                     <constraint firstAttribute="height" constant="80" id="MiE-hw-iAd"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.46666669849999998" green="0.50196081400000003" blue="0.52941179279999995" alpha="1" colorSpace="deviceRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VEJ-XE-50H" userLabel="feature Text View">
@@ -1281,7 +1281,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="nNj-RR-Iba"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.46666669849999998" green="0.50196081400000003" blue="0.52941179279999995" alpha="1" colorSpace="deviceRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_feature.png" translatesAutoresizingMaskIntoConstraints="NO" id="oyf-ay-a1t">
