@@ -226,6 +226,8 @@
     <BundleResource Include="Resources\progress_full_total%402x.png" />
     <BundleResource Include="Resources\progress_full.png" />
     <BundleResource Include="Resources\progress_full%402x.png" />
+    <BundleResource Include="Resources\ic_synchronize%402x.png" />
+    <BundleResource Include="Resources\ic_synchronize.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -429,6 +431,7 @@
     <Compile Include="src\views\UISliderActivity.designer.cs">
       <DependentUpon>UISliderActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\views\CustomStyles.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

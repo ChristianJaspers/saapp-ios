@@ -27,9 +27,7 @@ namespace BetterSalesman.iOS
         const string IcArguments = "ic_arguments";
         const string IcMyTeam = "ic_team";
         const string IcLogout = "ic_logout";
-        
-        // TODO remove synchronization button
-        const string IcSynchronization = "";
+        const string IcSynchronization = "ic_synchronize";
         
         int lastSelectedIndex;
 

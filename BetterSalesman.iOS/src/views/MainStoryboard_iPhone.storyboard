@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sK-2e-Chu">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sK-2e-Chu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -136,19 +136,19 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="yVK-Vq-jrV" customClass="UISliderActivity">
-                                                        <rect key="frame" x="8" y="73" width="304" height="31"/>
+                                                        <rect key="frame" x="8" y="67" width="304" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </slider>
                                                     <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dn5-db-oYG" customClass="UISliderActivity">
-                                                        <rect key="frame" x="8" y="181" width="304" height="31"/>
+                                                        <rect key="frame" x="8" y="175" width="304" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </slider>
                                                     <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="unw-Lv-dUx" customClass="UISliderActivity">
-                                                        <rect key="frame" x="8" y="125" width="304" height="31"/>
+                                                        <rect key="frame" x="8" y="119" width="304" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </slider>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My activity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQN-Tu-i30">
-                                                        <rect key="frame" x="40" y="44" width="270" height="30"/>
+                                                        <rect key="frame" x="40" y="38" width="270" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="PQE-P1-s8u"/>
                                                         </constraints>
@@ -157,7 +157,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity level last week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmA-fW-Dcl">
-                                                        <rect key="frame" x="25" y="14" width="270" height="30"/>
+                                                        <rect key="frame" x="25" y="8" width="270" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="H70-Qm-2dr"/>
                                                             <constraint firstAttribute="width" constant="270" id="pQZ-bD-SYp"/>
@@ -167,7 +167,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="All Teams activity" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="rPJ-I4-q4D">
-                                                        <rect key="frame" x="40" y="152" width="270" height="30"/>
+                                                        <rect key="frame" x="40" y="146" width="270" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="aPA-tU-Oyc"/>
                                                         </constraints>
@@ -176,7 +176,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My Team activity" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="adb-w5-hiX">
-                                                        <rect key="frame" x="40" y="96" width="270" height="30"/>
+                                                        <rect key="frame" x="40" y="90" width="270" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="YxI-DI-cL7"/>
                                                         </constraints>
@@ -185,7 +185,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="ic_profile_me.png" translatesAutoresizingMaskIntoConstraints="NO" id="82w-dC-fuu">
-                                                        <rect key="frame" x="10" y="48" width="22" height="22"/>
+                                                        <rect key="frame" x="10" y="42" width="22" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="BCs-dh-stG"/>
@@ -193,7 +193,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="ic_profile_team.png" translatesAutoresizingMaskIntoConstraints="NO" id="syF-Q0-C9m">
-                                                        <rect key="frame" x="10" y="100" width="22" height="22"/>
+                                                        <rect key="frame" x="10" y="94" width="22" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="OGT-mc-eJm"/>
@@ -201,7 +201,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="ic_profile_total.png" translatesAutoresizingMaskIntoConstraints="NO" id="2U7-Sm-QgD">
-                                                        <rect key="frame" x="10" y="156" width="22" height="22"/>
+                                                        <rect key="frame" x="10" y="150" width="22" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="9CA-JS-Kjn"/>
@@ -217,7 +217,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="vQN-Tu-i30" secondAttribute="trailing" constant="10" id="CnK-3g-5e1"/>
                                                     <constraint firstItem="adb-w5-hiX" firstAttribute="leading" secondItem="syF-Q0-C9m" secondAttribute="trailing" constant="8" id="TXH-JH-DQ5"/>
                                                     <constraint firstItem="rPJ-I4-q4D" firstAttribute="leading" secondItem="2U7-Sm-QgD" secondAttribute="trailing" constant="8" id="ZBb-4b-qeu"/>
-                                                    <constraint firstItem="SmA-fW-Dcl" firstAttribute="top" secondItem="yXa-jx-8Wv" secondAttribute="top" constant="14" id="btv-JF-J71"/>
+                                                    <constraint firstItem="SmA-fW-Dcl" firstAttribute="top" secondItem="yXa-jx-8Wv" secondAttribute="top" constant="8" id="btv-JF-J71"/>
                                                     <constraint firstItem="vQN-Tu-i30" firstAttribute="leading" secondItem="82w-dC-fuu" secondAttribute="trailing" constant="8" id="jbl-Ri-rKV"/>
                                                     <constraint firstAttribute="trailing" secondItem="adb-w5-hiX" secondAttribute="trailing" constant="10" id="ljq-Ac-4fk"/>
                                                     <constraint firstAttribute="trailing" secondItem="rPJ-I4-q4D" secondAttribute="trailing" constant="10" id="sjy-Zf-sA9"/>
