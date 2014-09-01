@@ -76,7 +76,7 @@ namespace BetterSalesman.iOS
             featureTxt.Text = argument.Feature;
             benefitTxt.Text = argument.Benefit;
             
-            relevanceTxt.Text = Sections[indexPath.Section].Title != I18n.WithoutRating ? argument.Rating.ToString() : "!";
+            relevanceTxt.Text = Sections[indexPath.Section].Title != I18n.WithoutRating ? argument.Rating.ToString("0.0") : "!";
             
             return cell;
         }
