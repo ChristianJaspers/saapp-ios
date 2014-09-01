@@ -100,7 +100,7 @@ namespace BetterSalesman.iOS
 
             if (segue.Identifier.Equals(segueIdArgumentEdit))
             {
-                var vc = (ArgumentsFormContainerViewController)segue.DestinationViewController;
+                var vc = segue.DestinationViewController as ArgumentsFormContainerViewController;
 
                 // TODO add cloning of this object here to avoiding problems if there was no save, and there were some changes?
                 vc.Argument = Argument;
@@ -248,7 +248,7 @@ namespace BetterSalesman.iOS
         {   
             if (Argument.Rated)
             {
-                ShowAlert(I18n.YouAlreadyRateThisElement);
+                ShowAlert(I18n.ArgumentAlreadyRated);
             } 
             else
             {

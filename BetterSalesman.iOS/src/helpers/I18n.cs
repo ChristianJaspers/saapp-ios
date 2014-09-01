@@ -92,7 +92,7 @@
         public static string VoteMedium = "vote_medium".t();
         public static string VoteHigh = "vote_high".t();
 
-        public static string YouAlreadyRateThisElement = "you_already_rate_this_element".t();
+        public static string ArgumentAlreadyRated = "you_already_rate_this_element".t();
     }
 }
 

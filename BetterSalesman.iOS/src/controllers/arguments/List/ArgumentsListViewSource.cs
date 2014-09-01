@@ -26,9 +26,8 @@ namespace BetterSalesman.iOS
         {   
             var cell = tableView.DequeueReusableCell(cellIdentifierHeader) ?? new UITableViewCell();
             
-            var titleTxt = (UILabel)cell.ViewWithTag(1);
-            
-            var imageView = (UIImageView)cell.ViewWithTag(2);
+            var titleTxt = cell.ViewWithTag(1) as UILabel;
+            var imageView = cell.ViewWithTag(2) as UIImageView;
             
             titleTxt.Text = Sections[section].Title;
             titleTxt.TextColor = AppDelegate.ColorTextDarkGray;
@@ -61,10 +60,9 @@ namespace BetterSalesman.iOS
             
             bg.BackgroundColor = indexPath.Row % 2 > 0 ? AppDelegate.ColorBackgroundZebraOdd : AppDelegate.ColorBackgroundZebraEven; 
             
-            var featureTxt = (UILabel)cell.ViewWithTag(1);
-            var benefitTxt = (UILabel)cell.ViewWithTag(2);
-            
-            var relevanceTxt = (UILabel)cell.ViewWithTag(5);
+            var featureTxt = cell.ViewWithTag(1) as UILabel;
+            var benefitTxt = cell.ViewWithTag(2) as UILabel;
+            var relevanceTxt = cell.ViewWithTag(5) as UILabel;
             var verticalLine = cell.ViewWithTag(6);
             
             var argument = Sections[indexPath.Section].Arguments[indexPath.Row];
