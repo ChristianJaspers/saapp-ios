@@ -210,6 +210,22 @@
     <BundleResource Include="Resources\rating_button_orange.png" />
     <BundleResource Include="Resources\ic_unrated.png" />
     <BundleResource Include="Resources\ic_unrated%402x.png" />
+    <BundleResource Include="Resources\ic_profile_me.png" />
+    <BundleResource Include="Resources\ic_profile_me%402x.png" />
+    <BundleResource Include="Resources\ic_profile_team.png" />
+    <BundleResource Include="Resources\ic_profile_team%402x.png" />
+    <BundleResource Include="Resources\ic_profile_total.png" />
+    <BundleResource Include="Resources\ic_profile_total%402x.png" />
+    <BundleResource Include="Resources\progress_bg.png" />
+    <BundleResource Include="Resources\progress_bg%402x.png" />
+    <BundleResource Include="Resources\progress_fill_total.png" />
+    <BundleResource Include="Resources\progress_fill_total%402x.png" />
+    <BundleResource Include="Resources\progress_fill.png" />
+    <BundleResource Include="Resources\progress_fill%402x.png" />
+    <BundleResource Include="Resources\progress_full_total.png" />
+    <BundleResource Include="Resources\progress_full_total%402x.png" />
+    <BundleResource Include="Resources\progress_full.png" />
+    <BundleResource Include="Resources\progress_full%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -409,6 +425,10 @@
       <Link>ServiceAccessLayer\SynchronizationManager.cs</Link>
     </Compile>
     <Compile Include="src\extensions\ObjectExtensions.cs" />
+    <Compile Include="src\views\UISliderActivity.cs" />
+    <Compile Include="src\views\UISliderActivity.designer.cs">
+      <DependentUpon>UISliderActivity.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />

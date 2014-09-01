@@ -32,6 +32,10 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel labelEarnInTotal { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel labelExperience { get; set; }
 
 		[Outlet]
@@ -79,6 +83,10 @@ namespace BetterSalesman.iOS
 			if (labelDisplayName != null) {
 				labelDisplayName.Dispose ();
 				labelDisplayName = null;
+			}
+			if (labelEarnInTotal != null) {
+				labelEarnInTotal.Dispose ();
+				labelEarnInTotal = null;
 			}
 			if (labelExperience != null) {
 				labelExperience.Dispose ();

@@ -62,6 +62,10 @@ namespace BetterSalesman.iOS
             NavigationController.NavigationBar.ShadowImage = new UIImage();
             
             labelExperience.TextColor = AppDelegate.ColorTextGreen;
+            labelDisplayName.TextColor = AppDelegate.ColorTextDarkGray;
+            labelEarnInTotal.TextColor = AppDelegate.ColorTextLightGray;
+            
+            labelEarnInTotal.Text = I18n.EarnedInTotal;
             
             imageViewBorder.Image = imageViewBorder.Image.Circle();
             

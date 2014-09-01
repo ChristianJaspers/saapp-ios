@@ -19,6 +19,8 @@ namespace BetterSalesman.iOS
         public static UIColor ColorBackgroundGreen = UIColor.Clear.FromHex("#50AA1D");
         public static UIColor ColorBackgroundGray = UIColor.Clear.FromHex("#e6e6e6");
         public static UIColor ColorTextDarkGray = UIColor.Clear.FromHex("#2b2b2b");
+        public static UIColor ColorTextLightGray = UIColor.Clear.FromHex("#878e94");
+
         public static UIColor ColorOrange = UIColor.Clear.FromHex("#F3810B");
         
         public static UIColor ColorBackgroundZebraOdd = UIColor.White;
