@@ -43,6 +43,20 @@ namespace BetterSalesman.iOS
             
             Window.TintColor = TintColor;
             
+            // ========
+            
+            string imageBg = "progress_bg";
+            string imageFull = "progress_full";
+            
+            var minImage = UIImage.FromBundle(imageFull).StretchableImage(3,3);
+            var maxImage = UIImage.FromBundle(imageBg).StretchableImage(3,3);
+
+            UISlider.Appearance.SetThumbImage(new UIImage(), UIControlState.Normal);
+            UISlider.Appearance.SetMinTrackImage(minImage, UIControlState.Normal);
+            UISlider.Appearance.SetMaxTrackImage(maxImage, UIControlState.Normal);
+            
+            // ========
+            
             UINavigationBar.Appearance.TintColor = ColorTextGreen;
             UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() {
                 TextColor = ColorTextGreen,

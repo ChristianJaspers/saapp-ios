@@ -16,11 +16,11 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView allTeamsActivityView { get; set; }
+		UIImageView imageViewBorder { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIImageView imageViewBorder { get; set; }
+		UILabel labelActivityLevelLastWeek { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -48,14 +48,6 @@ namespace BetterSalesman.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView myActivityView { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView myTeamActivityView { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton ProfileImageEditButton { get; set; }
 
 		[Outlet]
@@ -66,15 +58,27 @@ namespace BetterSalesman.iOS
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIImageView profilePictureInBackground { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISliderActivity progressAllTeamsActivity { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISliderActivity progressMyActivity { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISliderActivity progressMyTeamActivity { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (allTeamsActivityView != null) {
-				allTeamsActivityView.Dispose ();
-				allTeamsActivityView = null;
-			}
 			if (imageViewBorder != null) {
 				imageViewBorder.Dispose ();
 				imageViewBorder = null;
+			}
+			if (labelActivityLevelLastWeek != null) {
+				labelActivityLevelLastWeek.Dispose ();
+				labelActivityLevelLastWeek = null;
 			}
 			if (labelAllTeamsActivity != null) {
 				labelAllTeamsActivity.Dispose ();
@@ -100,14 +104,6 @@ namespace BetterSalesman.iOS
 				labelMyTeamActivity.Dispose ();
 				labelMyTeamActivity = null;
 			}
-			if (myActivityView != null) {
-				myActivityView.Dispose ();
-				myActivityView = null;
-			}
-			if (myTeamActivityView != null) {
-				myTeamActivityView.Dispose ();
-				myTeamActivityView = null;
-			}
 			if (ProfileImageEditButton != null) {
 				ProfileImageEditButton.Dispose ();
 				ProfileImageEditButton = null;
@@ -119,6 +115,18 @@ namespace BetterSalesman.iOS
 			if (profilePictureInBackground != null) {
 				profilePictureInBackground.Dispose ();
 				profilePictureInBackground = null;
+			}
+			if (progressAllTeamsActivity != null) {
+				progressAllTeamsActivity.Dispose ();
+				progressAllTeamsActivity = null;
+			}
+			if (progressMyActivity != null) {
+				progressMyActivity.Dispose ();
+				progressMyActivity = null;
+			}
+			if (progressMyTeamActivity != null) {
+				progressMyTeamActivity.Dispose ();
+				progressMyTeamActivity = null;
 			}
 		}
 	}

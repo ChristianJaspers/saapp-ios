@@ -26,10 +26,6 @@ namespace BetterSalesman.iOS
 
         private ImagePickerPresenter imagePickerPresenter;
 
-        MDRadialProgressView progressMyActivity;
-        MDRadialProgressView progressMyTeamActivity;
-        MDRadialProgressView progressAllTeamsActivity;
-
         public ProfileViewController(IntPtr handle)
             : base(handle)
         {
@@ -53,10 +49,7 @@ namespace BetterSalesman.iOS
             base.ViewDidLoad();
             
             Title = I18n.Profile;
-            
-            InitMyActivityViews();
-            
-            // TODO transparent navigation bar 
+
             NavigationController.NavigationBar.Translucent = true;
             NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
             NavigationController.NavigationBar.ShadowImage = new UIImage();
@@ -64,6 +57,13 @@ namespace BetterSalesman.iOS
             labelExperience.TextColor = AppDelegate.ColorTextGreen;
             labelDisplayName.TextColor = AppDelegate.ColorTextDarkGray;
             labelEarnInTotal.TextColor = AppDelegate.ColorTextLightGray;
+            
+            labelActivityLevelLastWeek.TextColor = AppDelegate.ColorTextGreen;
+            labelActivityLevelLastWeek.Text = I18n.ActivityLevelLastWeek;
+            
+            labelMyActivity.TextColor = AppDelegate.ColorTextDarkGray;
+            labelMyTeamActivity.TextColor = AppDelegate.ColorTextDarkGray;
+            labelAllTeamsActivity.TextColor = AppDelegate.ColorTextDarkGray;
             
             labelEarnInTotal.Text = I18n.EarnedInTotal;
             
@@ -90,28 +90,6 @@ namespace BetterSalesman.iOS
             ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
 
             LoadUser();
-        }
-
-        void InitMyActivityViews()
-        {
-            progressMyActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myActivityView.Frame.Size), ThemeWithThickness(12)) {
-                ProgressTotal = 100
-            };
-            
-            progressMyTeamActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myTeamActivityView.Frame.Size), ThemeWithThickness(8)) {
-                ProgressTotal = 100
-            };
-            
-            progressAllTeamsActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),allTeamsActivityView.Frame.Size), ThemeWithThickness(8)) {
-                ProgressTotal = 100
-            };
-            
-            myActivityView.AddSubview(progressMyActivity);
-            myActivityView.SendSubviewToBack(progressMyActivity);
-            myTeamActivityView.AddSubview(progressMyTeamActivity);
-            myTeamActivityView.SendSubviewToBack(progressMyTeamActivity);
-            allTeamsActivityView.AddSubview(progressAllTeamsActivity);
-            allTeamsActivityView.SendSubviewToBack(progressAllTeamsActivity);
         }
 
         static MDRadialProgressTheme ThemeWithThickness(float thickness)
@@ -217,9 +195,9 @@ namespace BetterSalesman.iOS
                 labelMyTeamActivity.Text = I18n.MyTeamActivity;
                 labelAllTeamsActivity.Text = I18n.AllTeamsActivity;
                 
-                progressMyActivity.ProgressCounter = Convert.ToUInt32(user.MyActivity);
-                progressMyTeamActivity.ProgressCounter = Convert.ToUInt32(user.MyTeamActivity);
-                progressAllTeamsActivity.ProgressCounter = Convert.ToUInt32(user.AllTeamsActivity);
+                progressMyActivity.Value = Convert.ToUInt32(user.MyActivity);
+                progressMyTeamActivity.Value = Convert.ToUInt32(user.MyTeamActivity);
+                progressAllTeamsActivity.Value = Convert.ToUInt32(user.AllTeamsActivity);
                 
                 var downloadOptions = SDWebImageOptions.ProgressiveDownload
                                   | SDWebImageOptions.ContinueInBackground
