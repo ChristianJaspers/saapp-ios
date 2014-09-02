@@ -33,7 +33,6 @@ namespace BetterSalesman.iOS
 
 			set
 			{
-                Debug.WriteLine("ReloadProductGroups");
 				this.selectedProductGroup = value;
 				OnSelectedProductGroupChanged(selectedProductGroup);
 			}
@@ -54,7 +53,6 @@ namespace BetterSalesman.iOS
 			OnProductGroupsReloaded();
 			if (SelectedProductGroup == null || ProductGroups.All(pg => pg.Id != SelectedProductGroup.Id))
 			{
-				Debug.WriteLine("Selected argument changed");
 				SelectedProductGroup = ProductGroups.FirstOrDefault();
 			}
 		}

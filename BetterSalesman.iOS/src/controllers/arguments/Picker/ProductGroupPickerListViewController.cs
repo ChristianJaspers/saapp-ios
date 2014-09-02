@@ -49,7 +49,7 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
-			ProductGroupsDataSource.ReloadProductGroups();
+//			ProductGroupsDataSource.ReloadProductGroups();
 
 			SubscribeToProductGroupPickedEvent();
 		}
