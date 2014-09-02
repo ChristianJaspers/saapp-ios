@@ -1,3 +1,7 @@
+build 4
+
+- Applied final touches on UI
+
 build 3
 
 - Background synchronization

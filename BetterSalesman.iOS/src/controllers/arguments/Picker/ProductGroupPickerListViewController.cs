@@ -1,5 +1,4 @@
 using System;
-using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
@@ -63,10 +62,7 @@ namespace BetterSalesman.iOS
 
 		public void RefreshProductGroupsList()
 		{
-			InvokeOnMainThread(() =>
-			{
-				TableView.ReloadData();
-			});
+            InvokeOnMainThread(TableView.ReloadData);
 		}
         
         #endregion

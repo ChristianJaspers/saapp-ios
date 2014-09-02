@@ -110,7 +110,7 @@ namespace BetterSalesman.iOS
                                 unratedArgumentLabel.Text = unratedArgumentsCount.ToString();
                                 UIView.BeginAnimations("cellAnimation");
                                 UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
-                                UIView.SetAnimationDuration(2);
+                                UIView.SetAnimationDuration(1);
                                 unratedArgumentIcon.Alpha = 1;
                                 unratedArgumentLabel.Alpha = 1;
                                 UIView.CommitAnimations();
