@@ -1,8 +1,6 @@
 using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.CodeDom.Compiler;
-using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
@@ -42,11 +40,6 @@ namespace BetterSalesman.iOS
 			base.ViewDidAppear(animated);
 
 			UpdateButtonLabel(ProductGroupsDataSource.SelectedProductGroup);
-		}
-
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
 		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)

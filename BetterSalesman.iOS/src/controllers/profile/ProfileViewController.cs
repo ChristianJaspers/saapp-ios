@@ -17,6 +17,8 @@ namespace BetterSalesman.iOS
     {
         private const string MenuIcon = "ic_menu";
         private const string MenuIconPasswordChange = "ic_key";
+        
+        const string imageFill = "progress_full_total";
 
         private const string AvatarPlaceholderImageName = "avatar_placeholder.png";
         private UIImage AvatarPlaceholderImage;
@@ -63,7 +65,10 @@ namespace BetterSalesman.iOS
             
             labelMyActivity.TextColor = AppDelegate.ColorTextDarkGray;
             labelMyTeamActivity.TextColor = AppDelegate.ColorTextDarkGray;
-            labelAllTeamsActivity.TextColor = AppDelegate.ColorTextDarkGray;
+            labelAllTeamsActivity.TextColor = AppDelegate.ColorTextDarkGray;            
+            
+            var fillImage = UIImage.FromBundle(imageFill).StretchableImage(3,3);
+            progressAllTeamsActivity.SetMinTrackImage(fillImage, UIControlState.Normal);
             
             labelEarnInTotal.Text = I18n.EarnedInTotal;
             

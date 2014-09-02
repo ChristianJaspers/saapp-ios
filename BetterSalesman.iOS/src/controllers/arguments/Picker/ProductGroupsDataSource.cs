@@ -34,6 +34,7 @@ namespace BetterSalesman.iOS
 
 			set
 			{
+                Debug.WriteLine("ReloadProductGroups");
 				this.selectedProductGroup = value;
 				OnSelectedProductGroupChanged(selectedProductGroup);
 			}
@@ -84,8 +85,8 @@ namespace BetterSalesman.iOS
 		{
 			var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
 
-			var productGroupTxt = (UILabel)cell.ViewWithTag(1);
-			var cellBackground = cell.ViewWithTag(2);
+            var productGroupTxt = cell.ViewWithTag(1) as UILabel;
+            var cellBackground = cell.ViewWithTag(2);
 
 			var productGroup = ProductGroups[indexPath.Row];
 
@@ -94,6 +95,34 @@ namespace BetterSalesman.iOS
 
 			return cell;
 		}
+        
+        public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+        {
+            var unratedArgumentIcon = cell.ViewWithTag(5) as UIImageView;
+            var unratedArgumentLabel = cell.ViewWithTag(10) as UILabel;
+            
+            unratedArgumentIcon.Alpha = 0;
+            unratedArgumentLabel.Alpha = 0;
+            
+            Task.Run(() => {
+                ProductGroupManager.GetUnratedArgumentCount(
+                    ProductGroups[indexPath.Row],
+                    unratedArgumentsCount => 
+                        InvokeOnMainThread(() =>
+                        {
+                            if ( unratedArgumentsCount > 0 )
+                            {
+                                unratedArgumentLabel.Text = unratedArgumentsCount.ToString();
+                                UIView.BeginAnimations("cellAnimation");
+                                UIView.SetAnimationDuration(1);
+                                unratedArgumentIcon.Alpha = 1;
+                                unratedArgumentLabel.Alpha = 1;
+                                UIView.CommitAnimations();
+                            }
+                        })
+                );
+            });
+        }
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
