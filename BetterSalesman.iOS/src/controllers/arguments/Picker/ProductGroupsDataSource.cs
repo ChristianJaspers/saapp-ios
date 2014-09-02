@@ -1,5 +1,4 @@
-﻿using System;
-using BetterSalesman.Core.BusinessLayer;
+﻿using BetterSalesman.Core.BusinessLayer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BetterSalesman.Core.BusinessLayer.Managers;
@@ -46,17 +45,14 @@ namespace BetterSalesman.iOS
 		{
 			ProductGroups = new List<ProductGroup>();
 
-			SynchronizationManager.Instance.FinishedSynchronization += (bool isBackgroundSynchronization) => 
-				{
-					ReloadProductGroups();
-				};
+			SynchronizationManager.Instance.FinishedSynchronization += isBackgroundSynchronization => ReloadProductGroups();
 		}
 
 		public void ReloadProductGroups()
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
 			OnProductGroupsReloaded();
-			if (SelectedProductGroup == null || !ProductGroups.Where(pg => pg.Id == SelectedProductGroup.Id).Any())
+			if (SelectedProductGroup == null || ProductGroups.All(pg => pg.Id != SelectedProductGroup.Id))
 			{
 				Debug.WriteLine("Selected argument changed");
 				SelectedProductGroup = ProductGroups.FirstOrDefault();
@@ -105,8 +101,9 @@ namespace BetterSalesman.iOS
             unratedArgumentLabel.Alpha = 0;
             
             Task.Run(() => {
-                ProductGroupManager.GetUnratedArgumentCount(
+                ProductGroupManager.GetUnratedArgumentsCount(
                     ProductGroups[indexPath.Row],
+                    UserManager.LoggedInUser().Id,
                     unratedArgumentsCount => 
                         InvokeOnMainThread(() =>
                         {
@@ -114,7 +111,8 @@ namespace BetterSalesman.iOS
                             {
                                 unratedArgumentLabel.Text = unratedArgumentsCount.ToString();
                                 UIView.BeginAnimations("cellAnimation");
-                                UIView.SetAnimationDuration(1);
+                                UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
+                                UIView.SetAnimationDuration(2);
                                 unratedArgumentIcon.Alpha = 1;
                                 unratedArgumentLabel.Alpha = 1;
                                 UIView.CommitAnimations();
@@ -126,7 +124,6 @@ namespace BetterSalesman.iOS
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			Debug.WriteLine("Selected ProductGroup: " + this.ProductGroups[indexPath.Row].Name);
 			this.SelectedProductGroup = this.ProductGroups[indexPath.Row];
 			OnProductGroupPicked(this.SelectedProductGroup);
 		}

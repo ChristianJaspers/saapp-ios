@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BetterSalesman.Core.DataLayer;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace BetterSalesman.Core.BusinessLayer.Managers
 {
@@ -22,10 +22,24 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
 			return DatabaseHelper.Get<ProductGroup>(id);
         }
         
-        public static void GetUnratedArgumentCount(ProductGroup productGroup, Action<int> successCallback)
+        public static void GetUnratedArgumentsCount(ProductGroup productGroup, int NotCountedArgumentsForUserId, Action<int> successCallback)
         {
-            Task.Delay(500);
-            successCallback(new Random().Next(100));
+            List<Argument> unratedArguments = new List<Argument>();
+            lock (DatabaseProvider.databaseWriteLocker)
+            {
+                using (var conn = DatabaseProvider.OpenConnectionReadWrite())
+                {
+                    unratedArguments = conn.Table<Argument>()
+                        .Where(
+                            argument =>
+                                argument.ProductGroupId == productGroup.Id &
+                                argument.UserId != NotCountedArgumentsForUserId & 
+                                argument.MyRating == 0
+                        ).ToList();
+                    
+                    successCallback(unratedArguments.Count);
+                }
+            }
         }
 	}
 }
