@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.Linq;
-using System.Diagnostics;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using BetterSalesman.Core.ServiceAccessLayer;

@@ -64,8 +64,14 @@
     <WarningLevel>4</WarningLevel>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution</CodesignKey>
     <BuildIpa>true</BuildIpa>
+    <CodesignProvision>2eee6af8-90ec-48af-b699-804672a176d6</CodesignProvision>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -79,6 +85,8 @@
     <BuildIpa>true</BuildIpa>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
@@ -140,7 +148,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
-    <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
     <BundleResource Include="Resources\avatar_placeholder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -502,6 +509,7 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
