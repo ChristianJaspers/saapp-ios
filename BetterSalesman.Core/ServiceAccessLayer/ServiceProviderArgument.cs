@@ -74,7 +74,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Path = path,
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
-
+					SynchronizationManager.Instance.CancelWriteToDatabaseIfSynchronizationInProgress();
                     DatabaseHelper.Replace<Argument>(response.MappedResponse.Argument);
                     DatabaseHelper.Replace<User>(response.MappedResponse.User);
 
@@ -111,7 +111,7 @@ namespace BetterSalesman.Core.ServiceAccessLayer
                 Path = string.Format(pathRate,argument.Id),
                 Parameters = ParametersWithDeviceInfo(parameters),
                 Success = response => {
-
+					SynchronizationManager.Instance.CancelWriteToDatabaseIfSynchronizationInProgress();
                     DatabaseHelper.Replace<Argument>(response.MappedResponse.Argument);
                     DatabaseHelper.Replace<User>(response.MappedResponse.User);
 

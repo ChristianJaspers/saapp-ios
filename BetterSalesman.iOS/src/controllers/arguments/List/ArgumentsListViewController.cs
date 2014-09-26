@@ -61,6 +61,8 @@ namespace BetterSalesman.iOS
                 
                 var indexPath = TableView.IndexPathForCell(cell);
                 
+                TableView.DeselectRow(indexPath, false);
+                
                 var vc = (ArgumentsDetail)segue.DestinationViewController;
                 
                 vc.Argument = ((ArgumentsListViewSource)TableView.Source).Sections[indexPath.Section].Arguments[indexPath.Row];
@@ -71,7 +73,7 @@ namespace BetterSalesman.iOS
 
         void LoadArguments()
         {
-            var allArguments = ArgumentManager.Arguments();
+            var allArguments = ArgumentManager.GetArguments();
             
             if (ProductGroupsDataSource != null && ProductGroupsDataSource.SelectedProductGroup != null)
             {
@@ -108,11 +110,14 @@ namespace BetterSalesman.iOS
             });
         }
         
-        protected override void OnSynchronizationFinished()
+		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
-            
-            LoadArguments();
+			InvokeOnMainThread(() =>
+				{
+					base.OnSynchronizationFinished(isBackgroundSynchronization);
+
+		            LoadArguments();
+				});
         }
     }
 }

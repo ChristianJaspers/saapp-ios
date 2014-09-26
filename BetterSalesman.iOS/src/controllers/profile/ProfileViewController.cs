@@ -17,14 +17,14 @@ namespace BetterSalesman.iOS
     {
         private const string MenuIcon = "ic_menu";
         private const string MenuIconPasswordChange = "ic_key";
+        private const string imageFill = "progress_full_total";
         private const string AvatarPlaceholderImageName = "avatar_placeholder.png";
+
         private UIImage AvatarPlaceholderImage;
         // TODO make it via Xamarin bindings not tags
         UIImageView fakeImageView;
         private ImagePickerPresenter imagePickerPresenter;
-        MDRadialProgressView progressMyActivity;
-        MDRadialProgressView progressMyTeamActivity;
-        MDRadialProgressView progressAllTeamsActivity;
+
         public ProfileViewController(IntPtr handle)
             : base(handle)
         {
@@ -46,20 +46,33 @@ namespace BetterSalesman.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            
+
             Title = I18n.Profile;
-            
-            InitMyActivityViews();
-            
-            // TODO transparent navigation bar 
+
             NavigationController.NavigationBar.Translucent = true;
             NavigationController.NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
             NavigationController.NavigationBar.ShadowImage = new UIImage();
-            
+
+            labelExperience.TextColor = AppDelegate.ColorTextGreen;
+            labelDisplayName.TextColor = AppDelegate.ColorTextDarkGray;
+            labelEarnInTotal.TextColor = AppDelegate.ColorTextLightGray;
+
+            labelActivityLevelLastWeek.TextColor = AppDelegate.ColorTextGreen;
+            labelActivityLevelLastWeek.Text = I18n.ActivityLevelLastWeek;
+
+            labelMyActivity.TextColor = AppDelegate.ColorTextDarkGray;
+            labelMyTeamActivity.TextColor = AppDelegate.ColorTextDarkGray;
+            labelAllTeamsActivity.TextColor = AppDelegate.ColorTextDarkGray;
+
+            var fillImage = UIImage.FromBundle(imageFill).StretchableImage(3,3);
+            progressAllTeamsActivity.SetMinTrackImage(fillImage, UIControlState.Normal);
+
+            labelEarnInTotal.Text = I18n.EarnedInTotal;
+
             imageViewBorder.Image = imageViewBorder.Image.Circle();
-            
+
             fakeImageView = (UIImageView)View.ViewWithTag(30);
-            
+
             AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName).Circle();
 
             var menuButton = new UIBarButtonItem(UIImage.FromBundle(MenuIcon), UIBarButtonItemStyle.Plain, delegate
@@ -68,12 +81,12 @@ namespace BetterSalesman.iOS
                 });
 
             NavigationItem.SetLeftBarButtonItem(menuButton, true);
-            
+
             var buttonPasswordChange = new UIBarButtonItem(UIImage.FromBundle(MenuIconPasswordChange), UIBarButtonItemStyle.Plain, delegate
                 {
                     DisplayPasswordChange(string.Empty, true);
                 });
-            
+
             NavigationItem.SetRightBarButtonItem(buttonPasswordChange, true);
 
             ProfileImageEditButton.TouchUpInside += (s, e) => imagePickerPresenter.ShowImagePickerTypeSelection(this);
@@ -81,37 +94,15 @@ namespace BetterSalesman.iOS
             LoadUser();
         }
 
-        void InitMyActivityViews()
-        {
-            progressMyActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myActivityView.Frame.Size), ThemeWithThickness(12)) {
-                ProgressTotal = 100
-            };
-            
-            progressMyTeamActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),myTeamActivityView.Frame.Size), ThemeWithThickness(8)) {
-                ProgressTotal = 100
-            };
-            
-            progressAllTeamsActivity = new MDRadialProgressView(new RectangleF(new PointF(0,0),allTeamsActivityView.Frame.Size), ThemeWithThickness(8)) {
-                ProgressTotal = 100
-            };
-            
-            myActivityView.AddSubview(progressMyActivity);
-            myActivityView.SendSubviewToBack(progressMyActivity);
-            myTeamActivityView.AddSubview(progressMyTeamActivity);
-            myTeamActivityView.SendSubviewToBack(progressMyTeamActivity);
-            allTeamsActivityView.AddSubview(progressAllTeamsActivity);
-            allTeamsActivityView.SendSubviewToBack(progressAllTeamsActivity);
-        }
-
         static MDRadialProgressTheme ThemeWithThickness(float thickness)
         {
             var theme = MDRadialProgressTheme.StandardTheme();
             theme.Thickness = 8;
             theme.IncompletedColor = UIColor.Clear;
-            theme.CompletedColor = AppDelegate.ColorTextOrange;
+            theme.CompletedColor = AppDelegate.ColorTextGreen;
             theme.SliceDividerHidden = true;
             theme.CenterColor = UIColor.White;
-            
+
             return theme;
         }
 
@@ -161,24 +152,24 @@ namespace BetterSalesman.iOS
                 {
                     fakeImageView.SetImage(
                         imageUrl,
-                        downsizedImage, 
+                        downsizedImage,
                         downloadOptions,
                         ProcessImageDownloadCompletedAfterUpload
                     );
                 });
         }
 
-        protected override void OnSynchronizationFinished()
+        protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
-            
+			      base.OnSynchronizationFinished(isBackgroundSynchronization);
+
             LoadUser();
         }
 
         private void ProcessImageDownloadCompletedAfterUpload(UIImage downloadedImage, NSError error, SDImageCacheType cacheType)
         {
             ProcessImageDownloadCompleted(downloadedImage, error, cacheType);
-            
+
             HideHud();
         }
 
@@ -190,7 +181,7 @@ namespace BetterSalesman.iOS
         private void LoadUser()
         {
             var user = UserManager.LoggedInUser();
-            
+
             if (user == null)
             {
                 Debug.WriteLine("Can't display profile information - LoggedInUser is null");
@@ -201,26 +192,26 @@ namespace BetterSalesman.iOS
             {
                 labelDisplayName.Text = user.DisplayName;
                 labelExperience.Text = string.Format("{0} {1}", user.Experience, I18n.XP);
-                
+
                 labelMyActivity.Text = I18n.MyActivity;
                 labelMyTeamActivity.Text = I18n.MyTeamActivity;
                 labelAllTeamsActivity.Text = I18n.AllTeamsActivity;
-                
-                progressMyActivity.ProgressCounter = Convert.ToUInt32(user.MyActivity);
-                progressMyTeamActivity.ProgressCounter = Convert.ToUInt32(user.MyTeamActivity);
-                progressAllTeamsActivity.ProgressCounter = Convert.ToUInt32(user.AllTeamsActivity);
-                
+
+                progressMyActivity.Value = Convert.ToUInt32(user.MyActivity);
+                progressMyTeamActivity.Value = Convert.ToUInt32(user.MyTeamActivity);
+                progressAllTeamsActivity.Value = Convert.ToUInt32(user.AllTeamsActivity);
+
                 var downloadOptions = SDWebImageOptions.ProgressiveDownload
                                   | SDWebImageOptions.ContinueInBackground
                                   | SDWebImageOptions.RetryFailed;
-            
+
                 if (user != null && !string.IsNullOrEmpty(user.AvatarThumbUrl))
                 {
                     WebCacheUIImageViewExtension.SetImage(
-                        ProfileImageView, 
-                        new NSUrl(user.AvatarThumbUrl), 
-                        AvatarPlaceholderImage, 
-                        downloadOptions, 
+                        ProfileImageView,
+                        new NSUrl(user.AvatarThumbUrl),
+                        AvatarPlaceholderImage,
+                        downloadOptions,
                         ProcessImageDownloadCompleted
                     );
                 }
@@ -238,23 +229,23 @@ namespace BetterSalesman.iOS
         XForm<UITextField> validator;
 
         void DisplayPasswordChange(string defaultPassword = "", bool firstTime = false)
-        {   
+        {
             UIAlertView alert = new UIAlertView(I18n.ProvideNewPassword, I18n.ProvideNewPasswordRequirement, null, I18n.OK, I18n.Cancel);
-            
+
             alert.AlertViewStyle = UIAlertViewStyle.SecureTextInput;
-            
+
             var passwordField = alert.GetTextField(0);
-            
+
             if (!firstTime)
             {
                 passwordField.Text = defaultPassword;
                 ValidateField(passwordField);
             }
-            
+
             alert.Clicked += (sender, e) =>
             {
                 if (e.ButtonIndex == 0)
-                {       
+                {
                     if (ValidateField(passwordField))
                     {
                         UpdatePassword(passwordField.Text);
@@ -264,7 +255,7 @@ namespace BetterSalesman.iOS
                     }
                 }
             };
-            
+
             alert.Show();
         }
 
@@ -277,13 +268,13 @@ namespace BetterSalesman.iOS
                         FieldView = field,
                         Validators = new [] {
                             new XValidatorLengthMinimum(5) {
-                                Message = I18n.ValidationLengthMinimum   
+                                Message = I18n.ValidationLengthMinimum
                             }
                         },
                     }
                 }
             };
-            
+
             return validator.Validate();
         }
 
@@ -294,7 +285,7 @@ namespace BetterSalesman.iOS
                 ShowAlert(ServiceAccessError.ErrorHostUnreachable.LocalizedMessage);
                 return;
             }
-            
+
             ShowHud();
 
             ServiceProviderUser.Instance.PasswordChange(
@@ -314,6 +305,4 @@ namespace BetterSalesman.iOS
 
         #endregion
     }
-    
-    
 }

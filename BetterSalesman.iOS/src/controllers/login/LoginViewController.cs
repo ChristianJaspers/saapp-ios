@@ -20,6 +20,7 @@ namespace BetterSalesman.iOS
             
             buttonForgotPassword.TouchUpInside += (s, e) => DisplayPasswordChange(string.Empty, true);
             buttonForgotPassword.SetTitle(I18n.ForgotPassword, UIControlState.Normal);
+            buttonForgotPassword.SetTitleColor(AppDelegate.ColorOrange, UIControlState.Normal);
             
             inputEmail.Placeholder = I18n.FieldEmail;
             inputPassword.Placeholder = I18n.FieldPassword;
@@ -38,9 +39,10 @@ namespace BetterSalesman.iOS
             };
             
 			loginButton.SetTitle(I18n.Login, UIControlState.Normal);
+            loginButton.BackgroundColor = AppDelegate.ColorBackgroundGreen;
             loginButton.TouchUpInside += (sender, e) => StartLogin();
             
-            if (UserSessionManager.Instance.User != null)
+			if (UserSessionManager.Instance.HasStoredSession)
             {
                 Login();
             }
@@ -108,22 +110,28 @@ namespace BetterSalesman.iOS
                 return;
             }
 
-            SynchronizationManagerApplication.Instance.Synchronize();
+            SynchronizationManager.Instance.Synchronize();
             
         }
         
-        protected override void OnSynchronizationStart()
+		protected override void OnSynchronizationStart(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationStart();
+			base.OnSynchronizationStart(isBackgroundSynchronization);
             
-            ShowHud(I18n.SynchronizationInProgress);
+			if (!isBackgroundSynchronization)
+			{
+            	ShowHud(I18n.SynchronizationInProgress);
+			}
         }
         
-        protected override void OnSynchronizationFinished()
+		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
+			base.OnSynchronizationFinished(isBackgroundSynchronization);
             
-            HideHud();
+			if (!isBackgroundSynchronization)
+			{
+            	HideHud();
+			}
             
             PerformSegue(sequeIdLogged, this);
         }

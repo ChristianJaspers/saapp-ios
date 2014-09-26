@@ -6,21 +6,9 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
 {
     public static class ArgumentManager
     {        
-        public static List<Argument> Arguments()
+        public static List<Argument> GetArguments()
         {
-            var items = new List<Argument>();
-            
-            using (var conn = DatabaseProvider.OpenConnection())
-            {
-                items = conn.Table<Argument>().ToList();
-                    
-                if ( items.Any() )
-                {
-					items = items.OrderByDescending(a=>a.Rating).ThenBy(a=>a.CreatedAt).ToList();
-                }
-            }
-            
-            return items;
+			return DatabaseHelper.GetAll<Argument>().OrderByDescending(a=>a.Rating).ThenBy(a=>a.CreatedAt).ToList();
         }
     }
 }

@@ -24,6 +24,12 @@ namespace BetterSalesman.iOS
             
             InitValidator();
 
+            labelFeature.TextColor = AppDelegate.ColorTextDarkGray;
+            labelBenefit.TextColor = AppDelegate.ColorTextDarkGray;
+            
+            labelFeatureEarn.TextColor = AppDelegate.ColorTextDarkGray;
+            labelBenefitEarn.TextColor = AppDelegate.ColorTextDarkGray;
+            
             if (Argument.Id > 0)
             {
                 labelFeature.Text = I18n.ArgumentEditFeature;
@@ -37,6 +43,9 @@ namespace BetterSalesman.iOS
 
             labelFeatureEarn.Text = I18n.FeatureAddEarnXp;
             labelBenefitEarn.Text = I18n.BenefitAddEarnXp;
+            
+            fieldFeature.TextColor = AppDelegate.ColorTextDarkGray;
+            fieldBenefit.TextColor = AppDelegate.ColorTextDarkGray;
             
             Feature = Argument.Feature;
             Benefit = Argument.Benefit;

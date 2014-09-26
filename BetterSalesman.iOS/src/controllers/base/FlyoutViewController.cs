@@ -27,9 +27,7 @@ namespace BetterSalesman.iOS
         const string IcArguments = "ic_arguments";
         const string IcMyTeam = "ic_team";
         const string IcLogout = "ic_logout";
-        
-        // TODO remove synchronization button
-        const string IcSynchronization = "";
+        const string IcSynchronization = "ic_synchronize";
         
         int lastSelectedIndex;
 
@@ -161,27 +159,36 @@ namespace BetterSalesman.iOS
                 return;
             }
             
-            SynchronizationManagerApplication.Instance.Synchronize();
+            SynchronizationManager.Instance.Synchronize();
         }
         
-        protected override void OnSynchronizationStart()
+		protected override void OnSynchronizationStart(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationStart();
+			base.OnSynchronizationStart(isBackgroundSynchronization);
             
             lastSelectedIndex = Navigation.SelectedIndex;
 
-            ShowHud(I18n.SynchronizationInProgress);
+			if (!isBackgroundSynchronization)
+			{
+            	ShowHud(I18n.SynchronizationInProgress);
+			}
         }
 
-        protected override void OnSynchronizationFinished()
+		protected override void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
-            base.OnSynchronizationFinished();
+			base.OnSynchronizationFinished(isBackgroundSynchronization);
 
-            HideHud();
-            
-            profileElement.RefreshUserData();
-            
-            SelectTab(lastSelectedIndex);
+			InvokeOnMainThread(() =>
+				{
+					if (!isBackgroundSynchronization)
+					{
+			            HideHud();
+					}
+		            
+		            profileElement.RefreshUserData();
+		            
+		            SelectTab(lastSelectedIndex);
+				});
         }
         
         void SelectTab(int row)

@@ -1,5 +1,4 @@
 using System;
-using MonoTouch.UIKit;
 using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
@@ -49,7 +48,7 @@ namespace BetterSalesman.iOS
 		{
 			base.ViewDidAppear(animated);
 
-			ProductGroupsDataSource.ReloadProductGroups();
+//			ProductGroupsDataSource.ReloadProductGroups();
 
 			SubscribeToProductGroupPickedEvent();
 		}
@@ -59,6 +58,11 @@ namespace BetterSalesman.iOS
 			base.ViewDidDisappear(animated);
 
 			UnsubscribeFromProductGroupPickedEvent();
+		}
+
+		public void RefreshProductGroupsList()
+		{
+            InvokeOnMainThread(TableView.ReloadData);
 		}
         
         #endregion
@@ -70,19 +74,21 @@ namespace BetterSalesman.iOS
 
 		private void SubscribeToProductGroupPickedEvent()
 		{
-			if (productGroupsDataSource != null && !isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && !this.isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
-				isSubscribedToSelectedProductGroupChangedEvent = true;
+				this.productGroupsDataSource.ProductGroupPicked += ProductGroupPicked;
+				this.productGroupsDataSource.ProductGroupsReloaded += RefreshProductGroupsList;
+				this.isSubscribedToSelectedProductGroupChangedEvent = true;
 			}
 		}
 
 		private void UnsubscribeFromProductGroupPickedEvent()
 		{
-			if (productGroupsDataSource != null && isSubscribedToSelectedProductGroupChangedEvent)
+			if (this.productGroupsDataSource != null && this.isSubscribedToSelectedProductGroupChangedEvent)
 			{
-				productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
-				isSubscribedToSelectedProductGroupChangedEvent = false;
+				this.productGroupsDataSource.ProductGroupPicked -= ProductGroupPicked;
+				this.productGroupsDataSource.ProductGroupsReloaded -= RefreshProductGroupsList;
+				this.isSubscribedToSelectedProductGroupChangedEvent = false;
 			}
 		}
 	}

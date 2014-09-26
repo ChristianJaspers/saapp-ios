@@ -18,10 +18,16 @@ namespace BetterSalesman.iOS
         public UIViewController vc;
         
         public override void ViewDidLoad()
-        {
+        {   
             vc = (UIViewController)Storyboard.InstantiateViewController(InitialControllerType);
 
             PushViewController(vc, false);
+        }
+        
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
         }
     }
 }

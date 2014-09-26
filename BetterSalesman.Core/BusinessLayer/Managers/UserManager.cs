@@ -9,24 +9,17 @@ namespace BetterSalesman.Core.BusinessLayer.Managers
     {        
         public static User LoggedInUser()
         {
-            if (UserSessionManager.Instance.User == null)
+			if (!UserSessionManager.Instance.HasStoredSession)
             {
                 return null;       
             }
             
-            return DatabaseHelper.Get<User>(UserSessionManager.Instance.User.UserId);
+            return DatabaseHelper.Get<User>(UserSessionManager.Instance.CurrentSession.UserId);
         }
         
         public static List<User> GetUsers()
         {
-            var users = new List<User>();
-            
-            using (var conn = DatabaseProvider.OpenConnection())
-            {
-                users = conn.Table<User>().OrderByDescending(u => u.Experience).ToList();
-            }
-            
-            return  users;
+			return DatabaseHelper.GetAll<User>().OrderByDescending(u => u.Experience).ToList();
         }
     }
 }

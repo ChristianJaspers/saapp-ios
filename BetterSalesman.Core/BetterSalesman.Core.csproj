@@ -34,7 +34,6 @@
     <Compile Include="BusinessLayer\Contracts\IBusinessEntity.cs" />
     <Compile Include="BusinessLayer\Argument.cs" />
     <Compile Include="ServiceAccessLayer\HttpConfig.cs" />
-    <Compile Include="ServiceAccessLayer\SynchronizationManagerBase.cs" />
     <Compile Include="DataLayer\DatabaseProvider.cs" />
     <Compile Include="DataLayer\UserSessionManager.cs" />
     <Compile Include="BusinessLayer\UserSession.cs" />
@@ -48,7 +47,6 @@
     <Compile Include="ServiceAccessLayer\ServiceProviderSynchronization.cs" />
     <Compile Include="Extensions\ArgumentsExtensions.cs" />
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs" />
-    <Compile Include="ServiceAccessLayer\SynchronizationManagerApplication.cs" />
     <Compile Include="ServiceAccessLayer\HttpClientFileUploader.cs" />
     <Compile Include="ServiceAccessLayer\ServiceAccessError.cs" />
     <Compile Include="ServiceAccessLayer\DataTransferObject\JsonEmpty.cs" />
@@ -58,6 +56,9 @@
     <Compile Include="ServiceAccessLayer\ServiceProviderArgument.cs" />
     <Compile Include="BusinessLayer\ProductGroup.cs" />
     <Compile Include="BusinessLayer\Managers\ProductGroupManager.cs" />
+    <Compile Include="ServiceAccessLayer\IReachabilityProvider.cs" />
+    <Compile Include="ServiceAccessLayer\ReachabilityChecker.cs" />
+    <Compile Include="ServiceAccessLayer\SynchronizationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

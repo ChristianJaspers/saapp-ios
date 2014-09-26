@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>BetterSalesman</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.selleo.bettersalesman</string>
+	<string>com.copenhagenapphouse.bettersalesman</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -15,7 +15,6 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
@@ -30,6 +29,6 @@
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>4</string>
 </dict>
 </plist>

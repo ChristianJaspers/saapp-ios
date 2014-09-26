@@ -65,13 +65,13 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <BuildIpa>true</BuildIpa>
+    <CodesignProvision>2eee6af8-90ec-48af-b699-804672a176d6</CodesignProvision>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -85,6 +85,8 @@
     <BuildIpa>true</BuildIpa>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
@@ -146,7 +148,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
-    <BundleResource Include="Resources\pl.lproj\Localizable.strings" />
     <BundleResource Include="Resources\avatar_placeholder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -203,6 +204,37 @@
     <BundleResource Include="Resources\ic_earn%402x.png" />
     <BundleResource Include="Resources\avatar_placeholder_square.png" />
     <BundleResource Include="Resources\avatar_placeholder_square%402x.png" />
+    <BundleResource Include="Resources\rating_button_green.png" />
+    <BundleResource Include="Resources\rating_button_green%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_middle%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_middle.png" />
+    <BundleResource Include="Resources\rating_button_red.png" />
+    <BundleResource Include="Resources\rating_button_red%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_left.png" />
+    <BundleResource Include="Resources\rating_button_border_left%402x.png" />
+    <BundleResource Include="Resources\rating_button_border_right.png" />
+    <BundleResource Include="Resources\rating_button_border_right%402x.png" />
+    <BundleResource Include="Resources\rating_button_orange.png" />
+    <BundleResource Include="Resources\ic_unrated.png" />
+    <BundleResource Include="Resources\ic_unrated%402x.png" />
+    <BundleResource Include="Resources\ic_profile_me.png" />
+    <BundleResource Include="Resources\ic_profile_me%402x.png" />
+    <BundleResource Include="Resources\ic_profile_team.png" />
+    <BundleResource Include="Resources\ic_profile_team%402x.png" />
+    <BundleResource Include="Resources\ic_profile_total.png" />
+    <BundleResource Include="Resources\ic_profile_total%402x.png" />
+    <BundleResource Include="Resources\progress_bg.png" />
+    <BundleResource Include="Resources\progress_bg%402x.png" />
+    <BundleResource Include="Resources\progress_fill_total.png" />
+    <BundleResource Include="Resources\progress_fill_total%402x.png" />
+    <BundleResource Include="Resources\progress_fill.png" />
+    <BundleResource Include="Resources\progress_fill%402x.png" />
+    <BundleResource Include="Resources\progress_full_total.png" />
+    <BundleResource Include="Resources\progress_full_total%402x.png" />
+    <BundleResource Include="Resources\progress_full.png" />
+    <BundleResource Include="Resources\progress_full%402x.png" />
+    <BundleResource Include="Resources\ic_synchronize%402x.png" />
+    <BundleResource Include="Resources\ic_synchronize.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -236,9 +268,6 @@
     </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\HttpConfig.cs">
       <Link>ServiceAccessLayer\HttpConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerBase.cs">
-      <Link>ServiceAccessLayer\SynchronizationManagerBase.cs</Link>
     </Compile>
     <Compile Include="..\BetterSalesman.Core\DataLayer\DatabaseProvider.cs">
       <Link>DataLayer\DatabaseProvider.cs</Link>
@@ -300,9 +329,6 @@
       <Link>Extensions\ArgumentsExtensions.cs</Link>
     </Compile>
     <Compile Include="src\views\components\XUITextField.cs" />
-    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManagerApplication.cs">
-      <Link>ServiceAccessLayer\SynchronizationManagerApplication.cs</Link>
-    </Compile>
     <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs">
       <Link>ServiceAccessLayer\DataTransferObject\JsonSynchronization.cs</Link>
     </Compile>
@@ -397,6 +423,22 @@
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressTheme.cs" />
     <Compile Include="src\views\MDRadialProgress\MDRadialProgressView.cs" />
     <Compile Include="src\helpers\DeviceInfo.cs" />
+    <Compile Include="src\helpers\IosReachabilityProvider.cs" />
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\IReachabilityProvider.cs">
+      <Link>ServiceAccessLayer\IReachabilityProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\ReachabilityChecker.cs">
+      <Link>ServiceAccessLayer\ReachabilityChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\BetterSalesman.Core\ServiceAccessLayer\SynchronizationManager.cs">
+      <Link>ServiceAccessLayer\SynchronizationManager.cs</Link>
+    </Compile>
+    <Compile Include="src\extensions\ObjectExtensions.cs" />
+    <Compile Include="src\views\UISliderActivity.cs" />
+    <Compile Include="src\views\UISliderActivity.designer.cs">
+      <DependentUpon>UISliderActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\views\CustomStyles.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="src\views\MainStoryboard_iPad.storyboard" />
@@ -467,6 +509,7 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Spotlight-40%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />

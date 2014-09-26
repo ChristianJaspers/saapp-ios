@@ -16,10 +16,6 @@ namespace BetterSalesman.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UISegmentedControl chooseRating { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UITextView labelBenefit { get; set; }
 
 		[Outlet]
@@ -46,12 +42,20 @@ namespace BetterSalesman.iOS
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIView rateContainer { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton ratedButtonHigh { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton ratedButtonLow { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton ratedButtonMedium { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (chooseRating != null) {
-				chooseRating.Dispose ();
-				chooseRating = null;
-			}
 			if (labelBenefit != null) {
 				labelBenefit.Dispose ();
 				labelBenefit = null;
@@ -79,6 +83,18 @@ namespace BetterSalesman.iOS
 			if (rateContainer != null) {
 				rateContainer.Dispose ();
 				rateContainer = null;
+			}
+			if (ratedButtonHigh != null) {
+				ratedButtonHigh.Dispose ();
+				ratedButtonHigh = null;
+			}
+			if (ratedButtonLow != null) {
+				ratedButtonLow.Dispose ();
+				ratedButtonLow = null;
+			}
+			if (ratedButtonMedium != null) {
+				ratedButtonMedium.Dispose ();
+				ratedButtonMedium = null;
 			}
 		}
 	}

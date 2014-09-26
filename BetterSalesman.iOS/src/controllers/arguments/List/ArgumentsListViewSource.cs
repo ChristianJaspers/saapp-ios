@@ -12,7 +12,6 @@ namespace BetterSalesman.iOS
         
         readonly string cellIdentifierItem = "ArgumentsCell";
         readonly string cellIdentifierHeader = "ArgumentsHeader";
-        readonly string cellIdentifierFooter = "ArgumentsFooter";
 
         public ArgumentsListViewSource()
         {
@@ -23,22 +22,15 @@ namespace BetterSalesman.iOS
             return Sections.Count;
         }
 
-        public override UIView GetViewForFooter(UITableView tableView, int section)
-        {
-            var cell = tableView.DequeueReusableCell(cellIdentifierFooter) ?? new UITableViewCell();
-            
-            return cell;
-        }
-
         public override UIView GetViewForHeader(UITableView tableView, int section)
         {   
             var cell = tableView.DequeueReusableCell(cellIdentifierHeader) ?? new UITableViewCell();
             
-            var titleTxt = (UILabel)cell.ViewWithTag(1);
-            
-            var imageView = (UIImageView)cell.ViewWithTag(2);
+            var titleTxt = cell.ViewWithTag(1) as UILabel;
+            var imageView = cell.ViewWithTag(2) as UIImageView;
             
             titleTxt.Text = Sections[section].Title;
+            titleTxt.TextColor = AppDelegate.ColorTextDarkGray;
             
             imageView.Image = UIImage.FromBundle(Sections[section].Icon);
             
@@ -48,11 +40,6 @@ namespace BetterSalesman.iOS
         public override float GetHeightForHeader(UITableView tableView, int section)
         {
             return 30;
-        }
-
-        public override float GetHeightForFooter(UITableView tableView, int section)
-        {
-            return 1;
         }
 
         public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
@@ -73,25 +60,23 @@ namespace BetterSalesman.iOS
             
             bg.BackgroundColor = indexPath.Row % 2 > 0 ? AppDelegate.ColorBackgroundZebraOdd : AppDelegate.ColorBackgroundZebraEven; 
             
-            var featureTxt = (UILabel)cell.ViewWithTag(1);
-            var benefitTxt = (UILabel)cell.ViewWithTag(2);
-            
-            var relevanceTxt = (UILabel)cell.ViewWithTag(5);
+            var featureTxt = cell.ViewWithTag(1) as UILabel;
+            var benefitTxt = cell.ViewWithTag(2) as UILabel;
+            var relevanceTxt = cell.ViewWithTag(5) as UILabel;
             var verticalLine = cell.ViewWithTag(6);
             
             var argument = Sections[indexPath.Section].Arguments[indexPath.Row];
-            
-            verticalLine.Hidden = !argument.Rated;
             
             var frame = verticalLine.Frame;
             frame.Width = 0.5f;
             verticalLine.Frame = frame;
             
-            relevanceTxt.Hidden = !argument.Rated;
+            relevanceTxt.TextColor = AppDelegate.ColorOrange;
             
             featureTxt.Text = argument.Feature;
             benefitTxt.Text = argument.Benefit;
-            relevanceTxt.Text = argument.Rating.ToString();
+            
+            relevanceTxt.Text = Sections[indexPath.Section].Title != I18n.WithoutRating ? argument.Rating.ToString("0.0") : "!";
             
             return cell;
         }

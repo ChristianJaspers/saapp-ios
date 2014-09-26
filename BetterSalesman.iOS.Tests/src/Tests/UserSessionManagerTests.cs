@@ -9,44 +9,46 @@ namespace BetterSalesman.iOS.Tests
     [TestFixture]
     public class UserSessionManagerTests
     {
-        UserSession testUser;
-        UserSession sessionUser;
-        
-        [SetUp]
-        public void Init()
+		private UserSession stubSession;
+
+		public UserSessionManagerTests()
+		{
+			stubSession = new UserSession
+			{
+				UserId = 11,
+				Token = "test_token"
+			};
+		}
+
+		[SetUp]
+		public void Setup()
+		{
+			UserSessionManager.Instance.SaveSession(stubSession.UserId, stubSession.Token);
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			UserSessionManager.Instance.Discard();
+		}
+
+        [Test]
+        public async void TestCurrentSessionIsNotNull()
         {
-            testUser = new UserSession {
-                Token = "abcdxyz"
-            };
+			var currentSession = await UserSessionManager.Instance.LoadSessionAsync();
             
-            sessionUser = null;
-            
-            UserSessionManager.Instance.User = testUser;
-
-            UserSessionManager.Instance.Save();
+			Assert.IsNotNull(currentSession);
         }
         
         [Test]
-        public async void TestSavingUserInManager()
-        {   
-            await UserSessionManager.Instance.FetchUser();
+        public async void TestCurrentSessionIsEqualToSavedSession()
+        {
+			var storedSession = await UserSessionManager.Instance.LoadSessionAsync();
 
-            sessionUser = UserSessionManager.Instance.User;
-            
-            Assert.IsNotNull(sessionUser);
-        }
-        
-        [Test]
-        public async void TestSavingSameDataInManager()
-        {   
-            await UserSessionManager.Instance.FetchUser();
+			var serializedStubSession = JsonConvert.SerializeObject(stubSession);
+			var serializedStoredSession = JsonConvert.SerializeObject(storedSession);
 
-            sessionUser = UserSessionManager.Instance.User;
-            
-            var serializedA = JsonConvert.SerializeObject(testUser);
-            var serializedB = JsonConvert.SerializeObject(sessionUser);
-
-            Assert.AreEqual(serializedA,serializedB);   
+			Assert.AreEqual(serializedStubSession, serializedStoredSession);
         }
     }
 }

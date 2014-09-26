@@ -123,23 +123,23 @@ namespace BetterSalesman.iOS
         {
             base.ViewWillAppear(animated);
 
-            SynchronizationManagerApplication.Instance.StartedSynchronization += OnSynchronizationStart;
-            SynchronizationManagerApplication.Instance.FinishedSynchronization += OnSynchronizationFinished;
+            SynchronizationManager.Instance.StartedSynchronization += OnSynchronizationStart;
+            SynchronizationManager.Instance.FinishedSynchronization += OnSynchronizationFinished;
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
 
-            SynchronizationManagerApplication.Instance.StartedSynchronization -= OnSynchronizationStart;
-            SynchronizationManagerApplication.Instance.FinishedSynchronization -= OnSynchronizationFinished;
+            SynchronizationManager.Instance.StartedSynchronization -= OnSynchronizationStart;
+            SynchronizationManager.Instance.FinishedSynchronization -= OnSynchronizationFinished;
         }
         
-        protected virtual void OnSynchronizationStart()
+		protected virtual void OnSynchronizationStart(bool isBackgroundSynchronization)
         {
         }
 
-        protected virtual void OnSynchronizationFinished()
+		protected virtual void OnSynchronizationFinished(bool isBackgroundSynchronization)
         {
         }
         

@@ -49,7 +49,7 @@ namespace BetterSalesman.iOS
                 Highlighted();
             }
             
-            var selectedView = new UIView { BackgroundColor = AppDelegate.ColorBackgroundOrange };
+            var selectedView = new UIView { BackgroundColor = AppDelegate.ColorBackgroundGreen };
             cell.SelectedBackgroundView = selectedView;
             cell.BackgroundColor = AppDelegate.ColorBackgroundGray;
             

@@ -39,6 +39,8 @@ namespace BetterSalesman.iOS
             
             labelViewProfile.Text = I18n.ViewProfile;
             
+            labelDisplayName.TextColor = AppDelegate.ColorTextGreen;
+            
             AvatarPlaceholderImage = UIImage.FromBundle(AvatarPlaceholderImageName).Circle();
             
             ProfileImageView.Image = AvatarPlaceholderImage;

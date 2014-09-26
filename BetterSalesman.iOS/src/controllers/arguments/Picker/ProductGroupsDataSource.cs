@@ -1,17 +1,17 @@
-﻿using System;
-using BetterSalesman.Core.BusinessLayer;
+﻿using BetterSalesman.Core.BusinessLayer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BetterSalesman.Core.BusinessLayer.Managers;
 using System.Linq;
-using System.Diagnostics;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using BetterSalesman.Core.ServiceAccessLayer;
 
 namespace BetterSalesman.iOS
 {
 	public delegate void SelectedProductGroupChanged(ProductGroup newSelectedProductGroup);
 	public delegate void ProductGroupPicked(ProductGroup pickedProductGroup);
+	public delegate void ProductGroupsReloaded();
 
 	public class ProductGroupsDataSource : UITableViewSource
 	{
@@ -19,6 +19,7 @@ namespace BetterSalesman.iOS
 
 		public event SelectedProductGroupChanged SelectedProductGroupChanged;
 		public event ProductGroupPicked ProductGroupPicked;
+		public event ProductGroupsReloaded ProductGroupsReloaded;
 
 		private ProductGroup selectedProductGroup;
 
@@ -41,14 +42,16 @@ namespace BetterSalesman.iOS
 		public ProductGroupsDataSource() : base()
 		{
 			ProductGroups = new List<ProductGroup>();
+
+			SynchronizationManager.Instance.FinishedSynchronization += isBackgroundSynchronization => ReloadProductGroups();
 		}
 
 		public void ReloadProductGroups()
 		{
 			ProductGroups = ProductGroupManager.GetProductGroups();
-			if (SelectedProductGroup == null || !ProductGroups.Where(pg => pg.Id == SelectedProductGroup.Id).Any())
+			OnProductGroupsReloaded();
+			if (SelectedProductGroup == null || ProductGroups.All(pg => pg.Id != SelectedProductGroup.Id))
 			{
-				Debug.WriteLine("Selected argument changed");
 				SelectedProductGroup = ProductGroups.FirstOrDefault();
 			}
 		}
@@ -75,8 +78,8 @@ namespace BetterSalesman.iOS
 		{
 			var cell = tableView.DequeueReusableCell(cellIdentifierItem) ?? new UITableViewCell();
 
-			var productGroupTxt = (UILabel)cell.ViewWithTag(1);
-			var cellBackground = cell.ViewWithTag(2);
+            var productGroupTxt = cell.ViewWithTag(1) as UILabel;
+            var cellBackground = cell.ViewWithTag(2);
 
 			var productGroup = ProductGroups[indexPath.Row];
 
@@ -85,19 +88,56 @@ namespace BetterSalesman.iOS
 
 			return cell;
 		}
+        
+        public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+        {
+            var unratedArgumentIcon = cell.ViewWithTag(5) as UIImageView;
+            var unratedArgumentLabel = cell.ViewWithTag(10) as UILabel;
+            
+            unratedArgumentIcon.Alpha = 0;
+            unratedArgumentLabel.Alpha = 0;
+            
+            Task.Run(() => {
+                ProductGroupManager.GetUnratedArgumentsCount(
+                    ProductGroups[indexPath.Row],
+                    UserManager.LoggedInUser().Id,
+                    unratedArgumentsCount => 
+                        InvokeOnMainThread(() =>
+                        {
+                            if ( unratedArgumentsCount > 0 )
+                            {
+                                unratedArgumentLabel.Text = unratedArgumentsCount.ToString();
+                                UIView.BeginAnimations("cellAnimation");
+                                UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
+                                UIView.SetAnimationDuration(1);
+                                unratedArgumentIcon.Alpha = 1;
+                                unratedArgumentLabel.Alpha = 1;
+                                UIView.CommitAnimations();
+                            }
+                        })
+                );
+            });
+        }
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			Debug.WriteLine("Selected ProductGroup: " + this.ProductGroups[indexPath.Row].Name);
 			this.SelectedProductGroup = this.ProductGroups[indexPath.Row];
 			OnProductGroupPicked(this.SelectedProductGroup);
 		}
 
-		public void OnProductGroupPicked(ProductGroup pickedProductGroup)
+		private void OnProductGroupPicked(ProductGroup pickedProductGroup)
 		{
 			if (ProductGroupPicked != null)
 			{
 				ProductGroupPicked(pickedProductGroup);
+			}
+		}
+
+		private void OnProductGroupsReloaded()
+		{
+			if (ProductGroupsReloaded != null)
+			{
+				ProductGroupsReloaded();
 			}
 		}
 	}

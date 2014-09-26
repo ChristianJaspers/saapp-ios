@@ -1,8 +1,6 @@
 using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.CodeDom.Compiler;
-using System.Diagnostics;
 using BetterSalesman.Core.BusinessLayer;
 
 namespace BetterSalesman.iOS
@@ -44,11 +42,6 @@ namespace BetterSalesman.iOS
 			UpdateButtonLabel(ProductGroupsDataSource.SelectedProductGroup);
 		}
 
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
-		}
-
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
 		{
 			base.PrepareForSegue(segue, sender);
@@ -68,6 +61,7 @@ namespace BetterSalesman.iOS
 			if (productGroup != null && ProductGroupPickerButton != null)
 			{
                 ProductGroupPickerButton.SetTitle(productGroup.Name, UIControlState.Normal);
+                ProductGroupPickerButton.SetTitleColor(AppDelegate.ColorTextProductGroupPicker, UIControlState.Normal);
 			}
 		}
 
